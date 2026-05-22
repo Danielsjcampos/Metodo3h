@@ -93,20 +93,20 @@ export function DevelopersSection() {
             </div>
           </div>
 
-          {/* Right Column: Large Dino Image & Large Raw Antigravity Logo */}
+          {/* Right Column: Large Dino Image & Logo Carousel */}
           <div 
             className={`flex flex-col items-center justify-start order-1 lg:order-2 transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             }`}
           >
-            {/* Dino Image Container - Large and Faded at the bottom */}
-            <div className="relative w-full max-w-[500px] lg:max-w-none h-[420px] md:h-[500px] lg:h-[620px] flex items-end justify-center overflow-hidden mb-6">
+            {/* Dino Image Container - Extremely Large and Faded at the bottom */}
+            <div className="relative w-full max-w-[550px] lg:max-w-none h-[480px] md:h-[580px] lg:h-[720px] flex items-end justify-center overflow-hidden mb-6">
               <img
                 src="/images/dino/dinosemf.png"
                 alt="Daniel Marques (Dino)"
-                className="h-full w-auto object-contain object-bottom transition-opacity duration-700"
+                className="h-full w-auto object-contain object-bottom transition-all duration-700 ease-out hover:scale-[1.03]"
                 style={{ 
-                  opacity: 0.65,
+                  opacity: 0.95,
                   WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
                   maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
                 }}
@@ -116,16 +116,63 @@ export function DevelopersSection() {
               <div className="absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%) pointer-events-none" />
             </div>
 
-            {/* Antigravity Logo underneath - Large, raw, without any card/container wrapper */}
-            <div className="flex justify-center mt-2 pointer-events-auto">
-              <img
-                src="/images/antigravity logo.webp"
-                alt="Antigravity Logo"
-                className="h-20 md:h-24 lg:h-28 w-auto object-contain transition-transform duration-500 hover:scale-105"
+            {/* Infinite Scrolling Logo Carousel underneath Dino */}
+            <div className="w-full max-w-[500px] lg:max-w-none mt-2 overflow-hidden relative pointer-events-auto">
+              {/* Fade gradient borders on the sides for a premium look */}
+              <div 
+                className="flex w-full select-none overflow-hidden"
                 style={{
-                  filter: "grayscale(100%) brightness(1.75) contrast(1.1) drop-shadow(0 0 15px rgba(255,255,255,0.2))",
+                  WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+                  maskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
                 }}
-              />
+              >
+                {/* First Marquee flex element */}
+                <div className="flex shrink-0 min-w-full justify-around items-center gap-10 py-4 marquee">
+                  <img
+                    src="/images/antigravity logo.webp"
+                    alt="Antigravity"
+                    className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                  <img
+                    src="/images/Vercel_logo_2025.svg"
+                    alt="Vercel"
+                    className="h-7 md:h-8 w-auto object-contain transition-transform duration-300 hover:scale-105 invert"
+                  />
+                  <img
+                    src="/images/claudecode-color.png"
+                    alt="Cloud Code"
+                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                  <img
+                    src="/images/google-search-console-icon.webp"
+                    alt="Google Search Console"
+                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+                {/* Duplicate Marquee flex element for seamless scrolling loop */}
+                <div className="flex shrink-0 min-w-full justify-around items-center gap-10 py-4 marquee" aria-hidden="true">
+                  <img
+                    src="/images/antigravity logo.webp"
+                    alt="Antigravity"
+                    className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                  <img
+                    src="/images/Vercel_logo_2025.svg"
+                    alt="Vercel"
+                    className="h-7 md:h-8 w-auto object-contain transition-transform duration-300 hover:scale-105 invert"
+                  />
+                  <img
+                    src="/images/claudecode-color.png"
+                    alt="Cloud Code"
+                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                  <img
+                    src="/images/google-search-console-icon.webp"
+                    alt="Google Search Console"
+                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
