@@ -239,3 +239,9 @@ const Demo = () => {
 };
 
 export default Demo;
+
+import { Component as MatrixComponent } from "./matrix-code-rain";
+
+export const DemoOne = () => {
+  return <MatrixComponent />;
+};
