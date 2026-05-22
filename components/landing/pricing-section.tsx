@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Check, CheckCircle, ShieldCheck } from "lucide-react";
+import { Check, CheckCircle, ShieldCheck, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import AnimatedShaderBackground from "../ui/animated-shader-background";
 
 const bonuses = [
   {
@@ -25,6 +26,22 @@ const bonuses = [
     title: "Super Bônus: Ranquear no Google Meu Negócio",
     description: "Aprenda com o especialista Vinicius Saldanha o método definitivo (avaliado em R$697) para colocar qualquer empresa local no topo das buscas do Google e do Maps e explodir suas vendas.",
   },
+];
+
+const saldanhaLessons = [
+  "1. O Poder do Posicionamento Local nas Buscas",
+  "2. Como Reivindicar e Otimizar sua Ficha do GMN",
+  "3. SEO Local Avançado para Destaque na Concorrência",
+  "4. Estratégias de Prospecção para Fechar Clientes Rápidos",
+  "5. Script de Negociação e Modelo de Contrato Exclusivo",
+];
+
+const gabrielLessons = [
+  "1. Gatilhos Mentais Essenciais para Textos Persuasivos",
+  "2. Estruturação de Headlines e Copy de Páginas Web",
+  "3. Scripts de Venda e Quebra de Objeções no WhatsApp",
+  "4. O Método Exato para Fechar Contratos Sem Descontos",
+  "5. Roteiro Passo a Passo de Apresentação de Propostas",
 ];
 
 export function PricingSection({ settings }: { settings?: any }) {
@@ -61,8 +78,11 @@ export function PricingSection({ settings }: { settings?: any }) {
   }, []);
 
   return (
-    <section id="pricing" ref={sectionRef} className="relative py-16 lg:py-20">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section id="pricing" ref={sectionRef} className="relative py-20 lg:py-28 overflow-hidden bg-black flex flex-col items-center justify-center min-h-[90vh]">
+      {/* WebGL cosmic blue meteorites background effect */}
+      <AnimatedShaderBackground />
+
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 w-full">
         {/* Header */}
         <div className="mb-10 lg:mb-12">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-8">
@@ -81,7 +101,7 @@ export function PricingSection({ settings }: { settings?: any }) {
         </div>
 
         {/* Bonus cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {bonuses.map((bonus, index) => (
             <div
               key={bonus.title}
@@ -101,7 +121,156 @@ export function PricingSection({ settings }: { settings?: any }) {
           ))}
         </div>
 
-// Main pricing card
+        {/* Highlighted Bonus Modules (Paschoalin-style) */}
+        <div className="space-y-12 mb-20 max-w-5xl mx-auto w-full">
+          {/* Header for Highlight Modules */}
+          <div className="text-center mb-8">
+            <span className="text-[#3B82F6] font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs block mb-3">
+              Módulos Bônus Exclusivos de Destaque
+            </span>
+            <h3 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+              Aprenda Diretamente com Quem <span className="text-[#3B82F6]">Faz Acontecer</span>
+            </h3>
+          </div>
+
+          {/* Module 1: Vinicius Saldanha */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7 }}
+            className="bg-[#0e0e0e]/85 backdrop-blur-xl border border-[#3B82F6]/20 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.1)] relative"
+          >
+            {/* Top Line Gradient */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-600 via-[#3B82F6] to-cyan-500" />
+            
+            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+              {/* Photo Column */}
+              <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
+                <img
+                  src="/images/Saldanha.jpeg"
+                  alt="Vinicius Saldanha"
+                  className="w-full h-full object-cover object-center lg:object-top transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
+                
+                {/* Badge */}
+                <div className="absolute bottom-4 left-4 bg-yellow-600/90 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg">
+                  <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Participação Especial
+                </div>
+              </div>
+
+              {/* Content Column */}
+              <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
+                <div className="mb-6">
+                  <span className="text-yellow-500 font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1">
+                    Especialista em Marketing Local
+                  </span>
+                  <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
+                    Vinicius Saldanha
+                  </h4>
+                  <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
+                    Google Meu Negócio: Domine o Maps e Atraia Clientes Sem Gastar Com Anúncios
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Aprenda a fórmula testada de SEO local para colocar qualquer empresa no topo das buscas do Google Maps. Uma ficha bem otimizada gera chamadas diárias e atrai clientes reais logo nas primeiras semanas de forma orgânica.
+                  </p>
+                </div>
+
+                <div className="border-t border-white/5 pt-6">
+                  <p className="text-xs font-black uppercase tracking-widest text-[#3B82F6] mb-4">Aulas Exclusivas Inclusas:</p>
+                  <div className="space-y-2.5">
+                    {saldanhaLessons.map((lesson, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-[#3B82F6]/20 border border-[#3B82F6]/40 flex items-center justify-center shrink-0">
+                          <Check size={10} className="text-[#3B82F6]" strokeWidth={3} />
+                        </div>
+                        <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-4 bg-[#3B82F6]/10 border border-[#3B82F6]/20 rounded-xl mt-6">
+                  <p className="text-sm font-bold text-[#3B82F6] leading-relaxed">
+                    Vinicius te ensina a colocar qualquer empresa no topo do Google Maps, <strong className="text-white">gerando prospecção passiva de clientes altamente qualificados</strong> de forma orgânica.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Module 2: Gabriel */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="bg-[#0e0e0e]/85 backdrop-blur-xl border border-[#3B82F6]/20 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.1)] relative"
+          >
+            {/* Top Line Gradient */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-600 via-[#3B82F6] to-cyan-500" />
+            
+            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+              {/* Photo Column */}
+              <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
+                <img
+                  src="/images/gabriel.jpeg"
+                  alt="Gabriel"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
+                
+                {/* Badge */}
+                <div className="absolute bottom-4 left-4 bg-[#3B82F6]/90 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg">
+                  <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Módulo Bônus Especial
+                </div>
+              </div>
+
+              {/* Content Column */}
+              <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
+                <div className="mb-6">
+                  <span className="text-[#3B82F6] font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1">
+                    Copywriter Profissional
+                  </span>
+                  <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
+                    Gabriel
+                  </h4>
+                  <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
+                    Copywriting e Fechamento de Vendas Pelo WhatsApp
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Descubra os segredos da escrita persuasiva aplicados a sites profissionais que convertem visitantes em clientes pagantes. Aprenda scripts de abordagem práticos e de alto impacto para conduzir reuniões comerciais e fechar propostas sem dar descontos.
+                  </p>
+                </div>
+
+                <div className="border-t border-white/5 pt-6">
+                  <p className="text-xs font-black uppercase tracking-widest text-[#3B82F6] mb-4">Aulas Exclusivas Inclusas:</p>
+                  <div className="space-y-2.5">
+                    {gabrielLessons.map((lesson, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-[#3B82F6]/20 border border-[#3B82F6]/40 flex items-center justify-center shrink-0">
+                          <Check size={10} className="text-[#3B82F6]" strokeWidth={3} />
+                        </div>
+                        <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-4 bg-[#3B82F6]/10 border border-[#3B82F6]/20 rounded-xl mt-6">
+                  <p className="text-sm font-bold text-[#3B82F6] leading-relaxed">
+                    Gabriel revela o roteiro exato e os gatilhos comerciais para <strong className="text-white">fechar contratos de alto valor pelo WhatsApp</strong> sem sofrer com objeções ou pedidos de desconto.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Centered glass card */}
         <div className={`w-full max-w-4xl mx-auto bg-[#0a0a0a]/90 backdrop-blur-xl border border-[#3B82F6]/20 rounded-[2.5rem] relative shadow-[0_0_120px_rgba(59,130,246,0.15)] overflow-hidden p-8 md:p-14 text-center transition-all duration-700 hover:shadow-[0_0_150px_rgba(59,130,246,0.25)] ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}>
