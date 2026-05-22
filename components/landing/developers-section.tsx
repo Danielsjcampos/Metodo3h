@@ -40,69 +40,93 @@ export function DevelopersSection() {
   }, []);
 
   return (
-    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden">
+    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-16 lg:py-24 bg-background">
+      {/* Ambient background glow */}
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* ── PARTE 1: Daniel Marques ─────────────────────────── */}
-      <div className="relative min-h-[900px] py-24 lg:py-32">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 lg:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column: Bio & Info */}
+          <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
+            <div className={`mb-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
+                <span className="w-8 h-px bg-foreground/30" />
+                Quem vai te ensinar
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight leading-[1.05]">
+                30 anos de
+                <br />
+                <span className="text-muted-foreground italic font-light">mercado real.</span>
+                <br />
+                Não YouTube.
+              </h2>
+            </div>
 
-        {/* Dino image */}
-        <div
-          className={`absolute bottom-0 right-0 pointer-events-none transition-opacity duration-1000 delay-300 ${
-            isVisible ? "opacity-90" : "opacity-0"
-          }`}
-          style={{ width: "58%", height: "100%" }}
-        >
-          <img
-            src="/images/dino/dinosemf.png"
-            alt="Daniel Marques"
-            style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "bottom center" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className={`mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-              <span className="w-8 h-px bg-foreground/30" />
-              Quem vai te ensinar
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95]">
-              30 anos de
-              <br />
-              <span className="text-muted-foreground">mercado real.</span>
-              <br />
-              Não YouTube.
-            </h2>
-          </div>
-
-          <div className={`lg:max-w-[50%] transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Me chamo <span className="text-foreground font-medium">Daniel Marques</span>. Comecei no mercado digital antes da internet banda larga existir no Brasil. Em 30 anos entreguei mais de 1.000 sites e sistemas de gestão, gerenciei mais de 10 lojas físicas, construí SaaS, micro-SaaS, plataformas de cursos e automações com IA para clientes reais.
-            </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Não sou um youtuber que aprendeu a fazer site mês passado. Sou um profissional que vive disso há três décadas — e que agora tem acesso às mesmas ferramentas de IA que nivelaram o campo para quem está começando agora.
-            </p>
-
-            <blockquote className="border-l-2 border-[#3B82F6] pl-6 mb-12">
-              <p className="text-lg text-foreground italic leading-relaxed">
-                &ldquo;Eu faço ao vivo, sem ensaio, sem script de teleprompter. Você vê exatamente o que eu faço quando entrego para um cliente pagando.&rdquo;
+            <div className={`transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed">
+                Me chamo <span className="text-foreground font-medium">Daniel Marques</span>. Comecei no mercado digital antes da internet banda larga existir no Brasil. Em 30 anos entreguei mais de 1.000 sites e sistemas de gestão, gerenciei mais de 10 lojas físicas, construí SaaS, micro-SaaS, plataformas de cursos e automações com IA para clientes reais.
               </p>
-            </blockquote>
+              <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed">
+                Não sou um youtuber que aprendeu a fazer site mês passado. Sou um profissional que vive disso há três décadas — e que agora tem acesso às mesmas ferramentas de IA que nivelaram o campo para quem está começando agora.
+              </p>
 
-            <div className="grid grid-cols-2 gap-6">
-              {dinoFeatures.map((f, i) => (
-                <div
-                  key={f.title}
-                  className={`transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-                  style={{ transitionDelay: `${i * 50 + 200}ms` }}
-                >
-                  <h3 className="font-medium mb-1">{f.title}</h3>
-                  <p className="text-sm text-muted-foreground">{f.description}</p>
-                </div>
-              ))}
+              <blockquote className="border-l-2 border-[#3B82F6] pl-6 mb-10">
+                <p className="text-lg text-foreground italic leading-relaxed">
+                  &ldquo;Eu faço ao vivo, sem ensaio, sem script de teleprompter. Você vê exatamente o que eu faço quando entrego para um cliente pagando.&rdquo;
+                </p>
+              </blockquote>
+
+              <div className="grid grid-cols-2 gap-6">
+                {dinoFeatures.map((f, i) => (
+                  <div
+                    key={f.title}
+                    className={`transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                    style={{ transitionDelay: `${i * 50 + 200}ms` }}
+                  >
+                    <h3 className="font-medium text-white mb-1">{f.title}</h3>
+                    <p className="text-sm text-muted-foreground">{f.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+
+          {/* Right Column: Dino Image & Antigravity Logo */}
+          <div 
+            className={`lg:col-span-5 flex flex-col items-center justify-start order-1 lg:order-2 transition-all duration-1000 delay-300 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            }`}
+          >
+            {/* Dino Image Container - Placed at the top */}
+            <div className="relative w-full max-w-[420px] lg:max-w-none flex justify-center mb-6">
+              <img
+                src="/images/dino/dinosemf.png"
+                alt="Daniel Marques (Dino)"
+                className="w-full max-h-[500px] object-contain object-top"
+              />
+              <div className="absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%) pointer-events-none" />
+            </div>
+
+            {/* Antigravity Logo underneath with a premium silver filter */}
+            <div className="flex flex-col items-center justify-center w-full max-w-[280px]">
+              <div className="w-full px-6 py-4 rounded-2xl glass-card border border-white/5 flex flex-col items-center justify-center shadow-lg transition-all duration-500 hover:border-white/10 hover:shadow-2xl">
+                <img
+                  src="/images/antigravity logo.webp"
+                  alt="Antigravity Logo"
+                  className="h-10 w-auto object-contain transition-all duration-500"
+                  style={{
+                    filter: "grayscale(100%) brightness(1.7) contrast(1.1) drop-shadow(0 0 10px rgba(255,255,255,0.15))",
+                  }}
+                />
+                <span className="text-[10px] font-mono tracking-widest text-muted-foreground/60 uppercase mt-2.5">
+                  Parceiro Oficial de IA
+                </span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
