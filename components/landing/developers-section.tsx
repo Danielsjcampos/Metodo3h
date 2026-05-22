@@ -100,12 +100,16 @@ export function DevelopersSection() {
             }`}
           >
             {/* Dino Image Container - Large and Faded at the bottom */}
-            <div className="relative w-full max-w-[500px] lg:max-w-none h-[420px] md:h-[500px] lg:h-[620px] flex justify-center overflow-hidden mb-6">
+            <div className="relative w-full max-w-[500px] lg:max-w-none h-[420px] md:h-[500px] lg:h-[620px] flex items-end justify-center overflow-hidden mb-6">
               <img
                 src="/images/dino/dinosemf.png"
                 alt="Daniel Marques (Dino)"
-                className="h-full w-auto object-contain object-top transition-opacity duration-700"
-                style={{ opacity: 0.65 }}
+                className="h-full w-auto object-contain object-bottom transition-opacity duration-700"
+                style={{ 
+                  opacity: 0.65,
+                  WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
+                  maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
+                }}
               />
               {/* Premium smooth bottom fade overlay to prevent hard crop cuts */}
               <div className="absolute bottom-0 left-0 right-0 h-32 md:h-44 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
