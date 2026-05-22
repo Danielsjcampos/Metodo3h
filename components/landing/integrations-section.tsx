@@ -73,12 +73,10 @@ export function IntegrationsSection() {
           <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
         </span>
 
-        <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
+        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}>
-          Ferramentas profissionais.
-          <br />
-          <span className="text-muted-foreground italic font-light">Com custo zero.</span>
+          Ferramentas profissionais. <span className="text-muted-foreground italic font-light">Com custo zero.</span>
         </h2>
 
         <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-200 ${

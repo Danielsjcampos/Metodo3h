@@ -52,25 +52,24 @@ export function FeaturesSection() {
     <section id="problema" ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="relative mb-10 lg:mb-12">
-          <div className="grid lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-8">
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-foreground/30" />
-                A realidade do mercado hoje
-              </span>
-              <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-                Você está pagando
-                <br />
-                <span className="text-muted-foreground">caro demais</span>
-                <br />
-                por algo que
-                <br />
-                <span className="text-muted-foreground">deveria ser simples.</span>
-              </h2>
-            </div>
-          </div>
-          <p className={`mt-6 text-xl text-muted-foreground leading-relaxed max-w-3xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <div className="relative mb-10 lg:mb-12 text-center flex flex-col items-center justify-center">
+          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 transition-all duration-700 justify-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          }`}>
+            <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+            A realidade do mercado hoje
+            <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+          </span>
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
+            Você está pagando <span className="text-muted-foreground">caro demais</span>
+            <br />
+            por algo que <span className="text-muted-foreground">deveria ser simples.</span>
+          </h2>
+          <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto transition-all duration-1000 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             O mercado quer te fazer crer que criar um site é complexo para te cobrar fortunas. Rompemos essa barreira: um aprendizado cirúrgico, sem jargões de programação ou marketing digital, desenhado para leigos colocarem projetos profissionais no ar em poucas horas — seja para faturar alto vendendo esse serviço ou para digitalizar sua própria empresa com custo zero de agência.
           </p>
         </div>

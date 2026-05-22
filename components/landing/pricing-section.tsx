@@ -103,15 +103,12 @@ export function PricingSection({ settings }: { settings?: any }) {
           </div>
 
           {/* Main Epic Headline */}
-          <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.95] text-white transition-all duration-1000 ${
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter leading-[1.05] text-white transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Bônus{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-[#3B82F6] to-cyan-400">
-              Acumulados
-            </span>
+            Bônus <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-[#3B82F6] to-cyan-400">Acumulados</span>
             <br />
-            <span className="text-gray-400 text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight block my-2 lg:my-3">
+            <span className="text-gray-400 text-lg md:text-xl lg:text-2xl font-extrabold tracking-tight block my-2">
               que somam mais de
             </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 font-black drop-shadow-[0_0_35px_rgba(250,204,21,0.25)] select-none">

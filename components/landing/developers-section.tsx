@@ -55,12 +55,8 @@ export function DevelopersSection() {
                 <span className="w-8 h-px bg-foreground/30" />
                 Quem vai te ensinar
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight leading-[1.05]">
-                30 anos de
-                <br />
-                <span className="text-muted-foreground italic font-light">mercado real.</span>
-                <br />
-                Não YouTube.
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mb-6">
+                30 anos de <span className="text-muted-foreground italic font-light">mercado real.</span> Não YouTube.
               </h2>
             </div>
 

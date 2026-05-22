@@ -74,23 +74,21 @@ export function SecuritySection() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="mb-10 md:mb-12 text-center md:text-left">
-          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 ${
+        <div className="mb-10 md:mb-12 text-center flex flex-col items-center justify-center">
+          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}>
             <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
             Para quem é este curso
+            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
           </span>
           
-          <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[1.05] mt-2 transition-all duration-1000 ${
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Projetado para quem quer
-            <br />
-            <span className="text-muted-foreground italic font-light">resultados reais,</span>{" "}
-            não diplomas.
+            Projetado para quem quer <span className="text-muted-foreground italic font-light">resultados reais,</span> não diplomas.
           </h2>
-          <p className={`mt-6 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
             O método prático direto ao ponto para tirar ideias do papel, dominar ferramentas de inteligência artificial e monetizar no mercado digital.

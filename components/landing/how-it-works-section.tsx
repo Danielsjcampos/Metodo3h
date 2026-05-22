@@ -35,34 +35,28 @@ export function HowItWorksSection() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="relative mb-10 lg:mb-12 grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
-          {/* Title */}
-          <div className="overflow-hidden">
-            <div className={`transition-all duration-1000 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"}`}>
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-white/40 mb-4">
-                <span className="w-12 h-px bg-white/20" />
-                A virada
-              </span>
-            </div>
-            
-            <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.9] transition-all duration-1000 delay-100 ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
-            }`}>
-              <span className="block">A IA acabou</span>
-              <span className="block text-white/40">com a</span>
-              <span className="block">barreira técnica.</span>
-              <span className="block text-white/20">Para sempre.</span>
-            </h2>
-          </div>
+        <div className="relative mb-10 lg:mb-12 text-center flex flex-col items-center justify-center">
+          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-white/40 uppercase mb-6 transition-all duration-700 justify-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          }`}>
+            <span className="w-8 h-[2px] bg-white/20 rounded-full" />
+            A virada
+            <span className="w-8 h-[2px] bg-white/20 rounded-full" />
+          </span>
+          
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] mb-6 transition-all duration-1000 delay-100 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
+          }`}>
+            A IA acabou com a barreira técnica. <span className="text-white/40">Para sempre.</span>
+          </h2>
 
-          {/* Description */}
-          <div className={`transition-all duration-1000 delay-200 ${
+          <div className={`max-w-3xl mx-auto transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}>
-            <p className="text-xl text-white/70 leading-relaxed mb-4">
+            <p className="text-base md:text-lg text-white/70 leading-relaxed mb-4">
               A tecnologia evoluiu para que você <span className="text-white">não precise ser programador</span> para criar designs dignos de grandes marcas. Com Inteligência Artificial e as ferramentas certas, qualquer leigo constrói sites ultra-profissionais de forma rápida e precisa.
             </p>
-            <p className="text-lg text-white/50 leading-relaxed">
+            <p className="text-sm md:text-base text-white/50 leading-relaxed">
               Seja você um empresário local querendo reduzir custos operacionais ou um profissional em busca de uma renda extra lucrativa, este é o caminho mais curto e eficiente para dominar o digital.
             </p>
           </div>

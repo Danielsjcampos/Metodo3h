@@ -91,25 +91,22 @@ export function InfrastructureSection() {
   return (
     <section id="modulos" ref={sectionRef} className="relative py-16 lg:py-20 overflow-hidden">
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 lg:mb-12">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 lg:mb-12 text-center flex flex-col items-center justify-center">
         {/* Header */}
-        <span className={`inline-flex items-center gap-4 text-sm font-mono text-muted-foreground mb-4 transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <span className="w-12 h-px bg-foreground/20" />
+        <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 transition-all duration-700 justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
+          <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
           O que você vai aprender
+          <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
         </span>
-        <div className="grid lg:grid-cols-2 gap-8 items-end">
-          <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            7 módulos.
-            <br />
-            <span className="text-muted-foreground">Tudo prático.</span>
-            <br />
-            Zero teoria.
-          </h2>
-          <p className={`text-xl text-muted-foreground leading-relaxed transition-all duration-1000 delay-100 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-            Cada aula foi desenhada para que você saia fazendo, não apenas assistindo.
-            Nenhuma aula passa de 25 minutos. Gravadas com tela real — o que eu faço no meu Mac, você faz junto comigo.
-          </p>
-        </div>
+        
+        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] mb-6 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          7 módulos. <span className="text-muted-foreground">Tudo prático.</span> Zero teoria.
+        </h2>
+        
+        <p className={`text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto transition-all duration-1000 delay-100 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+          Cada aula foi desenhada para que você saia fazendo, não apenas assistindo.
+          Nenhuma aula passa de 25 minutos. Gravadas com tela real — o que eu faço no meu Mac, você faz junto comigo.
+        </p>
       </div>
 
       {/* Infinite carousel */}

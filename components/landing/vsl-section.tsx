@@ -43,12 +43,12 @@ export function VslSection() {
             VEJA O MÉTODO AO VIVO
             <span className="w-8 h-px bg-[#3B82F6]/40" />
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] text-white">
             Do prompt ao site no ar.
             <br />
             <span className="text-muted-foreground">Em menos de 3 horas.</span>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Assista Daniel Marques construir um site profissional ao vivo — do zero, sem código, sem edições.
             O que você vai ver aqui é exatamente o que acontece na tela de um cliente pagante.
           </p>

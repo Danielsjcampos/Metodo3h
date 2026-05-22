@@ -64,12 +64,10 @@ export function FaqSection({ settings }: { settings?: any }) {
             Respondendo suas dúvidas
             <span className="w-8 h-px bg-foreground/20" />
           </span>
-          <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] transition-all duration-1000 ${
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Suas perguntas.
-            <br />
-            <span className="text-muted-foreground">Respostas diretas.</span>
+            Suas perguntas. <span className="text-muted-foreground">Respostas diretas.</span>
           </h2>
         </div>
 
