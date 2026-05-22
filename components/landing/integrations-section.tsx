@@ -6,12 +6,12 @@ import { Check } from "lucide-react";
 /* ─── Tool visuals — imagens geradas por IA ────────────────── */
 
 const toolImages = [
-  "/images/tools/antigravity.png",
+  "/images/imagem 1 antigravity.png",
   "/images/tools/vercel.png",
-  "/images/tools/cloudflare.png",
-  "/images/tools/registro.png",
-  "/images/tools/search-console.png",
-  "/images/tools/google-business.png",
+  "/images/imagem cloudfare.png",
+  "/images/imagem registro br.png",
+  "/images/imagem searchconsole.png",
+  "/images/imagem google business.png",
 ];
 
 function ToolVisual({ src }: { src: string }) {
