@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: "3h",     label: "Tempo médio para publicar", sublabel: "Do absoluto zero ao site no ar. Sem jargões técnicos complexos ou enrolações. 100% amigável para leigos.", img: "/images/tools/metric-speed.png" },
-  { value: "R$0",    label: "Custo de hospedagem",       sublabel: "Vercel + Cloudflare integrados de graça. Economize milhares de reais em custos operacionais ou aumente seu lucro.", img: "/images/tools/metric-free.png" },
-  { value: "100%",   label: "Independência total",       sublabel: "Você edita, atualiza, muda e replica sem depender de ninguém.",         img: "/images/tools/metric-independence.png" },
-  { value: "R$2.800",label: "Pacote médio de venda",    sublabel: "Precifique seu novo serviço com alta margem. Crie sites de R$1.500 a R$3.500 e fature logo no início.", img: "/images/tools/metric-earnings.png" },
+  { value: "3h",     label: "Tempo médio para publicar", sublabel: "Do absoluto zero ao site no ar. Sem jargões técnicos complexos ou enrolações. 100% amigável para leigos.", img: "/images/3 horas.png" },
+  { value: "R$0",    label: "Custo de hospedagem",       sublabel: "Vercel + Cloudflare integrados de graça. Economize milhares de reais em custos operacionais ou aumente seu lucro.", img: "/images/custo de hospedagem.png" },
+  { value: "100%",   label: "Independência total",       sublabel: "Você edita, atualiza, muda e replica sem depender de ninguém.",         img: "/images/100% independencia.png" },
+  { value: "R$2.800",label: "Pacote médio de venda",    sublabel: "Precifique seu novo serviço com alta margem. Crie sites de R$1.500 a R$3.500 e fature logo no início.", img: "/images/2800.png" },
 ];
 
 export function HowItWorksSection() {
