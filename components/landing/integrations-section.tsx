@@ -16,9 +16,17 @@ const toolImages = [
 
 function ToolVisual({ src }: { src: string }) {
   return (
-    <div className="relative h-44 overflow-hidden">
-      <img src={src} alt="" aria-hidden="true" className="w-full h-full object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+    <div className="relative h-52 overflow-hidden bg-black/40">
+      <img 
+        src={src} 
+        alt="" 
+        aria-hidden="true" 
+        className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105" 
+      />
+      {/* Subtle dynamic grid patterns over tool images */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+      {/* Premium vignette overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#060814] via-[#060814]/20 to-transparent" />
     </div>
   );
 }
@@ -26,12 +34,12 @@ function ToolVisual({ src }: { src: string }) {
 /* ─── Section ──────────────────────────────────────────────── */
 
 const tools = [
-  { name: "Antigravity", category: "Criação", description: "Site completo com IA", free: true },
-  { name: "Vercel", category: "Hospedagem", description: "Deploy automático", free: true },
-  { name: "Cloudflare", category: "DNS + CDN", description: "Performance e segurança", free: true },
-  { name: "Registro.br", category: "Domínio", description: ".com.br oficial", price: "R$40/ano" },
-  { name: "Search Console", category: "Indexação", description: "Aparecer no Google", free: true },
-  { name: "Google Business", category: "Local SEO", description: "Aparecer no Maps", free: true },
+  { name: "Antigravity", category: "Criação", description: "Criação ultra-veloz de sites profissionais com auxílio de Inteligência Artificial.", free: true },
+  { name: "Vercel", category: "Hospedagem", description: "Hospedagem de alto desempenho com deploy automático a cada alteração.", free: true },
+  { name: "Cloudflare", category: "DNS & Segurança", description: "Otimização de velocidade global, proteção contra ataques e CDN integrada.", free: true },
+  { name: "Registro.br", category: "Domínio", description: "Registro e gestão do seu endereço comercial .com.br oficial brasileiro.", price: "R$40/ano" },
+  { name: "Search Console", category: "Indexação", description: "Ferramenta oficial do Google para indexar e monitorar sua posição de busca.", free: true },
+  { name: "Google Business", category: "Local SEO", description: "Posicionamento estratégico no Google Maps para atração de clientes locais.", free: true },
 ];
 
 export function IntegrationsSection() {
@@ -49,105 +57,140 @@ export function IntegrationsSection() {
   }, []);
 
   return (
-    <section id="ferramentas" ref={sectionRef} className="relative overflow-hidden">
+    <section id="ferramentas" ref={sectionRef} className="relative py-28 md:py-36 lg:py-44 overflow-hidden bg-background">
+      
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[130px] pointer-events-none" />
 
       {/* Header */}
-      <div className="relative z-10 pt-32 lg:pt-40 text-center">
-        <span className={`inline-flex items-center gap-4 text-sm font-mono text-muted-foreground mb-8 transition-all duration-700 justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <span className="w-12 h-px bg-foreground/20" />
+      <div className="relative z-10 text-center mb-16 md:mb-20 px-6">
+        <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+        }`}>
+          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
           Stack do curso
-          <span className="w-12 h-px bg-foreground/20" />
+          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
         </span>
 
-        <h2 className={`text-5xl md:text-6xl lg:text-[100px] font-display tracking-tight leading-[0.9] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          Ferramentas
+        <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          Ferramentas profissionais.
           <br />
-          <span className="text-muted-foreground">profissionais.</span>
-          <br />
-          Custo zero.
+          <span className="text-muted-foreground italic font-light">Com custo zero.</span>
         </h2>
 
-        <p className={`mt-8 text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-100 px-6 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          Cada ferramenta foi escolhida por um critério: é o que eu uso de verdade com meus clientes pagantes. Não é o que é fácil de mostrar — é o que funciona.
+        <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-200 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}>
+          Cada ferramenta foi escolhida minuciosamente com base no que eu utilizo diariamente para atender clientes pagantes reais. Soluções de elite para você performar no mercado.
         </p>
       </div>
 
-      {/* Full-width image */}
-      <div className={`relative left-1/2 -translate-x-1/2 w-screen -mt-8 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+      {/* Full-width visual connection graph with smooth gradient blend */}
+      <div className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[1600px] -mt-10 mb-10 transition-all duration-1000 delay-200 overflow-hidden ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}>
+        {/* Vignette fade layers on sides to blend perfectly */}
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        
         <img
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/connection-KeJwWPQvn6l0a7C48tCARYtNEdC92H.png"
           alt=""
           aria-hidden="true"
-          className="w-full h-auto object-cover"
-          style={{ filter: "hue-rotate(180deg) saturate(1.4) brightness(0.9)" }}
+          className="w-full h-auto object-cover opacity-80"
+          style={{ filter: "hue-rotate(180deg) saturate(1.4) brightness(0.95)" }}
         />
       </div>
 
       {/* Tools grid */}
-      <div className="relative z-10 mt-0 lg:-mt-24 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16">
-          {tools.map((tool, index) => (
-            <div
-              key={tool.name}
-              className={`group relative overflow-hidden border transition-all duration-500 cursor-default ${
-                hoveredIndex === index
-                  ? "border-[#3B82F6]/50 scale-[1.02]"
-                  : "border-foreground/10 hover:border-[#3B82F6]/30"
-              } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={{ transitionDelay: `${index * 60 + 300}ms` }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Visual area */}
-              <ToolVisual src={toolImages[index]} />
-
-                {/* Content */}
-                <div className="p-5 lg:p-6 relative">
-                  {/* Category tag */}
-                  <span className={`absolute top-4 right-4 text-[9px] font-mono px-2 py-0.5 transition-colors ${
-                    hoveredIndex === index ? "bg-[#3B82F6] text-white" : "bg-foreground/10 text-muted-foreground"
-                  }`}>
-                    {tool.category}
-                  </span>
-
-                  <h3 className="text-lg lg:text-xl font-display mb-1 pr-16">{tool.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{tool.description}</p>
-
-                  <div className="flex items-center gap-2">
-                    {tool.free ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-[#3B82F6]" />
-                        <span className="text-sm text-[#3B82F6] font-medium">Gratuito</span>
-                      </>
-                    ) : (
-                      <span className="text-sm text-muted-foreground">{tool.price}</span>
-                    )}
-                  </div>
-
-                  {/* Animated underline */}
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-foreground/10 overflow-hidden">
-                    <div className={`h-full bg-[#3B82F6] transition-all duration-500 ${hoveredIndex === index ? "w-full" : "w-0"}`} />
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {tools.map((tool, index) => {
+            const isHovered = hoveredIndex === index;
+            return (
+              <div
+                key={tool.name}
+                className={`group relative overflow-hidden rounded-[2rem] glass-card transition-all duration-500 cursor-pointer flex flex-col justify-between ${
+                  isHovered
+                    ? "border-white/15 scale-[1.02] shadow-[0_20px_50px_rgba(59,130,246,0.12)]"
+                    : "border-white/5 hover:border-white/10"
+                } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                style={{ transitionDelay: `${index * 80}ms` }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                {/* Visual Area */}
+                <div className="relative border-b border-white/5 overflow-hidden rounded-t-[2rem]">
+                  <ToolVisual src={toolImages[index]} />
+                  
+                  {/* Floating badge for category */}
+                  <div className="absolute top-6 right-6 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg transition-colors group-hover:border-blue-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                    <span className="text-[9px] font-mono font-semibold tracking-wider text-white/90 uppercase">{tool.category}</span>
                   </div>
                 </div>
+
+                {/* Content */}
+                <div className="p-7 relative z-10 flex flex-col justify-between flex-grow">
+                  <div>
+                    <h3 className="text-xl font-display font-medium text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                      {tool.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                      {tool.description}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                    <div className="flex items-center gap-2">
+                      {tool.free ? (
+                        <>
+                          <div className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#3B82F6]">
+                            <Check className="w-3 h-3" />
+                          </div>
+                          <span className="text-xs text-[#3B82F6] font-mono tracking-wider font-semibold uppercase">Licença Gratuita</span>
+                        </>
+                      ) : (
+                        <span className="text-xs text-muted-foreground font-mono tracking-wider uppercase">Custo: <strong className="text-white font-medium">{tool.price}</strong></span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Ambient glow highlight line at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500/0 via-blue-500/40 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Bottom note */}
-        <div className={`flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 pt-12 border-t border-foreground/10 transition-all duration-1000 delay-500 pb-32 lg:pb-40 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-            {["Sem mensalidade", "Sem código", "Setup em 20 minutos"].map((t) => (
-              <span key={t} className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-[#3B82F6]" />
+        {/* Highly polished Summary Capsule Box */}
+        <div className={`p-6 md:p-8 rounded-[2rem] glass-card border border-white/5 flex flex-col lg:flex-row items-center justify-between gap-6 transition-all duration-1000 delay-500 shadow-xl ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-muted-foreground">
+            {["Sem mensalidades ocultas", "Sem necessidade de código", "Setup completo em 20 min"].map((t) => (
+              <span key={t} className="flex items-center gap-2 font-medium">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#3B82F6]">
+                  <Check className="w-3.5 h-3.5" />
+                </div>
                 {t}
               </span>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground">
-            Custo total: <span className="text-foreground font-medium">~R$40/ano</span> (apenas o domínio)
-          </p>
+          
+          <div className="shrink-0 text-center lg:text-right">
+            <p className="text-sm text-muted-foreground">
+              Investimento total em ferramentas: <span className="text-[#3B82F6] font-bold font-mono text-base ml-1">~R$40/ano</span> <span className="text-xs opacity-70">(apenas domínio .com.br)</span>
+            </p>
+          </div>
         </div>
+
       </div>
     </section>
   );
 }
+
