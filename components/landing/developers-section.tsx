@@ -46,10 +46,10 @@ export function DevelopersSection() {
 
       {/* ── PARTE 1: Daniel Marques ─────────────────────────── */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 lg:mb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Bio & Info */}
-          <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
+          <div className="flex flex-col justify-center order-2 lg:order-1">
             <div className={`mb-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
                 <span className="w-8 h-px bg-foreground/30" />
@@ -93,37 +93,35 @@ export function DevelopersSection() {
             </div>
           </div>
 
-          {/* Right Column: Dino Image & Antigravity Logo */}
+          {/* Right Column: Large Dino Image & Large Raw Antigravity Logo */}
           <div 
-            className={`lg:col-span-5 flex flex-col items-center justify-start order-1 lg:order-2 transition-all duration-1000 delay-300 ${
+            className={`flex flex-col items-center justify-start order-1 lg:order-2 transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             }`}
           >
-            {/* Dino Image Container - Placed at the top */}
-            <div className="relative w-full max-w-[420px] lg:max-w-none flex justify-center mb-6">
+            {/* Dino Image Container - Large and Faded at the bottom */}
+            <div className="relative w-full max-w-[500px] lg:max-w-none h-[420px] md:h-[500px] lg:h-[620px] flex justify-center overflow-hidden mb-6">
               <img
                 src="/images/dino/dinosemf.png"
                 alt="Daniel Marques (Dino)"
-                className="w-full max-h-[500px] object-contain object-top"
+                className="h-full w-auto object-contain object-top transition-opacity duration-700"
+                style={{ opacity: 0.65 }}
               />
+              {/* Premium smooth bottom fade overlay to prevent hard crop cuts */}
+              <div className="absolute bottom-0 left-0 right-0 h-32 md:h-44 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
               <div className="absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%) pointer-events-none" />
             </div>
 
-            {/* Antigravity Logo underneath with a premium silver filter */}
-            <div className="flex flex-col items-center justify-center w-full max-w-[280px]">
-              <div className="w-full px-6 py-4 rounded-2xl glass-card border border-white/5 flex flex-col items-center justify-center shadow-lg transition-all duration-500 hover:border-white/10 hover:shadow-2xl">
-                <img
-                  src="/images/antigravity logo.webp"
-                  alt="Antigravity Logo"
-                  className="h-10 w-auto object-contain transition-all duration-500"
-                  style={{
-                    filter: "grayscale(100%) brightness(1.7) contrast(1.1) drop-shadow(0 0 10px rgba(255,255,255,0.15))",
-                  }}
-                />
-                <span className="text-[10px] font-mono tracking-widest text-muted-foreground/60 uppercase mt-2.5">
-                  Parceiro Oficial de IA
-                </span>
-              </div>
+            {/* Antigravity Logo underneath - Large, raw, without any card/container wrapper */}
+            <div className="flex justify-center mt-2 pointer-events-auto">
+              <img
+                src="/images/antigravity logo.webp"
+                alt="Antigravity Logo"
+                className="h-20 md:h-24 lg:h-28 w-auto object-contain transition-transform duration-500 hover:scale-105"
+                style={{
+                  filter: "grayscale(100%) brightness(1.75) contrast(1.1) drop-shadow(0 0 15px rgba(255,255,255,0.2))",
+                }}
+              />
             </div>
           </div>
 
