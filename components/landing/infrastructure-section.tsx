@@ -11,6 +11,7 @@ const modules = [
     lessons: "2 aulas",
     duration: "~20 min",
     accent: "#3B82F6",
+    image: "/images/m0.png",
   },
   {
     number: "M1",
@@ -20,6 +21,7 @@ const modules = [
     lessons: "4 aulas",
     duration: "~55 min",
     accent: "#60A5FA",
+    image: "/images/m1.png",
   },
   {
     number: "M2",
@@ -29,6 +31,7 @@ const modules = [
     lessons: "3 aulas",
     duration: "~45 min",
     accent: "#38BDF8",
+    image: "/images/m2.png",
   },
   {
     number: "M3",
@@ -38,6 +41,7 @@ const modules = [
     lessons: "4 aulas",
     duration: "~60 min",
     accent: "#93C5FD",
+    image: "/images/m3.png",
   },
   {
     number: "M4",
@@ -47,6 +51,7 @@ const modules = [
     lessons: "4 aulas",
     duration: "~50 min",
     accent: "#3B82F6",
+    image: "/images/m4.png",
   },
   {
     number: "M5",
@@ -56,6 +61,7 @@ const modules = [
     lessons: "4 aulas",
     duration: "~55 min",
     accent: "#60A5FA",
+    image: "/images/m5.png",
   },
   {
     number: "M6",
@@ -65,6 +71,7 @@ const modules = [
     lessons: "5 aulas",
     duration: "~65 min",
     accent: "#38BDF8",
+    image: "/images/m6.png",
   },
 ];
 
@@ -117,48 +124,14 @@ export function InfrastructureSection() {
           {[...modules, ...modules].map((mod, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[320px] lg:w-[360px] rounded-3xl glass-card glass-card-hover overflow-hidden group cursor-default"
+              className="flex-shrink-0 w-[260px] md:w-[290px] lg:w-[325px] aspect-[9/16] rounded-[1.8rem] overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_20px_50px_rgba(59,130,246,0.22)] border border-white/10 group cursor-pointer"
             >
-              {/* Top accent bar */}
-              <div className="h-[2px]" style={{ background: `linear-gradient(to right, ${mod.accent}, transparent)` }} />
-
-              <div className="p-7 lg:p-8">
-                {/* Number + tag row */}
-                <div className="flex items-start justify-between mb-5">
-                  <span
-                    className="text-[64px] font-display font-bold leading-none select-none"
-                    style={{ color: `${mod.accent}18` }}
-                  >
-                    {mod.number}
-                  </span>
-                  <span
-                    className="text-[9px] font-mono tracking-widest px-2.5 py-1 border rounded-full uppercase mt-1"
-                    style={{ color: mod.accent, borderColor: `${mod.accent}40`, background: `${mod.accent}0d` }}
-                  >
-                    {mod.tag}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg lg:text-xl font-display leading-[1.25] mb-3 text-foreground group-hover:text-white transition-colors duration-300">
-                  {mod.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  {mod.description}
-                </p>
-
-                {/* Meta footer */}
-                <div className="flex items-center gap-3 pt-5 border-t border-foreground/10">
-                  <span className="text-[10px] font-mono text-muted-foreground/60">{mod.lessons}</span>
-                  <span className="text-foreground/20">·</span>
-                  <span className="text-[10px] font-mono text-muted-foreground/60">{mod.duration}</span>
-                  <div className="ml-auto">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: mod.accent, opacity: 0.6 }} />
-                  </div>
-                </div>
-              </div>
+              <img
+                src={mod.image}
+                alt={mod.title}
+                className="w-full h-full object-cover select-none"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
