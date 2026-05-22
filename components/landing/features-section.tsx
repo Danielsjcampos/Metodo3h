@@ -30,9 +30,9 @@ function AIVisual({ src }: { src: string }) {
 }
 
 const visuals = {
-  price: () => <AIVisual src="/images/tools/problem-price.png" />,
-  time:  () => <AIVisual src="/images/tools/problem-time.png" />,
-  lock:  () => <AIVisual src="/images/tools/problem-lock.png" />,
+  price: () => <AIVisual src="/images/o preco absurdo de uma agencia.png" />,
+  time:  () => <AIVisual src="/images/semanas ou meses esperando.png" />,
+  lock:  () => <AIVisual src="/images/dependencia permanente.png" />,
 };
 
 export function FeaturesSection() {
