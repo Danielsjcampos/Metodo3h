@@ -61,7 +61,7 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
 
-  const gradientColors = ["#22C55E", "#4ADE80", "#86EFAC", "#22C55E"];
+  const gradientColors = ["#3B82F6", "#60A5FA", "#38BDF8", "#93C5FD", "#3B82F6"];
 
   return (
     <>
@@ -90,7 +90,7 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
               display: "inline-block",
               opacity: letterStates[i]?.opacity ?? 0,
               filter: `blur(${letterStates[i]?.blur ?? 20}px)`,
-              color: showGradient ? `rgb(${r},${g},${b})` : "#22C55E",
+              color: showGradient ? `rgb(${r},${g},${b})` : "#3B82F6",
               transition: "color 0.4s ease",
             }}
           >
@@ -118,20 +118,20 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden bg-black">
-      {/* Background Matrix Rain */}
+    <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
+      {/* Background Matrix Rain (Falling Green Characters) */}
       <div className="absolute inset-0 z-0 opacity-40">
         <MatrixCodeRain />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 pointer-events-none" />
       </div>
 
-      {/* Subtle grid lines */}
+      {/* Subtle brand blue grid lines */}
       <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none opacity-20">
         {[...Array(8)].map((_, i) => (
           <div
             key={`h-${i}`}
-            className="absolute h-px bg-green-500/10"
+            className="absolute h-px bg-[#3B82F6]/10"
             style={{
               top: `${12.5 * (i + 1)}%`,
               left: 0,
@@ -142,7 +142,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
         {[...Array(12)].map((_, i) => (
           <div
             key={`v-${i}`}
-            className="absolute w-px bg-green-500/10"
+            className="absolute w-px bg-[#3B82F6]/10"
             style={{
               left: `${8.33 * (i + 1)}%`,
               top: 0,
@@ -152,16 +152,17 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
         ))}
       </div>
       
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-16 lg:pt-36 lg:pb-20">
+      {/* Main Content (Centered vertically via flex-grow) */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col justify-center">
         <div className="lg:max-w-[65%]">
           {/* Eyebrow */}
           <div 
-            className={`mb-8 transition-all duration-700 ${
+            className={`mb-6 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <span className="inline-flex items-center gap-3 text-sm font-mono text-green-400/60">
-              <span className="w-8 h-px bg-green-500/30" />
+            <span className="inline-flex items-center gap-3 text-sm font-mono text-white/60">
+              <span className="w-8 h-px bg-[#3B82F6]/30" />
               Lançamento · Maio 2025 · Edição Dev
             </span>
           </div>
@@ -178,7 +179,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
                 <span className="relative inline-block min-w-[4ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
-                <span className="text-green-500/40">.</span>
+                <span className="text-[#3B82F6]/40">.</span>
               </span>
             </h1>
           </div>
@@ -187,37 +188,37 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            O método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-green-400 font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
+            O método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#3B82F6] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
           </p>
 
           {/* CTA */}
-          <div className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-1000 delay-300 ${
+          <div className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             <Button
               asChild
               size="lg"
-              className="bg-green-500 hover:bg-green-400 text-black px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(34,197,94,0.3)] transition-all duration-300 font-bold"
+              className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(59,130,246,0.3)] transition-all duration-300 font-bold"
             >
               <a href="#inscricao">
                 Garantir minha vaga por R${settings?.launchPrice || "97"}
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
-            <span className="text-sm text-green-400/50 mt-2 sm:mt-4">
+            <span className="text-sm text-white/50">
               R${settings?.regularPrice || "247"} após o lançamento
             </span>
           </div>
         </div>
       </div>
       
-      {/* Stats */}
+      {/* Stats (Pushed to bottom via clean relative document flow to prevent any overlap) */}
       <div 
-        className={`absolute bottom-8 left-0 right-0 px-6 lg:px-12 transition-all duration-700 delay-500 ${
+        className={`relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 mt-10 md:mt-12 transition-all duration-700 delay-500 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="max-w-[1000px] mx-auto bg-black/80 backdrop-blur-xl border border-green-500/20 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
+        <div className="max-w-[1000px] mx-auto bg-black/85 backdrop-blur-xl border border-[#3B82F6]/20 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
           {[
             { value: "1.000+", label: "deploys rápidos" },
             { value: "Full Stack", label: "com Inteligência Artificial" },
@@ -225,7 +226,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1 md:flex-1 md:text-center">
               <span className="text-2xl lg:text-3xl font-display text-white">{stat.value}</span>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-green-400 leading-tight">
+              <span className="text-[10px] uppercase font-mono tracking-widest text-[#3B82F6] leading-tight">
                 {stat.label}
               </span>
             </div>
