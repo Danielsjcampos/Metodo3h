@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: "3h",     label: "Tempo médio para publicar", sublabel: "Do prompt ao site no ar com domínio próprio. Cronometrado.",            img: "/images/tools/metric-speed.png" },
-  { value: "R$0",    label: "Custo de hospedagem",       sublabel: "Vercel + Cloudflare são gratuitos para o que você precisa. Sem mensalidade.", img: "/images/tools/metric-free.png" },
+  { value: "3h",     label: "Tempo médio para publicar", sublabel: "Do absoluto zero ao site no ar. Sem jargões técnicos complexos ou enrolações. 100% amigável para leigos.", img: "/images/tools/metric-speed.png" },
+  { value: "R$0",    label: "Custo de hospedagem",       sublabel: "Vercel + Cloudflare integrados de graça. Economize milhares de reais em custos operacionais ou aumente seu lucro.", img: "/images/tools/metric-free.png" },
   { value: "100%",   label: "Independência total",       sublabel: "Você edita, atualiza, muda e replica sem depender de ninguém.",         img: "/images/tools/metric-independence.png" },
-  { value: "R$2.800",label: "Pacote mínimo para vender", sublabel: "O que você aprende aqui pode ser precificado e vendido para clientes amanhã.", img: "/images/tools/metric-earnings.png" },
+  { value: "R$2.800",label: "Pacote médio de venda",    sublabel: "Precifique seu novo serviço com alta margem. Crie sites de R$1.500 a R$3.500 e fature logo no início.", img: "/images/tools/metric-earnings.png" },
 ];
 
 export function HowItWorksSection() {
@@ -60,13 +60,10 @@ export function HowItWorksSection() {
             isVisible ? "opacity-100" : "opacity-0"
           }`}>
             <p className="text-xl text-white/70 leading-relaxed mb-8">
-              Em 2025, criar um site profissional com IA não é mais vantagem competitiva — é <span className="text-white">obrigação de quem quer se manter relevante</span>.
+              A tecnologia evoluiu para que você <span className="text-white">não precise ser programador</span> para criar designs dignos de grandes marcas. Com Inteligência Artificial e as ferramentas certas, qualquer leigo constrói sites ultra-profissionais de forma rápida e precisa.
             </p>
             <p className="text-lg text-white/50 leading-relaxed">
-              O profissional que ainda depende de agência para criar presença digital está ficando para trás enquanto você lê isso.
-            </p>
-            <p className="text-lg text-white/70 leading-relaxed mt-6">
-              Neste curso eu mostro exatamente como eu crio sites para meus clientes — <span className="text-white">ao vivo, sem cortes, sem teatro</span>. Você aprende fazendo junto.
+              Seja você um empresário local querendo reduzir custos operacionais ou um profissional em busca de uma renda extra lucrativa, este é o caminho mais curto e eficiente para dominar o digital.
             </p>
           </div>
         </div>

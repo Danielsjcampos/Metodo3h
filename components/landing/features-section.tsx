@@ -6,7 +6,7 @@ const problems = [
   {
     visual: "price" as const,
     title: "O preço absurdo de uma agência",
-    description: "R$5.000, R$8.000, R$12.000 — para um site que você vai depender deles para sempre mudar uma vírgula.",
+    description: "R$5.000, R$8.000 ou R$12.000 — um custo insustentável para pequenos estabelecimentos e uma enorme oportunidade de faturamento para quem aprende a criar.",
   },
   {
     visual: "time" as const,
@@ -16,7 +16,7 @@ const problems = [
   {
     visual: "lock" as const,
     title: "Dependência permanente",
-    description: "Precisa trocar uma foto? Liga para o desenvolvedor. Quer mudar o horário? Manda e-mail. Quer atualizar o preço? Aguarde.",
+    description: "Mudar uma vírgula ou imagem exige dias de espera e taxas extras de manutenção. Com nosso método, você tem controle total da sua presença digital.",
   },
 ];
 
@@ -71,7 +71,7 @@ export function FeaturesSection() {
             </div>
           </div>
           <p className={`mt-12 text-xl text-muted-foreground leading-relaxed max-w-3xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-            Agências cobram R$3.000 a R$15.000 por sites que levam 3 meses para ficar prontos — e que você não consegue atualizar sozinho depois. Freelancers somem. WordPress quebra. E seu negócio fica sem presença digital porque ninguém te ensinou o caminho mais rápido.
+            O mercado quer te fazer crer que criar um site é complexo para te cobrar fortunas. Rompemos essa barreira: um aprendizado cirúrgico, sem jargões de programação ou marketing digital, desenhado para leigos colocarem projetos profissionais no ar em poucas horas — seja para faturar alto vendendo esse serviço ou para digitalizar sua própria empresa com custo zero de agência.
           </p>
         </div>
 

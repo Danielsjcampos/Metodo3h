@@ -193,12 +193,10 @@ export function HeroSection({ settings }: { settings?: any }) {
           </div>
 
           {/* Subheadline */}
-          <p className={`text-xl lg:text-2xl text-white/70 max-w-xl mb-10 leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-10 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            Você não precisa saber programar.<br />
-            Não precisa contratar ninguém.<br />
-            Precisa apenas de <span className="text-white">3 horas</span> e o <span className="text-white">método certo</span>.
+            O método definitivo para quem <span className="text-white">não sabe nada</span> de programação ou marketing digital. Aprenda de forma rápida, precisa e eficiente a colocar seu site no ar. Seja para <span className="text-white">faturar de R$ 1.500 a R$ 3.500 vendendo sites</span>, ou para <span className="text-white">digitalizar sua própria operação</span> reduzindo custos com agências.
           </p>
 
           {/* CTA */}

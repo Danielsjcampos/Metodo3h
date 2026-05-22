@@ -19,6 +19,11 @@ const bonuses = [
     title: "Grupo exclusivo + novidades da IA toda semana",
     description: "Acesso ao grupo de alunos com 1 link/ferramenta nova por semana — porque o mundo da IA muda todo mês e você precisa se manter na frente.",
   },
+  {
+    icon: "🗺️",
+    title: "Super Bônus: Ranquear no Google Meu Negócio",
+    description: "Aprenda com o especialista Vinicius Saldanha o método definitivo (avaliado em R$697) para colocar qualquer empresa local no topo das buscas do Google e do Maps e explodir suas vendas.",
+  },
 ];
 
 export function PricingSection({ settings }: { settings?: any }) {
@@ -49,16 +54,16 @@ export function PricingSection({ settings }: { settings?: any }) {
           <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Bônus que
+            Bônus acumulados
             <br />
-            <span className="text-muted-foreground">valem mais</span>
+            <span className="text-muted-foreground">que valem mais de</span>
             <br />
-            que o curso.
+            R$ 697 reais.
           </h2>
         </div>
 
         {/* Bonus cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {bonuses.map((bonus, index) => (
             <div
               key={bonus.title}
@@ -104,8 +109,9 @@ export function PricingSection({ settings }: { settings?: any }) {
                 {[
                   "7 módulos completos (~6h de conteúdo)",
                   "26 aulas práticas com tela real",
+                  "Módulo Bônus: Google Meu Negócio (Vinicius Saldanha)",
+                  "Mais de R$697 acumulados em bônus inclusos",
                   "1 ano de acesso",
-                  "3 bônus exclusivos",
                   "Grupo de alunos no WhatsApp",
                   "7 dias de garantia incondicional",
                 ].map((feature) => (
