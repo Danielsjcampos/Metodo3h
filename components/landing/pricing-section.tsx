@@ -83,21 +83,44 @@ export function PricingSection({ settings }: { settings?: any }) {
       <AnimatedShaderBackground />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 w-full">
-        {/* Header */}
-        <div className="mb-10 lg:mb-12">
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-8">
-            <span className="w-12 h-px bg-foreground/30" />
-            O que vem junto
-          </span>
-          <h2 className={`text-4xl md:text-5xl lg:text-7xl font-display tracking-tight leading-[0.95] transition-all duration-1000 ${
+        {/* Header with High-Impact Value Stack Glow */}
+        <div className="mb-14 lg:mb-20 relative">
+          {/* Subtle Ambient Background Spotlight */}
+          <div className="absolute -top-12 left-10 w-[300px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+          {/* Glowing Pill Badge */}
+          <div className={`inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 px-5 py-2 rounded-full mb-8 transition-all duration-1000 ${
+            isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}>
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            <span className="text-blue-400 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+              Arsenal de Bônus Exclusivos
+            </span>
+          </div>
+
+          {/* Main Epic Headline */}
+          <h2 className={`text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-white transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Bônus acumulados
+            Bônus{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-[#3B82F6] to-cyan-400">
+              Acumulados
+            </span>
             <br />
-            <span className="text-muted-foreground">que valem mais de</span>
-            <br />
-            R$ 697 reais.
+            <span className="text-gray-400 text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight block my-2 lg:my-3">
+              que somam mais de
+            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 font-black drop-shadow-[0_0_35px_rgba(250,204,21,0.25)] select-none">
+              R$ 697,00 reais!
+            </span>
           </h2>
+          
+          {/* Supporting Premium Subtext */}
+          <p className={`mt-6 text-gray-400 text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed transition-all duration-1000 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}>
+            Você não vai receber apenas um treinamento. Ao garantir sua vaga hoje, você leva um ecossistema completo com métodos validados de fechamento e posicionamento local para acelerar seu faturamento.
+          </p>
         </div>
 
         {/* Bonus cards */}
