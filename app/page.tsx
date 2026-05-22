@@ -53,11 +53,8 @@ export default async function Home() {
       {/* A Virada: A IA acabou com a barreira técnica */}
       <HowItWorksSection />
 
-      {/* Quote: O que eu ensino aqui */}
-      <MetricsSection />
-
-      {/* Quem vai te ensinar: Daniel Marques */}
-      <DevelopersSection />
+      {/* Para quem é este curso (Alinhamento de Ego / Identidade) */}
+      <SecuritySection />
 
       {/* O que você vai aprender: 7 módulos carrossel */}
       <InfrastructureSection />
@@ -65,19 +62,22 @@ export default async function Home() {
       {/* Stack do curso: Ferramentas profissionais */}
       <IntegrationsSection />
 
-      {/* Para quem é este curso */}
-      <SecuritySection />
+      {/* Quem vai te ensinar: Daniel Marques */}
+      <DevelopersSection />
+
+      {/* Quote: O que eu ensino aqui */}
+      <MetricsSection />
 
       {/* Depoimentos reais */}
       <TestimonialsSection />
 
-      {/* FAQ: Suas perguntas */}
-      <FaqSection settings={settings} />
-
-      {/* Bônus que valem mais que o curso */}
+      {/* Bônus que valem mais que o curso (Oferta e valor empilhado) */}
       <PricingSection settings={settings} />
 
-      {/* CTA: Garante sua vaga */}
+      {/* FAQ: Suas perguntas (Quebra de objeções após o preço) */}
+      <FaqSection settings={settings} />
+
+      {/* CTA: Garanta sua vaga */}
       <CtaSection settings={settings} />
 
       {/* Footer */}
