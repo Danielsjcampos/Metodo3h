@@ -10,21 +10,25 @@ const bonuses = [
     icon: "🔗",
     title: "Links exclusivos — o arsenal completo",
     description: "A lista de ferramentas, bancos de imagens, fontes, geradores de paleta e recursos de IA que só cursos de R$2.000+ costumam entregar. Curados e testados por mim.",
+    value: "197,00",
   },
   {
     icon: "💰",
     title: "Como cobrar e conseguir o primeiro cliente",
     description: "Tabela de preços, 3 estratégias para conseguir cliente sem portfólio, script de abordagem no WhatsApp e modelo de contrato simples para proteger você.",
+    value: "297,00",
   },
   {
     icon: "📡",
     title: "Grupo exclusivo + novidades da IA toda semana",
     description: "Acesso ao grupo de alunos com 1 link/ferramenta nova por semana — porque o mundo da IA muda todo mês e você precisa se manter na frente.",
+    value: "147,00",
   },
   {
     icon: "🗺️",
     title: "Super Bônus: Ranquear no Google Meu Negócio",
     description: "Aprenda com o especialista Vinicius Saldanha o método definitivo (avaliado em R$697) para colocar qualquer empresa local no topo das buscas do Google e do Maps e explodir suas vendas.",
+    value: "697,00",
   },
 ];
 
@@ -99,7 +103,7 @@ export function PricingSection({ settings }: { settings?: any }) {
           </div>
 
           {/* Main Epic Headline */}
-          <h2 className={`text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-white transition-all duration-1000 ${
+          <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.95] text-white transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
             Bônus{" "}
@@ -107,11 +111,11 @@ export function PricingSection({ settings }: { settings?: any }) {
               Acumulados
             </span>
             <br />
-            <span className="text-gray-400 text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight block my-2 lg:my-3">
+            <span className="text-gray-400 text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight block my-2 lg:my-3">
               que somam mais de
             </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 font-black drop-shadow-[0_0_35px_rgba(250,204,21,0.25)] select-none">
-              R$ 697,00 reais!
+              R$ 1.300,00 reais!
             </span>
           </h2>
           
@@ -128,18 +132,33 @@ export function PricingSection({ settings }: { settings?: any }) {
           {bonuses.map((bonus, index) => (
             <div
               key={bonus.title}
-              className={`p-8 lg:p-10 rounded-3xl glass-card glass-card-hover transition-all duration-700 ${
+              className={`p-6 lg:p-8 rounded-3xl glass-card glass-card-hover transition-all duration-700 flex flex-col justify-between h-full relative overflow-hidden group border border-white/5 hover:border-[#3B82F6]/30 shadow-lg ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <span className="text-4xl mb-6 block">{bonus.icon}</span>
-              <h3 className="text-xl lg:text-2xl font-display mb-4">
-                {bonus.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {bonus.description}
-              </p>
+              {/* Subtle blue ambient glow on hover inside each card */}
+              <div className="absolute right-0 top-0 w-32 h-32 bg-[#3B82F6]/5 rounded-full blur-[30px] group-hover:bg-[#3B82F6]/10 transition-all pointer-events-none" />
+
+              <div className="relative z-10 flex-grow">
+                <span className="text-4xl mb-6 block">{bonus.icon}</span>
+                <h3 className="text-lg lg:text-xl font-bold tracking-tight text-white mb-4 leading-snug uppercase">
+                  {bonus.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                  {bonus.description}
+                </p>
+              </div>
+
+              {/* Price-comparison bar modeled on W-Tech */}
+              <div className="pt-4 border-t border-white/5 flex flex-row items-end justify-between gap-1 relative z-10 mt-auto">
+                <span className="text-gray-500 font-bold uppercase text-[10px] tracking-widest line-through decoration-[#3B82F6]/50">
+                  De R$ {bonus.value}
+                </span>
+                <span className="text-xl lg:text-2xl font-black text-cyan-400 tracking-tighter">
+                  POR R$ 0,00
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -359,7 +378,7 @@ export function PricingSection({ settings }: { settings?: any }) {
               "7 módulos completos (~6h de conteúdo)",
               "26 aulas práticas com tela real",
               "Módulo Bônus: Google Meu Negócio (Vinicius Saldanha)",
-              "Mais de R$697 acumulados em bônus inclusos",
+              "Mais de R$ 1.300 em bônus inclusos",
               "1 ano de acesso completo",
               "Grupo de alunos no WhatsApp",
               "7 dias de garantia incondicional",
