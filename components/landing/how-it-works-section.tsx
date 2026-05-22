@@ -29,17 +29,17 @@ export function HowItWorksSection() {
     <section
       id="metodo"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[oklch(0.09_0.01_260)] text-white overflow-hidden"
+      className="relative py-12 lg:py-16 bg-[oklch(0.09_0.01_260)] text-white overflow-hidden"
     >
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-white/[0.02] blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="relative mb-16 lg:mb-20 grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
+        <div className="relative mb-10 lg:mb-12 grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
           {/* Title */}
           <div className="overflow-hidden">
             <div className={`transition-all duration-1000 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"}`}>
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-white/40 mb-8">
+              <span className="inline-flex items-center gap-3 text-sm font-mono text-white/40 mb-4">
                 <span className="w-12 h-px bg-white/20" />
                 A virada
               </span>
@@ -59,7 +59,7 @@ export function HowItWorksSection() {
           <div className={`transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}>
-            <p className="text-xl text-white/70 leading-relaxed mb-8">
+            <p className="text-xl text-white/70 leading-relaxed mb-4">
               A tecnologia evoluiu para que você <span className="text-white">não precise ser programador</span> para criar designs dignos de grandes marcas. Com Inteligência Artificial e as ferramentas certas, qualquer leigo constrói sites ultra-profissionais de forma rápida e precisa.
             </p>
             <p className="text-lg text-white/50 leading-relaxed">

@@ -40,17 +40,17 @@ export function DevelopersSection() {
   }, []);
 
   return (
-    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-16 lg:py-24 bg-background">
+    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-10 lg:py-14 bg-background">
       {/* Ambient background glow */}
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* ── PARTE 1: Daniel Marques ─────────────────────────── */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 lg:mb-24">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-8 lg:mb-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Bio & Info */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <div className={`mb-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className={`mb-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
                 <span className="w-8 h-px bg-foreground/30" />
                 Quem vai te ensinar
@@ -72,7 +72,7 @@ export function DevelopersSection() {
                 Não sou um youtuber que aprendeu a fazer site mês passado. Sou um profissional que vive disso há três décadas — e que agora tem acesso às mesmas ferramentas de IA que nivelaram o campo para quem está começando agora.
               </p>
 
-              <blockquote className="border-l-2 border-[#3B82F6] pl-6 mb-10">
+              <blockquote className="border-l-2 border-[#3B82F6] pl-6 mb-6">
                 <p className="text-lg text-foreground italic leading-relaxed">
                   &ldquo;Eu faço ao vivo, sem ensaio, sem script de teleprompter. Você vê exatamente o que eu faço quando entrego para um cliente pagando.&rdquo;
                 </p>
@@ -180,10 +180,10 @@ export function DevelopersSection() {
       </div>
 
       {/* ── PARTE 2: Saldanha & Gabriel ─────────────────────── */}
-      <div className={`relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pb-24 lg:pb-32 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <div className={`relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pb-12 lg:pb-16 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
 
-        <div className="border-t border-foreground/10 pt-16">
-          <div className="flex items-center gap-4 mb-12">
+        <div className="border-t border-foreground/10 pt-8">
+          <div className="flex items-center gap-4 mb-6">
             <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">+ Também no time</span>
             <div className="flex-1 h-px bg-foreground/10" />
             <span className="text-[10px] font-mono text-[#3B82F6]/70 border border-[#3B82F6]/20 px-3 py-1 tracking-widest">EX-ALUNOS → SÓCIOS</span>

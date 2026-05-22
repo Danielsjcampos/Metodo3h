@@ -51,14 +51,14 @@ export function FaqSection({ settings }: { settings?: any }) {
   }, []);
 
   return (
-    <section ref={sectionRef} id="faq" className="relative py-32 lg:py-40 bg-background text-foreground overflow-hidden">
+    <section ref={sectionRef} id="faq" className="relative py-16 lg:py-20 bg-background text-foreground overflow-hidden">
       {/* Glow backgrounds */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] ambient-glow-blue opacity-50 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] ambient-glow-purple opacity-30 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[900px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-16 lg:mb-20">
+        <div className="text-center mb-10 lg:mb-12">
           <span className={`inline-flex items-center gap-4 text-sm font-mono text-muted-foreground mb-6 transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
             <span className="w-8 h-px bg-foreground/20" />
             Respondendo suas dúvidas

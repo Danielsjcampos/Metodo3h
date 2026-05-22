@@ -161,7 +161,7 @@ export function HeroSection({ settings }: { settings?: any }) {
         ))}
       </div>
       
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-16 lg:pt-36 lg:pb-20">
         <div className="lg:max-w-[65%]">
           {/* Eyebrow */}
           <div 
@@ -176,7 +176,7 @@ export function HeroSection({ settings }: { settings?: any }) {
           </div>
           
           {/* Main headline */}
-          <div className="mb-8">
+          <div className="mb-6">
             <h1 
               className={`text-left text-[clamp(2.2rem,6.5vw,4.5rem)] font-display leading-[0.95] tracking-tight text-white transition-all duration-1000 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -193,7 +193,7 @@ export function HeroSection({ settings }: { settings?: any }) {
           </div>
 
           {/* Subheadline */}
-          <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-10 leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             O método definitivo para quem <span className="text-white">não sabe nada</span> de programação ou marketing digital. Aprenda de forma rápida, precisa e eficiente a colocar seu site no ar. Seja para <span className="text-white">faturar de R$ 1.500 a R$ 3.500 vendendo sites</span>, ou para <span className="text-white">digitalizar sua própria operação</span> reduzindo custos com agências.

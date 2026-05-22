@@ -57,14 +57,14 @@ export function IntegrationsSection() {
   }, []);
 
   return (
-    <section id="ferramentas" ref={sectionRef} className="relative py-28 md:py-36 lg:py-44 overflow-hidden bg-background">
+    <section id="ferramentas" ref={sectionRef} className="relative py-14 md:py-18 lg:py-22 overflow-hidden bg-background">
       
       {/* Ambient background glows */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[130px] pointer-events-none" />
 
       {/* Header */}
-      <div className="relative z-10 text-center mb-16 md:mb-20 px-6">
+      <div className="relative z-10 text-center mb-10 md:mb-12 px-6">
         <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
         }`}>
@@ -89,7 +89,7 @@ export function IntegrationsSection() {
       </div>
 
       {/* Full-width visual connection graph with smooth gradient blend */}
-      <div className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[1600px] -mt-10 mb-10 transition-all duration-1000 delay-200 overflow-hidden ${
+      <div className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[1600px] -mt-6 mb-6 transition-all duration-1000 delay-200 overflow-hidden ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}>
         {/* Vignette fade layers on sides to blend perfectly */}
@@ -107,7 +107,7 @@ export function IntegrationsSection() {
 
       {/* Tools grid */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {tools.map((tool, index) => {
             const isHovered = hoveredIndex === index;
             return (

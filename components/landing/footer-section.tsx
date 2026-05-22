@@ -75,7 +75,7 @@ export function FooterSection({ settings }: { settings?: any }) {
       {/* Footer content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Main Footer */}
-        <div className="py-16 lg:py-20">
+        <div className="py-8 lg:py-12">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand Column */}
             <div className="col-span-2">

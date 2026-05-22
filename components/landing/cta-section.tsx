@@ -73,7 +73,7 @@ export function CtaSection({ settings }: { settings?: any }) {
   };
 
   return (
-    <section id="inscricao" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="inscricao" ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div
           className={`relative rounded-[2.5rem] glass-card overflow-hidden transition-all duration-1000 ${
@@ -89,7 +89,7 @@ export function CtaSection({ settings }: { settings?: any }) {
             }}
           />
           
-          <div className="relative z-10 px-8 lg:px-16 py-16 lg:py-24">
+          <div className="relative z-10 px-8 lg:px-16 py-10 lg:py-14">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left content */}
               <div>

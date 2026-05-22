@@ -25,7 +25,7 @@ export function VslSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden bg-[oklch(0.07_0.008_260)]">
+    <section ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden bg-[oklch(0.07_0.008_260)]">
 
       {/* Background glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#3B82F6] rounded-full blur-[200px] opacity-[0.04] pointer-events-none animate-pulse-glow" />
@@ -37,7 +37,7 @@ export function VslSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
 
         {/* Header */}
-        <div className={`text-center mb-12 lg:mb-16 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className={`text-center mb-8 lg:mb-10 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <span className="inline-flex items-center gap-3 text-sm font-mono text-[#3B82F6] mb-6">
             <span className="w-8 h-px bg-[#3B82F6]/40" />
             VEJA O MÉTODO AO VIVO
@@ -123,7 +123,7 @@ export function VslSection() {
         </div>
 
         {/* Stats below video */}
-        <div className={`mt-12 grid grid-cols-3 gap-4 lg:gap-8 max-w-3xl mx-auto transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`mt-8 grid grid-cols-3 gap-4 lg:gap-8 max-w-3xl mx-auto transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           {stats.map((stat, i) => (
             <div
               key={stat.label}
@@ -141,7 +141,7 @@ export function VslSection() {
         </div>
 
         {/* CTA */}
-        <div className={`mt-10 flex justify-center transition-all duration-1000 delay-500 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`mt-6 flex justify-center transition-all duration-1000 delay-500 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <Button
             asChild
             size="lg"

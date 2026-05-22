@@ -110,12 +110,12 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-28 md:py-36 overflow-hidden bg-background">
+    <section ref={sectionRef} className="relative py-14 md:py-18 overflow-hidden bg-background">
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
-        <div className="mb-20 text-center md:text-left">
+        <div className="mb-10 text-center md:text-left">
           <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}>
@@ -131,7 +131,7 @@ export function TestimonialsSection() {
           </h2>
         </div>
 
-        <div ref={scrollContainerRef} className="relative w-full min-h-[90vh] flex items-center justify-center mb-28">
+        <div ref={scrollContainerRef} className="relative w-full min-h-[70vh] flex items-center justify-center mb-12">
           
           <motion.div
             style={{
@@ -229,7 +229,7 @@ export function TestimonialsSection() {
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-20">
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
           {testimonials.map((t, i) => (
             <div
               key={t.name}
@@ -280,7 +280,7 @@ export function TestimonialsSection() {
           </div>
         </div>
 
-        <div className={`mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className={`mt-10 grid grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           {[
             { value: "100%", label: "aprovam o método", sub: "de quem implementou" },
             { value: "3h", label: "tempo médio", sub: "para o primeiro site no ar" },

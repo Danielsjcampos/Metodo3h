@@ -49,10 +49,10 @@ export function FeaturesSection() {
   }, []);
 
   return (
-    <section id="problema" ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
+    <section id="problema" ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="relative mb-20 lg:mb-24">
+        <div className="relative mb-10 lg:mb-12">
           <div className="grid lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
@@ -70,7 +70,7 @@ export function FeaturesSection() {
               </h2>
             </div>
           </div>
-          <p className={`mt-12 text-xl text-muted-foreground leading-relaxed max-w-3xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <p className={`mt-6 text-xl text-muted-foreground leading-relaxed max-w-3xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             O mercado quer te fazer crer que criar um site é complexo para te cobrar fortunas. Rompemos essa barreira: um aprendizado cirúrgico, sem jargões de programação ou marketing digital, desenhado para leigos colocarem projetos profissionais no ar em poucas horas — seja para faturar alto vendendo esse serviço ou para digitalizar sua própria empresa com custo zero de agência.
           </p>
         </div>

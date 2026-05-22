@@ -66,7 +66,7 @@ export function SecuritySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="para-quem" className="relative py-28 md:py-36 lg:py-44 overflow-hidden bg-background">
+    <section ref={sectionRef} id="para-quem" className="relative py-14 md:py-18 lg:py-22 overflow-hidden bg-background">
       {/* Background ambient glows */}
       <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
@@ -74,7 +74,7 @@ export function SecuritySection() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
-        <div className="mb-20 md:mb-24 text-center md:text-left">
+        <div className="mb-10 md:mb-12 text-center md:text-left">
           <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
           }`}>
@@ -98,7 +98,7 @@ export function SecuritySection() {
         </div>
 
         {/* Premium Target Audience Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-24">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {targetAudience.map((item, index) => {
             const isHovered = activeCard === index;
             return (
@@ -170,7 +170,7 @@ export function SecuritySection() {
           
           <div className="relative z-10">
             {/* Tag/Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-8 border-b border-white/5">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6 pb-4 border-b border-white/5">
               <div>
                 <span className="text-xs font-mono tracking-widest text-red-500 uppercase block mb-2">Filtro de Alinhamento</span>
                 <h3 className="text-2xl md:text-3xl font-display font-medium text-white">

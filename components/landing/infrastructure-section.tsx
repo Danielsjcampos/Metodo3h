@@ -89,11 +89,11 @@ export function InfrastructureSection() {
   }, []);
 
   return (
-    <section id="modulos" ref={sectionRef} className="relative py-32 lg:py-40 overflow-hidden">
+    <section id="modulos" ref={sectionRef} className="relative py-16 lg:py-20 overflow-hidden">
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 lg:mb-20">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 lg:mb-12">
         {/* Header */}
-        <span className={`inline-flex items-center gap-4 text-sm font-mono text-muted-foreground mb-8 transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <span className={`inline-flex items-center gap-4 text-sm font-mono text-muted-foreground mb-4 transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <span className="w-12 h-px bg-foreground/20" />
           O que você vai aprender
         </span>
@@ -138,7 +138,7 @@ export function InfrastructureSection() {
       </div>
 
       {/* Totals */}
-      <div className={`mt-16 max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-wrap items-center justify-center gap-8 pt-12 border-t border-foreground/10 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+      <div className={`mt-10 max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-foreground/10 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
         {[
           { value: "26", label: "aulas" },
           { value: "~6h", label: "de conteúdo" },
