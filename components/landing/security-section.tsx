@@ -7,7 +7,7 @@ const targetAudience = [
   {
     badge: "PERFIL 01",
     num: "01",
-    image: "/images/local_business.png",
+    image: "/images/o pequeno empresario.png",
     title: "O Pequeno Empresário",
     subtitle: "Dono de Negócio Local",
     description: "Você tem um estabelecimento — clínica, salão, loja, escritório — e precisa digitalizar sua operação para reduzir custos e atrair clientes do Google e Maps, de forma independente e livre de mensalidades abusivas de agências.",
@@ -19,7 +19,7 @@ const targetAudience = [
   {
     badge: "PERFIL 02",
     num: "02",
-    image: "/images/freelancer.png",
+    image: "/images/free lancer potencial.png",
     title: "O Freelancer Potencial",
     subtitle: "Renda Extra Digital",
     description: "Você quer construir uma nova fonte de renda e faturar alto, cobrando de R$1.500 a R$3.500 por projeto. Conecte-se a este modelo altamente lucrativo em tempo recorde sem precisar de experiência em código ou marketing digital.",
@@ -31,7 +31,7 @@ const targetAudience = [
   {
     badge: "PERFIL 03",
     num: "03",
-    image: "/images/career_shift.png",
+    image: "/images/transicao de carreira.png",
     title: "O Transição de Carreira",
     subtitle: "Iniciante / Leigo Absoluto",
     description: "Mesmo sendo um completo leigo em internet ou desenvolvimento, você terá acesso a um aprendizado extremamente rápido e preciso para dominar a criação de projetos com Inteligência Artificial e conquistar seu espaço no mercado.",
