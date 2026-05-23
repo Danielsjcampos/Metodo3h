@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const problems = [
   {
@@ -66,50 +67,34 @@ export function FeaturesSection({ isProgrammer = false }: { isProgrammer?: boole
     },
   ];
 
-  const activeProblems = isProgrammer ? programmerProblems : problems;
+  const activeProblems = problems;
 
   return (
     <section id="problema" ref={sectionRef} className="relative py-16 md:py-20 lg:py-24 overflow-hidden bg-black">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="relative mb-10 lg:mb-14 text-center flex flex-col items-center justify-center">
-          {isProgrammer ? (
-            <>
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
-                [03] DIAGNÓSTICO // O GARGALO TRADICIONAL
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
-                Você está desperdiçando <span className="text-orange-500 font-bold">tempo e banda</span>
-                <br />
-                com fluxos de <span className="text-muted-foreground">hospedagem e setup obsoletos.</span>
-              </h2>
-              <p className="mt-6 text-sm md:text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto font-mono">
-                O ecossistema legado quer te prender a configurações manuais de Nginx, VPS caras ou pacotes complexos apenas para manter páginas estáticas e landing pages no ar. Rompemos essa barreira unindo IA Generativa e deploys instantâneos sem custo.
-              </p>
-            </>
-          ) : (
-            <>
-              <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 transition-all duration-700 justify-center ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-              }`}>
-                <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
-                A realidade do mercado hoje
-                <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
-              </span>
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}>
-                Você está pagando <span className="text-muted-foreground">caro demais</span>
-                <br />
-                por algo que <span className="text-muted-foreground">deveria ser simples.</span>
-              </h2>
-              <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto transition-all duration-1000 delay-200 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}>
-                O mercado quer te fazer crer que criar um site é complexo para te cobrar fortunas. Rompemos essa barreira: um aprendizado cirúrgico, sem jargões de programação ou marketing digital, desenhado para leigos colocarem projetos profissionais no ar em poucas horas — seja para faturar alto vendendo esse serviço ou para digitalizar sua própria empresa com custo zero de agência.
-              </p>
-            </>
-          )}
+          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest ${isProgrammer ? "text-orange-500" : "text-muted-foreground"} uppercase mb-6 transition-all duration-700 justify-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          }`}>
+            <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+            A realidade do mercado hoje
+            <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+          </span>
+          <h2 className={cn(
+            "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.05] mb-6",
+            isProgrammer ? "font-mono text-white" : "font-display text-white"
+          )}>
+            Você está pagando <span className={isProgrammer ? "text-orange-500 font-bold" : "text-muted-foreground"}>caro demais</span>
+            <br />
+            por algo que <span className={isProgrammer ? "text-orange-500 font-bold" : "text-muted-foreground"}>deveria ser simples.</span>
+          </h2>
+          <p className={cn(
+            "mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto",
+            isProgrammer ? "font-mono" : ""
+          )}>
+            O mercado quer te fazer crer que criar um site é complexo para te cobrar fortunas. Rompemos essa barreira: um aprendizado cirúrgico, sem jargões de programação ou marketing digital, desenhado para leigos colocarem projetos profissionais no ar em poucas horas — seja para faturar alto vendendo esse serviço ou para digitalizar sua própria empresa com custo zero de agência.
+          </p>
         </div>
 
         {/* Problem Cards */}

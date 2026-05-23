@@ -61,7 +61,7 @@ export function FaqSection({ settings, isProgrammer = false }: { settings?: any;
     },
   ];
 
-  const activeFaqs = isProgrammer ? programmerFaqs : faqs;
+  const activeFaqs = faqs;
 
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [isVisible, setIsVisible] = useState(false);

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function CtaSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -94,39 +95,21 @@ export function CtaSection({ settings, isProgrammer = false }: { settings?: any;
               {/* Left content */}
               <div>
                 <span className="text-sm font-mono text-muted-foreground mb-4 block">
-                  {isProgrammer ? "O que acontece se você continuar programando na mão" : "O que acontece se você esperar"}
+                  O que acontece se você esperar
                 </span>
-                {isProgrammer ? (
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-8 leading-[0.95]">
-                    Cada semana sem
-                    <br />
-                    automatizar é tempo
-                    <br />
-                    <span className="text-muted-foreground">indo embora.</span>
-                  </h2>
-                ) : (
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-8 leading-[0.95]">
-                    Cada semana sem site
-                    <br />
-                    é dinheiro
-                    <br />
-                    <span className="text-muted-foreground">indo embora.</span>
-                  </h2>
-                )}
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-tight mb-8 leading-[0.95]">
+                  Cada semana sem site
+                  <br />
+                  é dinheiro
+                  <br />
+                  <span className="text-muted-foreground">indo embora.</span>
+                </h2>
 
-                {isProgrammer ? (
-                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                    Seus concorrentes já usam IA.<br />
-                    Já codificam 10x mais rápido.<br />
-                    Já entregam projetos inteiros em horas e lucram o triplo.
-                  </p>
-                ) : (
-                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                    Seu concorrente já está no Google.<br />
-                    Já aparece no Maps.<br />
-                    Já está pegando os clientes que deveriam ser seus.
-                  </p>
-                )}
+                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                  Seu concorrente já está no Google.<br />
+                  Já aparece no Maps.<br />
+                  Já está pegando os clientes que deveriam ser seus.
+                </p>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-mono mb-8">
                   <span className="text-foreground font-medium">50 vagas</span>
@@ -138,17 +121,10 @@ export function CtaSection({ settings, isProgrammer = false }: { settings?: any;
                   <span>7 dias de garantia</span>
                 </div>
 
-                {isProgrammer ? (
-                  <p className="text-sm text-muted-foreground">
-                    Quando as 50 vagas de deploy VIP acabarem, a lista fecha.<br />
-                    A próxima turma abre com preço normal — sem data definida.
-                  </p>
-                ) : (
-                  <p className="text-sm text-muted-foreground">
-                    Quando as 50 vagas acabarem, a lista fecha.<br />
-                    A próxima turma abre com preço maior — sem data definida.
-                  </p>
-                )}
+                <p className="text-sm text-muted-foreground">
+                  Quando as 50 vagas acabarem, a lista fecha.<br />
+                  A próxima turma abre com preço maior — sem data definida.
+                </p>
               </div>
 
               {/* Right - Form */}

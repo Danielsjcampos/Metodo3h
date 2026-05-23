@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Component as MatrixCodeRain } from "@/components/ui/matrix-code-rain";
 
-const words = ["hoje", "agora", "com IA", "em minutos"];
+const words = ["hoje", "agora", "grátis", "com IA"];
 
 function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   const letters = word.split("");
@@ -163,7 +163,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           >
             <span className="inline-flex items-center gap-3 text-sm font-mono text-white/60">
               <span className="w-8 h-px bg-[#F97316]/30" />
-              Lançamento · Maio 2025 · Edição Dev
+              Lançamento · Maio 2025 · 50 vagas
             </span>
           </div>
           
@@ -176,7 +176,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
             >
               <span className="block">Seu site no ar</span>
               <span className="block">
-                <span className="relative inline-block min-w-[4ch]">
+                <span className="relative inline-block min-w-[3ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
                 <span className="text-[#F97316]/40">.</span>
@@ -188,7 +188,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            O <span className="text-[#F97316] font-semibold">Método 3h</span> é o método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#F97316] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
+            O <span className="text-[#F97316] font-semibold">Método 3h</span> é o método definitivo para quem <span className="text-white">não sabe nada</span> de programação ou marketing digital. Aprenda de forma rápida, precisa e eficiente a colocar seu site no ar. Seja para <span className="text-[#F97316] font-semibold">faturar de R$ 1.500 a R$ 3.500 vendendo sites</span>, ou para <span className="text-white">digitalizar sua própria operação</span> reduzindo custos com agências.
           </p>
 
           {/* CTA */}
@@ -220,9 +220,9 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
       >
         <div className="max-w-[1000px] mx-auto bg-black/85 backdrop-blur-xl border border-[#F97316]/20 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
           {[
-            { value: "1.000+", label: "deploys rápidos" },
-            { value: "Full Stack", label: "com Inteligência Artificial" },
-            { value: "R$0", label: "custo de infra" },
+            { value: "1.000+", label: "sites entregues" },
+            { value: "30 anos", label: "no mercado" },
+            { value: "R$0", label: "custo de hospedagem" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1 md:flex-1 md:text-center">
               <span className="text-2xl lg:text-3xl font-display text-white">{stat.value}</span>

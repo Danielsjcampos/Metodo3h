@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Star, Volume2, VolumeX, Play, Sparkles, Cpu, Layers } from "lucide-react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
@@ -118,29 +119,19 @@ export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: b
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
         <div className="mb-10 text-center flex flex-col items-center justify-center">
-          {isProgrammer ? (
-            <>
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
-                [09] RESULTADOS // VALIDAÇÃO PRÁTICA
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
-                Quem compilou e enviou, <span className="text-orange-500 italic font-light">já está</span> colhendo frutos.
-              </h2>
-            </>
-          ) : (
-            <>
-              <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 justify-center ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-              }`}>
-                <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-                Prova real
-                <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-              </span>
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2`}>
-                Quem aplicou, <span className="text-muted-foreground italic font-light">já está</span> faturando.
-              </h2>
-            </>
-          )}
+          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"} uppercase mb-6 justify-center ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          }`}>
+            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+            Prova real
+            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+          </span>
+          <h2 className={cn(
+            "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.1] mt-2",
+            isProgrammer ? "font-mono text-white" : "font-display text-white"
+          )}>
+            Quem aplicou, <span className={isProgrammer ? "text-orange-500 font-bold" : "text-muted-foreground italic font-light"}>já está</span> faturando.
+          </h2>
         </div>
 
         <div ref={scrollContainerRef} className="relative w-full min-h-[70vh] flex items-center justify-center mb-12">

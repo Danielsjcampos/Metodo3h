@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /* ─── Tool visuals — imagens geradas por IA ────────────────── */
 
@@ -65,7 +66,7 @@ export function IntegrationsSection({ isProgrammer = false }: { isProgrammer?: b
     { name: "Maps API // Local SEO", category: "Local SEO", description: "Integração orgânica no Maps para atração e conversão passiva imediata.", free: true },
   ];
 
-  const tools = isProgrammer ? programmerTools : defaultTools;
+  const tools = defaultTools;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -89,41 +90,27 @@ export function IntegrationsSection({ isProgrammer = false }: { isProgrammer?: b
 
       {/* Header */}
       <div className="relative z-10 text-center mb-10 md:mb-12 px-6">
-        {isProgrammer ? (
-          <>
-            <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
-              [07] STACK // FERRAMENTAS PROFISSIONAIS
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
-              Stack de IA moderna. <span className="text-orange-500 font-bold">Com custo operacional zero.</span>
-            </h2>
-            <p className="mt-6 text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto font-mono">
-              Cada ferramenta da stack foi otimizada para automação, deploy instantâneo na borda (edge) e latência ultrabaixa para seus projetos e LPs de conversão.
-            </p>
-          </>
-        ) : (
-          <>
-            <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-            }`}>
-              <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-              Stack do curso
-              <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-            </span>
+        <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"} uppercase mb-6 transition-all duration-700 justify-center ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+        }`}>
+          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+          Stack do curso
+          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+        </span>
 
-            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}>
-              Ferramentas profissionais. <span className="text-muted-foreground italic font-light">Com custo zero.</span>
-            </h2>
+        <h2 className={cn(
+          "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.1]",
+          isProgrammer ? "font-mono text-white" : "font-display text-white"
+        )}>
+          Ferramentas profissionais. <span className={isProgrammer ? "text-orange-500" : "text-muted-foreground italic font-light"}>Com custo zero.</span>
+        </h2>
 
-            <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-200 ${
-              isVisible ? "opacity-100" : "opacity-0"
-            }`}>
-              Cada ferramenta foi escolhida minuciosamente com base no que eu utilizo diariamente para atender clientes pagantes reais. Soluções de elite para você performar no mercado.
-            </p>
-          </>
-        )}
+        <p className={cn(
+          "mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto",
+          isProgrammer ? "font-mono" : ""
+        )}>
+          Cada ferramenta foi escolhida minuciosamente com base no que eu utilizo diariamente para atender clientes pagantes reais. Soluções de elite para você performar no mercado.
+        </p>
       </div>
 
       {/* Full-width visual connection graph with smooth gradient blend */}
