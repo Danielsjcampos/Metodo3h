@@ -35,9 +35,9 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
       <nav 
         className={`mx-auto transition-all duration-500 ${
           isScrolled 
-            ? "glass-card rounded-full max-w-[1000px] px-2 shadow-2xl" 
+            ? "bg-black/90 md:bg-black/80 backdrop-blur-xl border border-white/10 rounded-full max-w-[1000px] px-2 shadow-2xl" 
             : isMobileMenuOpen
-              ? "glass-card rounded-2xl max-w-[1200px]"
+              ? "bg-black/95 md:bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl max-w-[1200px]"
               : "bg-transparent max-w-[1400px]"
         }`}
       >

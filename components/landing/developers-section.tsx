@@ -1,29 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Player } from "@remotion/player";
-import { PerspectiveMarquee, PerspectiveMarqueeItem } from "../ui/remotion-perspective-marquee";
-
-function PerspectiveMarqueeScene({ isProgrammer }: { isProgrammer: boolean }) {
-  const items: PerspectiveMarqueeItem[] = [
-    { type: "image", src: "/images/antigravity logo.webp", alt: "Antigravity", heightClass: "h-10 md:h-12" },
-    { type: "image", src: "/images/Vercel_logo_2025.svg", alt: "Vercel", heightClass: "h-7 md:h-8 invert" },
-    { type: "image", src: "/images/claudecode-color.png", alt: "Cloud Code", heightClass: "h-9 md:h-10" },
-    { type: "image", src: "/images/google-search-console-icon.webp", alt: "Google Search Console", heightClass: "h-9 md:h-10" },
-  ];
-  
-  return (
-    <PerspectiveMarquee
-      items={items}
-      rotateY={-28}
-      rotateX={8}
-      perspective={1200}
-      pixelsPerFrame={2}
-      background="transparent"
-      fadeColor="#000000"
-    />
-  );
-}
 
 const dinoFeatures = [
   { title: "1.000+ sites entregues", description: "Em 30 anos de mercado real, não apenas teoria." },
@@ -129,16 +106,16 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
 
           {/* Right Column: Large Dino Image & Logo Carousel */}
           <div 
-            className={`flex flex-col items-center justify-start order-1 lg:order-2 transition-all duration-1000 delay-300 ${
+            className={`flex flex-col items-center justify-end order-1 lg:order-2 transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             }`}
           >
             {/* Dino Image Container - Extremely Large and Faded at the bottom */}
-            <div className="relative w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full max-w-full sm:max-w-[650px] lg:max-w-none h-[660px] sm:h-[760px] md:h-[840px] lg:h-[1050px] flex items-end justify-center overflow-hidden mb-8 md:mb-10">
+            <div className="relative w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full max-w-full sm:max-w-[650px] lg:max-w-none h-[450px] sm:h-[580px] md:h-[680px] lg:h-[850px] flex items-end justify-center overflow-hidden mb-8 md:mb-10">
               <img
-                src="/images/dino/dinosemf.png"
+                src="/images/dino/dinosemf_cropped.png"
                 alt="Daniel Marques (Dino)"
-                className="h-full w-auto object-contain object-bottom transition-all duration-700 ease-out hover:scale-[1.03]"
+                className="w-[125%] sm:w-[105%] md:w-[115%] lg:w-[130%] max-w-none h-auto object-contain object-bottom transition-all duration-700 ease-out origin-bottom hover:scale-[1.08]"
                 style={{ 
                   opacity: 0.95,
                   WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%)",
@@ -146,29 +123,51 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
                 }}
               />
               {/* Premium smooth bottom fade overlay to prevent hard crop cuts */}
-              <div className="absolute bottom-0 left-0 right-0 h-36 md:h-48 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 h-28 md:h-36 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
               <div className={`absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,${isProgrammer ? "rgba(249,115,22,0.08)" : "rgba(59,130,246,0.08)"}_0%,transparent_70%) pointer-events-none`} />
             </div>
 
-            {/* Infinite Scrolling Logo Carousel underneath Dino */}
-            <div className="w-full h-32 mt-2 overflow-hidden relative pointer-events-auto flex items-center justify-center">
-              <Player
-                component={PerspectiveMarqueeScene}
-                inputProps={{ isProgrammer }}
-                durationInFrames={240}
-                fps={30}
-                compositionWidth={1280}
-                compositionHeight={720}
-                style={{ width: "100%", height: "100%" }}
-                controls={false}
-                autoPlay
-                loop
-                clickToPlay={false}
-                acknowledgeRemotionLicense={true}
-              />
+            {/* Infinite Scrolling Logo Carousel underneath Dino (Pure CSS 3D Perspective Marquee) */}
+            <div 
+              className="w-full h-28 sm:h-36 md:h-44 mt-2 overflow-hidden relative pointer-events-auto flex items-center justify-center"
+              style={{
+                perspective: "1200px",
+                transformStyle: "preserve-3d",
+              }}
+            >
+              {/* Scrolling Container with 3D rotation */}
+              <div 
+                className="flex items-center select-none pointer-events-none"
+                style={{
+                  transform: "rotateX(8deg) rotateY(-28deg)",
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                <div 
+                  className="flex gap-20 md:gap-28 items-center marquee w-max"
+                  style={{ animation: "marquee 16s linear infinite" }}
+                >
+                  {[
+                    { src: "/images/antigravity logo.webp", alt: "Antigravity", className: "h-12 sm:h-14 md:h-18 w-auto object-contain" },
+                    { src: "/images/Vercel_logo_2025.svg", alt: "Vercel", className: "h-8 sm:h-9 md:h-12 w-auto object-contain invert" },
+                    { src: "/images/claudecode-color.png", alt: "Claude Code", className: "h-10 sm:h-12 md:h-16 w-auto object-contain" },
+                    { src: "/images/google-search-console-icon.webp", alt: "Google Search Console", className: "h-10 sm:h-12 md:h-16 w-auto object-contain" },
+                    // Duplicate for seamless infinite scrolling loop
+                    { src: "/images/antigravity logo.webp", alt: "Antigravity", className: "h-12 sm:h-14 md:h-18 w-auto object-contain" },
+                    { src: "/images/Vercel_logo_2025.svg", alt: "Vercel", className: "h-8 sm:h-9 md:h-12 w-auto object-contain invert" },
+                    { src: "/images/claudecode-color.png", alt: "Claude Code", className: "h-10 sm:h-12 md:h-16 w-auto object-contain" },
+                    { src: "/images/google-search-console-icon.webp", alt: "Google Search Console", className: "h-10 sm:h-12 md:h-16 w-auto object-contain" },
+                  ].map((logo, idx) => (
+                    <img key={idx} src={logo.src} alt={logo.alt} className={logo.className} />
+                  ))}
+                </div>
+              </div>
+              
+              {/* Gradient masks for soft edges fading seamlessly into the background */}
+              <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-background to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" />
             </div>
           </div>
-
         </div>
       </div>
 

@@ -61,7 +61,7 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
 
-  const gradientColors = ["#3B82F6", "#60A5FA", "#38BDF8", "#93C5FD", "#3B82F6"];
+  const gradientColors = ["#F97316", "#FB923C", "#FDBA74", "#FFEDD5", "#F97316"];
 
   return (
     <>
@@ -90,7 +90,7 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
               display: "inline-block",
               opacity: letterStates[i]?.opacity ?? 0,
               filter: `blur(${letterStates[i]?.blur ?? 20}px)`,
-              color: showGradient ? `rgb(${r},${g},${b})` : "#3B82F6",
+              color: showGradient ? `rgb(${r},${g},${b})` : "#F97316",
               transition: "color 0.4s ease",
             }}
           >
