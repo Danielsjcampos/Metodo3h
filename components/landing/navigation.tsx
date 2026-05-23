@@ -51,7 +51,7 @@ export function Navigation({ settings }: { settings?: any }) {
             <img
               src="/images/metodo3h logo.png"
               alt="Método 3h"
-              className={`transition-all duration-500 ${isScrolled ? "h-7" : "h-9"}`}
+              className={`transition-all duration-500 ${isScrolled ? "h-10" : "h-14"}`}
             />
           </a>
 
