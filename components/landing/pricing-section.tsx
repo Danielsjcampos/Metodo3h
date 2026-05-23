@@ -41,19 +41,19 @@ const saldanhaLessons = [
 ];
 
 const gabrielLessons = [
-  "1. Gatilhos Mentais Essenciais para Textos Persuasivos",
-  "2. Estruturação de Headlines e Copy de Páginas Web",
-  "3. Scripts de Venda e Quebra de Objeções no WhatsApp",
-  "4. O Método Exato para Fechar Contratos Sem Descontos",
-  "5. Roteiro Passo a Passo de Apresentação de Propostas",
+  "1. Banco de Dados Sem Código & Modelagem com IA",
+  "2. Backend Serverless: Fluxos de Dados Simplificados",
+  "3. Interface Frontend Dinâmica de CRM com IA",
+  "4. Webhooks, Triggers e Notificações de Vendas",
+  "5. Publicação do CRM em Menos de 1 Hora",
 ];
 
 const devGabrielLessons = [
-  "1. Copywriting Avançado para Conversão de SaaS e Landing Pages",
-  "2. Anatomia de Headlines e UX Persuasiva para Conversão",
-  "3. Script de Abordagem para Clientes High-Ticket (EUA/Europa)",
-  "4. Fechamento Comercial e Negociação de Contratos de Software",
-  "5. Roteiro Passo a Passo de Venda Consultiva para Devs",
+  "1. Arquitetura de Software: Prompt-to-Database",
+  "2. Backend Serverless: APIs de Gestão com Supabase",
+  "3. Componentes React Dinâmicos & Dashboard Admin UI",
+  "4. Webhooks, Triggers e Automação de Notifications",
+  "5. Deploy Contínuo (CI/CD) de CRM de Alta Performance",
 ];
 
 export function PricingSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
@@ -320,18 +320,18 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
                   <span className={`font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1 ${
                     isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
                   }`}>
-                    {isProgrammer ? "Copywriter e Especialista em Vendas High-Ticket" : "Copywriter Profissional"}
+                    {isProgrammer ? "Engenheiro de IA & Arquiteto de Sistemas" : "Especialista em Sistemas & IA"}
                   </span>
                   <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
                     Gabriel
                   </h4>
                   <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
-                    {isProgrammer ? "Copywriting, Script Comercial e Venda Consultiva para Devs" : "Copywriting e Fechamento de Vendas Pelo WhatsApp"}
+                    {isProgrammer ? "Arquitetura de Sistemas: Prompt-to-Database & CRM" : "Crie um CRM / Sistema de Gestão com IA em Menos de 1 Hora"}
                   </p>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     {isProgrammer 
-                      ? "Descubra como construir textos persuasivos de alta conversão aplicados a produtos de tecnologia, SaaS e projetos freelance premium. Domine o script comercial exato e o fluxo de venda consultiva para fechar contratos de alto valor sem sofrer concorrência de plataformas baratas."
-                      : "Descubra os segredos da escrita persuasiva aplicados a sites profissionais que convertem visitantes em clientes pagantes. Aprenda scripts de abordagem práticos e de alto impacto para conduzir reuniões comerciais e fechar propostas sem dar descontos."
+                      ? "Descubra como projetar, estruturar e publicar sistemas internos complexos usando IA. Gabriel revela a arquitetura do Prompt-to-Database, a criação automática de APIs, dashboards administrativos integrados e webhooks avançados com Supabase e Vercel sem precisar de codificação tradicional backend."
+                      : "Aprenda a estruturar o backend e a interface frontend de um sistema de CRM/gestão completo do zero com inteligência artificial. Crie ferramentas corporativas de alto valor de mercado sem precisar de código manual e automatize empresas locais."
                     }
                   </p>
                 </div>
@@ -359,8 +359,8 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
                 }`}>
                   <p className="text-sm font-bold leading-relaxed">
                     {isProgrammer 
-                      ? "Gabriel revela o roteiro comercial de conversão exato para que você consiga fechar contratos de desenvolvimento de alto ticket pelo WhatsApp e reuniões virtuais sem esforço."
-                      : "Gabriel revela o roteiro exato e os gatilhos comerciais para fechar contratos de alto valor pelo WhatsApp sem sofrer com objeções ou pedidos de desconto."
+                      ? "Gabriel te ensina a arquitetar e implantar um sistema de gestão completo em menos de uma hora, agregando altíssimo valor comercial e escalabilidade aos seus projetos."
+                      : "Gabriel te ensina a construir um sistema de gestão completo (CRM) com IA do zero, automatizando processos corporativos e gerando alto valor de vendas em menos de uma hora."
                     }
                   </p>
                 </div>
@@ -389,7 +389,11 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
  
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img src="/images/metodo3h logo.png" alt="Logo" className="h-10 md:h-12 object-contain" />
+            <img 
+              src={isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png"} 
+              alt="Logo" 
+              className="h-10 md:h-12 object-contain" 
+            />
           </div>
  
           <span className={`font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs block mb-4 ${

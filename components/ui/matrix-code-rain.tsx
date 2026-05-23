@@ -17,13 +17,17 @@ interface Strand {
   scale: number;
 }
 
-export const Component = () => {
+export const Component = ({ color = '#00FF41' }: { color?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [fontSize, setFontSize] = useState(14);
   const [speed, setSpeed] = useState(0.4);
   const [density, setDensity] = useState(1);
-  const [textColor, setTextColor] = useState('#00FF41');
+  const [textColor, setTextColor] = useState(color);
+  
+  useEffect(() => {
+    setTextColor(color);
+  }, [color]);
   
   const animationFrameId = useRef<number | null>(null);
   const strands = useRef<Strand[]>([]);
@@ -183,7 +187,8 @@ export const Component = () => {
       <div className="absolute top-4 right-4 z-10">
         <button 
           onClick={() => setShowSettings(!showSettings)}
-          className="bg-black/70 text-green-400 p-2 rounded-full hover:bg-black/90 transition-colors"
+          className="bg-black/70 p-2 rounded-full hover:bg-black/90 transition-colors"
+          style={{ color: textColor }}
           aria-label="Settings"
         >
           <Settings size={24} />
@@ -191,7 +196,10 @@ export const Component = () => {
       </div>
       
       {showSettings && (
-        <div className="absolute top-16 right-4 bg-black/80 backdrop-blur-sm p-4 rounded-lg border border-green-500/30 text-green-400 w-64 shadow-lg z-10">
+        <div 
+          className="absolute top-16 right-4 bg-black/80 backdrop-blur-sm p-4 rounded-lg border w-64 shadow-lg z-10"
+          style={{ borderColor: `${textColor}4D`, color: textColor }}
+        >
           <h2 className="text-xl mb-4 font-semibold">Matrix Settings</h2>
           
           <div className="space-y-4">
@@ -203,7 +211,8 @@ export const Component = () => {
                 max={24} 
                 value={fontSize} 
                 onChange={(e) => setFontSize(Number(e.target.value))}
-                className="w-full accent-green-500"
+                className="w-full"
+                style={{ accentColor: textColor }}
               />
             </div>
             
@@ -216,7 +225,8 @@ export const Component = () => {
                 step={0.1}
                 value={speed} 
                 onChange={(e) => setSpeed(Number(e.target.value))}
-                className="w-full accent-green-500"
+                className="w-full"
+                style={{ accentColor: textColor }}
               />
             </div>
             
@@ -229,7 +239,8 @@ export const Component = () => {
                 step={0.1}
                 value={density} 
                 onChange={(e) => setDensity(Number(e.target.value))}
-                className="w-full accent-green-500"
+                className="w-full"
+                style={{ accentColor: textColor }}
               />
             </div>
             

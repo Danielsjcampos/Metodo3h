@@ -47,9 +47,9 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
           }`}
         >
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
+          <a href={isProgrammer ? "/programador" : "/"} className="flex items-center gap-2 group">
             <img
-              src="/images/metodo3h logo.png"
+              src={isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png"}
               alt="Método 3h"
               className={`transition-all duration-500 ${isScrolled ? "h-7 md:h-10" : "h-8 md:h-12"}`}
             />
