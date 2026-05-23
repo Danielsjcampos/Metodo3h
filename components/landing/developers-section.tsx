@@ -9,23 +9,6 @@ const dinoFeatures = [
   { title: "Gestor de Meta Ads", description: "Tráfego pago e marketing digital na prática." },
 ];
 
-const partners = [
-  {
-    name: "Vinícius Saldanha",
-    role: "Especialista em IA & Marketing Digital",
-    bio: "Dono de agência, especialista em marketing digital, desenvolvimento full-stack e IA/LLMs aplicados a negócios. Entrou como aluno, aplicou o método, escalou os resultados e se tornou sócio.",
-    tags: ["W-Tech Brasil", "Nacional Hidro", "IA aplicada"],
-    photo: "/images/Saldanha.jpeg",
-  },
-  {
-    name: "Gabriel",
-    role: "Especialista em IA & Desenvolvimento",
-    bio: "Especialista em IA e desenvolvimento full-stack. Dominou o método, começou a entregar sites para clientes e hoje é co-instrutor e sócio do 2Time — prova viva de que o método funciona.",
-    tags: ["Full-stack", "IA", "Automação"],
-    photo: "/images/gabriel.jpeg",
-  },
-];
-
 export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -171,71 +154,6 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
         </div>
       </div>
 
-      {/* ── PARTE 2: Saldanha & Gabriel ─────────────────────── */}
-      <div className={`relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pb-12 lg:pb-16 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-
-        <div className="border-t border-foreground/10 pt-8">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">+ Também no time</span>
-            <div className="flex-1 h-px bg-foreground/10" />
-            <span className={`text-[10px] font-mono border px-3 py-1 tracking-widest ${
-              isProgrammer ? "text-orange-500/70 border-orange-500/20" : "text-[#3B82F6]/70 border border-[#3B82F6]/20"
-            }`}>EX-ALUNOS → SÓCIOS</span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {partners.map((p, i) => (
-              <div
-                key={p.name}
-                className={`relative flex gap-6 p-6 lg:p-8 rounded-3xl glass-card glass-card-hover overflow-hidden transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${
-                  isProgrammer ? "hover:border-orange-500/30 hover:shadow-[0_16px_48px_-4px_rgba(249,115,22,0.2)]" : ""
-                }`}
-                style={{ transitionDelay: `${i * 150 + 500}ms` }}
-              >
-                {/* Photo */}
-                <div className="shrink-0">
-                  <div className={`w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-full border-2 shadow-[0_0_20px_rgba(0,0,0,0.5)] ${
-                    isProgrammer ? "border-orange-500/30 shadow-orange-500/10" : "border-[#3B82F6]/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
-                  }`}>
-                    <img
-                      src={p.photo}
-                      alt={p.name}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <h3 className="text-lg font-display text-white">{p.name}</h3>
-                  </div>
-                  <p className={`text-xs font-mono mb-3 ${isProgrammer ? "text-orange-400" : "text-[#3B82F6]/80"}`}>{p.role}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.bio}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((tag) => (
-                      <span key={tag} className="text-[9px] font-mono px-2 py-0.5 border border-foreground/15 text-muted-foreground/60 tracking-widest uppercase rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bottom accent */}
-                <div className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent to-transparent ${
-                  isProgrammer ? "via-orange-500/30" : "via-[#3B82F6]/30"
-                }`} />
-              </div>
-            ))}
-          </div>
-
-          <p className={`mt-8 text-center text-sm text-muted-foreground transition-all duration-700 delay-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-            Os três juntos formam o único time que combina{" "}
-            <span className="text-foreground">30 anos de mercado</span> com{" "}
-            <span className="text-foreground">especialização profunda em IA</span>.
-          </p>
-        </div>
-      </div>
     </section>
   );
 }
