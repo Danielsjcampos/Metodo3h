@@ -20,6 +20,7 @@ const FEATURES = [
     icon: DashboardSquare01Icon,
     image: "https://images.unsplash.com/photo-1551288049-bbda38a10ad5?q=80&w=1200",
     description: "Construa painéis completos para controlar o caixa, estoque e processos da sua empresa sem precisar programar e sem pagar mensalidades de softwares caros.",
+    url: "admin.metodo3h.com",
   },
   {
     id: "crm",
@@ -27,13 +28,15 @@ const FEATURES = [
     icon: SmartPhone01Icon,
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
     description: "Crie um sistema automático para organizar seus clientes, salvar contatos e gerenciar seu funil de vendas sem depender de planilhas confusas.",
+    url: "crm.metodo3h.com",
   },
   {
     id: "landing",
     label: "Páginas de Venda",
     icon: Pizza04Icon,
-    image: "https://images.unsplash.com/photo-1481487196290-c152efe083f5?q=80&w=1200",
+    image: "/images/pagina de vendas.png",
     description: "Crie páginas altamente vendedoras e modernas que explicam seu produto de forma profissional e transformam simples visitantes em clientes.",
+    url: "metodo3h.com/vendas",
   },
   {
     id: "institucional",
@@ -41,6 +44,7 @@ const FEATURES = [
     icon: CommandFreeIcons,
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200",
     description: "Coloque qualquer empresa física no mapa da internet com um site profissional de carregamento instantâneo que passa total credibilidade.",
+    url: "suaempresa.com.br",
   },
   {
     id: "seo",
@@ -48,6 +52,7 @@ const FEATURES = [
     icon: GlobalSearchIcon,
     image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=1200",
     description: "Aprenda a cadastrar e ranquear negócios locais no topo do Google para atrair dezenas de novos clientes todos os dias de forma 100% gratuita.",
+    url: "google.com",
   },
   {
     id: "magic",
@@ -55,6 +60,7 @@ const FEATURES = [
     icon: MagicWandIcon,
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200",
     description: "Use a inteligência artificial para responder clientes, organizar dados e fazer todo o trabalho repetitivo e chato de forma automática 24 horas por dia.",
+    url: "ai.metodo3h.com",
   },
 ];
 
@@ -197,10 +203,9 @@ export function FeatureCarousel({ isProgrammer = false }: FeatureCarouselProps) 
             })}
           </div>
         </div>
-
         {/* Right Column containing previews */}
         <div className="flex-1 min-h-[500px] md:min-h-[600px] lg:h-full relative bg-neutral-900/60 flex items-center justify-center py-16 md:py-24 lg:py-16 px-6 md:px-12 lg:px-10 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
-          <div className="relative w-full max-w-[420px] aspect-[4/5] flex items-center justify-center">
+          <div className="relative w-full max-w-[560px] aspect-[16/10] flex items-center justify-center">
             {FEATURES.map((feature, index) => {
               const status = getCardStatus(index);
               const isActive = status === "active";
@@ -215,7 +220,7 @@ export function FeatureCarousel({ isProgrammer = false }: FeatureCarouselProps) 
                     x: isActive ? 0 : isPrev ? -100 : isNext ? 100 : 0,
                     scale: isActive ? 1 : isPrev || isNext ? 0.85 : 0.7,
                     opacity: isActive ? 1 : isPrev || isNext ? 0.4 : 0,
-                    rotate: isPrev ? -3 : isNext ? 3 : 0,
+                    rotate: isPrev ? -2 : isNext ? 2 : 0,
                     zIndex: isActive ? 20 : isPrev || isNext ? 10 : 0,
                     pointerEvents: isActive ? "auto" : "none",
                   }}
@@ -225,57 +230,74 @@ export function FeatureCarousel({ isProgrammer = false }: FeatureCarouselProps) 
                     damping: 25,
                     mass: 0.8,
                   }}
-                  className="absolute inset-0 rounded-[2rem] md:rounded-[2.8rem] overflow-hidden border-4 md:border-8 border-neutral-950 bg-neutral-950 origin-center"
+                  className="absolute inset-0 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 origin-center flex flex-col shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]"
                 >
-                  <img
-                    src={feature.image}
-                    alt={feature.label}
-                    className={cn(
-                      "w-full h-full object-cover transition-all duration-700",
-                      isActive
-                        ? "grayscale-0 blur-0"
-                        : "grayscale blur-[2px] brightness-75"
-                    )}
-                  />
+                  {/* Sleek Mac Browser Header Bar */}
+                  <div className="h-7 bg-neutral-900 border-b border-white/5 flex items-center px-4 gap-1.5 shrink-0 z-30 relative select-none">
+                    <div className="w-2 h-2 rounded-full bg-[#FF5F56]" />
+                    <div className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                    <div className="w-2 h-2 rounded-full bg-[#27C93F]" />
+                    
+                    <div className="mx-auto w-40 md:w-56 h-4.5 bg-neutral-950/80 rounded border border-white/5 flex items-center justify-center text-[9px] text-white/30 font-mono tracking-wide">
+                      {feature.url}
+                    </div>
+                  </div>
 
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="absolute inset-x-0 bottom-0 p-8 pt-32 bg-gradient-to-t from-neutral-950/95 via-neutral-950/40 to-transparent flex flex-col justify-end pointer-events-none"
-                      >
-                        <div className={cn(
-                          "px-4 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase w-fit shadow-lg mb-3 border",
-                          isProgrammer 
-                            ? "bg-orange-500/10 border-orange-500/20 text-orange-400" 
-                            : "bg-blue-500/10 border-blue-500/20 text-blue-400"
-                        )}>
-                          {index + 1} • {feature.label}
-                        </div>
-                        <p className="text-white font-normal text-base md:text-lg leading-relaxed drop-shadow-md tracking-tight">
-                          {feature.description}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Browser Window Body Content */}
+                  <div className="relative flex-1 h-[calc(100%-1.75rem)] w-full overflow-hidden bg-neutral-950">
+                    <img
+                      src={feature.image}
+                      alt={feature.label}
+                      className={cn(
+                        "w-full h-full object-cover transition-all duration-700",
+                        isActive
+                          ? "grayscale-0 blur-0"
+                          : "grayscale blur-[2px] brightness-75"
+                      )}
+                      style={{
+                        objectPosition: feature.id === "landing" ? "left top" : "center top"
+                      }}
+                    />
 
-                  <div
-                    className={cn(
-                      "absolute top-8 left-8 flex items-center gap-3 transition-opacity duration-300",
-                      isActive ? "opacity-100" : "opacity-0"
-                    )}
-                  >
-                    <div className={cn(
-                      "w-2 h-2 rounded-full",
-                      isProgrammer 
-                        ? "bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,1)] animate-pulse" 
-                        : "bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,1)] animate-pulse"
-                    )} />
-                    <span className="text-white/80 text-[9px] font-semibold uppercase tracking-[0.3em] font-mono">
-                      APLICAÇÃO PRÁTICA
-                    </span>
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute inset-x-0 bottom-0 p-6 pt-24 bg-gradient-to-t from-neutral-950/95 via-neutral-950/40 to-transparent flex flex-col justify-end pointer-events-none"
+                        >
+                          <div className={cn(
+                            "px-3 py-1 rounded-full text-[9px] font-mono tracking-widest uppercase w-fit shadow-lg mb-2.5 border",
+                            isProgrammer 
+                              ? "bg-orange-500/10 border-orange-500/20 text-orange-400" 
+                              : "bg-blue-500/10 border-blue-500/20 text-blue-400"
+                          )}>
+                            {index + 1} • {feature.label}
+                          </div>
+                          <p className="text-white font-normal text-xs md:text-sm leading-relaxed drop-shadow-md tracking-tight max-w-[95%]">
+                            {feature.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div
+                      className={cn(
+                        "absolute top-5 left-6 flex items-center gap-2.5 transition-opacity duration-300",
+                        isActive ? "opacity-100" : "opacity-0"
+                      )}
+                    >
+                      <div className={cn(
+                        "w-1.5 h-1.5 rounded-full",
+                        isProgrammer 
+                          ? "bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,1)] animate-pulse" 
+                          : "bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,1)] animate-pulse"
+                      )} />
+                      <span className="text-white/80 text-[8px] font-semibold uppercase tracking-[0.3em] font-mono">
+                        APLICAÇÃO PRÁTICA
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
               );
