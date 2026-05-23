@@ -5,36 +5,18 @@ import { cn } from "@/lib/utils";
 
 const problems = [
   {
-    visual: "price" as const,
     title: "O preço absurdo de uma agência",
     description: "R$5.000, R$8.000 ou R$12.000 — um custo insustentável para pequenos estabelecimentos e uma enorme oportunidade de faturamento para quem aprende a criar.",
   },
   {
-    visual: "time" as const,
     title: "Semanas (ou meses) esperando",
     description: "Briefing, reunião, proposta, aprovação, revisão, mais revisão... enquanto seu concorrente já está no Google.",
   },
   {
-    visual: "lock" as const,
     title: "Dependência permanente",
     description: "Mudar uma vírgula ou imagem exige dias de espera e taxas extras de manutenção. Com nosso método, você tem controle total da sua presença digital.",
   },
 ];
-
-function AIVisual({ src }: { src: string }) {
-  return (
-    <div className="relative h-52 overflow-hidden">
-      <img src={src} alt="" aria-hidden="true" className="w-full h-full object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-    </div>
-  );
-}
-
-const visuals = {
-  price: () => <AIVisual src="/images/o preco absurdo de uma agencia.png" />,
-  time:  () => <AIVisual src="/images/semanas ou meses esperando.png" />,
-  lock:  () => <AIVisual src="/images/dependencia permanente.png" />,
-};
 
 export function FeaturesSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -51,23 +33,20 @@ export function FeaturesSection({ isProgrammer = false }: { isProgrammer?: boole
 
   const programmerProblems = [
     {
-      visual: "price" as const,
       title: "Infraestrutura complexa e cara",
       description: "Pagar por VPS caras, gerenciar servidores Nginx/Apache e bancos de dados complexos apenas para LPs e sites institucionais simples. Um desperdício de tempo e recursos.",
     },
     {
-      visual: "time" as const,
       title: "LPs lentas com Lighthouse quebrado",
       description: "Monólitos pesados em WordPress que quebram o Core Web Vitals (LCP, INP) e prejudicam a conversão de tráfego pago. O tráfego exige performance estática pura.",
     },
     {
-      visual: "lock" as const,
       title: "Deploy manual e burocracia de commits",
       description: "Qualquer alteração simples de copy ou imagem exige burocracia de commits ou demanda horas de manutenção. Com IA e Github modernizado, o deploy de borda é automatizado.",
     },
   ];
 
-  const activeProblems = problems;
+  const activeProblems = isProgrammer ? programmerProblems : problems;
 
   return (
     <section id="problema" ref={sectionRef} className="relative py-16 md:py-20 lg:py-24 overflow-hidden bg-black">
@@ -100,7 +79,6 @@ export function FeaturesSection({ isProgrammer = false }: { isProgrammer?: boole
         {/* Problem Cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {activeProblems.map((problem, index) => {
-            const Visual = visuals[problem.visual];
             return (
               <div
                 key={problem.title}
@@ -109,9 +87,6 @@ export function FeaturesSection({ isProgrammer = false }: { isProgrammer?: boole
                 } ${isProgrammer ? "border-orange-500/10 hover:border-orange-500/25" : ""}`}
                 style={{ transitionDelay: `${index * 120}ms` }}
               >
-                {/* Visual area */}
-                <Visual />
-
                 {/* Text area */}
                 <div className="p-8 lg:p-10">
                   <h3 className={`text-xl lg:text-2xl mb-4 ${isProgrammer ? "font-mono font-bold text-white" : "font-display text-white"}`}>
