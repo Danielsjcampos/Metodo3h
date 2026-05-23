@@ -56,10 +56,10 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
               {isProgrammer ? (
                 <>
                   <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
-                    [08] MENTORIA // DANIEL MARQUES
+                    Quem vai te ensinar
                   </span>
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] mb-6 text-white">
-                    30 anos de <span className="text-orange-500 italic font-light">produção real.</span> Sem enrolação.
+                    30 anos de <span className="text-orange-500 italic font-light">mercado real.</span> Não YouTube.
                   </h2>
                 </>
               ) : (

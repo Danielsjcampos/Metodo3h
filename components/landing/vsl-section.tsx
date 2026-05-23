@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Play, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const stats = [
   { value: "3h", label: "para publicar o primeiro site" },
@@ -46,38 +47,29 @@ export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean })
 
         {/* Header */}
         <div className={`text-center mb-10 lg:mb-12 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          {isProgrammer ? (
-            <>
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
-                [02] DEMO // COMPILAÇÃO AO VIVO
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
-                Prompt-to-Prod <span className="text-orange-500">sem fricção.</span>
-                <br />
-                <span className="text-muted-foreground text-xl lg:text-2xl block mt-3 font-mono font-normal tracking-wide">// Em menos de 3h e infra de custo zero</span>
-              </h2>
-              <p className="mt-6 text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-                Assista Daniel Marques codificar e publicar uma aplicação profissional em tempo real. Veja na prática como a IA Generativa combinada com infraestrutura moderna elimina a necessidade de configurações manuais de servidor.
-              </p>
-            </>
-          ) : (
-            <>
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-[#3B82F6] mb-6">
-                <span className="w-8 h-px bg-[#3B82F6]/40" />
-                VEJA O MÉTODO AO VIVO
-                <span className="w-8 h-px bg-[#3B82F6]/40" />
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] text-white">
-                Do prompt ao site no ar.
-                <br />
-                <span className="text-muted-foreground">Em menos de 3 horas.</span>
-              </h2>
-              <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Assista Daniel Marques construir um site profissional ao vivo — do zero, sem código, sem edições.
-                O que você vai ver aqui é exatamente o que acontece na tela de um cliente pagante.
-              </p>
-            </>
-          )}
+          <span className={cn(
+            "inline-flex items-center gap-3 text-sm font-mono mb-6",
+            isProgrammer ? "text-orange-500" : "text-[#3B82F6]"
+          )}>
+            <span className={cn("w-8 h-px", isProgrammer ? "bg-orange-500/40" : "bg-[#3B82F6]/40")} />
+            VEJA O MÉTODO AO VIVO
+            <span className={cn("w-8 h-px", isProgrammer ? "bg-orange-500/40" : "bg-[#3B82F6]/40")} />
+          </span>
+          <h2 className={cn(
+            "text-3xl md:text-4xl lg:text-5xl tracking-tight leading-[1.05] text-white",
+            isProgrammer ? "font-mono" : "font-display"
+          )}>
+            Do prompt ao site no ar.
+            <br />
+            <span className={isProgrammer ? "text-orange-500" : "text-muted-foreground"}>Em menos de 3 horas.</span>
+          </h2>
+          <p className={cn(
+            "mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed",
+            isProgrammer ? "font-mono text-sm md:text-base" : ""
+          )}>
+            Assista Daniel Marques construir um site profissional ao vivo — do zero, sem código, sem edições.
+            O que você vai ver aqui é exatamente o que acontece na tela de um cliente pagante.
+          </p>
         </div>
 
         {/* Video player */}
@@ -112,11 +104,11 @@ export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean })
                 <div className="relative text-center px-8 select-none">
                   {isProgrammer ? (
                     <>
-                      <p className="text-[10px] font-mono text-orange-500 tracking-widest uppercase mb-4">danielmarques.dino // system_architect</p>
+                      <p className="text-[10px] font-mono text-orange-500 tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
                       <h3 className="text-3xl lg:text-5xl font-mono text-white leading-tight mb-2">
-                        deploy_app.sh
+                        Criar Sites com IA
                       </h3>
-                      <p className="text-lg text-white/40 font-mono">./compile_and_run --with-ai</p>
+                      <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
                     </>
                   ) : (
                     <>
@@ -163,7 +155,7 @@ export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean })
                     isProgrammer ? "bg-orange-500" : "bg-[#3B82F6]"
                   }`} />
                   <span className="text-xs font-mono text-white/70">
-                    {isProgrammer ? "free_preview.sh · 08:24" : "Prévia gratuita · ~8 min"}
+                    {isProgrammer ? "Prévia gratuita · ~8 min" : "Prévia gratuita · ~8 min"}
                   </span>
                 </div>
               </div>
@@ -212,7 +204,7 @@ export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean })
             }`}
           >
             <a href="#inscricao">
-              {isProgrammer ? "./acessar_metodo_3h.sh" : "Quero aprender esse método"}
+              {isProgrammer ? "Quero aprender esse método" : "Quero aprender esse método"}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </a>
           </Button>
