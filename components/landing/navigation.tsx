@@ -49,8 +49,8 @@ export function Navigation({ settings }: { settings?: any }) {
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
             <img
-              src="/images/logo.png"
-              alt="2Time"
+              src="/images/metodo3h logo.png"
+              alt="Método 3h"
               className={`transition-all duration-500 ${isScrolled ? "h-7" : "h-9"}`}
             />
           </a>

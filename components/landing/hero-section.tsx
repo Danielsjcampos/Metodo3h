@@ -117,7 +117,7 @@ export function HeroSection({ settings }: { settings?: any }) {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden bg-black">
+    <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
       {/* Background video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -161,7 +161,7 @@ export function HeroSection({ settings }: { settings?: any }) {
         ))}
       </div>
       
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-16 lg:pt-36 lg:pb-20">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col justify-center">
         <div className="lg:max-w-[65%]">
           {/* Eyebrow */}
           <div 
@@ -220,13 +220,13 @@ export function HeroSection({ settings }: { settings?: any }) {
         </div>
       </div>
       
-      {/* Stats */}
+      {/* Stats (Pushed to bottom via clean relative document flow to prevent any overlap) */}
       <div 
-        className={`absolute bottom-8 left-0 right-0 px-6 lg:px-12 transition-all duration-700 delay-500 ${
+        className={`relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 mt-10 md:mt-12 transition-all duration-700 delay-500 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="max-w-[1000px] mx-auto glass-card rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
+        <div className="max-w-[1000px] mx-auto bg-black/60 backdrop-blur-md border border-white/10 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
           {[
             { value: "1.000+", label: "sites entregues" },
             { value: "30 anos", label: "no mercado" },

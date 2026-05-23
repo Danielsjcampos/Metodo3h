@@ -117,7 +117,7 @@ export async function initDatabase() {
         ["logo_text", "METODO3HORAS"],
         ["seo_title", "Método 3h - Seu site profissional com IA em 3 horas"],
         ["seo_description", "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h."],
-        ["seo_favicon", "/favicon.ico"],
+        ["seo_favicon", "/images/faviicon metodo3h.png"],
         ["geo_city", "São José dos Campos"],
         ["geo_state", "SP"],
         ["social_instagram", "https://instagram.com/danielmarques.dino"],
