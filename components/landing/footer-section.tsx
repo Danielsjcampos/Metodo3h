@@ -55,33 +55,11 @@ export function FooterSection({ settings, isProgrammer = false }: { settings?: a
   };
 
   return (
-    <footer className="relative bg-black">
-      {/* Panoramic banner image */}
-      <div className="relative w-full h-[340px] md:h-[420px] overflow-hidden">
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Upscaled%20Image%20%2810%29-UnDKstODkIENp5xqTYUEpt0Sm8tNOw.png"
-          alt="Bioluminescent landscape"
-          className="w-full h-full object-cover object-center"
-          style={{ 
-            filter: isProgrammer 
-              ? "hue-rotate(320deg) saturate(2) brightness(0.7)" 
-              : "hue-rotate(200deg) saturate(1.5) brightness(0.85)" 
-          }}
-        />
-        {/* Blue/Orange tint overlay */}
-        <div className={`absolute inset-0 mix-blend-screen pointer-events-none ${
-          isProgrammer ? "bg-orange-500/20" : "bg-[#3B82F6]/10"
-        }`} />
-        {/* Gradient fade to black at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
-        {/* Subtle dark vignette on sides */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
-      </div>
-
+    <footer className="relative bg-black border-t border-white/10">
       {/* Footer content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Main Footer */}
-        <div className="py-8 lg:py-12">
+        <div className="pt-16 pb-8 lg:pt-24 lg:pb-12">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand Column */}
             <div className="col-span-2">
