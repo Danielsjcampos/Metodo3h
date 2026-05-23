@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
-    title: `Política de Privacidade - ${settings.logoText || "Site Dino"}`,
-    description: "Entenda como protegemos e cuidamos dos seus dados pessoais em conformidade com a LGPD no Site Dino.",
+    title: `Política de Privacidade - ${settings.logoText || "Método 3 Horas"}`,
+    description: "Entenda como protegemos e cuidamos dos seus dados pessoais em conformidade com a LGPD no Método 3 Horas.",
     icons: {
       icon: settings.seoFavicon || "/favicon.ico",
     },

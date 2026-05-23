@@ -107,7 +107,7 @@ export default function LoginPage() {
             <Shield className="w-6 h-6 text-[#3B82F6]" />
           </div>
           <h1 className="text-3xl font-display text-white tracking-tight">
-            SITE <span className="text-[#3B82F6]">DINO</span>
+            MÉTODO <span className="text-[#3B82F6]">3 HORAS</span>
           </h1>
           <p className="text-sm text-muted-foreground font-mono mt-1">Portal de Acesso Interno</p>
         </div>
@@ -137,7 +137,7 @@ export default function LoginPage() {
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     type="email"
-                    placeholder="exemplo@sitedino.com"
+                    placeholder="exemplo@metodo3horas.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="h-12 pl-11 bg-black/40 border-white/10 hover:border-white/20 focus:border-[#3B82F6] transition-colors rounded-xl text-white placeholder:text-muted-foreground/60 text-sm"
@@ -170,7 +170,7 @@ export default function LoginPage() {
                   "Verificando..."
                 ) : (
                   <>
-                    Acessar o Painel
+                     Acessar o Painel
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                   </>
                 )}
@@ -185,7 +185,7 @@ export default function LoginPage() {
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={() => handleQuickLogin("aluno@sitedino.com", "aluno123")}
+                  onClick={() => handleQuickLogin("aluno@metodo3horas.com", "aluno123")}
                   disabled={isSubmitting}
                   className="flex flex-col items-start text-left bg-white/[0.01] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 p-3 rounded-xl transition-all duration-300 group/btn cursor-pointer disabled:opacity-50"
                 >
@@ -193,13 +193,13 @@ export default function LoginPage() {
                     Entrar como Aluno
                   </span>
                   <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    aluno@sitedino.com
+                    aluno@metodo3horas.com
                   </span>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => handleQuickLogin("admin@sitedino.com", "admin123")}
+                  onClick={() => handleQuickLogin("admin@metodo3horas.com", "admin123")}
                   disabled={isSubmitting}
                   className="flex flex-col items-start text-left bg-white/[0.01] hover:bg-white/[0.05] border border-white/5 hover:border-[#3B82F6]/20 p-3 rounded-xl transition-all duration-300 group/btn cursor-pointer disabled:opacity-50"
                 >
@@ -207,7 +207,7 @@ export default function LoginPage() {
                     Entrar como Admin
                   </span>
                   <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    admin@sitedino.com
+                    admin@metodo3horas.com
                   </span>
                 </button>
               </div>
@@ -217,7 +217,7 @@ export default function LoginPage() {
 
         {/* Footer info link */}
         <p className="text-center text-xs text-muted-foreground/40 mt-8">
-          Site Dino · Área Protegida por Criptografia SSL
+          Método 3 Horas · Área Protegida por Criptografia SSL
         </p>
       </div>
     </main>

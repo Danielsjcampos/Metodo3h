@@ -42,14 +42,14 @@ export function FooterSection({ settings }: { settings?: any }) {
   ];
 
   const whatsappNumber = settings?.whatsappNumber || "5512999999999";
-  const whatsappMessage = settings?.whatsappMessage || "Olá! Gostaria de saber mais sobre o método Site Dino.";
+  const whatsappMessage = settings?.whatsappMessage || "Olá! Gostaria de saber mais sobre o Método 3 Horas.";
   const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   const dynamicFooterLinks = {
     ...footerLinks,
     Suporte: [
       { name: "WhatsApp", href: waLink },
-      { name: "E-mail", href: "mailto:suporte@sitedino.com" },
+      { name: "E-mail", href: "mailto:suporte@metodo3horas.com.br" },
       { name: "FAQ", href: "/#faq" },
     ],
   };

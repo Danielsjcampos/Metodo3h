@@ -153,7 +153,7 @@ export default function StudentCoursesPage() {
                       {activeLesson.duration}
                     </span>
                     <span>·</span>
-                    <span className="text-[#3B82F6]">Site Dino VOD</span>
+                    <span className="text-[#3B82F6]">Método 3 Horas VOD</span>
                   </div>
                 </div>
 
@@ -185,7 +185,7 @@ export default function StudentCoursesPage() {
                 
                 <TabsContent value="description" className="mt-6 space-y-4">
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Nesta aula abordamos detalhadamente a execução passo a passo do método Site Dino. Siga as instruções do vídeo para configurar as dependências gratuitas e preparar a estrutura inicial em menos de 10 minutos.
+                    Nesta aula abordamos detalhadamente a execução passo a passo do Método 3 Horas. Siga as instruções do vídeo para configurar as dependências gratuitas e preparar a estrutura inicial em menos de 10 minutos.
                   </p>
                   <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl space-y-2 max-w-md">
                     <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block">Arquivos de Apoio</span>
@@ -197,7 +197,7 @@ export default function StudentCoursesPage() {
                       }}
                       className="flex items-center justify-between text-xs text-[#3B82F6] hover:text-[#3B82F6]/80 font-mono transition-colors"
                     >
-                      📄 Checklist de Configuração Dino.pdf
+                      📄 Checklist de Configuração Método 3 Horas.pdf
                       <ChevronRight className="w-4 h-4" />
                     </a>
                   </div>

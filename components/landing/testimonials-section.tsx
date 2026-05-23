@@ -213,7 +213,7 @@ export function TestimonialsSection() {
                   SaaS CRM Automatizado do Henrique
                 </h3>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  "Eu não sabia nada de código. Com o método Dino, desenvolvi e publiquei um software de CRM completo com integrações em 3 dias. Hoje o projeto já fatura no mercado digital."
+                  "Eu não sabia nada de código. Com o Método 3 Horas, desenvolvi e publiquei um software de CRM completo com integrações em 3 dias. Hoje o projeto já fatura no mercado digital."
                 </p>
               </div>
 
@@ -222,7 +222,7 @@ export function TestimonialsSection() {
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current text-yellow-500" />)}
                 </div>
                 <p className="text-sm font-semibold text-white">Henrique Souza</p>
-                <p className="text-[10px] font-mono text-muted-foreground uppercase">Aluno OdinoExplica · Ex-Leigo</p>
+                <p className="text-[10px] font-mono text-muted-foreground uppercase">Aluno Método 3 Horas · Ex-Leigo</p>
               </div>
             </motion.div>
           </motion.div>

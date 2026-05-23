@@ -3,7 +3,7 @@ import { SettingsForm } from "./settings-form";
 
 export const metadata = {
   title: "Configurações do Site - Painel Admin",
-  description: "Gerencie o logotipo, SEO, favicon, geolocalização e o widget do WhatsApp do Site Dino.",
+  description: "Gerencie o logotipo, SEO, favicon, geolocalização e o widget do WhatsApp do Método 3 Horas.",
 };
 
 export default async function AdminSettingsPage() {

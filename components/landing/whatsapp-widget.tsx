@@ -41,7 +41,7 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
 
     try {
       // Create a unique email for the database based on phone and timestamp
-      const mockEmail = `wa_${cleanPhone}_${Date.now()}@sitedino.com`;
+      const mockEmail = `wa_${cleanPhone}_${Date.now()}@metodo3horas.com.br`;
 
       const response = await fetch("/api/leads", {
         method: "POST",

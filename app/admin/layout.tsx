@@ -32,7 +32,7 @@ export default async function AdminLayout({
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-[#3B82F6]" />
-            <span className="font-display text-lg tracking-tight font-medium">Site Dino Admin</span>
+            <span className="font-display text-lg tracking-tight font-medium">Método 3 Horas</span>
           </Link>
           <Link href="/" className="text-muted-foreground hover:text-white transition-colors md:hidden">
             <ArrowLeft className="w-4 h-4" />

@@ -399,9 +399,9 @@ export async function getSettings(): Promise<SiteSettings> {
   if (!process.env.DATABASE_URL) {
     console.warn("DATABASE_URL is not defined in environment variables. Returning default settings.");
     return {
-      logoText: "SITECOMIA",
-      seoTitle: "Site Dino - Seu site profissional com IA em 3 horas",
-      seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara.",
+      logoText: "METODO3HORAS",
+      seoTitle: "Método 3 Horas - Seu site profissional com IA em 3 horas",
+      seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3 Horas.",
       seoFavicon: "/favicon.ico",
       geoCity: "São José dos Campos",
       geoState: "SP",
@@ -409,7 +409,7 @@ export async function getSettings(): Promise<SiteSettings> {
       socialYoutube: "https://youtube.com/c/danielmarques",
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
-      whatsappMessage: "Olá! Gostaria de saber mais sobre o método Site Dino.",
+      whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3 Horas.",
     };
   }
 
@@ -424,7 +424,7 @@ export async function getSettings(): Promise<SiteSettings> {
 
     return {
       logoText: settingsMap["logo_text"] || "SITECOMIA",
-      seoTitle: settingsMap["seo_title"] || "Site Dino - Seu site profissional com IA em 3 horas",
+      seoTitle: settingsMap["seo_title"] || "Método 3 Horas - Seu site profissional com IA em 3 horas",
       seoDescription: settingsMap["seo_description"] || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara.",
       seoFavicon: settingsMap["seo_favicon"] || "/favicon.ico",
       geoCity: settingsMap["geo_city"] || "São José dos Campos",
@@ -433,16 +433,16 @@ export async function getSettings(): Promise<SiteSettings> {
       socialYoutube: settingsMap["social_youtube"] || "https://youtube.com/c/danielmarques",
       whatsappEnabled: settingsMap["whatsapp_enabled"] === "true",
       whatsappNumber: settingsMap["whatsapp_number"] || "5512999999999",
-      whatsappMessage: settingsMap["whatsapp_message"] || "Olá! Gostaria de saber mais sobre o método Site Dino.",
+      whatsappMessage: settingsMap["whatsapp_message"] || "Olá! Gostaria de saber mais sobre o Método 3 Horas.",
       launchPrice: settingsMap["launch_price"] || "97",
       regularPrice: settingsMap["regular_price"] || "247",
     };
   } catch (error) {
     console.error("Error getting settings from Neon:", error);
     return {
-      logoText: "SITECOMIA",
-      seoTitle: "Site Dino - Seu site profissional com IA em 3 horas",
-      seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara.",
+      logoText: "METODO3HORAS",
+      seoTitle: "Método 3 Horas - Seu site profissional com IA em 3 horas",
+      seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3 Horas.",
       seoFavicon: "/favicon.ico",
       geoCity: "São José dos Campos",
       geoState: "SP",
@@ -450,7 +450,7 @@ export async function getSettings(): Promise<SiteSettings> {
       socialYoutube: "https://youtube.com/c/danielmarques",
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
-      whatsappMessage: "Olá! Gostaria de saber mais sobre o método Site Dino.",
+      whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3 Horas.",
       launchPrice: "97",
       regularPrice: "247",
     };

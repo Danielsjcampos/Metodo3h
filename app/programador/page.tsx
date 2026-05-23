@@ -19,11 +19,20 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
+  const title = "Método 3 Horas (Edição Programador) - Crie Sites com IA";
+  const description = "Aprenda a criar sites profissionais com IA em apenas 3 horas. Edição premium com foco em programadores e entusiastas de tecnologia com Matrix Code Rain.";
   return {
-    title: "Odino Explica (Edição Programador) - Crie Sites com IA",
-    description: "Duplicado premium com foco em tecnologia e automações com Matrix Rain.",
+    title: title,
+    description: description,
     icons: {
       icon: settings.seoFavicon || "/favicon.ico",
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      type: "website",
+      url: "https://metodo3horas.com.br/programador",
+      siteName: "Método 3 Horas",
     },
   };
 }

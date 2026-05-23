@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
-    title: `Política de Reembolso e Garantia - ${settings.logoText || "Site Dino"}`,
+    title: `Política de Reembolso e Garantia - ${settings.logoText || "Método 3 Horas"}`,
     description: "Conheça as diretrizes da nossa garantia incondicional de 7 dias e saiba como solicitar seu reembolso instantâneo.",
     icons: {
       icon: settings.seoFavicon || "/favicon.ico",
@@ -37,7 +37,7 @@ export default async function RefundPage() {
           Garantia e <span className="italic text-[#3B82F6]">Reembolso</span>
         </h1>
         <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Temos total confiança na qualidade e velocidade de entrega do Site Dino. Por isso, seu risco é absolutamente zero.
+          Temos total confiança na qualidade e velocidade de entrega do Método 3 Horas. Por isso, seu risco é absolutamente zero.
         </p>
       </div>
 
@@ -104,8 +104,8 @@ export default async function RefundPage() {
                     <p className="text-xs text-white/50 leading-relaxed">Respostas completas enviadas em até 24 horas úteis.</p>
                   </div>
                   <Button asChild variant="outline" size="sm" className="w-full text-xs cursor-pointer">
-                    <a href="mailto:suporte@sitedino.com" className="inline-flex items-center gap-2">
-                      suporte@sitedino.com <ArrowRight className="w-3 h-3" />
+                    <a href="mailto:suporte@metodo3horas.com" className="inline-flex items-center gap-2">
+                      suporte@metodo3horas.com <ArrowRight className="w-3 h-3" />
                     </a>
                   </Button>
                 </div>

@@ -116,7 +116,7 @@ export function VslSection() {
                 className="w-full h-full"
                 allow="autoplay; fullscreen"
                 allowFullScreen
-                title="VSL — Site Dino"
+                title="VSL — Método 3 Horas"
               />
             )}
           </div>
