@@ -55,7 +55,7 @@ const tickerItems = [
   "Marcos T. · R$4.500 em um mês ✓",
 ];
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -111,23 +111,36 @@ export function TestimonialsSection() {
 
   return (
     <section ref={sectionRef} className="relative py-14 md:py-18 overflow-hidden bg-background">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className={`absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none ${
+        isProgrammer ? "bg-orange-500/5" : "bg-blue-600/5"
+      }`} />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
         <div className="mb-10 text-center flex flex-col items-center justify-center">
-          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-          }`}>
-            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-            Prova real
-            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-          </span>
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            Quem aplicou, <span className="text-muted-foreground italic font-light">já está</span> faturando.
-          </h2>
+          {isProgrammer ? (
+            <>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
+                [09] RESULTADOS // VALIDAÇÃO PRÁTICA
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
+                Quem compilou e enviou, <span className="text-orange-500 italic font-light">já está</span> colhendo frutos.
+              </h2>
+            </>
+          ) : (
+            <>
+              <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 justify-center ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+              }`}>
+                <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+                Prova real
+                <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+              </span>
+              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2`}>
+                Quem aplicou, <span className="text-muted-foreground italic font-light">já está</span> faturando.
+              </h2>
+            </>
+          )}
         </div>
 
         <div ref={scrollContainerRef} className="relative w-full min-h-[70vh] flex items-center justify-center mb-12">
@@ -139,11 +152,17 @@ export function TestimonialsSection() {
               scale,
               borderRadius,
             }}
-            className="relative overflow-hidden border border-white/10 bg-black/60 shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-w-5xl w-full"
+            className={`relative overflow-hidden border bg-black/60 shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-w-5xl w-full ${
+              isProgrammer ? "border-orange-500/20" : "border-white/10"
+            }`}
             onClick={() => setHasInteracted(true)}
           >
-            <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
+              isProgrammer ? "bg-orange-500/10" : "bg-blue-500/10"
+            }`} />
+            <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
+              isProgrammer ? "bg-amber-500/10" : "bg-purple-500/10"
+            }`} />
 
             <video
               ref={videoRef}
@@ -163,7 +182,7 @@ export function TestimonialsSection() {
                   e.stopPropagation();
                   toggleMute();
                 }}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 shadow-lg text-white hover:bg-black/90 hover:border-white/20 transition-all duration-300 group active:scale-95"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 shadow-lg text-white hover:bg-black/90 hover:border-white/20 transition-all duration-300 group active:scale-95 cursor-pointer"
               >
                 {isMuted ? (
                   <>
@@ -179,8 +198,10 @@ export function TestimonialsSection() {
               </button>
             </div>
 
-            <div className="absolute top-6 left-6 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
-              <Sparkles className="w-4 h-4 text-blue-400 animate-pulse" />
+            <div className={`absolute top-6 left-6 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-md border shadow-lg ${
+              isProgrammer ? "border-orange-500/20" : "border-white/10"
+            }`}>
+              <Sparkles className={`w-4 h-4 animate-pulse ${isProgrammer ? "text-orange-400" : "text-blue-400"}`} />
               <span className="text-[10px] font-mono font-semibold tracking-wider text-white/90 uppercase">Depoimento em Vídeo</span>
             </div>
 
@@ -191,7 +212,9 @@ export function TestimonialsSection() {
                     e.stopPropagation();
                     toggleMute();
                   }}
-                  className="w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-[0_0_50px_rgba(59,130,246,0.4)] cursor-pointer group active:scale-95 z-20"
+                  className={`w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform duration-300 cursor-pointer group active:scale-95 z-20 ${
+                    isProgrammer ? "shadow-[0_0_50px_rgba(249,115,22,0.4)]" : "shadow-[0_0_50px_rgba(59,130,246,0.4)]"
+                  }`}
                 >
                   <Play className="w-8 h-8 text-black fill-black ml-1 group-hover:rotate-12 transition-transform duration-300" />
                 </button>
@@ -206,13 +229,15 @@ export function TestimonialsSection() {
               className="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 pointer-events-none"
             >
               <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[10px] font-mono text-[#3B82F6] uppercase font-semibold mb-3">
+                <span className={`inline-flex items-center gap-2 px-2.5 py-1 rounded text-[10px] font-mono uppercase font-semibold mb-3 ${
+                  isProgrammer ? "bg-orange-500/10 border border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
+                }`}>
                   <Cpu className="w-3 h-3" /> Projeto construído 100% com IA
                 </span>
                 <h3 className="text-2xl md:text-4xl font-display font-medium text-white mb-3">
                   SaaS CRM Automatizado do Henrique
                 </h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                <p className={`text-sm md:text-base text-muted-foreground leading-relaxed ${isProgrammer ? "font-mono" : ""}`}>
                   "Eu não sabia nada de código. Com o Método 3h, desenvolvi e publiquei um software de CRM completo com integrações em 3 dias. Hoje o projeto já fatura no mercado digital."
                 </p>
               </div>
@@ -222,7 +247,7 @@ export function TestimonialsSection() {
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current text-yellow-500" />)}
                 </div>
                 <p className="text-sm font-semibold text-white">Henrique Souza</p>
-                <p className="text-[10px] font-mono text-muted-foreground uppercase">Aluno Método 3h · Ex-Leigo</p>
+                <p className="text-[10px] font-mono text-muted-foreground uppercase">{isProgrammer ? "SaaS Developer · Ex-Aluno" : "Aluno Método 3h · Ex-Leigo"}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -232,7 +257,9 @@ export function TestimonialsSection() {
           {testimonials.map((t, i) => (
             <div
               key={t.name}
-              className={`relative p-8 lg:p-10 rounded-[2rem] glass-card overflow-hidden transition-all duration-500 hover:border-white/15 ${
+              className={`relative p-8 lg:p-10 rounded-[2rem] glass-card overflow-hidden transition-all duration-500 ${
+                isProgrammer ? "hover:border-orange-500/20" : "hover:border-white/15"
+              } ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               }`}
               style={{ transitionDelay: `${i * 100}ms` }}
@@ -243,11 +270,11 @@ export function TestimonialsSection() {
 
               <div className="flex items-center gap-1 mb-6">
                 {[...Array(t.stars)].map((_, si) => (
-                  <Star key={si} className="w-4 h-4 fill-[#3B82F6] text-[#3B82F6]" />
+                  <Star key={si} className={`w-4 h-4 ${isProgrammer ? "fill-orange-500 text-orange-500" : "fill-[#3B82F6] text-[#3B82F6]"}`} />
                 ))}
               </div>
 
-              <p className="text-base lg:text-lg text-foreground leading-relaxed mb-8">
+              <p className={`text-base lg:text-lg text-foreground leading-relaxed mb-8 ${isProgrammer ? "font-mono" : ""}`}>
                 "{t.quote}"
               </p>
 
@@ -257,7 +284,9 @@ export function TestimonialsSection() {
                   <p className="text-xs text-muted-foreground mt-0.5">{t.role}</p>
                 </div>
 
-                <div className="px-3 py-1.5 rounded-full bg-[#3B82F6]/5 border border-[#3B82F6]/20 text-[10px] font-mono text-[#3B82F6] font-semibold">
+                <div className={`px-3 py-1.5 rounded-full font-mono text-[10px] font-semibold ${
+                  isProgrammer ? "bg-orange-500/5 border border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/5 border border-[#3B82F6]/20 text-[#3B82F6]"
+                }`}>
                   {t.highlight}
                 </div>
               </div>
@@ -272,7 +301,7 @@ export function TestimonialsSection() {
                 key={i}
                 className="flex items-center gap-8 px-8 text-xs font-mono text-muted-foreground whitespace-nowrap"
               >
-                <span className="text-[#3B82F6] text-xs">◆</span>
+                <span className={`text-xs ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>◆</span>
                 {item}
               </span>
             ))}
@@ -288,10 +317,12 @@ export function TestimonialsSection() {
           ].map((m, i) => (
             <div
               key={m.label}
-              className="p-6 rounded-2xl glass-card border border-white/5 hover:border-blue-500/20 text-center transition-all duration-300"
+              className={`p-6 rounded-2xl glass-card border border-white/5 text-center transition-all duration-300 ${
+                isProgrammer ? "hover:border-orange-500/20" : "hover:border-blue-500/20"
+              }`}
               style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <span className="block text-3xl lg:text-4xl font-display text-white mb-1 font-semibold">{m.value}</span>
+              <span className={`block text-3xl lg:text-4xl font-display mb-1 font-semibold ${isProgrammer ? "text-orange-500" : "text-white"}`}>{m.value}</span>
               <span className="block text-sm font-medium text-foreground">{m.label}</span>
               <span className="block text-xs text-muted-foreground mt-1">{m.sub}</span>
             </div>

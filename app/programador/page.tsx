@@ -42,56 +42,56 @@ export default async function ProgramadorPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-x-hidden"
+      className="relative min-h-screen overflow-x-hidden bg-black text-white"
       style={{
-        backgroundImage: "radial-gradient(rgba(34,197,94,0.05) 1px, transparent 1px)",
-        backgroundSize: "28px 28px",
+        backgroundImage: "radial-gradient(rgba(249,115,22,0.06) 1px, transparent 1px)",
+        backgroundSize: "32px 32px",
       }}
     >
-      <Navigation settings={settings} />
+      <Navigation settings={settings} isProgrammer={true} />
 
       {/* 1. ATENÇÃO: Seu site no ar hoje (Edição Programador com Matrix Code Rain) */}
       <HeroProgrammerSection settings={settings} />
 
       {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
-      <VslSection />
+      <VslSection isProgrammer={true} />
 
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
-      <FeaturesSection />
+      <FeaturesSection isProgrammer={true} />
 
       {/* 4. SOLUÇÃO / A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
-      <HowItWorksSection />
+      <HowItWorksSection isProgrammer={true} />
 
       {/* 5. ALINHAMENTO & EGO FEEDING: Mostra que ele pertence ao ecossistema (Freelancer, Negócio Local, etc.) */}
-      <SecuritySection />
+      <SecuritySection isProgrammer={true} />
 
       {/* 6. A JORNADA: Detalhamento dos 7 módulos práticos do curso */}
-      <InfrastructureSection />
+      <InfrastructureSection isProgrammer={true} />
 
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
-      <IntegrationsSection />
+      <IntegrationsSection isProgrammer={true} />
 
       {/* 8. LIDERANÇA / CREDIBILIDADE: Quem é o mentor (Daniel) e sua filosofia */}
-      <DevelopersSection />
-      <MetricsSection />
+      <DevelopersSection isProgrammer={true} />
+      <MetricsSection isProgrammer={true} />
 
       {/* 9. PROVA SOCIAL: Depoimentos e validação real do método */}
-      <TestimonialsSection />
+      <TestimonialsSection isProgrammer={true} />
 
       {/* 10. A OFERTA IRRECUSÁVEL: O valor empilhado com os bônus detalhados por R$0,00 */}
-      <PricingSection settings={settings} />
+      <PricingSection settings={settings} isProgrammer={true} />
 
       {/* 11. ANTIMÍSSIL DE OBJEÇÕES: FAQ colocado cirurgicamente ao lado do preço final */}
-      <FaqSection settings={settings} />
+      <FaqSection settings={settings} isProgrammer={true} />
 
       {/* 12. FECHAMENTO SEGURO: Chamada à ação final antes do rodapé */}
-      <CtaSection settings={settings} />
+      <CtaSection settings={settings} isProgrammer={true} />
 
       {/* Footer */}
-      <FooterSection settings={settings} />
+      <FooterSection settings={settings} isProgrammer={true} />
 
       {/* Floating WhatsApp CRM lead capture button */}
-      <WhatsAppWidget settings={settings} />
+      <WhatsAppWidget settings={settings} isProgrammer={true} />
     </main>
   );
 }

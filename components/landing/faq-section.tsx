@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
-export function FaqSection({ settings }: { settings?: any }) {
+export function FaqSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const launchPrice = settings?.launchPrice || "97";
   const regularPrice = settings?.regularPrice || "247";
 
@@ -34,6 +34,35 @@ export function FaqSection({ settings }: { settings?: any }) {
     },
   ];
 
+  const programmerFaqs = [
+    {
+      question: "Preciso dominar frameworks complexos ou backend?",
+      answer: "Não. O Método 3h foca em Prompt-to-Prod de alta performance. A IA gera o código limpo no frontend (Tailwind/TSX) e o deploy roda em serverless. Você não precisa gastar meses aprendendo backend complexo.",
+    },
+    {
+      question: "O código gerado é limpo e customizável?",
+      answer: "Sim, 100%. Diferente de builders visuais fechados (como WordPress/Wix), o Método 3h gera código nativo React/Next.js estruturado com Tailwind CSS. Você pode abrir no seu VS Code e alterar o que quiser.",
+    },
+    {
+      question: "As ferramentas realmente são grátis?",
+      answer: "Sim. Usamos os planos generosos (Free Tier) da Vercel (deploy), Cloudflare (DNS) e APIs de IA gratuitas. O único custo real opcional é o domínio, cerca de R$40 por ano.",
+    },
+    {
+      question: "Como funciona a captação de clientes para desenvolvedores?",
+      answer: "O curso tem um módulo bônus focado exatamente em prospecção de alta conversão. Você aprenderá como empacotar e vender sites por R$2.000 a R$5.000, abordando clientes locais e internacionais.",
+    },
+    {
+      question: "E se eu não me adaptar ao método?",
+      answer: "Você tem 7 dias de garantia incondicional protegida por lei. Se achar que o método não serve para agilizar seu workflow de desenvolvimento, devolvemos 100% do seu investimento.",
+    },
+    {
+      question: `Por que investir R$${launchPrice} neste treinamento?`,
+      answer: `Porque em vez de perder semanas codificando boilerplate do zero, você aprenderá a entregar projetos robustos em poucas horas. O investimento de R$${launchPrice} se paga logo no primeiro cliente ou deploy freelancer.`,
+    },
+  ];
+
+  const activeFaqs = isProgrammer ? programmerFaqs : faqs;
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -53,8 +82,17 @@ export function FaqSection({ settings }: { settings?: any }) {
   return (
     <section ref={sectionRef} id="faq" className="relative py-16 lg:py-20 bg-background text-foreground overflow-hidden">
       {/* Glow backgrounds */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] ambient-glow-blue opacity-50 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] ambient-glow-purple opacity-30 blur-[120px] pointer-events-none" />
+      {isProgrammer ? (
+        <>
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 opacity-50 blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-500/10 opacity-30 blur-[120px] pointer-events-none" />
+        </>
+      ) : (
+        <>
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] ambient-glow-blue opacity-50 blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] ambient-glow-purple opacity-30 blur-[120px] pointer-events-none" />
+        </>
+      )}
 
       <div className="relative z-10 max-w-[900px] mx-auto px-6 lg:px-12">
         {/* Header */}
@@ -67,19 +105,21 @@ export function FaqSection({ settings }: { settings?: any }) {
           <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Suas perguntas. <span className="text-muted-foreground">Respostas diretas.</span>
+            Suas perguntas. <span className={isProgrammer ? "text-orange-500" : "text-muted-foreground"}>Respostas diretas.</span>
           </h2>
         </div>
 
         {/* Accordion list */}
         <div className={`space-y-4 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-          {faqs.map((faq, idx) => {
+          {activeFaqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
                 className={`rounded-3xl glass-card overflow-hidden transition-all duration-500 ${
-                  isOpen ? "border-[#3B82F6]/30 shadow-[0_0_30px_rgba(59,130,246,0.15)]" : "hover:bg-white/[0.04]"
+                  isOpen 
+                    ? (isProgrammer ? "border-orange-500/30 shadow-[0_0_30px_rgba(249,115,22,0.15)]" : "border-[#3B82F6]/30 shadow-[0_0_30px_rgba(59,130,246,0.15)]") 
+                    : "hover:bg-white/[0.04]"
                 }`}
               >
                 <button
@@ -90,7 +130,9 @@ export function FaqSection({ settings }: { settings?: any }) {
                     {faq.question}
                   </span>
                   <span className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 transition-all duration-500 ${
-                    isOpen ? "rotate-180 bg-white/10 border-white/20 text-[#3B82F6]" : "text-muted-foreground"
+                    isOpen 
+                      ? `rotate-180 bg-white/10 border-white/20 ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}` 
+                      : "text-muted-foreground"
                   }`}>
                     <ChevronDown className="w-5 h-5 transition-transform duration-300" />
                   </span>

@@ -32,7 +32,7 @@ const socialLinks = [
   { name: "LinkedIn", href: "#" },
 ];
 
-export function FooterSection({ settings }: { settings?: any }) {
+export function FooterSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const socialInstagram = settings?.socialInstagram || "https://instagram.com/danielmarques.dino";
   const socialYoutube = settings?.socialYoutube || "https://youtube.com/c/danielmarques";
 
@@ -62,10 +62,16 @@ export function FooterSection({ settings }: { settings?: any }) {
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Upscaled%20Image%20%2810%29-UnDKstODkIENp5xqTYUEpt0Sm8tNOw.png"
           alt="Bioluminescent landscape"
           className="w-full h-full object-cover object-center"
-          style={{ filter: "hue-rotate(200deg) saturate(1.5) brightness(0.85)" }}
+          style={{ 
+            filter: isProgrammer 
+              ? "hue-rotate(320deg) saturate(2) brightness(0.7)" 
+              : "hue-rotate(200deg) saturate(1.5) brightness(0.85)" 
+          }}
         />
-        {/* Blue tint overlay */}
-        <div className="absolute inset-0 bg-[#3B82F6]/10 mix-blend-screen pointer-events-none" />
+        {/* Blue/Orange tint overlay */}
+        <div className={`absolute inset-0 mix-blend-screen pointer-events-none ${
+          isProgrammer ? "bg-orange-500/20" : "bg-[#3B82F6]/10"
+        }`} />
         {/* Gradient fade to black at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
         {/* Subtle dark vignette on sides */}
@@ -79,12 +85,15 @@ export function FooterSection({ settings }: { settings?: any }) {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand Column */}
             <div className="col-span-2">
-              <a href="/" className="inline-flex items-center gap-2 mb-6">
-                <span className="text-2xl font-display text-white">{settings?.logoText || "SITECOMIA"}</span>
+              <a href={isProgrammer ? "/programador" : "/"} className="inline-flex items-center gap-2 mb-6">
+                <img src="/images/metodo3h logo.png" alt="Método 3h" className="h-8 object-contain" />
               </a>
 
               <p className="text-white/50 leading-relaxed mb-8 max-w-xs text-sm">
-                Aprenda a criar sites profissionais com IA em apenas 3 horas. Com Daniel Marques, 30 anos de mercado.
+                {isProgrammer 
+                  ? "Aprenda a construir e monetizar aplicações web profissionais com IA em tempo recorde. Com Daniel Marques, 30 anos de mercado."
+                  : "Aprenda a criar sites profissionais com IA em apenas 3 horas. Com Daniel Marques, 30 anos de mercado."
+                }
               </p>
 
               {/* Social Links */}
@@ -130,12 +139,12 @@ export function FooterSection({ settings }: { settings?: any }) {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/30">
-            &copy; 2025 {settings?.logoText || "SITECOMIA"}. Todos os direitos reservados.
+            &copy; 2026 Método 3h. Todos os direitos reservados.
           </p>
 
           <div className="flex items-center gap-4 text-sm text-white/30">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
+              <span className={`w-2 h-2 rounded-full ${isProgrammer ? "bg-orange-500 animate-pulse" : "bg-[#3B82F6]"}`} />
               {settings?.geoCity || "São José dos Campos"}, {settings?.geoState || "SP"}
             </span>
           </div>

@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Quem Ensina",    href: "/#instrutor"    },
 ];
 
-export function Navigation({ settings }: { settings?: any }) {
+export function Navigation({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -43,7 +43,7 @@ export function Navigation({ settings }: { settings?: any }) {
       >
         <div 
           className={`flex items-center justify-between transition-all duration-500 px-6 lg:px-8 ${
-            isScrolled ? "h-14" : "h-20"
+            isScrolled ? "h-12 md:h-14" : "h-16 md:h-20"
           }`}
         >
           {/* Logo */}
@@ -51,8 +51,13 @@ export function Navigation({ settings }: { settings?: any }) {
             <img
               src="/images/metodo3h logo.png"
               alt="Método 3h"
-              className={`transition-all duration-500 ${isScrolled ? "h-10" : "h-14"}`}
+              className={`transition-all duration-500 ${isScrolled ? "h-7 md:h-10" : "h-8 md:h-12"}`}
             />
+            {isProgrammer && (
+              <span className="px-2 py-0.5 text-[8px] font-mono rounded bg-orange-500/20 border border-orange-500/30 text-orange-400 font-bold uppercase tracking-wider animate-pulse">
+                Dev
+              </span>
+            )}
           </a>
 
           {/* Desktop Navigation */}

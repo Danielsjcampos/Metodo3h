@@ -119,19 +119,19 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
-      {/* Background Matrix Rain (Falling Green Characters) */}
+      {/* Background Matrix Rain (Falling Amber Characters) */}
       <div className="absolute inset-0 z-0 opacity-40">
-        <MatrixCodeRain />
+        <MatrixCodeRain color="#F97316" />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 pointer-events-none" />
       </div>
 
-      {/* Subtle brand blue grid lines */}
+      {/* Subtle brand orange grid lines */}
       <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none opacity-20">
         {[...Array(8)].map((_, i) => (
           <div
             key={`h-${i}`}
-            className="absolute h-px bg-[#3B82F6]/10"
+            className="absolute h-px bg-[#F97316]/10"
             style={{
               top: `${12.5 * (i + 1)}%`,
               left: 0,
@@ -142,7 +142,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
         {[...Array(12)].map((_, i) => (
           <div
             key={`v-${i}`}
-            className="absolute w-px bg-[#3B82F6]/10"
+            className="absolute w-px bg-[#F97316]/10"
             style={{
               left: `${8.33 * (i + 1)}%`,
               top: 0,
@@ -162,7 +162,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
             }`}
           >
             <span className="inline-flex items-center gap-3 text-sm font-mono text-white/60">
-              <span className="w-8 h-px bg-[#3B82F6]/30" />
+              <span className="w-8 h-px bg-[#F97316]/30" />
               Lançamento · Maio 2025 · Edição Dev
             </span>
           </div>
@@ -170,7 +170,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           {/* Main headline */}
           <div className="mb-6">
             <h1 
-              className={`text-left text-[clamp(2.2rem,6.5vw,4.5rem)] font-display leading-[0.95] tracking-tight text-white transition-all duration-1000 ${
+              className={`text-left text-[clamp(2.75rem,8.5vw,4.5rem)] font-display leading-[1.05] tracking-tight text-white transition-all duration-1000 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
@@ -179,16 +179,16 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
                 <span className="relative inline-block min-w-[4ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
-                <span className="text-[#3B82F6]/40">.</span>
+                <span className="text-[#F97316]/40">.</span>
               </span>
             </h1>
           </div>
 
           {/* Subheadline */}
-          <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            O <span className="text-[#3B82F6] font-semibold">Método 3h</span> é o método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#3B82F6] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
+            O <span className="text-[#F97316] font-semibold">Método 3h</span> é o método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#F97316] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
           </p>
 
           {/* CTA */}
@@ -198,7 +198,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
             <Button
               asChild
               size="lg"
-              className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(59,130,246,0.3)] transition-all duration-300 font-bold"
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(249,115,22,0.3)] transition-all duration-300 font-bold"
             >
               <a href="#inscricao">
                 Garantir minha vaga por R${settings?.launchPrice || "97"}
@@ -218,7 +218,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="max-w-[1000px] mx-auto bg-black/85 backdrop-blur-xl border border-[#3B82F6]/20 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
+        <div className="max-w-[1000px] mx-auto bg-black/85 backdrop-blur-xl border border-[#F97316]/20 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
           {[
             { value: "1.000+", label: "deploys rápidos" },
             { value: "Full Stack", label: "com Inteligência Artificial" },
@@ -226,7 +226,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1 md:flex-1 md:text-center">
               <span className="text-2xl lg:text-3xl font-display text-white">{stat.value}</span>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#3B82F6] leading-tight">
+              <span className="text-[10px] uppercase font-mono tracking-widest text-[#F97316] leading-tight">
                 {stat.label}
               </span>
             </div>

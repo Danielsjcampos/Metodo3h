@@ -26,7 +26,7 @@ const partners = [
   },
 ];
 
-export function DevelopersSection() {
+export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -40,24 +40,39 @@ export function DevelopersSection() {
   }, []);
 
   return (
-    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-10 lg:py-14 bg-background">
+    <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-24 md:py-28 lg:py-36 bg-background">
       {/* Ambient background glow */}
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className={`absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none ${
+        isProgrammer ? "bg-orange-500/5" : "bg-blue-600/5"
+      }`} />
 
       {/* ── PARTE 1: Daniel Marques ─────────────────────────── */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-8 lg:mb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 lg:mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           
           {/* Left Column: Bio & Info */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
             <div className={`mb-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
-                <span className="w-8 h-px bg-foreground/30" />
-                Quem vai te ensinar
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mb-6">
-                30 anos de <span className="text-muted-foreground italic font-light">mercado real.</span> Não YouTube.
-              </h2>
+              {isProgrammer ? (
+                <>
+                  <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
+                    [08] MENTORIA // DANIEL MARQUES
+                  </span>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] mb-6 text-white">
+                    30 anos de <span className="text-orange-500 italic font-light">produção real.</span> Sem enrolação.
+                  </h2>
+                </>
+              ) : (
+                <>
+                  <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
+                    <span className="w-8 h-px bg-foreground/30" />
+                    Quem vai te ensinar
+                  </span>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mb-6">
+                    30 anos de <span className="text-muted-foreground italic font-light">mercado real.</span> Não YouTube.
+                  </h2>
+                </>
+              )}
             </div>
 
             <div className={`transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
@@ -68,7 +83,7 @@ export function DevelopersSection() {
                 Não sou um youtuber que aprendeu a fazer site mês passado. Sou um profissional que vive disso há três décadas — e que agora tem acesso às mesmas ferramentas de IA que nivelaram o campo para quem está começando agora.
               </p>
 
-              <blockquote className="border-l-2 border-[#3B82F6] pl-6 mb-6">
+              <blockquote className={`border-l-2 pl-6 mb-6 ${isProgrammer ? "border-orange-500" : "border-[#3B82F6]"}`}>
                 <p className="text-lg text-foreground italic leading-relaxed">
                   &ldquo;Eu faço ao vivo, sem ensaio, sem script de teleprompter. Você vê exatamente o que eu faço quando entrego para um cliente pagando.&rdquo;
                 </p>
@@ -96,20 +111,20 @@ export function DevelopersSection() {
             }`}
           >
             {/* Dino Image Container - Extremely Large and Faded at the bottom */}
-            <div className="relative w-full max-w-[550px] lg:max-w-none h-[480px] md:h-[580px] lg:h-[720px] flex items-end justify-center overflow-hidden mb-6">
+            <div className="relative w-[calc(100%+2rem)] -mx-4 sm:mx-0 sm:w-full max-w-full sm:max-w-[650px] lg:max-w-none h-[660px] sm:h-[760px] md:h-[840px] lg:h-[1050px] flex items-end justify-center overflow-hidden mb-8 md:mb-10">
               <img
                 src="/images/dino/dinosemf.png"
                 alt="Daniel Marques (Dino)"
                 className="h-full w-auto object-contain object-bottom transition-all duration-700 ease-out hover:scale-[1.03]"
                 style={{ 
                   opacity: 0.95,
-                  WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
-                  maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 95%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%)",
+                  maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%)",
                 }}
               />
               {/* Premium smooth bottom fade overlay to prevent hard crop cuts */}
-              <div className="absolute bottom-0 left-0 right-0 h-32 md:h-44 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%) pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 h-36 md:h-48 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
+              <div className={`absolute inset-0 -z-10 bg-radial-gradient(circle_at_center,${isProgrammer ? "rgba(249,115,22,0.08)" : "rgba(59,130,246,0.08)"}_0%,transparent_70%) pointer-events-none`} />
             </div>
 
             {/* Infinite Scrolling Logo Carousel underneath Dino */}
@@ -182,19 +197,25 @@ export function DevelopersSection() {
           <div className="flex items-center gap-4 mb-6">
             <span className="text-sm font-mono text-muted-foreground tracking-widest uppercase">+ Também no time</span>
             <div className="flex-1 h-px bg-foreground/10" />
-            <span className="text-[10px] font-mono text-[#3B82F6]/70 border border-[#3B82F6]/20 px-3 py-1 tracking-widest">EX-ALUNOS → SÓCIOS</span>
+            <span className={`text-[10px] font-mono border px-3 py-1 tracking-widest ${
+              isProgrammer ? "text-orange-500/70 border-orange-500/20" : "text-[#3B82F6]/70 border border-[#3B82F6]/20"
+            }`}>EX-ALUNOS → SÓCIOS</span>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {partners.map((p, i) => (
               <div
                 key={p.name}
-                className={`relative flex gap-6 p-6 lg:p-8 rounded-3xl glass-card glass-card-hover overflow-hidden transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`relative flex gap-6 p-6 lg:p-8 rounded-3xl glass-card glass-card-hover overflow-hidden transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${
+                  isProgrammer ? "hover:border-orange-500/30 hover:shadow-[0_16px_48px_-4px_rgba(249,115,22,0.2)]" : ""
+                }`}
                 style={{ transitionDelay: `${i * 150 + 500}ms` }}
               >
                 {/* Photo */}
                 <div className="shrink-0">
-                  <div className="w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-full border-2 border-[#3B82F6]/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                  <div className={`w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-full border-2 shadow-[0_0_20px_rgba(0,0,0,0.5)] ${
+                    isProgrammer ? "border-orange-500/30 shadow-orange-500/10" : "border-[#3B82F6]/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                  }`}>
                     <img
                       src={p.photo}
                       alt={p.name}
@@ -208,7 +229,7 @@ export function DevelopersSection() {
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <h3 className="text-lg font-display text-white">{p.name}</h3>
                   </div>
-                  <p className="text-xs font-mono text-[#3B82F6]/80 mb-3">{p.role}</p>
+                  <p className={`text-xs font-mono mb-3 ${isProgrammer ? "text-orange-400" : "text-[#3B82F6]/80"}`}>{p.role}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.bio}</p>
                   <div className="flex flex-wrap gap-2">
                     {p.tags.map((tag) => (
@@ -220,7 +241,9 @@ export function DevelopersSection() {
                 </div>
 
                 {/* Bottom accent */}
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#3B82F6]/30 to-transparent" />
+                <div className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent to-transparent ${
+                  isProgrammer ? "via-orange-500/30" : "via-[#3B82F6]/30"
+                }`} />
               </div>
             ))}
           </div>

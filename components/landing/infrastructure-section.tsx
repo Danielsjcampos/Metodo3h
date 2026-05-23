@@ -75,7 +75,7 @@ const modules = [
   },
 ];
 
-export function InfrastructureSection() {
+export function InfrastructureSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -93,20 +93,35 @@ export function InfrastructureSection() {
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 lg:mb-12 text-center flex flex-col items-center justify-center">
         {/* Header */}
-        <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 transition-all duration-700 justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
-          O que você vai aprender
-          <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
-        </span>
-        
-        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] mb-6 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          7 módulos. <span className="text-muted-foreground">Tudo prático.</span> Zero teoria.
-        </h2>
-        
-        <p className={`text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto transition-all duration-1000 delay-100 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          Cada aula foi desenhada para que você saia fazendo, não apenas assistindo.
-          Nenhuma aula passa de 25 minutos. Gravadas com tela real — o que eu faço no meu Mac, você faz junto comigo.
-        </p>
+        {isProgrammer ? (
+          <>
+            <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
+              [06] CRONOGRAMA // MÓDULOS DE ENTREGA
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.05] mb-6 text-white">
+              7 módulos. <span className="text-orange-500 font-bold">Stack moderno.</span> Zero boilerplate.
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-3xl mx-auto font-mono">
+              Cada aula foi desenhada para que você saia implementando e publicando, sem blá-blá-blá corporativo.
+              Aulas curtas, gravadas com tela real — o que eu digito no meu Mac, você compila no seu.
+            </p>
+          </>
+        ) : (
+          <>
+            <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
+              <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+              O que você vai aprender
+              <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+            </span>
+            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.05] mb-6 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              7 módulos. <span className="text-muted-foreground">Tudo prático.</span> Zero teoria.
+            </h2>
+            <p className={`text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto transition-all duration-1000 delay-100 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+              Cada aula foi desenhada para que você saia fazendo, não apenas assistindo.
+              Nenhuma aula passa de 25 minutos. Gravadas com tela real — o que eu faço no meu Mac, você faz junto comigo.
+            </p>
+          </>
+        )}
       </div>
 
       {/* Infinite carousel */}
@@ -121,7 +136,11 @@ export function InfrastructureSection() {
           {[...modules, ...modules].map((mod, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[260px] md:w-[290px] lg:w-[325px] aspect-[9/16] rounded-[1.8rem] overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_20px_50px_rgba(59,130,246,0.22)] border border-white/10 group cursor-pointer"
+              className={`flex-shrink-0 w-[260px] md:w-[290px] lg:w-[325px] aspect-[9/16] rounded-[1.8rem] overflow-hidden transition-all duration-500 hover:scale-[1.03] border cursor-pointer ${
+                isProgrammer 
+                  ? "border-[#F97316]/10 hover:border-[#F97316]/30 hover:shadow-[0_20px_50px_rgba(249,115,22,0.22)]" 
+                  : "border-white/10 hover:shadow-[0_20px_50px_rgba(59,130,246,0.22)]"
+              }`}
             >
               <img
                 src={mod.image}
@@ -144,7 +163,7 @@ export function InfrastructureSection() {
         ].map((stat, i) => (
           <div key={stat.label} className="flex items-baseline gap-3">
             {i > 0 && <div className="hidden sm:block w-px h-8 bg-foreground/10" />}
-            <span className="text-4xl font-display text-white">{stat.value}</span>
+            <span className={`text-4xl font-display font-bold ${isProgrammer ? "text-[#F97316]" : "text-white"}`}>{stat.value}</span>
             <span className="text-muted-foreground">{stat.label}</span>
           </div>
         ))}

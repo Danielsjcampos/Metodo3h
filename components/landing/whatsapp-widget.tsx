@@ -16,9 +16,10 @@ import { Button } from "@/components/ui/button";
 
 interface WhatsAppWidgetProps {
   settings: SiteSettings;
+  isProgrammer?: boolean;
 }
 
-export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
+export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -106,8 +107,12 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
       {/* Dynamic Lead Capture Modal */}
       <DialogContent className="sm:max-w-[440px] bg-[#060814]/75 border border-white/10 backdrop-blur-xl text-white rounded-[2rem] p-6 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
         {/* Glow decoration */}
-        <div className="absolute -top-12 -right-12 w-[180px] h-[180px] ambient-glow-blue opacity-40 blur-[50px] pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-[180px] h-[180px] ambient-glow-gold opacity-15 blur-[50px] pointer-events-none" />
+        <div className={`absolute -top-12 -right-12 w-[180px] h-[180px] opacity-40 blur-[50px] pointer-events-none ${
+          isProgrammer ? "bg-orange-500/20" : "ambient-glow-blue"
+        }`} />
+        <div className={`absolute -bottom-12 -left-12 w-[180px] h-[180px] opacity-15 blur-[50px] pointer-events-none ${
+          isProgrammer ? "bg-amber-500/20" : "ambient-glow-gold"
+        }`} />
 
         <div className="relative z-10">
           <DialogHeader className="space-y-3">
@@ -115,7 +120,7 @@ export function WhatsAppWidget({ settings }: WhatsAppWidgetProps) {
               <MessageCircle className="w-6 h-6 text-emerald-400" />
             </div>
             <DialogTitle className="text-2xl font-display font-light text-center">
-              Falar com o <span className="italic text-[#3B82F6]">Especialista</span>
+              Falar com o <span className={`italic ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>Especialista</span>
             </DialogTitle>
             <DialogDescription className="text-center text-white/60 text-xs leading-relaxed">
               Preencha seus dados rapidamente abaixo para iniciarmos seu atendimento personalizado via WhatsApp.

@@ -48,10 +48,103 @@ const notFor = [
   "Você quer desenvolver e-commerces ultra-robustos com integrações customizadas de ERPs corporativos legados.",
 ];
 
-export function SecuritySection() {
+export function SecuritySection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const defaultAudience = [
+    {
+      badge: "PERFIL 01",
+      num: "01",
+      image: "/images/o pequeno empresario.png",
+      title: "O Pequeno Empresário",
+      subtitle: "Dono de Negócio Local",
+      description: "Você tem um estabelecimento — clínica, salão, loja, escritório — e precisa digitalizar sua operação para reduzir custos e atrair clientes do Google e Maps, de forma independente e livre de mensalidades abusivas de agências.",
+      accent: "from-blue-500/10 to-cyan-500/10 hover:border-blue-500/30",
+      glow: "rgba(59,130,246,0.15)",
+      badgeColor: "bg-blue-500",
+      textColor: "group-hover:text-blue-400",
+    },
+    {
+      badge: "PERFIL 02",
+      num: "02",
+      image: "/images/free lancer potencial.png",
+      title: "O Freelancer Potencial",
+      subtitle: "Renda Extra Digital",
+      description: "Você quer construir uma nova fonte de renda e faturar alto, cobrando de R$1.500 a R$3.500 por projeto. Conecte-se a este modelo altamente lucrativo em tempo recorde sem precisar de experiência em código ou marketing digital.",
+      accent: "from-amber-500/10 to-orange-500/10 hover:border-amber-500/30",
+      glow: "rgba(245,158,11,0.15)",
+      badgeColor: "bg-amber-500",
+      textColor: "group-hover:text-amber-400",
+    },
+    {
+      badge: "PERFIL 03",
+      num: "03",
+      image: "/images/transicao de carreira.png",
+      title: "O Transição de Carreira",
+      subtitle: "Iniciante / Leigo Absoluto",
+      description: "Mesmo sendo um completo leigo em internet ou desenvolvimento, você terá acesso a um aprendizado extremamente rápido e preciso para dominar a criação de projetos com Inteligência Artificial e conquistar seu espaço no mercado.",
+      accent: "from-purple-500/10 to-pink-500/10 hover:border-purple-500/30",
+      glow: "rgba(168,85,247,0.15)",
+      badgeColor: "bg-purple-500",
+      textColor: "group-hover:text-purple-400",
+    },
+  ];
+
+  const programmerAudience = [
+    {
+      badge: "DEV WORKFLOW",
+      num: "01",
+      image: "/images/o pequeno empresario.png",
+      title: "O Dev Freelancer",
+      subtitle: "Monetização de Alta Margem",
+      description: "Você quer usar a IA para criar e entregar sites completos e portfólios premium em horas, faturando de R$1.500 a R$3.500 por projeto sem a enrolação ou custos de desenvolvimento tradicional.",
+      accent: "from-orange-500/10 to-amber-500/10 hover:border-orange-500/30",
+      glow: "rgba(249,115,22,0.15)",
+      badgeColor: "bg-orange-500",
+      textColor: "group-hover:text-orange-400",
+    },
+    {
+      badge: "SOLOPRENEUR / SAAS",
+      num: "02",
+      image: "/images/free lancer potencial.png",
+      title: "O Criador de Projetos",
+      subtitle: "MVPs & Validação Rápida",
+      description: "Você é programador ou fundador técnico e quer lançar suas próprias LPs, SaaS, MVPs ou páginas de vendas com design premium sem perder dias duelando com CSS, build pipelines ou webpack.",
+      accent: "from-orange-500/15 to-orange-600/15 hover:border-orange-500/40",
+      glow: "rgba(249,115,22,0.2)",
+      badgeColor: "bg-orange-500",
+      textColor: "group-hover:text-orange-400",
+    },
+    {
+      badge: "FULL STACK AI",
+      num: "03",
+      image: "/images/transicao de carreira.png",
+      title: "O Dev do Futuro",
+      subtitle: "Alavancagem Tecnológica",
+      description: "Você quer dominar a stack moderna de IA (Antigravity + Claude Code + Vercel + Cloudflare) para maximizar sua velocidade de entrega, diminuir custos operacionais para zero e se diferenciar do mercado.",
+      accent: "from-orange-500/10 to-yellow-500/10 hover:border-orange-500/30",
+      glow: "rgba(249,115,22,0.15)",
+      badgeColor: "bg-orange-500",
+      textColor: "group-hover:text-orange-400",
+    },
+  ];
+
+  const defaultNotFor = [
+    "Você busca atalhos fáceis, dinheiro rápido sem esforço ou fórmulas mágicas sem dedicação.",
+    "Você quer aprender programação profissional complexa, lógica pura ou desenvolvimento nativo do zero.",
+    "Você quer desenvolver e-commerces ultra-robustos com integrações customizadas de ERPs corporativos legados.",
+  ];
+
+  const programmerNotFor = [
+    "Você prefere desperdiçar seu tempo escrevendo código boilerplate inútil e configurando servidores legados complexos.",
+    "Você busca atalhos milagrosos de enriquecimento fácil sem praticar nem operar a stack.",
+    "Você não acredita em alavancagem por IA e prefere a lentidão do desenvolvimento manual repetitivo.",
+  ];
+
+  const targetAudience = isProgrammer ? programmerAudience : defaultAudience;
+  const notFor = isProgrammer ? programmerNotFor : defaultNotFor;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,31 +161,44 @@ export function SecuritySection() {
   return (
     <section ref={sectionRef} id="para-quem" className="relative py-14 md:py-18 lg:py-22 overflow-hidden bg-background">
       {/* Background ambient glows */}
-      <div className="absolute top-1/4 left-10 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className={`absolute top-1/4 left-10 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none ${
+        isProgrammer ? "bg-orange-500/5" : "bg-blue-600/5"
+      }`} />
+      <div className={`absolute bottom-1/4 right-10 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none ${
+        isProgrammer ? "bg-amber-500/5" : "bg-purple-600/5"
+      }`} />
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
         <div className="mb-10 md:mb-12 text-center flex flex-col items-center justify-center">
-          <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-          }`}>
-            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-            Para quem é este curso
-            <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-          </span>
-          
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            Projetado para quem quer <span className="text-muted-foreground italic font-light">resultados reais,</span> não diplomas.
-          </h2>
-          <p className={`mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            O método prático direto ao ponto para tirar ideias do papel, dominar ferramentas de inteligência artificial e monetizar no mercado digital.
-          </p>
+          {isProgrammer ? (
+            <>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
+                [05] PERFIL // PÚBLICO ALVO
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
+                Projetado para quem busca <span className="text-orange-500 italic font-light">alavancagem extrema,</span> não burocracia.
+              </h2>
+              <p className="mt-6 text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
+                O fluxo de trabalho prático direto ao ponto para devs, criadores e solopreneurs dominarem ferramentas de IA e multiplicarem sua capacidade de entrega.
+              </p>
+            </>
+          ) : (
+            <>
+              <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-muted-foreground uppercase mb-6 justify-center`}>
+                <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+                Para quem é este curso
+                <span className="w-8 h-[2px] bg-foreground/20 rounded-full" />
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] mt-2">
+                Projetado para quem quer <span className="text-muted-foreground italic font-light">resultados reais,</span> não diplomas.
+              </h2>
+              <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                O método prático direto ao ponto para tirar ideias do papel, dominar ferramentas de inteligência artificial e monetizar no mercado digital.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Premium Target Audience Grid */}

@@ -42,10 +42,30 @@ const tools = [
   { name: "Google Business", category: "Local SEO", description: "Posicionamento estratégico no Google Maps para atração de clientes locais.", free: true },
 ];
 
-export function IntegrationsSection() {
+export function IntegrationsSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const defaultTools = [
+    { name: "Antigravity", category: "Criação", description: "Criação ultra-veloz de sites profissionais com auxílio de Inteligência Artificial.", free: true },
+    { name: "Vercel", category: "Hospedagem", description: "Hospedagem de alto desempenho com deploy automático a cada alteração.", free: true },
+    { name: "Cloudflare", category: "DNS & Segurança", description: "Otimização de velocidade global, proteção contra ataques e CDN integrada.", free: true },
+    { name: "Registro.br", category: "Domínio", description: "Registro e gestão do seu endereço comercial .com.br oficial brasileiro.", price: "R$40/ano" },
+    { name: "Search Console", category: "Indexação", description: "Ferramenta oficial do Google para indexar e monitorar sua posição de busca.", free: true },
+    { name: "Google Business", category: "Local SEO", description: "Posicionamento estratégico no Google Maps para atração de clientes locais.", free: true },
+  ];
+
+  const programmerTools = [
+    { name: "Antigravity // AI-Compiler", category: "Criação", description: "Criação ultra-veloz com compiladores e prompts de Inteligência Artificial.", free: true },
+    { name: "Vercel // Serverless Edge", category: "Hospedagem", description: "Hospedagem global de alta performance com deploy automático via Git branch.", free: true },
+    { name: "Cloudflare // DNS & Cache", category: "DNS & Segurança", description: "DNS com latência sub-milissegundo, proteção contra DDoS e CDN integrada.", free: true },
+    { name: "Registro.br // Domínios", category: "Domínio", description: "Domínio oficial brasileiro com DNS dinâmico e custo fixo de R$40/ano.", price: "R$40/ano" },
+    { name: "Google Console // Crawl API", category: "Indexação", description: "Monitoramento automático de crawl-rate e indexação rápida via API do Google.", free: true },
+    { name: "Maps API // Local SEO", category: "Local SEO", description: "Integração orgânica no Maps para atração e conversão passiva imediata.", free: true },
+  ];
+
+  const tools = isProgrammer ? programmerTools : defaultTools;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,30 +80,50 @@ export function IntegrationsSection() {
     <section id="ferramentas" ref={sectionRef} className="relative py-14 md:py-18 lg:py-22 overflow-hidden bg-background">
       
       {/* Ambient background glows */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#3B82F6]/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className={`absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full blur-[130px] pointer-events-none ${
+        isProgrammer ? "bg-orange-500/5" : "bg-blue-600/5"
+      }`} />
+      <div className={`absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full blur-[130px] pointer-events-none ${
+        isProgrammer ? "bg-amber-500/5" : "bg-[#3B82F6]/5"
+      }`} />
 
       {/* Header */}
       <div className="relative z-10 text-center mb-10 md:mb-12 px-6">
-        <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-        }`}>
-          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-          Stack do curso
-          <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
-        </span>
+        {isProgrammer ? (
+          <>
+            <span className="inline-flex items-center gap-3 text-xs font-mono text-orange-500 mb-6 bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full uppercase tracking-widest">
+              [07] STACK // FERRAMENTAS PROFISSIONAIS
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-mono tracking-tight leading-[1.1] text-white">
+              Stack de IA moderna. <span className="text-orange-500 font-bold">Com custo operacional zero.</span>
+            </h2>
+            <p className="mt-6 text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto font-mono">
+              Cada ferramenta da stack foi otimizada para automação, deploy instantâneo na borda (edge) e latência ultrabaixa para seus projetos e LPs de conversão.
+            </p>
+          </>
+        ) : (
+          <>
+            <span className={`inline-flex items-center gap-3 text-xs font-mono tracking-widest text-[#3B82F6] uppercase mb-6 transition-all duration-700 justify-center ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+            }`}>
+              <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+              Stack do curso
+              <span className="w-8 h-[2px] bg-[#3B82F6]/60 rounded-full" />
+            </span>
 
-        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}>
-          Ferramentas profissionais. <span className="text-muted-foreground italic font-light">Com custo zero.</span>
-        </h2>
+            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display tracking-tight leading-[1.1] transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}>
+              Ferramentas profissionais. <span className="text-muted-foreground italic font-light">Com custo zero.</span>
+            </h2>
 
-        <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-200 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}>
-          Cada ferramenta foi escolhida minuciosamente com base no que eu utilizo diariamente para atender clientes pagantes reais. Soluções de elite para você performar no mercado.
-        </p>
+            <p className={`mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-200 ${
+              isVisible ? "opacity-100" : "opacity-0"
+            }`}>
+              Cada ferramenta foi escolhida minuciosamente com base no que eu utilizo diariamente para atender clientes pagantes reais. Soluções de elite para você performar no mercado.
+            </p>
+          </>
+        )}
       </div>
 
       {/* Full-width visual connection graph with smooth gradient blend */}
@@ -99,7 +139,7 @@ export function IntegrationsSection() {
           alt=""
           aria-hidden="true"
           className="w-full h-auto object-cover opacity-80"
-          style={{ filter: "hue-rotate(180deg) saturate(1.4) brightness(0.95)" }}
+          style={{ filter: isProgrammer ? "hue-rotate(30deg) saturate(1.4) brightness(0.95)" : "hue-rotate(180deg) saturate(1.4) brightness(0.95)" }}
         />
       </div>
 
@@ -113,7 +153,9 @@ export function IntegrationsSection() {
                 key={tool.name}
                 className={`group relative overflow-hidden rounded-[2rem] glass-card transition-all duration-500 cursor-pointer flex flex-col justify-between ${
                   isHovered
-                    ? "border-white/15 scale-[1.02] shadow-[0_20px_50px_rgba(59,130,246,0.12)]"
+                    ? isProgrammer 
+                      ? "border-white/15 scale-[1.02] shadow-[0_20px_50px_rgba(249,115,22,0.12)]"
+                      : "border-white/15 scale-[1.02] shadow-[0_20px_50px_rgba(59,130,246,0.12)]"
                     : "border-white/5 hover:border-white/10"
                 } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
                 style={{ transitionDelay: `${index * 80}ms` }}
@@ -125,8 +167,10 @@ export function IntegrationsSection() {
                   <ToolVisual src={toolImages[index]} />
                   
                   {/* Floating badge for category */}
-                  <div className="absolute top-6 right-6 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg transition-colors group-hover:border-blue-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                  <div className={`absolute top-6 right-6 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg transition-colors ${
+                    isProgrammer ? "group-hover:border-orange-500/30" : "group-hover:border-blue-500/30"
+                  }`}>
+                    <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isProgrammer ? "bg-orange-500" : "bg-blue-500"}`} />
                     <span className="text-[9px] font-mono font-semibold tracking-wider text-white/90 uppercase">{tool.category}</span>
                   </div>
                 </div>
@@ -134,10 +178,14 @@ export function IntegrationsSection() {
                 {/* Content */}
                 <div className="p-7 relative z-10 flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="text-xl font-display font-medium text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                    <h3 className={`text-xl font-medium mb-2 transition-colors duration-300 ${
+                      isProgrammer 
+                        ? "font-mono text-white group-hover:text-orange-400" 
+                        : "font-display text-white group-hover:text-blue-400"
+                    }`}>
                       {tool.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    <p className={`text-sm text-muted-foreground leading-relaxed mb-6 ${isProgrammer ? "font-mono" : ""}`}>
                       {tool.description}
                     </p>
                   </div>
@@ -146,10 +194,14 @@ export function IntegrationsSection() {
                     <div className="flex items-center gap-2">
                       {tool.free ? (
                         <>
-                          <div className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#3B82F6]">
+                          <div className={`flex items-center justify-center w-5 h-5 rounded-full border ${
+                            isProgrammer 
+                              ? "bg-orange-500/10 border-orange-500/20 text-orange-400" 
+                              : "bg-blue-500/10 border-blue-500/20 text-[#3B82F6]"
+                          }`}>
                             <Check className="w-3 h-3" />
                           </div>
-                          <span className="text-xs text-[#3B82F6] font-mono tracking-wider font-semibold uppercase">Licença Gratuita</span>
+                          <span className={`text-xs font-mono tracking-wider font-semibold uppercase ${isProgrammer ? "text-orange-400" : "text-[#3B82F6]"}`}>Licença Gratuita</span>
                         </>
                       ) : (
                         <span className="text-xs text-muted-foreground font-mono tracking-wider uppercase">Custo: <strong className="text-white font-medium">{tool.price}</strong></span>
@@ -159,7 +211,9 @@ export function IntegrationsSection() {
                 </div>
 
                 {/* Ambient glow highlight line at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500/0 via-blue-500/40 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500/0 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                  isProgrammer ? "via-orange-500/40" : "via-blue-500/40"
+                }`} />
               </div>
             );
           })}
@@ -172,7 +226,9 @@ export function IntegrationsSection() {
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-muted-foreground">
             {["Sem mensalidades ocultas", "Sem necessidade de código", "Setup completo em 20 min"].map((t) => (
               <span key={t} className="flex items-center gap-2 font-medium">
-                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#3B82F6]">
+                <div className={`flex items-center justify-center w-5 h-5 rounded-full border ${
+                  isProgrammer ? "bg-orange-500/10 border-orange-500/20 text-orange-400" : "bg-blue-500/10 border-blue-500/20 text-[#3B82F6]"
+                }`}>
                   <Check className="w-3.5 h-3.5" />
                 </div>
                 {t}
@@ -182,7 +238,7 @@ export function IntegrationsSection() {
           
           <div className="shrink-0 text-center lg:text-right">
             <p className="text-sm text-muted-foreground">
-              Investimento total em ferramentas: <span className="text-[#3B82F6] font-bold font-mono text-base ml-1">~R$40/ano</span> <span className="text-xs opacity-70">(apenas domínio .com.br)</span>
+              Investimento total em ferramentas: <span className={`font-bold font-mono text-base ml-1 ${isProgrammer ? "text-orange-400" : "text-[#3B82F6]"}`}>~R$40/ano</span> <span className="text-xs opacity-70">(apenas domínio .com.br)</span>
             </p>
           </div>
         </div>
