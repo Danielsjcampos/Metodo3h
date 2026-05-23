@@ -8,8 +8,8 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
-    title: `Termos de Uso - ${settings.logoText || "Método 3 Horas"}`,
-    description: "Entenda os termos de uso, licença de código e regras da nossa área de membros do Método 3 Horas.",
+    title: `Termos de Uso - ${settings.logoText || "Método 3h"}`,
+    description: "Entenda os termos de uso, licença de código e regras da nossa área de membros do Método 3h.",
     icons: {
       icon: settings.seoFavicon || "/favicon.ico",
     },
@@ -36,7 +36,7 @@ export default async function TermsPage() {
           Termos de <span className="italic text-[#3B82F6]">Uso</span>
         </h1>
         <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Por favor, leia atentamente as diretrizes abaixo para entender suas permissões, responsabilidades e direitos ao se tornar aluno do Método 3 Horas.
+          Por favor, leia atentamente as diretrizes abaixo para entender suas permissões, responsabilidades e direitos ao se tornar aluno do Método 3h.
         </p>
       </div>
 
@@ -79,7 +79,7 @@ export default async function TermsPage() {
             </div>
             <div className="pl-11 space-y-3 text-white/75 text-sm md:text-base leading-relaxed">
               <p>
-                Toda a propriedade intelectual dos códigos fornecidos, vídeos explicativos, artes gráficas e templates é propriedade exclusiva do Método 3 Horas. Ao se tornar aluno, concedemos a você uma licença de uso limitada:
+                Toda a propriedade intelectual dos códigos fornecidos, vídeos explicativos, artes gráficas e templates é propriedade exclusiva do Método 3h. Ao se tornar aluno, concedemos a você uma licença de uso limitada:
               </p>
               <ul className="list-disc pl-5 space-y-2 text-[#3B82F6]">
                 <li className="text-white/60">
@@ -102,7 +102,7 @@ export default async function TermsPage() {
             </div>
             <div className="pl-11 space-y-3 text-white/75 text-sm md:text-base leading-relaxed">
               <p>
-                O Método 3 Horas ensina técnicas profissionais modernas utilizando as melhores práticas do mercado de desenvolvimento web acelerado por inteligência artificial. Contudo:
+                O Método 3h ensina técnicas profissionais modernas utilizando as melhores práticas do mercado de desenvolvimento web acelerado por inteligência artificial. Contudo:
               </p>
               <ul className="list-disc pl-5 space-y-2 text-white/60">
                 <li>Não garantimos ganhos financeiros específicos, resultados comerciais ou fechamento automático de contratos com clientes, pois o sucesso profissional depende integralmente da aplicação prática e dedicação individual de cada aluno.</li>

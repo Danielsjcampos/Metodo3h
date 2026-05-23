@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
-    title: `Política de Reembolso e Garantia - ${settings.logoText || "Método 3 Horas"}`,
+    title: `Política de Reembolso e Garantia - ${settings.logoText || "Método 3h"}`,
     description: "Conheça as diretrizes da nossa garantia incondicional de 7 dias e saiba como solicitar seu reembolso instantâneo.",
     icons: {
       icon: settings.seoFavicon || "/favicon.ico",
@@ -37,7 +37,7 @@ export default async function RefundPage() {
           Garantia e <span className="italic text-[#3B82F6]">Reembolso</span>
         </h1>
         <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Temos total confiança na qualidade e velocidade de entrega do Método 3 Horas. Por isso, seu risco é absolutamente zero.
+          Temos total confiança na qualidade e velocidade de entrega do Método 3h. Por isso, seu risco é absolutamente zero.
         </p>
       </div>
 

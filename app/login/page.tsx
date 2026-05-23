@@ -193,13 +193,13 @@ export default function LoginPage() {
                     Entrar como Aluno
                   </span>
                   <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    aluno@metodo3horas.com
+                    aluno@metodo3h.com.br
                   </span>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => handleQuickLogin("admin@metodo3horas.com", "admin123")}
+                  onClick={() => handleQuickLogin("admin@metodo3h.com.br", "admin123")}
                   disabled={isSubmitting}
                   className="flex flex-col items-start text-left bg-white/[0.01] hover:bg-white/[0.05] border border-white/5 hover:border-[#3B82F6]/20 p-3 rounded-xl transition-all duration-300 group/btn cursor-pointer disabled:opacity-50"
                 >
@@ -207,7 +207,7 @@ export default function LoginPage() {
                     Entrar como Admin
                   </span>
                   <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    admin@metodo3horas.com
+                    admin@metodo3h.com.br
                   </span>
                 </button>
               </div>
@@ -217,7 +217,7 @@ export default function LoginPage() {
 
         {/* Footer info link */}
         <p className="text-center text-xs text-muted-foreground/40 mt-8">
-          Método 3 Horas · Área Protegida por Criptografia SSL
+          Método 3h · Área Protegida por Criptografia SSL
         </p>
       </div>
     </main>

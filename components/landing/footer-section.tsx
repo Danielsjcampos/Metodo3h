@@ -42,7 +42,7 @@ export function FooterSection({ settings }: { settings?: any }) {
   ];
 
   const whatsappNumber = settings?.whatsappNumber || "5512999999999";
-  const whatsappMessage = settings?.whatsappMessage || "Olá! Gostaria de saber mais sobre o Método 3 Horas.";
+  const whatsappMessage = settings?.whatsappMessage || "Olá! Gostaria de saber mais sobre o Método 3h.";
   const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   const dynamicFooterLinks = {

@@ -115,8 +115,8 @@ export async function initDatabase() {
       console.log("Seeding starting database settings...");
       const defaultSettings = [
         ["logo_text", "METODO3HORAS"],
-        ["seo_title", "Método 3 Horas - Seu site profissional com IA em 3 horas"],
-        ["seo_description", "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3 Horas."],
+        ["seo_title", "Método 3h - Seu site profissional com IA em 3 horas"],
+        ["seo_description", "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h."],
         ["seo_favicon", "/favicon.ico"],
         ["geo_city", "São José dos Campos"],
         ["geo_state", "SP"],
@@ -124,7 +124,7 @@ export async function initDatabase() {
         ["social_youtube", "https://youtube.com/c/danielmarques"],
         ["whatsapp_enabled", "false"],
         ["whatsapp_number", "5512999999999"],
-        ["whatsapp_message", "Olá! Gostaria de saber mais sobre o Método 3 Horas."],
+        ["whatsapp_message", "Olá! Gostaria de saber mais sobre o Método 3h."],
         ["launch_price", "97"],
         ["regular_price", "247"]
       ];
@@ -174,7 +174,7 @@ export async function initDatabase() {
         `INSERT INTO courses (id, title, description) VALUES ($1, $2, $3)`,
         [
           "c1", 
-          "Método 3 Horas Masterclass", 
+          "Método 3h Masterclass", 
           "Aprenda a colocar seu site ou o de seus clientes no ar em tempo recorde utilizando Inteligência Artificial e ferramentas profissionais sem pagar por hospedagem cara."
         ]
       );
@@ -195,7 +195,7 @@ export async function initDatabase() {
 
       // Seed Lessons
       const lessonsSeed = [
-        ["le1", "m1", "1.1 Introdução ao Método 3 Horas", "12:45", "https://www.w3schools.com/html/mov_bbb.mp4", 1],
+        ["le1", "m1", "1.1 Introdução ao Método 3h", "12:45", "https://www.w3schools.com/html/mov_bbb.mp4", 1],
         ["le2", "m1", "1.2 Configurando as ferramentas gratuitas", "18:20", "https://www.w3schools.com/html/movie.mp4", 2],
         ["le3", "m1", "1.3 Entendendo o poder do Low-Code + IA", "15:10", "https://www.w3schools.com/html/mov_bbb.mp4", 3],
         
@@ -220,7 +220,7 @@ export async function initDatabase() {
         [
           "n1", 
           "🔥 Lançamento Oficial da Turma 1!", 
-          "Sejam bem-vindos ao Método 3 Horas! O portal oficial está 100% funcional. Preparem-se para as aulas dinâmicas e o suporte individual na nossa comunidade secreta. Nossa primeira live de mentoria será nesta quinta-feira às 20:00!", 
+          "Sejam bem-vindos ao Método 3h! O portal oficial está 100% funcional. Preparem-se para as aulas dinâmicas e o suporte individual na nossa comunidade secreta. Nossa primeira live de mentoria será nesta quinta-feira às 20:00!", 
           "Geral", 
           true, 
           new Date().toLocaleDateString("pt-BR")

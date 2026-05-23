@@ -19,7 +19,7 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = "Método 3 Horas (Edição Programador) - Crie Sites com IA";
+  const title = "Método 3h (Edição Programador) - Crie Sites com IA";
   const description = "Aprenda a criar sites profissionais com IA em apenas 3 horas. Edição premium com foco em programadores e entusiastas de tecnologia com Matrix Code Rain.";
   return {
     title: title,
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: description,
       type: "website",
       url: "https://metodo3horas.com.br/programador",
-      siteName: "Método 3 Horas",
+      siteName: "Método 3h",
     },
   };
 }

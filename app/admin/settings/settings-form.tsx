@@ -120,7 +120,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 onChange={handleInputChange}
                 required
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
-                placeholder="Ex: Método 3 Horas - Seu site no ar hoje"
+                placeholder="Ex: Método 3h - Seu site no ar hoje"
               />
             </div>
             

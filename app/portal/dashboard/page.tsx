@@ -76,7 +76,7 @@ export default function StudentDashboard() {
             <span className="text-muted-foreground">começa aqui.</span>
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Bem-vindo à sua área de membros exclusiva. Aqui você tem acesso ao curso Método 3 Horas completo, ferramentas, scripts de IA e materiais complementares prontos para download.
+            Bem-vindo à sua área de membros exclusiva. Aqui você tem acesso ao curso Método 3h completo, ferramentas, scripts de IA e materiais complementares prontos para download.
           </p>
         </div>
 

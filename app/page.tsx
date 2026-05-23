@@ -19,8 +19,8 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = settings.seoTitle || "Método 3 Horas - Seu site profissional com IA em 3 horas";
-  const description = settings.seoDescription || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3 Horas.";
+  const title = settings.seoTitle || "Método 3h - Seu site profissional com IA em 3 horas";
+  const description = settings.seoDescription || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h.";
   return {
     title: title,
     description: description,
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: description,
       type: "website",
       url: "https://metodo3horas.com.br",
-      siteName: "Método 3 Horas",
+      siteName: "Método 3h",
     },
   };
 }

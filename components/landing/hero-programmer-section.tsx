@@ -188,7 +188,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           <p className={`text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            O <span className="text-[#3B82F6] font-semibold">Método 3 Horas</span> é o método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#3B82F6] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
+            O <span className="text-[#3B82F6] font-semibold">Método 3h</span> é o método definitivo para quem quer criar sites profissionais com a velocidade da Inteligência Artificial. Domine deploys e automações sem complicação. Seja para <span className="text-[#3B82F6] font-semibold">faturar alto como freelancer</span> ou criar sua própria infraestrutura web de custo zero.
           </p>
 
           {/* CTA */}
