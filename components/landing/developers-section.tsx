@@ -1,6 +1,29 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { Player } from "@remotion/player";
+import { PerspectiveMarquee, PerspectiveMarqueeItem } from "../ui/remotion-perspective-marquee";
+
+function PerspectiveMarqueeScene({ isProgrammer }: { isProgrammer: boolean }) {
+  const items: PerspectiveMarqueeItem[] = [
+    { type: "image", src: "/images/antigravity logo.webp", alt: "Antigravity", heightClass: "h-10 md:h-12" },
+    { type: "image", src: "/images/Vercel_logo_2025.svg", alt: "Vercel", heightClass: "h-7 md:h-8 invert" },
+    { type: "image", src: "/images/claudecode-color.png", alt: "Cloud Code", heightClass: "h-9 md:h-10" },
+    { type: "image", src: "/images/google-search-console-icon.webp", alt: "Google Search Console", heightClass: "h-9 md:h-10" },
+  ];
+  
+  return (
+    <PerspectiveMarquee
+      items={items}
+      rotateY={-28}
+      rotateX={8}
+      perspective={1200}
+      pixelsPerFrame={2}
+      background="transparent"
+      fadeColor="#000000"
+    />
+  );
+}
 
 const dinoFeatures = [
   { title: "1.000+ sites entregues", description: "Em 30 anos de mercado real, não apenas teoria." },
@@ -128,62 +151,21 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
             </div>
 
             {/* Infinite Scrolling Logo Carousel underneath Dino */}
-            <div className="w-full max-w-[500px] lg:max-w-none mt-2 overflow-hidden relative pointer-events-auto">
-              {/* Fade gradient borders on the sides for a premium look */}
-              <div 
-                className="flex w-full select-none overflow-hidden"
-                style={{
-                  WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
-                  maskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
-                }}
-              >
-                {/* First Marquee flex element */}
-                <div className="flex shrink-0 min-w-full justify-around items-center gap-10 py-4 marquee">
-                  <img
-                    src="/images/antigravity logo.webp"
-                    alt="Antigravity"
-                    className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                  <img
-                    src="/images/Vercel_logo_2025.svg"
-                    alt="Vercel"
-                    className="h-7 md:h-8 w-auto object-contain transition-transform duration-300 hover:scale-105 invert"
-                  />
-                  <img
-                    src="/images/claudecode-color.png"
-                    alt="Cloud Code"
-                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                  <img
-                    src="/images/google-search-console-icon.webp"
-                    alt="Google Search Console"
-                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                {/* Duplicate Marquee flex element for seamless scrolling loop */}
-                <div className="flex shrink-0 min-w-full justify-around items-center gap-10 py-4 marquee" aria-hidden="true">
-                  <img
-                    src="/images/antigravity logo.webp"
-                    alt="Antigravity"
-                    className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                  <img
-                    src="/images/Vercel_logo_2025.svg"
-                    alt="Vercel"
-                    className="h-7 md:h-8 w-auto object-contain transition-transform duration-300 hover:scale-105 invert"
-                  />
-                  <img
-                    src="/images/claudecode-color.png"
-                    alt="Cloud Code"
-                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                  <img
-                    src="/images/google-search-console-icon.webp"
-                    alt="Google Search Console"
-                    className="h-9 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-              </div>
+            <div className="w-full h-32 mt-2 overflow-hidden relative pointer-events-auto flex items-center justify-center">
+              <Player
+                component={PerspectiveMarqueeScene}
+                inputProps={{ isProgrammer }}
+                durationInFrames={240}
+                fps={30}
+                compositionWidth={1280}
+                compositionHeight={720}
+                style={{ width: "100%", height: "100%" }}
+                controls={false}
+                autoPlay
+                loop
+                clickToPlay={false}
+                acknowledgeRemotionLicense={true}
+              />
             </div>
           </div>
 
