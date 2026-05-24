@@ -4,7 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-const words = ["hoje", "agora", "grátis", "com IA"];
+const words = [
+  "sites de R$ 3.000",
+  "sistemas em minutos",
+  "o superpoder da IA",
+  "liberdade sem programar"
+];
 
 function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   const letters = word.split("");
@@ -174,7 +179,6 @@ export function HeroSection({ settings }: { settings?: any }) {
               Lançamento · Maio 2025 · 50 vagas
             </span>
           </div>
-          
           {/* Main headline */}
           <div className="mb-6">
             <h1 
@@ -182,9 +186,10 @@ export function HeroSection({ settings }: { settings?: any }) {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <span className="block">Seu site no ar</span>
-              <span className="block">
-                <span className="relative inline-block min-w-[3ch]">
+              <span className="block">Destrave o segredo para criar</span>
+              <span className="block text-white/50">
+                e faturar com{" "}
+                <span className="relative inline-block text-white min-w-[3ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
                 <span className="text-white/40">.</span>
@@ -196,7 +201,7 @@ export function HeroSection({ settings }: { settings?: any }) {
           <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            O <span className="text-white font-semibold">Método 3h</span> é o método definitivo para quem <span className="text-white">não sabe nada</span> de programação ou marketing digital. Aprenda de forma rápida, precisa e eficiente a colocar seu site no ar. Seja para <span className="text-white">faturar de R$ 1.500 a R$ 3.500 vendendo sites</span>, ou para <span className="text-white">digitalizar sua própria operação</span> reduzindo custos com agências.
+            O <span className="text-white font-semibold">Método 3h</span> é o método definitivo para você criar <span className="text-white font-semibold">qualquer estrutura digital em minutos</span> usando Inteligência Artificial. Conquiste autonomia total para o seu negócio ou fature alto prestando esse serviço premium — <span className="text-white font-semibold">mesmo sem saber uma única linha de código.</span>
           </p>
 
           {/* CTA */}
@@ -229,7 +234,7 @@ export function HeroSection({ settings }: { settings?: any }) {
         <div className="max-w-[1000px] mx-auto bg-black/60 backdrop-blur-md border border-white/10 rounded-3xl p-6 px-10 shadow-2xl flex items-center justify-between gap-6 md:gap-12 flex-wrap">
           {[
             { value: "1.000+", label: "sites entregues" },
-            { value: "30 anos", label: "no mercado" },
+            { value: "100% Prático", label: "método comprovado" },
             { value: "R$0", label: "custo de hospedagem" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1 md:flex-1 md:text-center">

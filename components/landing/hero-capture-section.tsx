@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 
-const words = ["hoje", "grátis", "com IA", "sem código"];
+const words = [
+  "sites de R$ 3.000",
+  "sistemas em minutos",
+  "o superpoder da IA",
+  "liberdade sem programar"
+];
 
 function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   const letters = word.split("");
@@ -234,9 +239,10 @@ export function HeroCaptureSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <span className="block">Seu site profissional</span>
-              <span className="block">
-                <span className="relative inline-block min-w-[3ch]">
+              <span className="block">Destrave o segredo para criar</span>
+              <span className="block text-white/50">
+                e faturar com{" "}
+                <span className="relative inline-block text-white min-w-[3ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
                 <span className="text-white/40">.</span>
@@ -248,15 +254,15 @@ export function HeroCaptureSection() {
           <p className={`text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mb-6 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            Aprenda a colocar sua estrutura profissional no ar <span className="text-white font-medium">do absoluto zero e com custo zero de hospedagem</span> usando Inteligência Artificial. Descubra o método definitivo projetado tanto para empresários conquistarem autonomia digital, quanto para quem quer ter faturamentos extras prestando esse serviço.
+            Descubra os bastidores da metodologia que permite colocar estruturas profissionais no ar em tempo recorde usando Inteligência Artificial. Aprenda a faturar de R$ 1.500 a R$ 3.500 por projeto, <span className="text-white font-medium">sem precisar programar e com custo zero de hospedagem</span>.
           </p>
 
           {/* Features checkmarks */}
           <div className={`space-y-3 mb-8 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100" : "opacity-0"}`}>
             {[
-              "Autonomia Total: Mude imagens ou textos sem depender de agência.",
-              "Renda Rápida: Descubra como criar e vender sites de R$1.500 a R$3.500.",
-              "Sem Programação: Qualquer leigo constrói layouts premium com a IA."
+              "Ganhos Acelerados: Crie e entregue sites profissionais cobrando de R$ 1.500 a R$ 3.500 por projeto.",
+              "Custo Operacional Zero: Aprenda a hospedar todos os seus projetos de graça com velocidade máxima.",
+              "Sem Barreira Técnica: Descubra o atalho para construir qualquer layout premium sem digitar código."
             ].map((text, idx) => (
               <div key={idx} className="flex items-center gap-3">
                 <svg className="w-5 h-5 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
