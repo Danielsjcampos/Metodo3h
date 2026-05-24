@@ -2,7 +2,16 @@ import { Navigation } from "@/components/landing/navigation";
 import { HeroCaptureSection } from "@/components/landing/hero-capture-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
+import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
+import { VslSection } from "@/components/landing/vsl-section";
+import { InfrastructureSection } from "@/components/landing/infrastructure-section";
+import { IntegrationsSection } from "@/components/landing/integrations-section";
+import { SecuritySection } from "@/components/landing/security-section";
+import { TestimonialsSection } from "@/components/landing/testimonials-section";
+import { FaqSection } from "@/components/landing/faq-section";
+import { PricingSection } from "@/components/landing/pricing-section";
+import { CtaSection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
@@ -41,22 +50,51 @@ export default async function Home() {
     >
       <Navigation settings={settings} />
 
-      {/* 1. Pre-Launch Waitlist Hero (Title rotation + Email/Name Capture Form) */}
-      <HeroCaptureSection />
+      {/* 1. Pre-Launch Waitlist Hero (Title rotation + Email/Name/WhatsApp Capture Form) */}
+      <div id="inscricao">
+        <HeroCaptureSection />
+      </div>
 
-      {/* 2. DOR & AGITAÇÃO: A realidade do mercado tradicional e os 3 ganchos dos Avatares */}
+      {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
+      <VslSection />
+
+      {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection />
 
-      {/* 3. A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
+      {/* 4. SOLUÇÃO / A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
       <HowItWorksSection />
 
-      {/* 4. LIDERANÇA / CREDIBILIDADE: Quem é o mentor (Daniel) e os co-fundadores (Vinicius e Gabriel) */}
+      {/* 5. ALINHAMENTO & EGO FEEDING: Mostra a quem pertence o ecossistema (Freelancer, Negócio Local, etc.) */}
+      <SecuritySection />
+
+      {/* 6. A JORNADA: Detalhamento dos 7 módulos práticos do curso */}
+      <InfrastructureSection />
+
+      {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
+      <IntegrationsSection />
+
+      {/* 8. LIDERANÇA / CREDIBILIDADE: Quem vai te ensinar (Dino, Vinicius e Gabriel com fotos) */}
       <DevelopersSection showPartners={true} />
 
-      {/* 5. Footer */}
+      {/* 9. Quote: O que eu ensino aqui */}
+      <MetricsSection />
+
+      {/* 10. Depoimentos reais */}
+      <TestimonialsSection />
+
+      {/* 11. Bônus que valem mais que o curso (Oferta e valor empilhado) */}
+      <PricingSection settings={settings} />
+
+      {/* 12. FAQ: Suas perguntas (Quebra de objeções após o preço) */}
+      <FaqSection settings={settings} />
+
+      {/* 13. CTA: Garanta sua vaga */}
+      <CtaSection settings={settings} />
+
+      {/* Footer */}
       <FooterSection settings={settings} />
 
-      {/* 6. Floating WhatsApp CRM lead capture button */}
+      {/* Floating WhatsApp CRM lead capture button */}
       <WhatsAppWidget settings={settings} />
     </main>
   );

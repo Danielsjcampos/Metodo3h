@@ -71,8 +71,8 @@ export default async function MatriculaPage() {
       {/* Stack do curso: Ferramentas profissionais */}
       <IntegrationsSection />
 
-      {/* Quem vai te ensinar: Daniel Marques */}
-      <DevelopersSection />
+      {/* Quem vai te ensinar: Daniel Marques, Vinicius e Gabriel */}
+      <DevelopersSection showPartners={true} />
 
       {/* Quote: O que eu ensino aqui */}
       <MetricsSection />

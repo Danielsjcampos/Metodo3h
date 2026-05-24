@@ -57,6 +57,7 @@ export function DevelopersSection({
               {
                 name: "Daniel Marques (Dino)",
                 role: "Fundador & Instrutor Principal",
+                image: "/images/dino/dino3.jpg",
                 highlights: ["30+ anos de mercado", "1.000+ sites entregues"],
                 bio: "Veterano do mercado digital com três décadas de experiência construindo SaaS, sistemas empresariais complexos e automações avançadas. Ensina a essência da lógica e a infraestrutura cirúrgica.",
                 color: "border-blue-500/20 text-blue-400",
@@ -69,6 +70,7 @@ export function DevelopersSection({
               {
                 name: "Vinicius Saldanha",
                 role: "Co-fundador & Diretor de Tecnologia",
+                image: "/images/Saldanha.jpeg",
                 highlights: ["Especialista em IA e UX", "Desenvolvimento Premium"],
                 bio: "Especialista em engenharia de prompt, layouts de alto padrão visual com efeito de vidro (Glassmorphism) e performance otimizada de SEO. Garante que seu aprendizado use as melhores IAs do mundo.",
                 color: "border-emerald-500/20 text-emerald-400",
@@ -81,6 +83,7 @@ export function DevelopersSection({
               {
                 name: "Gabriel",
                 role: "Co-fundador & Diretor de Growth",
+                image: "/images/gabriel.jpeg",
                 highlights: ["Funis de Alta Conversão", "Estratégia de Vendas"],
                 bio: "Estrategista de marketing de atração e funis automatizados de conversão de tráfego. Ensina você a comercializar seus sites para obter recorrência e fechar contratos comerciais lucrativos.",
                 color: "border-purple-500/20 text-purple-400",
@@ -94,25 +97,35 @@ export function DevelopersSection({
               <div
                 key={p.name}
                 className={cn(
-                  "relative rounded-3xl glass-card glass-card-hover p-8 md:p-10 flex flex-col justify-between transition-all duration-700",
+                  "relative rounded-3xl glass-card glass-card-hover p-6 md:p-8 flex flex-col justify-between transition-all duration-700",
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
                 )}
                 style={{ transitionDelay: `${i * 120}ms` }}
               >
                 <div>
+                  {/* Photo container with zoom on hover */}
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-neutral-900 border border-white/5 shadow-inner">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+
                   {/* Icon & Title */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={cn("w-12 h-12 rounded-2xl bg-white/5 border flex items-center justify-center", p.color.split(" ")[0])}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={cn("w-10 h-10 rounded-xl bg-white/5 border flex items-center justify-center", p.color.split(" ")[0])}>
                       {p.icon}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white leading-tight">{p.name}</h3>
-                      <p className="text-[10px] text-white/50 font-medium uppercase tracking-wider mt-1">{p.role}</p>
+                      <h3 className="text-base font-semibold text-white leading-tight">{p.name}</h3>
+                      <p className="text-[9px] text-white/50 font-medium uppercase tracking-wider mt-1">{p.role}</p>
                     </div>
                   </div>
 
                   {/* Bio */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6">
                     {p.bio}
                   </p>
                 </div>
