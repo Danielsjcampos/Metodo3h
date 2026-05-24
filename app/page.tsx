@@ -5,7 +5,6 @@ import { FeaturesSection } from "@/components/landing/features-section";
 import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
 import { VslSection } from "@/components/landing/vsl-section";
-import { InfrastructureSection } from "@/components/landing/infrastructure-section";
 import { IntegrationsSection } from "@/components/landing/integrations-section";
 import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
@@ -60,8 +59,7 @@ export default async function Home() {
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection />
 
-      {/* 4. A JORNADA: Detalhamento dos 8 módulos práticos do curso */}
-      <InfrastructureSection />
+
 
       {/* 5. ALINHAMENTO & EGO FEEDING: Mostra a quem pertence o ecossistema (Freelancer, Negócio Local, etc.) */}
       <SecuritySection />
