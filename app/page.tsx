@@ -9,8 +9,8 @@ import { IntegrationsSection } from "@/components/landing/integrations-section";
 import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { FaqSection } from "@/components/landing/faq-section";
-import { PricingSection } from "@/components/landing/pricing-section";
 import { FooterSection } from "@/components/landing/footer-section";
+
 import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
 import type { Metadata } from "next";
@@ -69,8 +69,8 @@ export default async function Home() {
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
       <IntegrationsSection />
 
-      {/* 8. LIDERANÇA / CREDIBILIDADE: Quem vai te ensinar (Dino, Vinicius e Gabriel com fotos) */}
-      <DevelopersSection showPartners={true} />
+      {/* 8. LIDERANÇA / CREDIBILIDADE: Quem vai te ensinar (Dino com foto e carrossel de logos) */}
+      <DevelopersSection showPartners={false} />
 
       {/* 9. Quote: O que eu ensino aqui */}
       <MetricsSection />
@@ -78,14 +78,8 @@ export default async function Home() {
       {/* 10. Depoimentos reais */}
       <TestimonialsSection />
 
-      {/* 11. Bônus que valem mais que o curso (Oferta e valor empilhado) */}
-      <PricingSection settings={settings} />
-
-      {/* 12. FAQ: Suas perguntas (Quebra de objeções após o preço) */}
-      <FaqSection settings={settings} />
-
-
-
+      {/* 12. FAQ: Suas perguntas (Quebra de objeções) */}
+      <FaqSection settings={settings} isWaitlist={true} />
       {/* Footer */}
       <FooterSection settings={settings} />
 

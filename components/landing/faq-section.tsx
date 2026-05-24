@@ -3,7 +3,15 @@
 import { useEffect, useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
-export function FaqSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
+export function FaqSection({ 
+  settings, 
+  isProgrammer = false, 
+  isWaitlist = false 
+}: { 
+  settings?: any; 
+  isProgrammer?: boolean; 
+  isWaitlist?: boolean;
+}) {
   const launchPrice = settings?.launchPrice || "97";
   const regularPrice = settings?.regularPrice || "247";
 
@@ -61,7 +69,30 @@ export function FaqSection({ settings, isProgrammer = false }: { settings?: any;
     },
   ];
 
-  const activeFaqs = faqs;
+  const waitlistFaqs = [
+    {
+      question: "A aula prática é realmente gratuita?",
+      answer: "Sim, 100% gratuita. Você terá acesso imediato à aula gravada e a todos os materiais e bônus sem custo algum.",
+    },
+    {
+      question: "Preciso de conhecimento prévio em programação?",
+      answer: "Não. A aula foi desenhada do absoluto zero para iniciantes e empresários. A Inteligência Artificial cuida de toda a parte técnica.",
+    },
+    {
+      question: "Como vou receber os bônus e materiais de apoio?",
+      answer: "Assim que preencher o formulário nesta página, você será direcionado para o grupo VIP de WhatsApp, onde compartilhamos todos os links de bônus, ferramentas recomendadas e PDFs da aula.",
+    },
+    {
+      question: "Quais ferramentas vou aprender na aula?",
+      answer: "Você verá na prática como registrar seu domínio e como usar IA e servidores globais de alta velocidade para colocar um site profissional no ar, de forma 100% gratuita.",
+    },
+    {
+      question: "Quanto tempo dura a aula prática gravada?",
+      answer: "A aula tem cerca de 45 a 60 minutos, indo direto ao ponto, com foco total em prática (mão na massa), sem enrolação.",
+    },
+  ];
+
+  const activeFaqs = isWaitlist ? waitlistFaqs : (isProgrammer ? programmerFaqs : faqs);
 
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [isVisible, setIsVisible] = useState(false);
