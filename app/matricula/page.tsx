@@ -11,7 +11,6 @@ import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { PricingSection } from "@/components/landing/pricing-section";
-import { CtaSection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
@@ -86,8 +85,7 @@ export default async function MatriculaPage() {
       {/* FAQ: Suas perguntas (Quebra de objeções após o preço) */}
       <FaqSection settings={settings} />
 
-      {/* CTA: Garanta sua vaga (Purchase Card) */}
-      <CtaSection settings={settings} showForm={false} />
+
 
       {/* Footer */}
       <FooterSection settings={settings} />

@@ -11,7 +11,6 @@ import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { PricingSection } from "@/components/landing/pricing-section";
-import { CtaSection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
@@ -84,8 +83,7 @@ export default async function ProgramadorPage() {
       {/* 11. ANTIMÍSSIL DE OBJEÇÕES: FAQ colocado cirurgicamente ao lado do preço final */}
       <FaqSection settings={settings} isProgrammer={true} />
 
-      {/* 12. FECHAMENTO SEGURO: Chamada à ação final antes do rodapé (Purchase Card) */}
-      <CtaSection settings={settings} isProgrammer={true} showForm={false} />
+
 
       {/* Footer */}
       <FooterSection settings={settings} isProgrammer={true} />
