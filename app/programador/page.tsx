@@ -84,8 +84,8 @@ export default async function ProgramadorPage() {
       {/* 11. ANTIMÍSSIL DE OBJEÇÕES: FAQ colocado cirurgicamente ao lado do preço final */}
       <FaqSection settings={settings} isProgrammer={true} />
 
-      {/* 12. FECHAMENTO SEGURO: Chamada à ação final antes do rodapé */}
-      <CtaSection settings={settings} isProgrammer={true} />
+      {/* 12. FECHAMENTO SEGURO: Chamada à ação final antes do rodapé (Purchase Card) */}
+      <CtaSection settings={settings} isProgrammer={true} showForm={false} />
 
       {/* Footer */}
       <FooterSection settings={settings} isProgrammer={true} />

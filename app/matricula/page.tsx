@@ -86,8 +86,8 @@ export default async function MatriculaPage() {
       {/* FAQ: Suas perguntas (Quebra de objeções após o preço) */}
       <FaqSection settings={settings} />
 
-      {/* CTA: Garanta sua vaga */}
-      <CtaSection settings={settings} />
+      {/* CTA: Garanta sua vaga (Purchase Card) */}
+      <CtaSection settings={settings} showForm={false} />
 
       {/* Footer */}
       <FooterSection settings={settings} />

@@ -6,7 +6,15 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function CtaSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
+export function CtaSection({ 
+  settings, 
+  isProgrammer = false,
+  showForm = true
+}: { 
+  settings?: any; 
+  isProgrammer?: boolean; 
+  showForm?: boolean;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -133,116 +141,179 @@ export function CtaSection({ settings, isProgrammer = false }: { settings?: any;
                   isProgrammer ? "bg-orange-500/30" : "ambient-glow-blue"
                 }`} />
                 
-                {isSuccess ? (
-                  <div className="text-center py-12 px-4 space-y-6 animate-char-in relative z-10">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl font-light ${
-                      isProgrammer ? "bg-orange-500/15 border border-orange-500/40 text-orange-400" : "bg-[#3B82F6]/15 border border-[#3B82F6]/40 text-[#3B82F6]"
-                    }`}>
-                      ✓
-                    </div>
-                    <div className="space-y-3">
-                      <h3 className="text-3xl font-display font-medium text-white tracking-tight">Você está garantido!</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                        {successMessage}<br />
-                        Preço especial de lançamento de <strong className="text-white">R${settings?.launchPrice || "97"}</strong> bloqueado com sucesso.
+                {showForm ? (
+                  isSuccess ? (
+                    <div className="text-center py-12 px-4 space-y-6 animate-char-in relative z-10">
+                      <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl font-light ${
+                        isProgrammer ? "bg-orange-500/15 border border-orange-500/40 text-orange-400" : "bg-[#3B82F6]/15 border border-[#3B82F6]/40 text-[#3B82F6]"
+                      }`}>
+                        ✓
+                      </div>
+                      <div className="space-y-3">
+                        <h3 className="text-3xl font-display font-medium text-white tracking-tight">Você está garantido!</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
+                          {successMessage}<br />
+                          Preço especial de lançamento de <strong className="text-white">R${settings?.launchPrice || "97"}</strong> bloqueado com sucesso.
+                        </p>
+                      </div>
+                      <div className="bg-foreground/[0.02] border border-foreground/10 py-6 px-4 rounded-xl space-y-1 max-w-xs mx-auto">
+                        <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono block">Sua Posição na Fila</span>
+                        <p className={`text-4xl font-display font-semibold ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>#043</p>
+                        <p className="text-[10px] text-muted-foreground font-mono mt-2">Próxima turma · Vagas Limitadas</p>
+                      </div>
+                      <p className="text-xs text-muted-foreground/60 max-w-xs mx-auto">
+                        Fique de olho no WhatsApp. Entraremos em contato assim que o carrinho oficial for aberto.
                       </p>
                     </div>
-                    <div className="bg-foreground/[0.02] border border-foreground/10 py-6 px-4 rounded-xl space-y-1 max-w-xs mx-auto">
-                      <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono block">Sua Posição na Fila</span>
-                      <p className={`text-4xl font-display font-semibold ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>#043</p>
-                      <p className="text-[10px] text-muted-foreground font-mono mt-2">Próxima turma · Vagas Limitadas</p>
+                  ) : (
+                    <div className="relative z-10">
+                      <h3 className="text-2xl font-display mb-2 text-white">
+                        Garanta sua vaga.
+                      </h3>
+                      <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
+                        Preencha abaixo e garanta o preço de lançamento de R${settings?.launchPrice || "97"}.<br />
+                        Quem está na lista é avisado primeiro — e tem o preço bloqueado.
+                      </p>
+
+                      {/* Vacancy counter */}
+                      <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-3xl font-display ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>7</span>
+                          <span className="text-sm text-muted-foreground">confirmados</span>
+                        </div>
+                        <span className="text-muted-foreground">/</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-3xl font-display text-white">50</span>
+                          <span className="text-sm text-muted-foreground">vagas totais</span>
+                        </div>
+                        <span className="text-muted-foreground">·</span>
+                        <span className={`text-sm font-medium ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>43 restantes</span>
+                      </div>
+
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        {errorMessage && (
+                          <div className="p-3 bg-destructive/10 border border-destructive/20 text-destructive text-xs rounded-md">
+                            ⚠️ {errorMessage}
+                          </div>
+                        )}
+                        
+                        <div>
+                          <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">Seu nome *</label>
+                          <Input 
+                            placeholder="Daniel Marques" 
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
+                              isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
+                            }`} 
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">WhatsApp *</label>
+                          <Input 
+                            placeholder="(12) 99999-9999" 
+                            value={whatsapp}
+                            onChange={(e) => setWhatsapp(e.target.value)}
+                            className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
+                              isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
+                            }`} 
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">E-mail *</label>
+                          <Input 
+                            type="email" 
+                            placeholder="voce@seusite.com.br" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
+                              isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
+                            }`} 
+                            required
+                          />
+                        </div>
+
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className={`w-full h-14 text-base rounded-full font-medium transition-all duration-300 group mt-6 cursor-pointer disabled:opacity-50 flex items-center justify-center ${
+                            isProgrammer 
+                              ? "bg-gradient-to-r from-orange-600 to-[#F97316] text-white hover:from-orange-500 hover:to-[#fb923c] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)]" 
+                              : "bg-white hover:bg-white/95 text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+                          }`}
+                        >
+                          {isSubmitting ? "Enviando..." : "Quero garantir minha vaga agora"}
+                          {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
+                        </Button>
+                      </form>
+
+                      <p className="text-xs text-muted-foreground mt-6 text-center">
+                        🔒 Seus dados são privados. Você será avisado no WhatsApp quando o carrinho abrir.
+                      </p>
                     </div>
-                    <p className="text-xs text-muted-foreground/60 max-w-xs mx-auto">
-                      Fique de olho no WhatsApp. Entraremos em contato assim que o carrinho oficial for aberto.
-                    </p>
-                  </div>
+                  )
                 ) : (
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-display mb-2 text-white">
-                      Garanta sua vaga.
+                  <div className="relative z-10 text-center py-4 px-2">
+                    <h3 className="text-2xl font-display mb-3 text-white">
+                      Garanta seu acesso agora!
                     </h3>
-                    <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-                      Preencha abaixo e garanta o preço de lançamento de R${settings?.launchPrice || "97"}.<br />
-                      Quem está na lista é avisado primeiro — e tem o preço bloqueado.
+                    <p className="text-muted-foreground mb-8 text-sm leading-relaxed max-w-sm mx-auto">
+                      O preço promocional de lançamento de R$ 97,00 é válido por tempo limitado. Garanta sua vaga com todos os bônus inclusos.
                     </p>
 
                     {/* Vacancy counter */}
-                    <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/5">
+                    <div className="flex items-center justify-center gap-3 mb-8 pb-6 border-b border-white/5">
                       <div className="flex items-center gap-2">
-                        <span className={`text-3xl font-display ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>7</span>
-                        <span className="text-sm text-muted-foreground">confirmados</span>
+                        <span className={`text-3xl font-display ${isProgrammer ? "text-orange-500" : "text-blue-400"}`}>7</span>
+                        <span className="text-sm text-muted-foreground">vagas preenchidas</span>
                       </div>
                       <span className="text-muted-foreground">/</span>
                       <div className="flex items-center gap-2">
                         <span className="text-3xl font-display text-white">50</span>
-                        <span className="text-sm text-muted-foreground">vagas totais</span>
+                        <span className="text-sm text-muted-foreground">limite da turma</span>
                       </div>
-                      <span className="text-muted-foreground">·</span>
-                      <span className={`text-sm font-medium ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`}>43 restantes</span>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      {errorMessage && (
-                        <div className="p-3 bg-destructive/10 border border-destructive/20 text-destructive text-xs rounded-md">
-                          ⚠️ {errorMessage}
-                        </div>
-                      )}
-                      
-                      <div>
-                        <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">Seu nome *</label>
-                        <Input 
-                          placeholder="Daniel Marques" 
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
-                            isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
-                          }`} 
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">WhatsApp *</label>
-                        <Input 
-                          placeholder="(12) 99999-9999" 
-                          value={whatsapp}
-                          onChange={(e) => setWhatsapp(e.target.value)}
-                          className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
-                            isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
-                          }`} 
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2 block">E-mail *</label>
-                        <Input 
-                          type="email" 
-                          placeholder="voce@seusite.com.br" 
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className={`h-12 rounded-full bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:ring-1 px-5 ${
-                            isProgrammer ? "focus-visible:ring-orange-500" : "focus-visible:ring-[#3B82F6]"
-                          }`} 
-                          required
-                        />
-                      </div>
+                    <div className="bg-white/[0.02] border border-white/5 py-6 px-4 rounded-2xl mb-8 space-y-2 max-w-xs mx-auto">
+                      <span className="text-gray-500 font-bold uppercase text-xs tracking-widest line-through">
+                        De R$ {settings?.regularPrice || "247"},00 por
+                      </span>
+                      <p className="text-3xl sm:text-4xl font-display font-black text-white leading-none">
+                        R$ {settings?.launchPrice || "97"},00 à vista
+                      </p>
+                      <p className={`text-xs font-semibold ${isProgrammer ? "text-orange-400 font-mono" : "text-blue-400"}`}>
+                        no Cartão ou Pix (Sem mensalidade)
+                      </p>
+                    </div>
 
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className={`w-full h-14 text-base rounded-full font-medium transition-all duration-300 group mt-6 cursor-pointer disabled:opacity-50 flex items-center justify-center ${
-                          isProgrammer 
-                            ? "bg-gradient-to-r from-orange-600 to-[#F97316] text-white hover:from-orange-500 hover:to-[#fb923c] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)]" 
-                            : "bg-white hover:bg-white/95 text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-                        }`}
+                    <Button
+                      asChild
+                      className={`w-full h-14 text-base rounded-full font-bold transition-all duration-300 group cursor-pointer flex items-center justify-center ${
+                        isProgrammer 
+                          ? "bg-gradient-to-r from-orange-600 to-[#F97316] text-white hover:from-orange-500 hover:to-[#fb923c] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)]" 
+                          : "bg-white hover:bg-white/95 text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+                      }`}
+                    >
+                      <a 
+                        href={settings?.whatsappNumber 
+                          ? `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$97 à vista!")}`
+                          : `https://wa.me/5512999999999?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$97 à vista!")}`
+                        } 
+                        target="_blank" 
+                        rel="noopener noreferrer"
                       >
-                        {isSubmitting ? "Enviando..." : "Quero garantir minha vaga agora"}
-                        {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
-                      </Button>
-                    </form>
+                        Quero Comprar Agora
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    </Button>
 
-                    <p className="text-xs text-muted-foreground mt-6 text-center">
-                      🔒 Seus dados são privados. Você será avisado no WhatsApp quando o carrinho abrir.
-                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 text-gray-500 text-[10px] font-semibold uppercase tracking-wider">
+                      <span>✓ Compra 100% segura</span>
+                      <span className="hidden sm:inline">·</span>
+                      <span>✓ Garantia de 7 dias</span>
+                    </div>
                   </div>
                 )}
               </div>
