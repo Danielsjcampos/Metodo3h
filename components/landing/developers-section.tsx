@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 const dinoFeatures = [
   { title: "1.000+ sites entregues", description: "Em 30 anos de mercado real, não apenas teoria." },
@@ -9,7 +10,13 @@ const dinoFeatures = [
   { title: "Gestor de Meta Ads", description: "Tráfego pago e marketing digital na prática." },
 ];
 
-export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
+export function DevelopersSection({ 
+  isProgrammer = false, 
+  showPartners = false 
+}: { 
+  isProgrammer?: boolean; 
+  showPartners?: boolean;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -21,6 +28,116 @@ export function DevelopersSection({ isProgrammer = false }: { isProgrammer?: boo
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  if (showPartners) {
+    return (
+      <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-20 md:py-24 lg:py-32 bg-background border-t border-white/5">
+        {/* Background ambient glow */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
+          {/* Header */}
+          <div className="relative mb-14 lg:mb-20 text-center flex flex-col items-center justify-center">
+            <span className="inline-flex items-center gap-3 text-xs font-mono tracking-widest text-blue-400 uppercase mb-6 justify-center">
+              <span className="w-8 h-[2px] bg-blue-500/30 rounded-full" />
+              Equipe do Método 3h
+              <span className="w-8 h-[2px] bg-blue-500/30 rounded-full" />
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white tracking-tight leading-[1.05] mb-6">
+              Quem vai te guiar <span className="text-muted-foreground italic font-light">passo a passo.</span>
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              Reunimos especialistas com décadas de experiência real em desenvolvimento de sistemas, engenharia de prompts de Inteligência Artificial e estratégias comerciais de atração para que você saia com resultados imediatos.
+            </p>
+          </div>
+
+          {/* Partners Grid Card Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Daniel Marques (Dino)",
+                role: "Fundador & Instrutor Principal",
+                highlights: ["30+ anos de mercado", "1.000+ sites entregues"],
+                bio: "Veterano do mercado digital com três décadas de experiência construindo SaaS, sistemas empresariais complexos e automações avançadas. Ensina a essência da lógica e a infraestrutura cirúrgica.",
+                color: "border-blue-500/20 text-blue-400",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                )
+              },
+              {
+                name: "Vinicius Saldanha",
+                role: "Co-fundador & Diretor de Tecnologia",
+                highlights: ["Especialista em IA e UX", "Desenvolvimento Premium"],
+                bio: "Especialista em engenharia de prompt, layouts de alto padrão visual com efeito de vidro (Glassmorphism) e performance otimizada de SEO. Garante que seu aprendizado use as melhores IAs do mundo.",
+                color: "border-emerald-500/20 text-emerald-400",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
+                  </svg>
+                )
+              },
+              {
+                name: "Gabriel",
+                role: "Co-fundador & Diretor de Growth",
+                highlights: ["Funis de Alta Conversão", "Estratégia de Vendas"],
+                bio: "Estrategista de marketing de atração e funis automatizados de conversão de tráfego. Ensina você a comercializar seus sites para obter recorrência e fechar contratos comerciais lucrativos.",
+                color: "border-purple-500/20 text-purple-400",
+                icon: (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                )
+              }
+            ].map((p, i) => (
+              <div
+                key={p.name}
+                className={cn(
+                  "relative rounded-3xl glass-card glass-card-hover p-8 md:p-10 flex flex-col justify-between transition-all duration-700",
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                )}
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
+                <div>
+                  {/* Icon & Title */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={cn("w-12 h-12 rounded-2xl bg-white/5 border flex items-center justify-center", p.color.split(" ")[0])}>
+                      {p.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white leading-tight">{p.name}</h3>
+                      <p className="text-[10px] text-white/50 font-medium uppercase tracking-wider mt-1">{p.role}</p>
+                    </div>
+                  </div>
+
+                  {/* Bio */}
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    {p.bio}
+                  </p>
+                </div>
+
+                {/* Highlights tags */}
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                  {p.highlights.map((h) => (
+                    <span
+                      key={h}
+                      className={cn(
+                        "px-2.5 py-0.5 rounded-full text-[9px] font-mono tracking-wider font-semibold uppercase border bg-white/5",
+                        p.color
+                      )}
+                    >
+                      {h}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-24 md:py-28 lg:py-36 bg-background">

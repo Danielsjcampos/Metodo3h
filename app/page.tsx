@@ -1,17 +1,8 @@
 import { Navigation } from "@/components/landing/navigation";
-import { HeroSection } from "@/components/landing/hero-section";
+import { HeroCaptureSection } from "@/components/landing/hero-capture-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
-import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
-import { VslSection } from "@/components/landing/vsl-section";
-import { InfrastructureSection } from "@/components/landing/infrastructure-section";
-import { IntegrationsSection } from "@/components/landing/integrations-section";
-import { SecuritySection } from "@/components/landing/security-section";
-import { TestimonialsSection } from "@/components/landing/testimonials-section";
-import { FaqSection } from "@/components/landing/faq-section";
-import { PricingSection } from "@/components/landing/pricing-section";
-import { CtaSection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
 import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
@@ -19,8 +10,8 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = settings.seoTitle || "Método 3h - Seu site profissional com IA em 3 horas";
-  const description = settings.seoDescription || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h.";
+  const title = settings.seoTitle || "Método 3h - Aula Prática Gratuita com IA";
+  const description = "Aprenda a colocar seu site profissional no ar hoje sem precisar programar e sem pagar por hospedagem com a nossa aula gratuita.";
   return {
     title: title,
     description: description,
@@ -50,49 +41,22 @@ export default async function Home() {
     >
       <Navigation settings={settings} />
 
-      {/* Hero: Seu site no ar hoje */}
-      <HeroSection settings={settings} />
+      {/* 1. Pre-Launch Waitlist Hero (Title rotation + Email/Name Capture Form) */}
+      <HeroCaptureSection />
 
-      {/* VSL: Veja o método ao vivo */}
-      <VslSection />
-
-      {/* O Problema: Você está pagando caro demais */}
+      {/* 2. DOR & AGITAÇÃO: A realidade do mercado tradicional e os 3 ganchos dos Avatares */}
       <FeaturesSection />
 
-      {/* A Virada: A IA acabou com a barreira técnica */}
+      {/* 3. A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
       <HowItWorksSection />
 
-      {/* Para quem é este curso (Alinhamento de Ego / Identidade) */}
-      <SecuritySection />
+      {/* 4. LIDERANÇA / CREDIBILIDADE: Quem é o mentor (Daniel) e os co-fundadores (Vinicius e Gabriel) */}
+      <DevelopersSection showPartners={true} />
 
-      {/* O que você vai aprender: 7 módulos carrossel */}
-      <InfrastructureSection />
-
-      {/* Stack do curso: Ferramentas profissionais */}
-      <IntegrationsSection />
-
-      {/* Quem vai te ensinar: Daniel Marques */}
-      <DevelopersSection />
-
-      {/* Quote: O que eu ensino aqui */}
-      <MetricsSection />
-
-      {/* Depoimentos reais */}
-      <TestimonialsSection />
-
-      {/* Bônus que valem mais que o curso (Oferta e valor empilhado) */}
-      <PricingSection settings={settings} />
-
-      {/* FAQ: Suas perguntas (Quebra de objeções após o preço) */}
-      <FaqSection settings={settings} />
-
-      {/* CTA: Garanta sua vaga */}
-      <CtaSection settings={settings} />
-
-      {/* Footer */}
+      {/* 5. Footer */}
       <FooterSection settings={settings} />
 
-      {/* Floating WhatsApp CRM lead capture button */}
+      {/* 6. Floating WhatsApp CRM lead capture button */}
       <WhatsAppWidget settings={settings} />
     </main>
   );

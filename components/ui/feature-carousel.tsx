@@ -115,26 +115,18 @@ export function FeatureCarousel({ isProgrammer = false }: FeatureCarouselProps) 
   return (
     <div className="w-full max-w-7xl mx-auto md:p-8">
       <div className="relative overflow-hidden rounded-[2.5rem] lg:rounded-[4rem] flex flex-col lg:flex-row min-h-[600px] lg:aspect-video border border-white/5">
-        {/* Left Column containing selection chips */}
+        {/* Left Column containing selection chips (redesigned with premium Glassmorphism) */}
         <div 
           className={cn(
-            "w-full lg:w-[40%] min-h-[350px] md:min-h-[450px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-8 md:px-16 lg:pl-16 transition-colors duration-500",
-            isProgrammer ? "bg-orange-600" : "bg-[#2563EB]"
+            "w-full lg:w-[40%] min-h-[350px] md:min-h-[450px] lg:h-full relative z-30 flex flex-col items-start justify-center overflow-hidden px-8 md:px-16 lg:pl-16 transition-all duration-500",
+            isProgrammer 
+              ? "bg-orange-950/25 lg:bg-orange-950/15 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-orange-500/20" 
+              : "bg-blue-950/20 lg:bg-blue-950/10 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-white/10"
           )}
         >
-          {/* Fades for smooth top and bottom scrolling effect */}
-          <div className={cn(
-            "absolute inset-x-0 top-0 h-12 md:h-20 lg:h-16 z-40",
-            isProgrammer 
-              ? "bg-gradient-to-b from-orange-600 via-orange-600/80 to-transparent" 
-              : "bg-gradient-to-b from-[#2563EB] via-[#2563EB]/80 to-transparent"
-          )} />
-          <div className={cn(
-            "absolute inset-x-0 bottom-0 h-12 md:h-20 lg:h-16 z-40",
-            isProgrammer 
-              ? "bg-gradient-to-t from-orange-600 via-orange-600/80 to-transparent" 
-              : "bg-gradient-to-t from-[#2563EB] via-[#2563EB]/80 to-transparent"
-          )} />
+          {/* Fades for smooth top and bottom scrolling effect (blended with the glass background) */}
+          <div className="absolute inset-x-0 top-0 h-12 md:h-20 lg:h-16 z-40 pointer-events-none bg-gradient-to-b from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-12 md:h-20 lg:h-16 z-40 pointer-events-none bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
           <div className="relative w-full h-full flex items-center justify-center lg:justify-start z-20 my-10 lg:my-0">
             {FEATURES.map((feature, index) => {
@@ -172,8 +164,8 @@ export function FeatureCarousel({ isProgrammer = false }: FeatureCarouselProps) 
                     className={cn(
                       "relative flex items-center gap-4 px-6 md:px-10 lg:px-8 py-3.5 md:py-5 lg:py-4 rounded-full transition-all duration-700 text-left group border cursor-pointer",
                       isActive
-                        ? "bg-white border-white z-10 shadow-lg"
-                        : "bg-transparent text-white/60 border-white/20 hover:border-white/40 hover:text-white"
+                        ? "bg-white border-white z-10 shadow-[0_0_24px_rgba(255,255,255,0.15)] scale-105"
+                        : "bg-white/5 text-white/60 border-white/10 hover:border-white/20 hover:bg-white/10 hover:text-white"
                     )}
                     style={{
                       color: isActive ? (isProgrammer ? "#EA580C" : "#2563EB") : undefined
