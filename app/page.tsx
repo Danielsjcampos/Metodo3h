@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/landing/navigation";
 import { HeroCaptureSection } from "@/components/landing/hero-capture-section";
 import { FeaturesSection } from "@/components/landing/features-section";
-import { HowItWorksSection } from "@/components/landing/how-it-works-section";
+
 import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
 import { VslSection } from "@/components/landing/vsl-section";
@@ -67,8 +67,7 @@ export default async function Home() {
       {/* 5. ALINHAMENTO & EGO FEEDING: Mostra a quem pertence o ecossistema (Freelancer, Negócio Local, etc.) */}
       <SecuritySection />
 
-      {/* 6. SOLUÇÃO / A VIRADA: O que você realmente vai aprender a fazer com o Método 3h */}
-      <HowItWorksSection />
+
 
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
       <IntegrationsSection />
