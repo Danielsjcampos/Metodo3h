@@ -73,6 +73,16 @@ const modules = [
     accent: "#38BDF8",
     image: "/images/m6.png",
   },
+  {
+    number: "M7",
+    tag: "CRM",
+    title: "CRM & Sistemas de Gestão com IA",
+    description: "Crie um sistema de CRM completo do zero com inteligência artificial para controle de leads e vendas em menos de 1 hora sem programação manual.",
+    lessons: "5 aulas",
+    duration: "~50 min",
+    accent: "#60A5FA",
+    image: "/images/m7.png",
+  },
 ];
 
 export function InfrastructureSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
@@ -156,8 +166,8 @@ export function InfrastructureSection({ isProgrammer = false }: { isProgrammer?:
       {/* Totals */}
       <div className={`mt-10 max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-wrap items-center justify-center gap-8 pt-8 border-t border-foreground/10 transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
         {[
-          { value: "26", label: "aulas" },
-          { value: "~6h", label: "de conteúdo" },
+          { value: "31", label: "aulas" },
+          { value: "~7h", label: "de conteúdo" },
           { value: "1 ano", label: "de acesso" },
           { value: "R$0", label: "hospedagem" },
         ].map((stat, i) => (
