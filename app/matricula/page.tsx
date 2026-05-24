@@ -59,14 +59,14 @@ export default async function MatriculaPage() {
       {/* O Problema: Você está pagando caro demais */}
       <FeaturesSection />
 
-      {/* A Virada: A IA acabou com a barreira técnica */}
-      <HowItWorksSection />
+      {/* O que você vai aprender: 8 módulos carrossel */}
+      <InfrastructureSection />
 
       {/* Para quem é este curso (Alinhamento de Ego / Identidade) */}
       <SecuritySection />
 
-      {/* O que você vai aprender: 7 módulos carrossel */}
-      <InfrastructureSection />
+      {/* A Virada: O que você realmente vai aprender a fazer com o Método 3h */}
+      <HowItWorksSection />
 
       {/* Stack do curso: Ferramentas profissionais */}
       <IntegrationsSection />

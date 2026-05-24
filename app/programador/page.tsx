@@ -59,14 +59,14 @@ export default async function ProgramadorPage() {
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection isProgrammer={true} />
 
-      {/* 4. SOLUÇÃO / A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
-      <HowItWorksSection isProgrammer={true} />
+      {/* 4. A JORNADA: Detalhamento dos 8 módulos práticos do curso */}
+      <InfrastructureSection isProgrammer={true} />
 
       {/* 5. ALINHAMENTO & EGO FEEDING: Mostra que ele pertence ao ecossistema (Freelancer, Negócio Local, etc.) */}
       <SecuritySection isProgrammer={true} />
 
-      {/* 6. A JORNADA: Detalhamento dos 7 módulos práticos do curso */}
-      <InfrastructureSection isProgrammer={true} />
+      {/* 6. SOLUÇÃO / A VIRADA: O que você realmente vai aprender a fazer com o Método 3h */}
+      <HowItWorksSection isProgrammer={true} />
 
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
       <IntegrationsSection isProgrammer={true} />

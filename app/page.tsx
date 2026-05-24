@@ -61,14 +61,14 @@ export default async function Home() {
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection />
 
-      {/* 4. SOLUÇÃO / A VIRADA: Apresentando o veículo (IA) que resolve o problema */}
-      <HowItWorksSection />
+      {/* 4. A JORNADA: Detalhamento dos 8 módulos práticos do curso */}
+      <InfrastructureSection />
 
       {/* 5. ALINHAMENTO & EGO FEEDING: Mostra a quem pertence o ecossistema (Freelancer, Negócio Local, etc.) */}
       <SecuritySection />
 
-      {/* 6. A JORNADA: Detalhamento dos 7 módulos práticos do curso */}
-      <InfrastructureSection />
+      {/* 6. SOLUÇÃO / A VIRADA: O que você realmente vai aprender a fazer com o Método 3h */}
+      <HowItWorksSection />
 
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
       <IntegrationsSection />
