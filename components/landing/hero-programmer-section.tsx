@@ -175,12 +175,13 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           {/* Main headline */}
           <div className="mb-6">
             <h1 
-              className={`text-left text-[clamp(2.25rem,6.5vw,3.75rem)] font-display leading-[1.1] tracking-tight text-white transition-all duration-1000 ${
+              className={`text-left text-[clamp(1.8rem,5vw,3.2rem)] font-display leading-[1.1] tracking-tight text-white transition-all duration-1000 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <span className="block">Crie e fature com</span>
+              <span className="block">Destrave o segredo para criar</span>
               <span className="block text-white/50">
+                e faturar com{" "}
                 <span className="relative inline-block text-white min-w-[3ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
