@@ -207,7 +207,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
               className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(249,115,22,0.3)] transition-all duration-300 font-bold"
             >
               <a href="#inscricao">
-                Garantir minha vaga por R${settings?.launchPrice || "97"}
+                Garantir minha vaga por R${settings?.launchPrice || "197"}
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>

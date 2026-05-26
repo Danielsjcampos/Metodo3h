@@ -122,7 +122,7 @@ export function CtaSection({
                 <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-mono mb-8">
                   <span className="text-foreground font-medium">50 vagas</span>
                   <span>·</span>
-                  <span className={`${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"} font-medium`}>R${settings?.launchPrice || "97"} agora</span>
+                  <span className={`${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"} font-medium`}>R${settings?.launchPrice || "197"} agora</span>
                   <span>·</span>
                   <span>R${settings?.regularPrice || "247"} depois</span>
                   <span>·</span>
@@ -153,7 +153,7 @@ export function CtaSection({
                         <h3 className="text-3xl font-display font-medium text-white tracking-tight">Você está garantido!</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
                           {successMessage}<br />
-                          Preço especial de lançamento de <strong className="text-white">R${settings?.launchPrice || "97"}</strong> bloqueado com sucesso.
+                          Preço especial de lançamento de <strong className="text-white">R${settings?.launchPrice || "197"}</strong> bloqueado com sucesso.
                         </p>
                       </div>
                       <div className="bg-foreground/[0.02] border border-foreground/10 py-6 px-4 rounded-xl space-y-1 max-w-xs mx-auto">
@@ -171,7 +171,7 @@ export function CtaSection({
                         Garanta sua vaga.
                       </h3>
                       <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-                        Preencha abaixo e garanta o preço de lançamento de R${settings?.launchPrice || "97"}.<br />
+                        Preencha abaixo e garanta o preço de lançamento de R${settings?.launchPrice || "197"}.<br />
                         Quem está na lista é avisado primeiro — e tem o preço bloqueado.
                       </p>
 
@@ -260,7 +260,7 @@ export function CtaSection({
                       Garanta seu acesso agora!
                     </h3>
                     <p className="text-muted-foreground mb-8 text-sm leading-relaxed max-w-sm mx-auto">
-                      O preço promocional de lançamento de R$ 97,00 é válido por tempo limitado. Garanta sua vaga com todos os bônus inclusos.
+                      O preço promocional de lançamento de R$ 197,00 é válido por tempo limitado. Garanta sua vaga com todos os bônus inclusos.
                     </p>
 
                     {/* Vacancy counter */}
@@ -281,10 +281,10 @@ export function CtaSection({
                         De R$ {settings?.regularPrice || "247"},00 por
                       </span>
                       <p className="text-3xl sm:text-4xl font-display font-black text-white leading-none">
-                        R$ {settings?.launchPrice || "97"},00 à vista
+                        R$ {settings?.launchPrice || "197"},00 à vista
                       </p>
                       <p className={`text-xs font-semibold ${isProgrammer ? "text-orange-400 font-mono" : "text-blue-400"}`}>
-                        no Cartão ou Pix (Sem mensalidade)
+                        ou em até 10x de R$ 22,50 no cartão
                       </p>
                     </div>
 
@@ -298,8 +298,8 @@ export function CtaSection({
                     >
                       <a 
                         href={settings?.whatsappNumber 
-                          ? `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$97 à vista!")}`
-                          : `https://wa.me/5512999999999?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$97 à vista!")}`
+                          ? `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
+                          : `https://wa.me/5512999999999?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
                         } 
                         target="_blank" 
                         rel="noopener noreferrer"

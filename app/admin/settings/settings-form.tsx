@@ -14,7 +14,10 @@ import {
   Save, 
   Eye, 
   HelpCircle,
-  Tag
+  Tag,
+  Upload,
+  Image as ImageIcon,
+  Play
 } from "lucide-react";
 
 interface SettingsFormProps {
@@ -25,6 +28,41 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const router = useRouter();
   const [settings, setSettings] = useState<SiteSettings>(initialSettings);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState<{ [key: string]: boolean }>({});
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldName: keyof SiteSettings) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(prev => ({ ...prev, [fieldName]: true }));
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("name", file.name);
+
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro ao enviar arquivo.");
+      }
+
+      setSettings(prev => ({
+        ...prev,
+        [fieldName]: data.url,
+      }));
+      toast.success("Arquivo enviado com sucesso!");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message || "Não foi possível enviar o arquivo.");
+    } finally {
+      setIsUploading(prev => ({ ...prev, [fieldName]: false }));
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -97,6 +135,52 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               Texto que aparece no header da navegação e no rodapé do site.
             </span>
           </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+              Logotipo do Site (Imagem)
+            </label>
+            <div className="flex gap-4 items-center">
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  name="logoImage"
+                  value={settings.logoImage || ""}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all pr-12"
+                  placeholder="Ex: /images/metodo3h logo.png"
+                />
+                <label className="absolute right-2 top-1.5 p-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white cursor-pointer hover:bg-white/10 transition-all flex items-center justify-center">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, "logoImage")}
+                    className="hidden"
+                    disabled={isUploading["logoImage"]}
+                  />
+                  {isUploading["logoImage"] ? (
+                    <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  ) : (
+                    <Upload className="w-4 h-4 text-white" />
+                  )}
+                </label>
+              </div>
+
+              {settings.logoImage && (
+                <div className="w-16 h-12 rounded-lg bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center p-1">
+                  <img
+                    src={settings.logoImage}
+                    alt="Preview do Logo"
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+              )}
+            </div>
+            <span className="text-[10px] text-muted-foreground block">
+              Imagem oficial do logotipo exibida na navegação e rodapé.
+            </span>
+          </div>
         </div>
       </div>
 
@@ -104,11 +188,11 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
       <div className="bg-white/[0.02] border border-white/[0.08] rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-3 pb-3 border-b border-white/5">
           <Globe className="w-5 h-5 text-[#3B82F6]" />
-          <h2 className="text-lg font-medium text-white">SEO & Metadados (Google)</h2>
+          <h2 className="text-lg font-medium text-white">SEO & Metadados (Google & Social Share)</h2>
         </div>
         
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
               <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
                 Título da Página (Meta Title)
@@ -128,15 +212,84 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
                 Favicon (Ícone da aba)
               </label>
-              <input
-                type="text"
-                name="seoFavicon"
-                value={settings.seoFavicon}
-                onChange={handleInputChange}
-                required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
-                placeholder="Ex: /favicon.ico"
-              />
+              <div className="flex gap-4 items-center">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    name="seoFavicon"
+                    value={settings.seoFavicon}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all pr-12"
+                    placeholder="Ex: /favicon.ico"
+                  />
+                  <label className="absolute right-2 top-1.5 p-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white cursor-pointer hover:bg-white/10 transition-all flex items-center justify-center">
+                    <input
+                      type="file"
+                      accept="image/x-icon,image/png,image/svg+xml"
+                      onChange={(e) => handleFileUpload(e, "seoFavicon")}
+                      className="hidden"
+                      disabled={isUploading["seoFavicon"]}
+                    />
+                    {isUploading["seoFavicon"] ? (
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                    ) : (
+                      <Upload className="w-4 h-4 text-white" />
+                    )}
+                  </label>
+                </div>
+                {settings.seoFavicon && (
+                  <div className="w-12 h-12 rounded-lg bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center p-2 shrink-0">
+                    <img
+                      src={settings.seoFavicon}
+                      alt="Favicon"
+                      className="w-6 h-6 object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+                Imagem de Preview (og:image)
+              </label>
+              <div className="flex gap-4 items-center">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    name="seoImage"
+                    value={settings.seoImage || ""}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all pr-12"
+                    placeholder="Ex: /images/preview.png"
+                  />
+                  <label className="absolute right-2 top-1.5 p-2 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white cursor-pointer hover:bg-white/10 transition-all flex items-center justify-center">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, "seoImage")}
+                      className="hidden"
+                      disabled={isUploading["seoImage"]}
+                    />
+                    {isUploading["seoImage"] ? (
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                    ) : (
+                      <Upload className="w-4 h-4 text-white" />
+                    )}
+                  </label>
+                </div>
+                {settings.seoImage && (
+                  <div className="w-16 h-12 rounded-lg bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center p-1 shrink-0">
+                    <img
+                      src={settings.seoImage}
+                      alt="Preview og:image"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -229,6 +382,50 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
               placeholder="Ex: https://youtube.com/c/seucanal"
             />
+          </div>
+        </div>
+      </div>
+
+      {/* Configurações de Vídeo (VSL & Depoimentos) */}
+      <div className="bg-white/[0.02] border border-white/[0.08] rounded-2xl p-6 space-y-4">
+        <div className="flex items-center gap-3 pb-3 border-b border-white/5">
+          <Play className="w-5 h-5 text-[#3B82F6]" />
+          <h2 className="text-lg font-medium text-white">Configurações de Vídeo (VSL & Depoimentos)</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+              Vídeo do VSL (YouTube URL)
+            </label>
+            <input
+              type="text"
+              name="vslVideoUrl"
+              value={settings.vslVideoUrl || ""}
+              onChange={handleInputChange}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
+              placeholder="Ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            />
+            <span className="text-[10px] text-muted-foreground block">
+              O link do vídeo principal de apresentação (VSL) exibido na seção de demonstração.
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+              Vídeo de Depoimentos (YouTube URL)
+            </label>
+            <input
+              type="text"
+              name="testimonialsVideoUrl"
+              value={settings.testimonialsVideoUrl || ""}
+              onChange={handleInputChange}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
+              placeholder="Ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            />
+            <span className="text-[10px] text-muted-foreground block">
+              O vídeo que roda de fundo/interativo na seção de prova social e depoimentos de alunos.
+            </span>
           </div>
         </div>
       </div>

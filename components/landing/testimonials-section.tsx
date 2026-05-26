@@ -56,14 +56,16 @@ const tickerItems = [
   "Marcos T. · R$4.500 em um mês ✓",
 ];
 
-export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
+export function TestimonialsSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
   
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: scrollContainerRef,
@@ -76,6 +78,69 @@ export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: b
   const borderRadius = useTransform(scrollYProgress, [0.2, 0.45], ["2rem", "1.5rem"]);
   const opacityText = useTransform(scrollYProgress, [0.38, 0.48], [0, 1]);
 
+  // Helper to parse YouTube Video ID
+  const getYouTubeId = (url: string): string => {
+    if (!url) return "dQw4w9WgXcQ";
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : url;
+  };
+
+  const hasVideo = !!settings?.testimonialsVideoUrl && settings.testimonialsVideoUrl.trim() !== "";
+  const videoId = getYouTubeId(settings?.testimonialsVideoUrl || "dQw4w9WgXcQ");
+
+  // Scroll auto-pause for smart UX
+  useEffect(() => {
+    return scrollYProgress.onChange((v) => {
+      if (isStarted && isPlaying && (v < 0.15 || v > 0.85)) {
+        iframeRef.current?.contentWindow?.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}', 
+          '*'
+        );
+        setIsPlaying(false);
+      }
+    });
+  }, [scrollYProgress, isStarted, isPlaying]);
+
+  // Fake Progress Bar Simulation
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 35) {
+          // Rapid progress at the beginning (0% - 35%)
+          return prev + Math.random() * 4 + 2;
+        } else if (prev < 75) {
+          // Slow down in the middle (35% - 75%)
+          return prev + 0.08 + Math.random() * 0.05;
+        } else if (prev < 98) {
+          // Extremely slow crawling at the end (75% - 98%)
+          return prev + 0.01 + Math.random() * 0.01;
+        }
+        return prev; // Lock just below 100%
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"pauseVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(false);
+    } else {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"playVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(true);
+    }
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
@@ -84,31 +149,6 @@ export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: b
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    return scrollYProgress.onChange((v) => {
-      if (videoRef.current) {
-        if (v > 0.35 && v < 0.7) {
-          if (hasInteracted) {
-            setIsMuted(false);
-            videoRef.current.muted = false;
-          }
-        } else {
-          setIsMuted(true);
-          videoRef.current.muted = true;
-        }
-      }
-    });
-  }, [scrollYProgress, hasInteracted]);
-
-  const toggleMute = () => {
-    setHasInteracted(true);
-    if (videoRef.current) {
-      const nextMuted = !videoRef.current.muted;
-      videoRef.current.muted = nextMuted;
-      setIsMuted(nextMuted);
-    }
-  };
 
   return (
     <section ref={sectionRef} className="relative py-14 md:py-18 overflow-hidden bg-background">
@@ -134,115 +174,172 @@ export function TestimonialsSection({ isProgrammer = false }: { isProgrammer?: b
           </h2>
         </div>
 
-        <div ref={scrollContainerRef} className="relative w-full min-h-[70vh] flex items-center justify-center mb-12">
-          
-          <motion.div
-            style={{
-              width,
-              height,
-              scale,
-              borderRadius,
-            }}
-            className={`relative overflow-hidden border bg-black/60 shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-w-5xl w-full ${
-              isProgrammer ? "border-orange-500/20" : "border-white/10"
-            }`}
-            onClick={() => setHasInteracted(true)}
-          >
-            <div className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
-              isProgrammer ? "bg-orange-500/10" : "bg-blue-500/10"
-            }`} />
-            <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
-              isProgrammer ? "bg-amber-500/10" : "bg-purple-500/10"
-            }`} />
-
-            <video
-              ref={videoRef}
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-hero-0BnFGdr81Ifnj3WbBZoNt1KE4D5DMT.mp4"
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              className="w-full h-full object-cover pointer-events-none opacity-80 mix-blend-screen saturate-[1.2] filter contrast-[1.1]"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none" />
-
-            <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleMute();
-                }}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 shadow-lg text-white hover:bg-black/90 hover:border-white/20 transition-all duration-300 group active:scale-95 cursor-pointer"
-              >
-                {isMuted ? (
-                  <>
-                    <VolumeX className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[10px] font-mono font-semibold tracking-wider">ATIVAR ÁUDIO</span>
-                  </>
-                ) : (
-                  <>
-                    <Volume2 className="w-4 h-4 text-green-400 group-hover:scale-110 transition-transform duration-300 animate-pulse" />
-                    <span className="text-[10px] font-mono font-semibold tracking-wider">ÁUDIO LIGADO</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            <div className={`absolute top-6 left-6 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-md border shadow-lg ${
-              isProgrammer ? "border-orange-500/20" : "border-white/10"
-            }`}>
-              <Sparkles className={`w-4 h-4 animate-pulse ${isProgrammer ? "text-orange-400" : "text-blue-400"}`} />
-              <span className="text-[10px] font-mono font-semibold tracking-wider text-white/90 uppercase">Depoimento em Vídeo</span>
-            </div>
-
-            {isMuted && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/25 backdrop-blur-[2px] transition-all duration-500">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleMute();
-                  }}
-                  className={`w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform duration-300 cursor-pointer group active:scale-95 z-20 ${
-                    isProgrammer ? "shadow-[0_0_50px_rgba(249,115,22,0.4)]" : "shadow-[0_0_50px_rgba(59,130,246,0.4)]"
-                  }`}
-                >
-                  <Play className="w-8 h-8 text-black fill-black ml-1 group-hover:rotate-12 transition-transform duration-300" />
-                </button>
-                <div className="absolute bottom-28 text-center text-white/60 text-xs font-mono tracking-widest uppercase animate-bounce">
-                  Role a página para expandir e ouvir
-                </div>
-              </div>
-            )}
-
+        {hasVideo && (
+          <div ref={scrollContainerRef} className="relative w-full min-h-[70vh] flex items-center justify-center mb-12">
+            
             <motion.div
-              style={{ opacity: opacityText }}
-              className="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 pointer-events-none"
+              style={{
+                width,
+                height,
+                scale,
+                borderRadius,
+              }}
+              className={`relative overflow-hidden border bg-black/60 shadow-[0_25px_60px_rgba(0,0,0,0.8)] max-w-5xl w-full ${
+                isProgrammer ? "border-orange-500/20" : "border-white/10"
+              }`}
             >
-              <div className="max-w-2xl">
-                <span className={`inline-flex items-center gap-2 px-2.5 py-1 rounded text-[10px] font-mono uppercase font-semibold mb-3 ${
-                  isProgrammer ? "bg-orange-500/10 border border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
-                }`}>
-                  <Cpu className="w-3 h-3" /> Projeto construído 100% com IA
-                </span>
-                <h3 className="text-2xl md:text-4xl font-display font-medium text-white mb-3">
-                  SaaS CRM Automatizado do Henrique
-                </h3>
-                <p className={`text-sm md:text-base text-muted-foreground leading-relaxed ${isProgrammer ? "font-mono" : ""}`}>
-                  "Eu não sabia nada de código. Com o Método 3h, desenvolvi e publiquei um software de CRM completo com integrações em 3 dias. Hoje o projeto já fatura no mercado digital."
-                </p>
-              </div>
+              <div className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
+                isProgrammer ? "bg-orange-500/10" : "bg-blue-500/10"
+              }`} />
+              <div className={`absolute bottom-0 left-0 w-80 h-80 rounded-full blur-[80px] pointer-events-none ${
+                isProgrammer ? "bg-amber-500/10" : "bg-purple-500/10"
+              }`} />
 
-              <div className="shrink-0 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex flex-col gap-2 min-w-[200px]">
-                <div className="flex items-center gap-1.5 text-yellow-400">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current text-yellow-500" />)}
+              {/* Loop teaser background video displayed ONLY when NOT started */}
+              {!isStarted && (
+                <video
+                  ref={videoRef}
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-hero-0BnFGdr81Ifnj3WbBZoNt1KE4D5DMT.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover pointer-events-none opacity-80 mix-blend-screen saturate-[1.2] filter contrast-[1.1]"
+                />
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none z-10" />
+
+              {/* If not started, display custom trigger buttons and teaser states */}
+              {!isStarted && (
+                <>
+                  <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setIsStarted(true);
+                        setIsPlaying(true);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 shadow-lg text-white hover:bg-black/90 hover:border-white/20 transition-all duration-300 group active:scale-95 cursor-pointer"
+                    >
+                      <VolumeX className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform duration-300" />
+                      <span className="text-[10px] font-mono font-semibold tracking-wider">ATIVAR ÁUDIO / ASSISTIR</span>
+                    </button>
+                  </div>
+
+                  <div className={`absolute top-6 left-6 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-md border shadow-lg ${
+                    isProgrammer ? "border-orange-500/20" : "border-white/10"
+                  }`}>
+                    <Sparkles className={`w-4 h-4 animate-pulse ${isProgrammer ? "text-orange-400" : "text-blue-400"}`} />
+                    <span className="text-[10px] font-mono font-semibold tracking-wider text-white/90 uppercase">Depoimento em Vídeo</span>
+                  </div>
+
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/25 backdrop-blur-[2px] transition-all duration-500 z-15">
+                    <button
+                      onClick={() => {
+                        setIsStarted(true);
+                        setIsPlaying(true);
+                      }}
+                      className={`w-20 h-20 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform duration-300 cursor-pointer group active:scale-95 z-20 ${
+                        isProgrammer ? "shadow-[0_0_50px_rgba(249,115,22,0.4)]" : "shadow-[0_0_50px_rgba(59,130,246,0.4)]"
+                      }`}
+                    >
+                      <Play className="w-8 h-8 text-black fill-black ml-1 group-hover:rotate-12 transition-transform duration-300" />
+                    </button>
+                    <div className="absolute bottom-28 text-center text-white/60 text-xs font-mono tracking-widest uppercase animate-bounce">
+                      Clique para iniciar depoimento
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Smart YouTube Embed and click-lock overlays once started */}
+              {isStarted && (
+                <>
+                  {/* Transparent click-lock overlay that sits ABOVE the YouTube player */}
+                  <div 
+                    className="absolute inset-0 z-20 cursor-pointer" 
+                    onClick={togglePlay}
+                  />
+
+                  {/* Semi-transparent blur overlay when paused */}
+                  {!isPlaying && (
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-15 flex items-center justify-center transition-all duration-300">
+                      <button
+                        onClick={togglePlay}
+                        className="absolute inset-0 w-full h-full flex items-center justify-center group"
+                      >
+                        <div className="relative">
+                          {/* Pulse rings */}
+                          <div className={`absolute -inset-6 rounded-full border animate-ping opacity-60 ${
+                            isProgrammer ? "border-orange-500/20" : "border-[#3B82F6]/20"
+                          }`} />
+
+                          {/* Button */}
+                          <div className={`relative w-20 h-20 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 ${
+                            isProgrammer 
+                              ? "bg-orange-500 text-white shadow-[0_0_40px_rgba(249,115,22,0.5)]" 
+                              : "bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]"
+                          }`}>
+                            <Play className="w-8 h-8 fill-current ml-1" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  )}
+
+                  <iframe
+                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                    className="w-full h-full pointer-events-none scale-[1.01] z-0"
+                    allow="autoplay; encrypted-media"
+                    title="Depoimento — Método 3h"
+                  />
+
+                  {/* Fake Progress Bar */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 z-25 overflow-hidden">
+                    <div 
+                      className={cn(
+                        "h-full shadow-[0_0_8px_currentColor] transition-all duration-300 ease-out",
+                        isProgrammer ? "bg-orange-500 text-orange-500" : "bg-[#3B82F6] text-[#3B82F6]"
+                      )}
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </>
+              )}
+
+              <motion.div
+                style={{ opacity: opacityText }}
+                className={cn(
+                  "absolute bottom-0 left-0 right-0 p-8 md:p-12 z-20 flex flex-col md:flex-row md:items-end justify-between gap-6 pointer-events-none transition-all duration-500",
+                  isPlaying ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+                )}
+              >
+                <div className="max-w-2xl">
+                  <span className={`inline-flex items-center gap-2 px-2.5 py-1 rounded text-[10px] font-mono uppercase font-semibold mb-3 ${
+                    isProgrammer ? "bg-orange-500/10 border border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
+                  }`}>
+                    <Cpu className="w-3 h-3" /> Projeto construído 100% com IA
+                  </span>
+                  <h3 className="text-2xl md:text-4xl font-display font-medium text-white mb-3">
+                    SaaS CRM Automatizado do Henrique
+                  </h3>
+                  <p className={`text-sm md:text-base text-muted-foreground leading-relaxed ${isProgrammer ? "font-mono" : ""}`}>
+                    "Eu não sabia nada de código. Com o Método 3h, desenvolvi e publiquei um software de CRM completo com integrações em 3 dias. Hoje o projeto já fatura no mercado digital."
+                  </p>
                 </div>
-                <p className="text-sm font-semibold text-white">Henrique Souza</p>
-                <p className="text-[10px] font-mono text-muted-foreground uppercase">{isProgrammer ? "SaaS Developer · Ex-Aluno" : "Aluno Método 3h · Ex-Leigo"}</p>
-              </div>
+
+                <div className="shrink-0 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex flex-col gap-2 min-w-[200px]">
+                  <div className="flex items-center gap-1.5 text-yellow-400">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current text-yellow-500" />)}
+                  </div>
+                  <p className="text-sm font-semibold text-white">Henrique Souza</p>
+                  <p className="text-[10px] font-mono text-muted-foreground uppercase">{isProgrammer ? "SaaS Developer · Ex-Aluno" : "Aluno Método 3h · Ex-Leigo"}</p>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
+          </div>
+        )}
 
         <div className="grid md:grid-cols-2 gap-6 mb-10">
           {testimonials.map((t, i) => (

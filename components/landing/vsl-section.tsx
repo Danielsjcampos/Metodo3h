@@ -11,10 +11,65 @@ const stats = [
   { value: "1.000+", label: "sites entregues pelo método" },
 ];
 
-export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean }) {
+export function VslSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Helper to parse YouTube Video ID
+  const getYouTubeId = (url: string): string => {
+    if (!url) return "dQw4w9WgXcQ";
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : url;
+  };
+
+  const hasVideo = !!settings?.vslVideoUrl && settings.vslVideoUrl.trim() !== "";
+  const videoId = getYouTubeId(settings?.vslVideoUrl || "dQw4w9WgXcQ");
+
+  // Fake Progress Bar Simulation
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 35) {
+          // Rapid progress at the beginning (0% - 35%)
+          return prev + Math.random() * 4 + 2;
+        } else if (prev < 75) {
+          // Slow down in the middle (35% - 75%)
+          return prev + 0.08 + Math.random() * 0.05;
+        } else if (prev < 98) {
+          // Extremely slow crawling at the end (75% - 98%)
+          return prev + 0.01 + Math.random() * 0.01;
+        }
+        return prev; // Lock just below 100%
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      // Pause command to YouTube iframe via postMessage
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"pauseVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(false);
+    } else {
+      // Play command to YouTube iframe via postMessage
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"playVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,104 +128,155 @@ export function VslSection({ isProgrammer = false }: { isProgrammer?: boolean })
         </div>
 
         {/* Video player */}
-        <div className={`relative mx-auto max-w-4xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
+        {hasVideo && (
+          <div className={`relative mx-auto max-w-4xl transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
 
-          {/* Glow behind video */}
-          <div 
-            className={`absolute -inset-4 rounded-full blur-[80px] opacity-[0.08] pointer-events-none animate-pulse-glow ${
-              isProgrammer ? "bg-orange-500" : "bg-[#3B82F6]"
-            }`} 
-          />
+            {/* Glow behind video */}
+            <div 
+              className={`absolute -inset-4 rounded-full blur-[80px] opacity-[0.08] pointer-events-none animate-pulse-glow ${
+                isProgrammer ? "bg-orange-500" : "bg-[#3B82F6]"
+              }`} 
+            />
 
-          {/* Video container */}
-          <div className={`relative aspect-video border rounded-3xl overflow-hidden bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] ${
-            isProgrammer ? "border-orange-500/20" : "border-white/10"
-          }`}>
+            {/* Video container */}
+            <div className={`relative aspect-video border rounded-3xl overflow-hidden bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] ${
+              isProgrammer ? "border-orange-500/20" : "border-white/10"
+            }`}>
 
-            {/* Thumbnail / placeholder */}
-            {!isPlaying ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0d0d0d]">
-                {/* Grid lines background */}
-                <div className="absolute inset-0 opacity-[0.04]">
-                  {[...Array(8)].map((_, i) => (
-                    <div key={`h${i}`} className="absolute h-px bg-white" style={{ top: `${12.5 * (i + 1)}%`, left: 0, right: 0 }} />
-                  ))}
-                  {[...Array(12)].map((_, i) => (
-                    <div key={`v${i}`} className="absolute w-px bg-white" style={{ left: `${8.33 * (i + 1)}%`, top: 0, bottom: 0 }} />
-                  ))}
-                </div>
-
-                {/* Thumbnail text */}
-                <div className="relative text-center px-8 select-none">
-                  {isProgrammer ? (
-                    <>
-                      <p className="text-[10px] font-mono text-orange-500 tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
-                      <h3 className="text-3xl lg:text-5xl font-mono text-white leading-tight mb-2">
-                        Criar Sites com IA
-                      </h3>
-                      <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-[10px] font-mono text-[#3B82F6] tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
-                      <h3 className="text-3xl lg:text-5xl font-display text-white leading-tight mb-2">
-                        Criar Sites com IA
-                      </h3>
-                      <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
-                    </>
-                  )}
-                </div>
-
-                {/* Play button */}
-                <button
-                  onClick={() => setIsPlaying(true)}
-                  className="absolute inset-0 flex items-center justify-center group cursor-pointer"
-                  aria-label="Reproduzir vídeo"
-                >
-                  <div className="relative">
-                    {/* Pulse rings */}
-                    <div className={`absolute -inset-6 rounded-full border animate-ping opacity-60 ${
-                      isProgrammer ? "border-orange-500/20" : "border-[#3B82F6]/20"
-                    }`} />
-                    <div className={`absolute -inset-12 rounded-full border animate-ping opacity-30 ${
-                      isProgrammer ? "border-orange-500/10" : "border-[#3B82F6]/10"
-                    }`} style={{ animationDelay: "0.4s" }} />
-
-                    {/* Button */}
-                    <div className={`relative w-20 h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 animate-cta-pulse ${
-                      isProgrammer 
-                        ? "bg-orange-500 text-white shadow-[0_0_40px_rgba(249,115,22,0.5)] hover:bg-orange-600" 
-                        : "bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]"
-                    }`}>
-                      <Play className={`w-8 h-8 lg:w-10 lg:h-10 fill-current ml-1 ${isProgrammer ? "text-white" : "text-black"}`} />
-                    </div>
+              {/* Thumbnail / placeholder */}
+              {!isStarted && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0d0d0d] z-30">
+                  {/* Grid lines background */}
+                  <div className="absolute inset-0 opacity-[0.04]">
+                    {[...Array(8)].map((_, i) => (
+                      <div key={`h${i}`} className="absolute h-px bg-white" style={{ top: `${12.5 * (i + 1)}%`, left: 0, right: 0 }} />
+                    ))}
+                    {[...Array(12)].map((_, i) => (
+                      <div key={`v${i}`} className="absolute w-px bg-white" style={{ left: `${8.33 * (i + 1)}%`, top: 0, bottom: 0 }} />
+                    ))}
                   </div>
-                </button>
 
-                {/* Duration badge */}
-                <div className={`absolute bottom-6 right-6 flex items-center gap-2 bg-black/80 px-3 py-1.5 backdrop-blur-sm rounded-full border ${
-                  isProgrammer ? "border-orange-500/20" : "border-white/10"
-                }`}>
-                  <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                    isProgrammer ? "bg-orange-500" : "bg-[#3B82F6]"
-                  }`} />
-                  <span className="text-xs font-mono text-white/70">
-                    {isProgrammer ? "Prévia gratuita · ~8 min" : "Prévia gratuita · ~8 min"}
-                  </span>
+                  {/* Thumbnail text */}
+                  <div className="relative text-center px-8 select-none">
+                    {isProgrammer ? (
+                      <>
+                        <p className="text-[10px] font-mono text-orange-500 tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
+                        <h3 className="text-3xl lg:text-5xl font-mono text-white leading-tight mb-2">
+                          Criar Sites com IA
+                        </h3>
+                        <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-[10px] font-mono text-[#3B82F6] tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
+                        <h3 className="text-3xl lg:text-5xl font-display text-white leading-tight mb-2">
+                          Criar Sites com IA
+                        </h3>
+                        <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Play button */}
+                  <button
+                    onClick={() => {
+                      setIsStarted(true);
+                      setIsPlaying(true);
+                    }}
+                    className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+                    aria-label="Reproduzir vídeo"
+                  >
+                    <div className="relative">
+                      {/* Pulse rings */}
+                      <div className={`absolute -inset-6 rounded-full border animate-ping opacity-60 ${
+                        isProgrammer ? "border-orange-500/20" : "border-[#3B82F6]/20"
+                      }`} />
+                      <div className={`absolute -inset-12 rounded-full border animate-ping opacity-30 ${
+                        isProgrammer ? "border-orange-500/10" : "border-[#3B82F6]/10"
+                      }`} style={{ animationDelay: "0.4s" }} />
+
+                      {/* Button */}
+                      <div className={`relative w-20 h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 animate-cta-pulse ${
+                        isProgrammer 
+                          ? "bg-orange-500 text-white shadow-[0_0_40px_rgba(249,115,22,0.5)] hover:bg-orange-600" 
+                          : "bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]"
+                      }`}>
+                        <Play className={`w-8 h-8 lg:w-10 lg:h-10 fill-current ml-1 ${isProgrammer ? "text-white" : "text-black"}`} />
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* Duration badge */}
+                  <div className={`absolute bottom-6 right-6 flex items-center gap-2 bg-black/80 px-3 py-1.5 backdrop-blur-sm rounded-full border ${
+                    isProgrammer ? "border-orange-500/20" : "border-white/10"
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                      isProgrammer ? "bg-orange-500" : "bg-[#3B82F6]"
+                    }`} />
+                    <span className="text-xs font-mono text-white/70">
+                      Prévia gratuita · ~8 min
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              /* Aqui vai o embed do YouTube/Vimeo quando tiver o vídeo */
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                className="w-full h-full"
-                allow="autoplay; fullscreen"
-                allowFullScreen
-                title="VSL — Método 3h"
-              />
-            )}
+              )}
+
+              {isStarted && (
+                <>
+                  {/* Transparent click-lock overlay that sits ABOVE the YouTube player */}
+                  <div 
+                    className="absolute inset-0 z-20 cursor-pointer" 
+                    onClick={togglePlay}
+                  />
+
+                  {/* Semi-transparent blur overlay when paused */}
+                  {!isPlaying && (
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center transition-all duration-300">
+                      <button
+                        onClick={togglePlay}
+                        className="absolute inset-0 w-full h-full flex items-center justify-center group"
+                      >
+                        <div className="relative">
+                          {/* Pulse rings */}
+                          <div className={`absolute -inset-6 rounded-full border animate-ping opacity-60 ${
+                            isProgrammer ? "border-orange-500/20" : "border-[#3B82F6]/20"
+                          }`} />
+
+                          {/* Button */}
+                          <div className={`relative w-20 h-20 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 ${
+                            isProgrammer 
+                              ? "bg-orange-500 text-white shadow-[0_0_40px_rgba(249,115,22,0.5)]" 
+                              : "bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]"
+                          }`}>
+                            <Play className="w-8 h-8 fill-current ml-1" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  )}
+
+                  <iframe
+                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                    className="w-full h-full pointer-events-none scale-[1.01]"
+                    allow="autoplay; encrypted-media"
+                    title="VSL — Método 3h"
+                  />
+
+                  {/* Fake Progress Bar */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 z-25 overflow-hidden">
+                    <div 
+                      className={cn(
+                        "h-full shadow-[0_0_8px_currentColor] transition-all duration-300 ease-out",
+                        isProgrammer ? "bg-orange-500 text-orange-500" : "bg-[#3B82F6] text-[#3B82F6]"
+                      )}
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Stats below video */}
         <div className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 max-w-3xl mx-auto transition-all duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>

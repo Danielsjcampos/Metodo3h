@@ -18,8 +18,10 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = "Método 3h (Edição Programador) - Crie Sites com IA";
-  const description = "Aprenda a criar sites profissionais com IA em apenas 3 horas. Edição premium com foco em programadores e entusiastas de tecnologia com Matrix Code Rain.";
+  const title = settings.seoTitle ? `${settings.seoTitle} (Dev)` : "Método 3h (Edição Programador) - Crie Sites com IA";
+  const description = settings.seoDescription || "Aprenda a criar sites profissionais com IA em apenas 3 horas. Edição premium com foco em programadores e entusiastas de tecnologia com Matrix Code Rain.";
+  const previewImage = settings.seoImage || "/images/preview.png";
+
   return {
     title: title,
     description: description,
@@ -32,6 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       url: "https://metodo3horas.com.br/programador",
       siteName: "Método 3h",
+      images: [
+        {
+          url: previewImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ],
     },
   };
 }
@@ -53,7 +63,7 @@ export default async function ProgramadorPage() {
       <HeroProgrammerSection settings={settings} />
 
       {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
-      <VslSection isProgrammer={true} />
+      <VslSection settings={settings} isProgrammer={true} />
 
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection isProgrammer={true} />
@@ -75,7 +85,7 @@ export default async function ProgramadorPage() {
       <MetricsSection isProgrammer={true} />
 
       {/* 9. PROVA SOCIAL: Depoimentos e validação real do método */}
-      <TestimonialsSection isProgrammer={true} />
+      <TestimonialsSection settings={settings} isProgrammer={true} />
 
       {/* 10. A OFERTA IRRECUSÁVEL: O valor empilhado com os bônus detalhados por R$0,00 */}
       <PricingSection settings={settings} isProgrammer={true} />

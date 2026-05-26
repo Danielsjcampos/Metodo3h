@@ -12,7 +12,7 @@ export function FaqSection({
   isProgrammer?: boolean; 
   isWaitlist?: boolean;
 }) {
-  const launchPrice = settings?.launchPrice || "97";
+  const launchPrice = settings?.launchPrice || "197";
   const regularPrice = settings?.regularPrice || "247";
 
   const faqs = [

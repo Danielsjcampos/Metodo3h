@@ -37,9 +37,13 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {
       logoText,
+      logoImage,
       seoTitle,
       seoDescription,
       seoFavicon,
+      seoImage,
+      vslVideoUrl,
+      testimonialsVideoUrl,
       geoCity,
       geoState,
       socialInstagram,
@@ -61,9 +65,13 @@ export async function POST(req: NextRequest) {
 
     const settingsToSave: SiteSettings = {
       logoText,
+      logoImage: logoImage || "/images/metodo3h logo.png",
       seoTitle,
       seoDescription,
       seoFavicon: seoFavicon || "/favicon.ico",
+      seoImage: seoImage || "/images/preview.png",
+      vslVideoUrl: vslVideoUrl !== undefined ? vslVideoUrl : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      testimonialsVideoUrl: testimonialsVideoUrl !== undefined ? testimonialsVideoUrl : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       geoCity: geoCity || "São José dos Campos",
       geoState: geoState || "SP",
       socialInstagram: socialInstagram || "",

@@ -20,6 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   const title = settings.seoTitle || "Método 3h - Seu site profissional com IA em 3 horas";
   const description = settings.seoDescription || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h.";
+  const previewImage = settings.seoImage || "/images/preview.png";
+
   return {
     title: title,
     description: description,
@@ -32,6 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       url: "https://metodo3horas.com.br/matricula",
       siteName: "Método 3h",
+      images: [
+        {
+          url: previewImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        }
+      ],
     },
   };
 }
@@ -53,7 +63,7 @@ export default async function MatriculaPage() {
       <HeroSection settings={settings} />
 
       {/* VSL: Veja o método ao vivo */}
-      <VslSection />
+      <VslSection settings={settings} />
 
       {/* O Problema: Você está pagando caro demais */}
       <FeaturesSection />
@@ -77,7 +87,7 @@ export default async function MatriculaPage() {
       <MetricsSection />
 
       {/* Depoimentos reais */}
-      <TestimonialsSection />
+      <TestimonialsSection settings={settings} />
 
       {/* Bônus que valem mais que o curso (Oferta e valor empilhado) */}
       <PricingSection settings={settings} />

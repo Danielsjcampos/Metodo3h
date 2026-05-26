@@ -65,8 +65,8 @@ export function FooterSection({ settings, isProgrammer = false }: { settings?: a
             <div className="col-span-2">
               <a href={isProgrammer ? "/programador" : "/"} className="inline-flex items-center gap-2 mb-6">
                 <img 
-                  src={isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png"} 
-                  alt="Método 3h" 
+                  src={settings?.logoImage || (isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png")} 
+                  alt={settings?.logoText || "Método 3h"} 
                   className="h-8 object-contain" 
                 />
               </a>

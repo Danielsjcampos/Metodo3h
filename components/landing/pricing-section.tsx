@@ -19,10 +19,10 @@ const bonuses = [
     value: "297,00",
   },
   {
-    icon: "📡",
-    title: "Grupo exclusivo + novidades da IA toda semana",
-    description: "Acesso ao grupo de alunos com 1 link/ferramenta nova por semana — porque o mundo da IA muda todo mês e você precisa se manter na frente.",
-    value: "147,00",
+    icon: "💬",
+    title: "Grupo VIP + Mentoria com 3 Mentores",
+    description: "Acesso ao grupo VIP de alunos com o acompanhamento direto de 3 mentores para avaliar o seu site e tirar suas dúvidas em tempo real. Nós vamos te ajudar de verdade a colocar o seu primeiro site no ar!",
+    value: "497,00",
   },
   {
     icon: "🗺️",
@@ -369,6 +369,61 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
           </motion.div>
         </div>
  
+        {/* Certification & Launch Guarantee Highlight Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7 }}
+          className={`backdrop-blur-xl border rounded-[2.5rem] p-8 md:p-12 mb-20 max-w-4xl mx-auto relative overflow-hidden text-center ${
+            isProgrammer 
+              ? "bg-[#0e0e0e]/85 border-orange-500/20 shadow-[0_0_80px_rgba(249,115,22,0.08)]" 
+              : "bg-[#0e0e0e]/85 border-blue-500/20 shadow-[0_0_80px_rgba(59,130,246,0.08)]"
+          }`}
+        >
+          {/* Ambient Glow */}
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full blur-[60px] pointer-events-none opacity-[0.06] ${
+            isProgrammer ? "bg-orange-500" : "bg-blue-500"
+          }`} />
+
+          <div className="relative z-10 flex flex-col items-center">
+            {/* Certification Icon/Stamp */}
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 border ${
+              isProgrammer ? "bg-orange-500/10 border-orange-500/30 text-orange-400" : "bg-blue-500/10 border-blue-500/30 text-blue-400"
+            }`}>
+              <Star className="w-8 h-8 fill-current shrink-0" />
+            </div>
+
+            <span className={`font-mono font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs block mb-3 ${
+              isProgrammer ? "text-orange-500" : "text-[#3B82F6]"
+            }`}>
+              Garantia de Lançamento & Selo Oficial de Capacitação
+            </span>
+
+            <h3 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tight leading-tight">
+              Selo de Excelência & Certificado pela <span className={isProgrammer ? "text-orange-400" : "text-cyan-400"}>2timeweb</span>
+            </h3>
+
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-6">
+              Nossa missão não é apenas te entregar aulas: **nós vamos te apoiar para lançar seu site de verdade**. 
+              Assim que você colocar o seu primeiro site no ar usando o Método 3h, nossa equipe fará uma **avaliação técnica completa** do seu projeto. 
+              Sendo validado e aprovado, você ganhará o **Certificado Oficial de Profissional de Desenvolvimento IA** emitido pela renomada agência **2timeweb**, provando sua capacitação técnica e servindo de autoridade absoluta para fechar com novos clientes.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono font-semibold uppercase text-white/80">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-green-500" /> Avaliação Técnica Individual
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-green-500" /> Selo 2timeweb de Qualidade
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-green-500" /> Certificado Homologado
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Centered glass card */}
         <div className={`w-full max-w-4xl mx-auto bg-[#0a0a0a]/90 backdrop-blur-xl border rounded-[2.5rem] relative overflow-hidden p-8 md:p-14 text-center transition-all duration-700 ${
           isProgrammer 
@@ -420,11 +475,16 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
  
           <div className="mb-2 flex flex-col items-center justify-center">
             <span className="text-4xl md:text-6xl font-black text-white tracking-tighter drop-shadow-lg">
-              R$ {settings?.launchPrice || "97"},00 à vista
+              R$ {settings?.launchPrice || "197"},00 à vista
+            </span>
+            <span className={`text-base md:text-lg font-bold mt-2 ${
+              isProgrammer ? "text-orange-400 font-mono" : "text-cyan-400"
+            }`}>
+              ou em até 10x de R$ 22,50 no cartão
             </span>
           </div>
           <div className={`font-bold text-xs md:text-sm mb-10 ${
-            isProgrammer ? "text-orange-400 font-mono" : "text-[#3B82F6]/90"
+            isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
           }`}>
             no Cartão ou Pix (sem mensalidades)
           </div>
@@ -466,20 +526,20 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
               "7 módulos completos (~6h de conteúdo)",
               "26 aulas de engenharia de software real",
               "Bônus: Google Meu Negócio (Vinicius Saldanha)",
-              "Bônus: Copywriting para Tech Freelancers",
-              "Mais de R$ 1.300 em bônus inclusos",
-              "1 ano de acesso completo com suporte VIP",
-              "7 dias de garantia de satisfação incondicional",
+              "Bônus: Grupo VIP + 3 Mentores de IA",
+              "Garantia: Devolução Total em até 7 dias",
+              "Mentoria: Acompanhamento até o site no ar",
+              "Exclusivo: Certificado Oficial da 2timeweb",
             ] : [
               "7 módulos completos (~6h de conteúdo)",
               "26 aulas práticas com tela real",
               "Módulo Bônus: Google Meu Negócio (Vinicius Saldanha)",
-              "Mais de R$ 1.300 em bônus inclusos",
-              "1 ano de acesso completo",
-              "Grupo de alunos no WhatsApp",
-              "7 dias de garantia incondicional",
+              "Módulo Bônus: Grupo VIP com 3 Mentores",
+              "Suporte em tempo real para tirar dúvidas",
+              "Garantia de Satisfação Total (7 dias)",
+              "Certificado Oficial Homologado 2timeweb 🏆",
             ]).map((feature) => {
-              const isBonus = feature.toLowerCase().includes("bônus");
+              const isBonus = feature.toLowerCase().includes("bônus") || feature.toLowerCase().includes("exclusivo") || feature.toLowerCase().includes("certificado");
               return (
                 <div key={feature} className={`flex items-start gap-3 ${isBonus ? "animate-pulse" : ""}`}>
                   <CheckCircle size={18} className={`shrink-0 mt-0.5 ${isBonus ? "text-yellow-500" : (isProgrammer ? "text-orange-500" : "text-[#3B82F6]")}`} />

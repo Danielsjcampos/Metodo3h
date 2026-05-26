@@ -61,9 +61,13 @@ export interface HighlightItem {
 
 export interface SiteSettings {
   logoText: string;
+  logoImage: string;
   seoTitle: string;
   seoDescription: string;
   seoFavicon: string;
+  seoImage: string;
+  vslVideoUrl: string;
+  testimonialsVideoUrl: string;
   geoCity: string;
   geoState: string;
   socialInstagram: string;
@@ -400,9 +404,13 @@ export async function getSettings(): Promise<SiteSettings> {
     console.warn("DATABASE_URL is not defined in environment variables. Returning default settings.");
     return {
       logoText: "METODO3HORAS",
+      logoImage: "/images/metodo3h logo.png",
       seoTitle: "Método 3h - Seu site profissional com IA em 3 horas",
       seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h.",
       seoFavicon: "/images/faviicon metodo3h.png",
+      seoImage: "/images/preview.png",
+      vslVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      testimonialsVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       geoCity: "São José dos Campos",
       geoState: "SP",
       socialInstagram: "https://instagram.com/danielmarques.dino",
@@ -410,6 +418,8 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3h.",
+      launchPrice: "197",
+      regularPrice: "247",
     };
   }
 
@@ -424,9 +434,13 @@ export async function getSettings(): Promise<SiteSettings> {
 
     return {
       logoText: settingsMap["logo_text"] || "SITECOMIA",
+      logoImage: settingsMap["logo_image"] || "/images/metodo3h logo.png",
       seoTitle: settingsMap["seo_title"] || "Método 3h - Seu site profissional com IA em 3 horas",
       seoDescription: settingsMap["seo_description"] || "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara.",
       seoFavicon: settingsMap["seo_favicon"] || "/images/faviicon metodo3h.png",
+      seoImage: settingsMap["seo_image"] || "/images/preview.png",
+      vslVideoUrl: settingsMap["vsl_video_url"] !== undefined ? settingsMap["vsl_video_url"] : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      testimonialsVideoUrl: settingsMap["testimonials_video_url"] !== undefined ? settingsMap["testimonials_video_url"] : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       geoCity: settingsMap["geo_city"] || "São José dos Campos",
       geoState: settingsMap["geo_state"] || "SP",
       socialInstagram: settingsMap["social_instagram"] || "https://instagram.com/danielmarques.dino",
@@ -434,16 +448,20 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: settingsMap["whatsapp_enabled"] === "true",
       whatsappNumber: settingsMap["whatsapp_number"] || "5512999999999",
       whatsappMessage: settingsMap["whatsapp_message"] || "Olá! Gostaria de saber mais sobre o Método 3h.",
-      launchPrice: settingsMap["launch_price"] || "97",
+      launchPrice: settingsMap["launch_price"] || "197",
       regularPrice: settingsMap["regular_price"] || "247",
     };
   } catch (error) {
     console.error("Error getting settings from Neon:", error);
     return {
       logoText: "METODO3HORAS",
+      logoImage: "/images/metodo3h logo.png",
       seoTitle: "Método 3h - Seu site profissional com IA em 3 horas",
       seoDescription: "Aprenda a colocar seu site no ar hoje sem precisar programar e sem pagar por hospedagem cara com o Método 3h.",
       seoFavicon: "/images/faviicon metodo3h.png",
+      seoImage: "/images/preview.png",
+      vslVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      testimonialsVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       geoCity: "São José dos Campos",
       geoState: "SP",
       socialInstagram: "https://instagram.com/danielmarques.dino",
@@ -451,7 +469,7 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3h.",
-      launchPrice: "97",
+      launchPrice: "197",
       regularPrice: "247",
     };
   }
@@ -470,9 +488,13 @@ export async function saveSettings(settings: SiteSettings): Promise<void> {
   try {
     const settingsList = [
       ["logo_text", settings.logoText],
+      ["logo_image", settings.logoImage],
       ["seo_title", settings.seoTitle],
       ["seo_description", settings.seoDescription],
       ["seo_favicon", settings.seoFavicon],
+      ["seo_image", settings.seoImage],
+      ["vsl_video_url", settings.vslVideoUrl],
+      ["testimonials_video_url", settings.testimonialsVideoUrl],
       ["geo_city", settings.geoCity],
       ["geo_state", settings.geoState],
       ["social_instagram", settings.socialInstagram],

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, GraduationCap, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "O Problema",     href: "/#problema"     },
@@ -49,9 +49,9 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
           {/* Logo */}
           <a href={isProgrammer ? "/programador" : "/"} className="flex items-center gap-2 group">
             <img
-              src={isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png"}
-              alt="Método 3h"
-              className={`transition-all duration-500 ${isScrolled ? "h-7 md:h-10" : "h-8 md:h-12"}`}
+              src={settings?.logoImage || (isProgrammer ? "/images/logo laranja metodo3h.png" : "/images/metodo3h logo.png")}
+              alt={settings?.logoText || "Método 3h"}
+              className={`transition-all duration-500 ${isScrolled ? "h-7 md:h-10" : "h-8 md:h-12"} object-contain`}
             />
             {isProgrammer && (
               <span className="px-2 py-0.5 text-[8px] font-mono rounded bg-orange-500/20 border border-orange-500/30 text-orange-400 font-bold uppercase tracking-wider animate-pulse">
@@ -76,30 +76,6 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a 
-              href="/portal/dashboard" 
-              title="Portal do Aluno"
-              className={`p-2 rounded-full border transition-all duration-300 flex items-center justify-center cursor-pointer ${
-                isScrolled 
-                  ? "border-foreground/15 hover:bg-foreground/5 text-foreground hover:scale-105" 
-                  : "border-white/20 hover:bg-white/10 text-white hover:scale-105"
-              }`}
-            >
-              <GraduationCap className="w-4 h-4" />
-            </a>
-            
-            <a 
-              href="/admin" 
-              title="Área do Administrador"
-              className={`p-2 rounded-full border transition-all duration-300 flex items-center justify-center cursor-pointer ${
-                isScrolled 
-                  ? "border-foreground/15 hover:bg-foreground/5 text-foreground hover:scale-105" 
-                  : "border-white/20 hover:bg-white/10 text-white hover:scale-105"
-              }`}
-            >
-              <Shield className="w-4 h-4" />
-            </a>
-
             <Button
               asChild
               size="sm"
@@ -164,25 +140,6 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
           }`}
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <div className="flex gap-3">
-              <a 
-                href="/portal/dashboard" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex-1 flex items-center justify-center gap-2 border border-foreground/20 hover:bg-foreground/5 text-foreground rounded-full h-12 text-sm font-medium transition-all"
-              >
-                <GraduationCap className="w-4 h-4" />
-                Portal Aluno
-              </a>
-              <a 
-                href="/admin" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex-1 flex items-center justify-center gap-2 border border-foreground/20 hover:bg-foreground/5 text-foreground rounded-full h-12 text-sm font-medium transition-all"
-              >
-                <Shield className="w-4 h-4" />
-                Área Adm
-              </a>
-            </div>
-
             <Button 
               asChild
               className="w-full bg-foreground text-background rounded-full h-14 text-base cursor-pointer"

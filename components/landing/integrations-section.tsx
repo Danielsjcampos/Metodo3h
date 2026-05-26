@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 /* ─── Tool visuals — imagens geradas por IA ────────────────── */
 
@@ -67,6 +68,13 @@ export function IntegrationsSection({ isProgrammer = false }: { isProgrammer?: b
   ];
 
   const tools = defaultTools;
+  const parallaxContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: parallaxContainerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,21 +121,31 @@ export function IntegrationsSection({ isProgrammer = false }: { isProgrammer?: b
         </p>
       </div>
 
-      {/* Full-width visual connection graph with smooth gradient blend */}
-      <div className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[1600px] -mt-6 mb-6 transition-all duration-1000 delay-200 overflow-hidden ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}>
-        {/* Vignette fade layers on sides to blend perfectly */}
+      {/* Full-width visual connection graph with smooth parallax and gradient blends */}
+      <div 
+        ref={parallaxContainerRef}
+        className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[1600px] h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px] -mt-6 mb-6 overflow-hidden transition-opacity duration-1000 delay-200 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {/* Vignette fade layers to blend perfectly at all edges into bg-background */}
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent z-10" />
         <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
         
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/connection-KeJwWPQvn6l0a7C48tCARYtNEdC92H.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-auto object-cover opacity-80"
-          style={{ filter: isProgrammer ? "hue-rotate(30deg) saturate(1.4) brightness(0.95)" : "hue-rotate(180deg) saturate(1.4) brightness(0.95)" }}
-        />
+        <motion.div 
+          style={{ y: parallaxY, scale: 1.18 }}
+          className="absolute inset-0 w-full h-[136%] -top-[18%]"
+        >
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/connection-KeJwWPQvn6l0a7C48tCARYtNEdC92H.png"
+            alt="Conexão de inteligência artificial"
+            aria-hidden="true"
+            className="w-full h-full object-cover opacity-80"
+            style={{ filter: isProgrammer ? "hue-rotate(30deg) saturate(1.4) brightness(0.95)" : "hue-rotate(180deg) saturate(1.4) brightness(0.95)" }}
+          />
+        </motion.div>
       </div>
 
       {/* Tools grid */}

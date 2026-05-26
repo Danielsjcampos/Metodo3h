@@ -125,7 +125,7 @@ export async function initDatabase() {
         ["whatsapp_enabled", "false"],
         ["whatsapp_number", "5512999999999"],
         ["whatsapp_message", "Olá! Gostaria de saber mais sobre o Método 3h."],
-        ["launch_price", "97"],
+        ["launch_price", "197"],
         ["regular_price", "247"]
       ];
       for (const [key, value] of defaultSettings) {

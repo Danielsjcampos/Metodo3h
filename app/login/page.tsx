@@ -45,37 +45,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickLogin = async (quickEmail: string, quickPassword: string) => {
-    setEmail(quickEmail);
-    setPassword(quickPassword);
-    setError("");
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch("/api/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: quickEmail, password: quickPassword }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Algo deu errado. Verifique seus dados.");
-      } else {
-        if (data.user.role === "admin") {
-          router.push("/admin");
-        } else {
-          router.push("/portal/dashboard");
-        }
-      }
-    } catch (err) {
-      setError("Erro de conexão. Tente novamente mais tarde.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <main className="relative min-h-screen bg-black flex items-center justify-center p-6 overflow-hidden noise-overlay">
       {/* Dynamic Gradients */}
@@ -176,42 +145,6 @@ export default function LoginPage() {
                 )}
               </Button>
             </form>
-
-            <div className="mt-8 pt-6 border-t border-white/5 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-wider">Acesso Rápido (Dev)</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => handleQuickLogin("aluno@metodo3horas.com", "aluno123")}
-                  disabled={isSubmitting}
-                  className="flex flex-col items-start text-left bg-white/[0.01] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 p-3 rounded-xl transition-all duration-300 group/btn cursor-pointer disabled:opacity-50"
-                >
-                  <span className="text-white block font-sans font-semibold text-xs mb-0.5 group-hover/btn:text-purple-300 transition-colors">
-                    Entrar como Aluno
-                  </span>
-                  <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    aluno@metodo3h.com.br
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleQuickLogin("admin@metodo3h.com.br", "admin123")}
-                  disabled={isSubmitting}
-                  className="flex flex-col items-start text-left bg-white/[0.01] hover:bg-white/[0.05] border border-white/5 hover:border-[#3B82F6]/20 p-3 rounded-xl transition-all duration-300 group/btn cursor-pointer disabled:opacity-50"
-                >
-                  <span className="text-[#3B82F6] block font-sans font-semibold text-xs mb-0.5 group-hover/btn:text-pink-300 transition-colors">
-                    Entrar como Admin
-                  </span>
-                  <span className="text-[9px] text-muted-foreground font-mono block truncate w-full">
-                    admin@metodo3h.com.br
-                  </span>
-                </button>
-              </div>
-            </div>
           </CardContent>
         </Card>
 
