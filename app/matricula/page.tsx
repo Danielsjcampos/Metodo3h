@@ -16,6 +16,8 @@ import { WhatsAppWidget } from "@/components/landing/whatsapp-widget";
 import { getSettings } from "@/lib/db";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   const title = settings.seoTitle || "Método 3h - Seu site profissional com IA em 3 horas";

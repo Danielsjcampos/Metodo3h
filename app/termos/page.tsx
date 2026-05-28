@@ -5,6 +5,8 @@ import { getSettings } from "@/lib/db";
 import { Scale, Users, Award, AlertCircle } from "lucide-react";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
