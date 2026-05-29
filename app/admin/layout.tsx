@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { readDb } from "@/lib/db";
-import { Shield, Users, BookOpen, Megaphone, LogOut, LayoutDashboard, ArrowLeft, Settings } from "lucide-react";
+import { Shield, Users, BookOpen, Megaphone, LogOut, LayoutDashboard, ArrowLeft, Settings, Sparkles } from "lucide-react";
 import { LogoutButton } from "./logout-button";
 
 export default async function AdminLayout({
@@ -58,6 +58,7 @@ export default async function AdminLayout({
             { label: "Leads da Espera", path: "/admin", icon: Users },
             { label: "Grade de Cursos", path: "/admin/courses", icon: BookOpen },
             { label: "Notícias & Mural", path: "/admin/news", icon: Megaphone },
+            { label: "Glossário SEO", path: "/admin/glossario", icon: Sparkles },
             { label: "Configurações", path: "/admin/settings", icon: Settings },
           ].map((item) => {
             const Icon = item.icon;
