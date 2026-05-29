@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model GlossaryTerm {
+  id        String         @id @default(cuid())
+  termo     String
+  slug      String         @unique
+  letra     String
+  nicho     String?
+  conteudo  String
+  resumo    String?
+  seoTitle  String?
+  imagem    String?
+  publicado Boolean        @default(false)
+  revisado  Boolean        @default(false)
+  views     Int            @default(0)
+  origem    GlossaryOrigem @default(MANUAL)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([letra, publicado])
+  @@index([createdAt])
+}
+
+enum GlossaryOrigem {
+  MANUAL
+  AI_GEMINI
+  AI_OPENAI
+  AI_ANTHROPIC
+  AI_OPENROUTER
+  AI_GROQ
+  AI_DEEPSEEK
+  CSV_IMPORT
+}
+
+model SeoIndexingLog {
+  id         String   @id @default(cuid())
+  url        String
+  action     String   @default("URL_UPDATED")
+  motor      String
+  status     String
+  statusCode Int?
+  erro       String?
+  origem     String?
+  createdAt  DateTime @default(now())
+
+  @@index([url])
+  @@index([createdAt])
+  @@index([motor, status])
+}
