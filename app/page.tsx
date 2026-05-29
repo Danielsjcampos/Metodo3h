@@ -86,7 +86,7 @@ export default async function Home() {
       <IntegrationsSection />
 
       {/* 8. LIDERANÇA / CREDIBILIDADE: Quem vai te ensinar (Dino com foto e carrossel de logos) */}
-      <DevelopersSection showPartners={false} />
+      <DevelopersSection showPartners={true} />
 
       {/* 9. Quote: O que eu ensino aqui */}
       <MetricsSection />

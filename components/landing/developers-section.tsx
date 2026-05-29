@@ -12,7 +12,7 @@ const dinoFeatures = [
 
 export function DevelopersSection({ 
   isProgrammer = false, 
-  showPartners = false 
+  showPartners = true 
 }: { 
   isProgrammer?: boolean; 
   showPartners?: boolean;
@@ -33,15 +33,21 @@ export function DevelopersSection({
     return (
       <section id="instrutor" ref={sectionRef} className="relative overflow-hidden py-20 md:py-24 lg:py-32 bg-background border-t border-white/5">
         {/* Background ambient glow */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
+        <div className={cn(
+          "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none",
+          isProgrammer ? "bg-orange-500/5" : "bg-blue-600/5"
+        )} />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
           {/* Header */}
           <div className="relative mb-14 lg:mb-20 text-center flex flex-col items-center justify-center">
-            <span className="inline-flex items-center gap-3 text-xs font-mono tracking-widest text-blue-400 uppercase mb-6 justify-center">
-              <span className="w-8 h-[2px] bg-blue-500/30 rounded-full" />
+            <span className={cn(
+              "inline-flex items-center gap-3 text-xs font-mono tracking-widest uppercase mb-6 justify-center",
+              isProgrammer ? "text-orange-400" : "text-blue-400"
+            )}>
+              <span className={cn("w-8 h-[2px] rounded-full", isProgrammer ? "bg-orange-500/30" : "bg-blue-500/30")} />
               Equipe do Método 3h
-              <span className="w-8 h-[2px] bg-blue-500/30 rounded-full" />
+              <span className={cn("w-8 h-[2px] rounded-full", isProgrammer ? "bg-orange-500/30" : "bg-blue-500/30")} />
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-white tracking-tight leading-[1.05] mb-6">
               Quem vai te guiar <span className="text-muted-foreground italic font-light">passo a passo.</span>
@@ -56,10 +62,10 @@ export function DevelopersSection({
             {[
               {
                 name: "Daniel Marques (Dino)",
-                role: "Fundador & Instrutor Principal",
+                role: "O Mentor & Veterano do Digital",
                 image: "/images/dino/dino3.jpg",
-                highlights: ["30+ anos de mercado", "1.000+ sites entregues"],
-                bio: "Veterano do mercado digital com três décadas de experiência construindo SaaS, sistemas empresariais complexos e automações avançadas. Ensina a essência da lógica e a infraestrutura cirúrgica.",
+                highlights: ["30 anos de mercado", "1.000+ sites entregues", "Criador do Método"],
+                bio: "Veterano do mercado digital com três décadas de experiência construindo SaaS, sistemas complexos e automações de verdade. Ensina a essência da lógica de negócios, infraestrutura cirúrgica e a estratégia comercial real.",
                 color: "border-blue-500/20 text-blue-400",
                 icon: (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,10 +75,10 @@ export function DevelopersSection({
               },
               {
                 name: "Vinicius Saldanha",
-                role: "Co-fundador & Diretor de Tecnologia",
+                role: "Ex-Aluno que \"Domou\" a IA & Sócio",
                 image: "/images/Saldanha.jpeg",
-                highlights: ["Especialista em IA e UX", "Desenvolvimento Premium"],
-                bio: "Especialista em engenharia de prompt, layouts de alto padrão visual com efeito de vidro (Glassmorphism) e performance otimizada de SEO. Garante que seu aprendizado use as melhores IAs do mundo.",
+                highlights: ["Nunca foi dev tradicional", "Mestre em Prompts de IA", "Design Premium e SEO"],
+                bio: "Nunca estudou programação por 5 anos nem foi desenvolvedor de banco de dados. Mas ele 'domou' a Inteligência Artificial. Com a mentoria do Daniel e o superpoder da IA, Vinicius cria sistemas full-stack completos, layouts premium com efeito de vidro (Glassmorphism) e SEO impecável.",
                 color: "border-emerald-500/20 text-emerald-400",
                 icon: (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,10 +88,10 @@ export function DevelopersSection({
               },
               {
                 name: "Gabriel",
-                role: "Co-fundador & Diretor de Growth",
+                role: "Ex-Aluno que Criou CRM & Sócio",
                 image: "/images/gabriel.jpeg",
-                highlights: ["Funis de Alta Conversão", "Estratégia de Vendas"],
-                bio: "Estrategista de marketing de atração e funis automatizados de conversão de tráfego. Ensina você a comercializar seus sites para obter recorrência e fechar contratos comerciais lucrativos.",
+                highlights: ["Sem código tradicional", "Criador de CRM com IA", "Automações de Vendas"],
+                bio: "Começou do zero absoluto, sem background técnico tradicional. Aprendeu os princípios do negócio digital com o Daniel e usa a IA para construir sistemas completos de CRM e automações de vendas que agregam altíssimo valor corporativo.",
                 color: "border-purple-500/20 text-purple-400",
                 icon: (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
