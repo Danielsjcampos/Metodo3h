@@ -221,7 +221,10 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const videoId = getYouTubeId(settings?.vslVideoUrl || "dQw4w9WgXcQ");
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-[140px] sm:pt-[180px] lg:pt-36 pb-12 lg:pb-16">
+    <section className={cn(
+      "relative min-h-screen flex flex-col justify-between items-stretch bg-black pt-[140px] sm:pt-[180px] lg:pt-36 pb-12 lg:pb-16",
+      isFloating && !isClosed ? "z-[9999]" : "z-10 overflow-hidden"
+    )}>
       {/* Background video */}
       <div className="absolute inset-0 z-0 opacity-55">
         <video
@@ -273,7 +276,10 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
       </div>
       
       {/* Main Content (Centered vertically via flex-grow) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-6 gap-x-12 lg:gap-x-16 items-center pt-8">
+      <div className={cn(
+        "w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-6 gap-x-12 lg:gap-x-16 items-center pt-8",
+        isFloating && !isClosed ? "relative z-[9999]" : "relative z-10"
+      )}>
         {/* 1. Intro Group (Eyebrow, Headline, Subheadline) */}
         <div className="lg:col-start-1 lg:row-start-1 flex flex-col justify-end self-end w-full">
           {/* Eyebrow */}
