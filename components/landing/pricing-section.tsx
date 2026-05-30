@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { Check, CheckCircle, ShieldCheck, Star } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Check, CheckCircle, ShieldCheck, Star, Loader2, Mail, Phone, User as UserIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedShaderBackground from "../ui/animated-shader-background";
 
@@ -59,6 +60,53 @@ const devGabrielLessons = [
 export function PricingSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, "");
+    if (value.length > 11) value = value.slice(0, 11);
+    
+    if (value.length > 6) {
+      value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+    } else if (value.length > 2) {
+      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    } else if (value.length > 0) {
+      value = `(${value}`;
+    }
+    setWhatsapp(value);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg("");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, whatsapp }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Ocorreu um erro ao realizar o cadastro.");
+      }
+
+      router.push(`/obrigado?name=${encodeURIComponent(name)}`);
+    } catch (err: any) {
+      console.error(err);
+      setErrorMsg(err.message || "Erro de conexão. Tente novamente mais tarde.");
+      setIsLoading(false);
+    }
+  };
   
   // 7 minutes countdown timer logic (looping)
   const [timeLeft, setTimeLeft] = useState(7 * 60);
@@ -424,8 +472,8 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
           </div>
         </motion.div>
 
-        {/* Centered glass card */}
-        <div className={`w-full max-w-4xl mx-auto bg-[#0a0a0a]/90 backdrop-blur-xl border rounded-[2.5rem] relative overflow-hidden p-8 md:p-14 text-center transition-all duration-700 ${
+        {/* Centered glass card with registration form */}
+        <div id="inscricao" className={`w-full max-w-4xl mx-auto bg-[#0a0a0a]/90 backdrop-blur-xl border rounded-[2.5rem] relative overflow-hidden p-8 md:p-14 text-center transition-all duration-700 ${
           isProgrammer 
             ? "border-[#F97316]/20 shadow-[0_0_120px_rgba(249,115,22,0.15)] hover:shadow-[0_0_150px_rgba(249,115,22,0.25)]" 
             : "border-[#3B82F6]/20 shadow-[0_0_120px_rgba(59,130,246,0.15)] hover:shadow-[0_0_150px_rgba(59,130,246,0.25)]"
@@ -454,159 +502,112 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
           <span className={`font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs block mb-4 ${
             isProgrammer ? "text-orange-500" : "text-[#3B82F6]"
           }`}>
-            Lançamento — Valor Especial por Tempo Limitado
+            RESERVA DE VAGA + DESCONTO EXCLUSIVO ATIVADO
           </span>
  
           <h2 className="text-2xl md:text-4xl font-black text-white mb-3 tracking-tight">
-            Garanta Sua Vaga <span className={isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}>Agora</span>
+            Garanta Acesso Gratuito <span className={isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}>+ Reserva de Desconto</span>
           </h2>
-          <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-            {isProgrammer
-              ? "7 módulos práticos + Bônus Prospecção (Saldanha) + Bônus Negociação (Gabriel) + Comunidade VIP. Tudo por um investimento único de lançamento."
-              : "7 módulos práticos + Módulo Bônus com Vinicius Saldanha + Comunidade VIP. Tudo por um investimento único de lançamento."
-            }
+          
+          <p className="text-gray-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">
+            Ao se inscrever abaixo, você garante **acesso imediato e 100% gratuito** às 3 aulas/módulos práticos do Método 3h (Daniel, Vinícius e Gabriel). 
+            Além disso, você **trava o valor promocional de lançamento** do Arsenal Completo: de <span className="line-through text-red-500/80">R$ 997,00</span> por **apenas R$ 197,00** caso decida adquiri-lo futuramente.
+            <span className="block mt-3 font-semibold text-white">Sem compromisso ou obrigação de compra! É um benefício para garantir esse preço e ter acesso grátis imediato.</span>
           </p>
- 
-          {settings?.showCoursePrice ? (
-            <>
-              <div className={`text-gray-400 font-bold uppercase text-xs md:text-sm tracking-[0.15em] mb-2 line-through decoration-2 ${
-                isProgrammer ? "decoration-orange-500/70" : "decoration-blue-500/70"
-              }`}>
-                De R$ {settings?.regularPrice || "247"},00 por
+
+          <form onSubmit={handleFormSubmit} className="space-y-4 max-w-md mx-auto text-left mb-8 relative z-20">
+            <div className="space-y-1.5 relative">
+              <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">Nome Completo</span>
+              <div className="relative">
+                <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
+                <input 
+                  type="text"
+                  placeholder="Ex: Daniel Marques"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
+                  required
+                />
               </div>
-     
-              <div className="mb-2 flex flex-col items-center justify-center">
-                <span className="text-4xl md:text-6xl font-black text-white tracking-tighter drop-shadow-lg">
-                  R$ {settings?.launchPrice || "197"},00 à vista
-                </span>
-                <span className={`text-base md:text-lg font-bold mt-2 ${
-                  isProgrammer ? "text-orange-400 font-mono" : "text-cyan-400"
-                }`}>
-                  ou em até 10x de R$ 22,50 no cartão
-                </span>
-              </div>
-              <div className={`font-bold text-xs md:text-sm mb-10 ${
-                isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
-              }`}>
-                no Cartão ou Pix (sem mensalidades)
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={`text-gray-400 font-bold uppercase text-xs md:text-sm tracking-[0.15em] mb-2 line-through decoration-2 ${
-                isProgrammer ? "decoration-orange-500/70" : "decoration-blue-500/70"
-              }`}>
-                De R$ 1.300,00 (Em Bônus e Aula) por
-              </div>
-     
-              <div className="mb-2 flex flex-col items-center justify-center">
-                <span className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500 tracking-tighter drop-shadow-lg uppercase">
-                  100% GRATUITO
-                </span>
-                <span className={`text-base md:text-lg font-bold mt-2 ${
-                  isProgrammer ? "text-orange-400 font-mono" : "text-emerald-400"
-                }`}>
-                  Apenas Hoje · Vagas Limitadas
-                </span>
-              </div>
-              <div className={`font-bold text-xs md:text-sm mb-10 ${
-                isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
-              }`}>
-                Acesso Livre & Imediato no Grupo VIP do WhatsApp
-              </div>
-            </>
-          )}
- 
-          {/* Real Timer */}
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-8">
-            <div className="flex flex-col items-center">
-              <div className={`bg-[#111] border rounded-xl w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center text-3xl font-black font-mono ${
-                isProgrammer 
-                  ? "border-orange-500/30 text-orange-500 shadow-[inset_0_0_15px_rgba(249,115,22,0.2)]" 
-                  : "border-[#3B82F6]/30 text-[#3B82F6] shadow-[inset_0_0_15px_rgba(59,130,246,0.2)]"
-              }`}>
-                {String(minutes).padStart(2, '0')}
-              </div>
-              <span className="text-[9px] sm:text-[10px] text-gray-500 uppercase tracking-widest mt-2 font-bold">Minutos</span>
             </div>
-            <span className={`text-xl sm:text-2xl font-black -mt-6 animate-pulse ${
-              isProgrammer ? "text-orange-500/50" : "text-[#3B82F6]/50"
-            }`}>:</span>
-            <div className="flex flex-col items-center">
-              <div className={`bg-[#111] border rounded-xl w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center text-3xl font-black font-mono ${
-                isProgrammer 
-                  ? "border-orange-500/30 text-orange-500 shadow-[inset_0_0_15px_rgba(249,115,22,0.2)]" 
-                  : "border-[#3B82F6]/30 text-[#3B82F6] shadow-[inset_0_0_15px_rgba(59,130,246,0.2)]"
-              }`}>
-                {String(seconds).padStart(2, '0')}
+
+            <div className="space-y-1.5 relative">
+              <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">E-mail</span>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
+                <input 
+                  type="email"
+                  placeholder="seuemail@exemplo.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
+                  required
+                />
               </div>
-              <span className="text-[9px] sm:text-[10px] text-gray-500 uppercase tracking-widest mt-2 font-bold">Segundos</span>
             </div>
-          </div>
- 
-          <p className="text-gray-400 text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed">
-            {settings?.showCoursePrice 
-              ? "Ao finalizar o contador acima as vagas da oferta atual podem se encerrar. Oportunidade com 1 Ano de acesso e bônus inclusos."
-              : "Ao finalizar o contador acima as vagas gratuitas podem se encerrar. Garanta sua inscrição gratuita antes que acabe."}
-          </p>
- 
-          {/* Features Grid */}
-          <div className="grid sm:grid-cols-2 gap-y-5 gap-x-6 max-w-2xl mx-auto mb-12 text-left">
-            {(isProgrammer ? [
-              "7 módulos completos (~6h de conteúdo)",
-              "26 aulas de engenharia de software real",
-              "Bônus: Google Meu Negócio (Vinicius Saldanha)",
-              "Bônus: Grupo VIP + 3 Mentores de IA",
-              "Garantia: Devolução Total em até 7 dias",
-              "Mentoria: Acompanhamento até o site no ar",
-              "Exclusivo: Certificado Oficial da 2timeweb",
-            ] : [
-              "7 módulos completos (~6h de conteúdo)",
-              "26 aulas práticas com tela real",
-              "Módulo Bônus: Google Meu Negócio (Vinicius Saldanha)",
-              "Módulo Bônus: Grupo VIP com 3 Mentores",
-              "Suporte em tempo real para tirar dúvidas",
-              "Garantia de Satisfação Total (7 dias)",
-              "Certificado Oficial Homologado 2timeweb 🏆",
-            ]).map((feature) => {
-              const isBonus = feature.toLowerCase().includes("bônus") || feature.toLowerCase().includes("exclusivo") || feature.toLowerCase().includes("certificado");
-              return (
-                <div key={feature} className={`flex items-start gap-3 ${isBonus ? "animate-pulse" : ""}`}>
-                  <CheckCircle size={18} className={`shrink-0 mt-0.5 ${isBonus ? "text-yellow-500" : (isProgrammer ? "text-orange-500" : "text-[#3B82F6]")}`} />
-                  <span className={`text-gray-300 text-xs sm:text-sm ${isBonus ? "font-bold text-yellow-400" : "font-medium"}`}>
-                    {feature}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
- 
-          {/* Premium CTA Button */}
-          <motion.a
-            href="#inscricao"
-            whileHover={{ scale: 1.02, boxShadow: isProgrammer ? "0 0 40px rgba(249,115,22,0.5)" : "0 0 40px rgba(59,130,246,0.5)" }}
-            whileTap={{ scale: 0.98 }}
-            className={`w-full max-w-xl mx-auto text-white px-8 py-5 sm:py-6 rounded-2xl font-black text-sm md:text-[15px] uppercase tracking-widest transition-all mb-4 shadow-xl relative overflow-hidden group flex items-center justify-center cursor-pointer ${
-              isProgrammer 
-                ? "bg-gradient-to-r from-orange-700 to-[#F97316] hover:from-orange-600 hover:to-[#fb923c]" 
-                : "bg-gradient-to-r from-blue-700 to-[#3B82F6] hover:from-blue-600 hover:to-[#60a5fa]"
-            }`}
-          >
-            <div className="absolute inset-0 w-full h-full bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-            <span className="relative z-10">
-              {settings?.showCoursePrice ? "Quero Garantir Minha Vaga Agora" : "Quero Participar da Aula Gratuita"}
-            </span>
-          </motion.a>
-          <p className="text-gray-600 text-xs mb-8">
-            {settings?.showCoursePrice 
-              ? "Acesso imediato após a confirmação do cadastro" 
-              : "Acesso imediato e 100% gratuito pelo WhatsApp"}
-          </p>
+
+            <div className="space-y-1.5 relative">
+              <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">WhatsApp (Com DDD)</span>
+              <div className="relative">
+                <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
+                <input 
+                  type="tel"
+                  placeholder="(DD) 99999-9999"
+                  value={whatsapp}
+                  onChange={handlePhoneChange}
+                  className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
+                  required
+                />
+              </div>
+            </div>
+
+            {errorMsg && (
+              <p className="text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 p-3 rounded-lg text-center">
+                {errorMsg}
+              </p>
+            )}
+
+            {/* Countdown timer right inside the form area to add high-converting urgency */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between gap-4 mt-6">
+              <div className="text-left">
+                <span className="text-[10px] text-red-500 uppercase font-mono tracking-wider block font-bold">VAGAS EXCLUSIVAS EXPIRANDO</span>
+                <span className="text-[11px] text-muted-foreground">Garanta sua reserva antes que o tempo acabe.</span>
+              </div>
+              
+              <div className="flex items-center gap-2 font-mono text-lg font-black text-white bg-black/40 border border-white/5 px-3 py-1 rounded-xl shrink-0">
+                <span>{String(minutes).padStart(2, '0')}</span>
+                <span className="animate-pulse">:</span>
+                <span>{String(seconds).padStart(2, '0')}</span>
+              </div>
+            </div>
+
+            <Button 
+              type="submit"
+              disabled={isLoading}
+              className={`w-full text-white h-14 rounded-2xl text-xs font-mono font-bold tracking-widest cursor-pointer shadow-xl border transition-all duration-300 mt-6 flex items-center justify-center gap-2 ${
+                isProgrammer 
+                  ? "bg-gradient-to-r from-orange-700 to-[#F97316] hover:from-orange-600 hover:to-[#fb923c] border-orange-500/50 shadow-[0_8px_32px_rgba(249,115,22,0.35)]" 
+                  : "bg-gradient-to-r from-blue-700 to-[#3B82F6] hover:from-blue-600 hover:to-[#60a5fa] border-blue-500/50 shadow-[0_8px_32px_rgba(59,130,246,0.35)]"
+              }`}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  RESERVANDO VAGA E DESCONTO...
+                </>
+              ) : (
+                <>
+                  GARANTIR ACESSO GRÁTIS + RESERVAR DESCONTO
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </Button>
+          </form>
  
           {/* Trust Footnote */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-10 pt-8 border-t border-white/5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-10 pt-8 border-t border-white/5 relative z-10">
             <div className="flex items-center gap-2 text-gray-500 text-[11px] font-semibold uppercase tracking-wider">
-              <ShieldCheck size={16} className="text-gray-400" /> Garantia Incondicional de 7 Dias
+              <ShieldCheck size={16} className="text-gray-400" /> Garantia de Preço Reservado
             </div>
             <div className="flex items-center gap-3 text-gray-500 text-[11px] font-semibold uppercase tracking-wider">
               <div className="flex -space-x-2">
@@ -614,7 +615,7 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
                 <div className="w-5 h-5 rounded-full bg-zinc-700 border border-[#0a0a0a]" />
                 <div className="w-5 h-5 rounded-full bg-zinc-600 border border-[#0a0a0a]" />
               </div>
-              Vagas sujeitas à disponibilidade
+              Inscrições gratuitas ativas hoje
             </div>
           </div>
         </div>
@@ -625,15 +626,15 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
         }`}>
           <span className="flex items-center gap-2">
             <Check className={`w-4 h-4 ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`} />
-            Pagamento seguro
+            Conexão segura
           </span>
           <span className="flex items-center gap-2">
             <Check className={`w-4 h-4 ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`} />
-            Acesso imediato
+            Acesso grátis imediato
           </span>
           <span className="flex items-center gap-2">
             <Check className={`w-4 h-4 ${isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}`} />
-            Suporte por WhatsApp
+            Suporte individualizado
           </span>
         </div>
       </div>

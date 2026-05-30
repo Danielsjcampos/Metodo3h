@@ -5,7 +5,6 @@ import { MiddleCtaSection } from "@/components/landing/middle-cta";
 
 import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
-import { VslSection } from "@/components/landing/vsl-section";
 import { IntegrationsSection } from "@/components/landing/integrations-section";
 import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
@@ -63,13 +62,8 @@ export default async function Home() {
     >
       <Navigation settings={settings} isWaitlist={true} />
 
-      {/* 1. Pre-Launch Waitlist Hero (Title rotation + Email/Name/WhatsApp Capture Form) */}
-      <div id="inscricao">
-        <HeroCaptureSection />
-      </div>
-
-      {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
-      <VslSection settings={settings} />
+      {/* 1. Pre-Launch Waitlist Hero (Title rotation + VSL Video Player) */}
+      <HeroCaptureSection settings={settings} />
 
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection />

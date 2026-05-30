@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Play, Clock, VolumeX, Volume2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const words = [
   "sites de R$ 3.000",
@@ -107,17 +107,16 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   );
 }
 
-export function HeroCaptureSection() {
-  const router = useRouter();
+export function HeroCaptureSection({ settings }: { settings?: any }) {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
 
-  // Form states
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  // VSL player states
+  const [isStarted, setIsStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -130,45 +129,68 @@ export function HeroCaptureSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // WhatsApp Mask: (99) 99999-9999
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 11) value = value.slice(0, 11);
-    
-    if (value.length > 6) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-    } else if (value.length > 2) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    } else if (value.length > 0) {
-      value = `(${value}`;
-    }
-    setWhatsapp(value);
+  // Helper to parse YouTube Video ID
+  const getYouTubeId = (url: string): string => {
+    if (!url) return "dQw4w9WgXcQ";
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : url;
   };
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMsg("");
+  const hasVideo = !!settings?.vslVideoUrl && settings.vslVideoUrl.trim() !== "";
+  const videoId = getYouTubeId(settings?.vslVideoUrl || "dQw4w9WgXcQ");
 
-    try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, whatsapp }),
+  // Fake Progress Bar Simulation
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < 35) {
+          return prev + Math.random() * 4 + 2;
+        } else if (prev < 75) {
+          return prev + 0.08 + Math.random() * 0.05;
+        } else if (prev < 98) {
+          return prev + 0.01 + Math.random() * 0.01;
+        }
+        return prev;
       });
+    }, 1000);
 
-      const data = await response.json();
+    return () => clearInterval(interval);
+  }, [isPlaying]);
 
-      if (!response.ok) {
-        throw new Error(data.error || "Ocorreu um erro ao realizar o cadastro.");
-      }
+  const handleUnmute = () => {
+    setIsMuted(false);
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"unMute","args":""}', 
+      '*'
+    );
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"playVideo","args":""}', 
+      '*'
+    );
+    setIsPlaying(true);
+  };
 
-      // Smooth redirection to thank you page
-      router.push(`/obrigado?name=${encodeURIComponent(name)}`);
-    } catch (err: any) {
-      console.error(err);
-      setErrorMsg(err.message || "Erro de conexão. Tente novamente mais tarde.");
-      setIsLoading(false);
+  const togglePlay = () => {
+    if (isMuted) {
+      handleUnmute();
+      return;
+    }
+
+    if (isPlaying) {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"pauseVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(false);
+    } else {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"playVideo","args":""}', 
+        '*'
+      );
+      setIsPlaying(true);
     }
   };
 
@@ -219,7 +241,7 @@ export function HeroCaptureSection() {
       
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-16 pt-8">
         {/* Left Side: Headlines & Promise */}
-        <div className="flex-1 lg:max-w-[55%]">
+        <div className="flex-1 lg:max-w-[50%]">
           {/* Eyebrow */}
           <div 
             className={`mb-6 transition-all duration-700 ${
@@ -272,86 +294,161 @@ export function HeroCaptureSection() {
               </div>
             ))}
           </div>
+
+          {/* High-Impact CTA to go to bottom registration form */}
+          <div className={`transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+            <Button
+              asChild
+              size="lg"
+              className="px-8 h-14 text-base rounded-full group cursor-pointer animate-cta-pulse font-mono bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_32px_rgba(59,130,246,0.3)] hover:shadow-[0_0_32px_rgba(59,130,246,0.5)]"
+            >
+              <a href="#inscricao">
+                Reservar Minha Vaga & Acessar Aulas
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </a>
+            </Button>
+          </div>
         </div>
 
-        {/* Right Side: Lead Capture Form */}
-        <div className={`w-full max-w-md bg-black/60 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl transition-all duration-1000 delay-400 ${
+        {/* Right Side: VSL Player */}
+        <div className={`w-full max-w-2xl lg:max-w-[50%] transition-all duration-1000 delay-400 ${
           isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}>
-          <div className="mb-6 text-center lg:text-left">
-            <h3 className="text-xl font-display font-semibold text-white mb-2">Garantir Acesso Gratuito</h3>
-            <p className="text-xs text-white/60">Preencha os campos abaixo para receber o link exclusivo da aula e os bônus no WhatsApp.</p>
-          </div>
+          <div className="relative aspect-video border border-white/10 rounded-3xl overflow-hidden bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+            
+            {/* Thumbnail / placeholder */}
+            {!isStarted && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0d0d0d] z-30">
+                {/* Grid lines background */}
+                <div className="absolute inset-0 opacity-[0.04]">
+                  {[...Array(8)].map((_, i) => (
+                    <div key={`h${i}`} className="absolute h-px bg-white" style={{ top: `${12.5 * (i + 1)}%`, left: 0, right: 0 }} />
+                  ))}
+                  {[...Array(12)].map((_, i) => (
+                    <div key={`v${i}`} className="absolute w-px bg-white" style={{ left: `${8.33 * (i + 1)}%`, top: 0, bottom: 0 }} />
+                  ))}
+                </div>
 
-          <form onSubmit={handleFormSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-xs font-medium text-white/70 mb-1">Seu Nome Completo</label>
-              <input
-                id="name"
-                type="text"
-                required
-                placeholder="Ex: Daniel Marques"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              />
-            </div>
+                {/* Thumbnail text */}
+                <div className="relative text-center px-8 select-none">
+                  <p className="text-[10px] font-mono text-[#3B82F6] tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
+                  <h3 className="text-3xl font-display text-white leading-tight mb-2">
+                    Criar Sites com IA
+                  </h3>
+                  <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
+                </div>
 
-            <div>
-              <label htmlFor="email" className="block text-xs font-medium text-white/70 mb-1">Seu Melhor E-mail</label>
-              <input
-                id="email"
-                type="email"
-                required
-                placeholder="Ex: daniel@empresa.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              />
-            </div>
+                {/* Play button */}
+                <button
+                  onClick={() => {
+                    setIsStarted(true);
+                    setIsPlaying(true);
+                  }}
+                  className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+                  aria-label="Reproduzir vídeo"
+                >
+                  <div className="relative">
+                    {/* Pulse rings */}
+                    <div className="absolute -inset-6 rounded-full border border-[#3B82F6]/20 animate-ping opacity-60" />
+                    <div className="absolute -inset-12 rounded-full border border-[#3B82F6]/10 animate-ping opacity-30" style={{ animationDelay: "0.4s" }} />
 
-            <div>
-              <label htmlFor="whatsapp" className="block text-xs font-medium text-white/70 mb-1">Seu WhatsApp</label>
-              <input
-                id="whatsapp"
-                type="tel"
-                required
-                placeholder="Ex: (12) 99999-9999"
-                value={whatsapp}
-                onChange={handlePhoneChange}
-                className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              />
-            </div>
+                    {/* Button */}
+                    <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]">
+                      <Play className="w-8 h-8 lg:w-10 lg:h-10 fill-current ml-1 text-black" />
+                    </div>
+                  </div>
+                </button>
 
-            {errorMsg && (
-              <p className="text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 p-3 rounded-lg text-center">
-                {errorMsg}
-              </p>
+                {/* Duration badge */}
+                <div className="absolute bottom-6 right-6 flex items-center gap-2 bg-black/80 px-3 py-1.5 backdrop-blur-sm rounded-full border border-white/10">
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-[#3B82F6]" />
+                  <span className="text-xs font-mono text-white/70">
+                    Prévia gratuita · ~8 min
+                  </span>
+                </div>
+              </div>
             )}
 
-            <Button
-              type="submit"
-              disabled={isLoading}
-              size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white h-12 rounded-xl group cursor-pointer flex items-center justify-center font-semibold text-sm transition-all duration-300 shadow-[0_4px_20px_0_rgba(59,130,246,0.3)] disabled:opacity-75 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Cadastrando Vaga...
-                </>
-              ) : (
-                <>
-                  Garantir Acesso Gratuito
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </>
-              )}
-            </Button>
-          </form>
+            {isStarted && (
+              <>
+                {/* Transparent click-lock overlay that sits ABOVE the YouTube player */}
+                <div 
+                  className="absolute inset-0 z-20 cursor-pointer" 
+                  onClick={togglePlay}
+                />
 
-          <p className="text-[10px] text-center text-white/40 mt-4 leading-normal">
-            Prometemos não enviar spam. Seus dados estão seguros e você poderá cancelar a assinatura a qualquer momento.
-          </p>
+                {/* Premium un-mute overlay */}
+                {isMuted && (
+                  <div 
+                    className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
+                    onClick={handleUnmute}
+                  >
+                    <div className="w-[280px] sm:w-[320px] bg-[#0073e6] border border-blue-400/30 text-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,115,230,0.4)] text-center space-y-4 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle">
+                      <h4 className="text-lg font-bold tracking-tight leading-snug">Dê o play para ativar o som</h4>
+                      <div className="relative w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20">
+                        <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 animate-pulse text-white">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l-2.25-2.25M19.5 12l-2.25 2.25m-10.5-6L4.5 9H1.5v6h3l2.25 2.25V8.25z" />
+                        </svg>
+                      </div>
+                      <p className="text-xs uppercase tracking-widest font-mono font-bold text-blue-200">O vídeo já começou</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Semi-transparent blur overlay when paused */}
+                {!isPlaying && !isMuted && (
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center transition-all duration-300">
+                    <button
+                      onClick={togglePlay}
+                      className="absolute inset-0 w-full h-full flex items-center justify-center group"
+                    >
+                      <div className="relative">
+                        <div className="absolute -inset-6 rounded-full border border-[#3B82F6]/20 animate-ping opacity-60" />
+                        <div className="relative w-20 h-20 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 bg-white text-black shadow-[0_0_40px_rgba(59,130,246,0.4)]">
+                          <Play className="w-8 h-8 fill-current ml-1" />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                )}
+
+                <iframe
+                  ref={iframeRef}
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                  className="w-full h-full pointer-events-none scale-[1.01]"
+                  allow="autoplay; encrypted-media"
+                  title="VSL — Método 3h"
+                />
+              </>
+            )}
+          </div>
+
+          {/* Premium Progress Bar Dashboard Panel */}
+          {isStarted && (
+            <div className="mt-4 bg-white/[0.02] border border-white/5 p-4 rounded-2xl space-y-2 max-w-2xl mx-auto shadow-lg backdrop-blur-sm">
+              <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  Transmissão em Andamento
+                </span>
+                <span className="text-white font-medium">{Math.floor(progress)}% Concluído</span>
+              </div>
+              <div className="h-3 bg-white/5 border border-white/10 rounded-full overflow-hidden relative">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] rounded-full transition-all duration-500 ease-out shadow-[0_0_12px_rgba(59,130,246,0.3)]"
+                  style={{ width: `${progress}%` }}
+                />
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-shine pointer-events-none"
+                  style={{ animationDuration: "3s" }}
+                />
+              </div>
+              <p className="text-[10px] text-center text-muted-foreground font-mono">
+                A barra de reprodução avança de acordo com os principais pontos práticos apresentados.
+              </p>
+            </div>
+          )}
         </div>
       </div>
       
