@@ -126,9 +126,21 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setIsFloating(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsFloating(!entry.isIntersecting);
+        if (window.innerWidth >= 1024) {
+          setIsFloating(!entry.isIntersecting);
+        } else {
+          setIsFloating(false);
+        }
       },
       { threshold: 0.1 }
     );
@@ -137,8 +149,12 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
       observer.observe(sentinelRef.current);
     }
 
+    // Run initial check
+    handleResize();
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
