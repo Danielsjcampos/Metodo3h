@@ -2,6 +2,7 @@ import { Navigation } from "@/components/landing/navigation";
 import { FooterSection } from "@/components/landing/footer-section";
 import { getSettings } from "@/lib/db";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { CheckCircle2, MessageSquare, AlertTriangle, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { RedirectCountdown } from "@/components/landing/redirect-countdown";
@@ -114,17 +115,18 @@ export default async function ObrigadoPage({
 
           {/* Pulse Action Button */}
           <div className="space-y-4">
-            <Button
+            <ShinyButton
               asChild
-              size="lg"
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-14 rounded-2xl group cursor-pointer flex items-center justify-center font-bold text-base transition-all duration-300 shadow-[0_8px_32px_0_rgba(16,185,129,0.35)] animate-cta-pulse border border-emerald-500/50"
+              theme="green"
+              variant="solid"
+              className="w-full h-14 font-bold"
             >
               <a href={targetUrl} target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="w-5 h-5 mr-2" />
                 Entrar no Grupo VIP Grátis
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
-            </Button>
+            </ShinyButton>
             <p className="text-[10px] text-white/40">Você será redirecionado para o WhatsApp com segurança.</p>
           </div>
 

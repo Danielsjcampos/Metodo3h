@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -235,18 +236,16 @@ export function CtaSection({
                           />
                         </div>
 
-                        <Button
+                        <ShinyButton
                           type="submit"
                           disabled={isSubmitting}
-                          className={`w-full h-14 text-base rounded-full font-medium transition-all duration-300 group mt-6 cursor-pointer disabled:opacity-50 flex items-center justify-center ${
-                            isProgrammer 
-                              ? "bg-gradient-to-r from-orange-600 to-[#F97316] text-white hover:from-orange-500 hover:to-[#fb923c] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)]" 
-                              : "bg-white hover:bg-white/95 text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-                          }`}
+                          theme={isProgrammer ? "orange" : "default"}
+                          variant="solid"
+                          className="w-full h-14 font-medium mt-6"
                         >
                           {isSubmitting ? "Enviando..." : "Quero garantir minha vaga agora"}
                           {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
-                        </Button>
+                        </ShinyButton>
                       </form>
 
                       <p className="text-xs text-muted-foreground mt-6 text-center">
@@ -288,13 +287,11 @@ export function CtaSection({
                       </p>
                     </div>
 
-                    <Button
+                    <ShinyButton
                       asChild
-                      className={`w-full h-14 text-base rounded-full font-bold transition-all duration-300 group cursor-pointer flex items-center justify-center ${
-                        isProgrammer 
-                          ? "bg-gradient-to-r from-orange-600 to-[#F97316] text-white hover:from-orange-500 hover:to-[#fb923c] hover:shadow-[0_0_30px_rgba(249,115,22,0.25)]" 
-                          : "bg-white hover:bg-white/95 text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-                      }`}
+                      theme={isProgrammer ? "orange" : "default"}
+                      variant="solid"
+                      className="w-full h-14 font-bold"
                     >
                       <a 
                         href={settings?.whatsappNumber 
@@ -307,7 +304,7 @@ export function CtaSection({
                         Quero Comprar Agora
                         <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                       </a>
-                    </Button>
+                    </ShinyButton>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 text-gray-500 text-[10px] font-semibold uppercase tracking-wider">
                       <span>✓ Compra 100% segura</span>

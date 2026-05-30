@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { ArrowRight, Sparkles, CheckCircle2, Gift, FileText, Users, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -178,21 +179,17 @@ export function FinalCtaSection({ isProgrammer = false }: { isProgrammer?: boole
                 </div>
 
                 <div className="space-y-3">
-                  <Button
+                  <ShinyButton
                     asChild
-                    size="lg"
-                    className={cn(
-                      "w-full h-14 text-base rounded-full font-semibold transition-all duration-300 group cursor-pointer flex items-center justify-center",
-                      isProgrammer
-                        ? "bg-orange-500 hover:bg-orange-400 text-white shadow-[0_4px_20px_0_rgba(249,115,22,0.3)]"
-                        : "bg-blue-600 hover:bg-blue-500 text-white shadow-[0_4px_20px_0_rgba(59,130,246,0.3)]"
-                    )}
+                    theme={isProgrammer ? "orange" : "blue"}
+                    variant="solid"
+                    className="w-full h-14 font-bold"
                   >
                     <a href="#inscricao">
                       Quero me inscrever agora
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </a>
-                  </Button>
+                  </ShinyButton>
 
                   <p className="text-[9px] text-muted-foreground/60 leading-normal">
                     🔒 Seus dados estão 100% protegidos e seguros. Nossos disparos de WhatsApp são imediatos.

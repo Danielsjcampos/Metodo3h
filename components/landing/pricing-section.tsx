@@ -6,6 +6,7 @@ import { Check, CheckCircle, ShieldCheck, Star, Loader2, Mail, Phone, User as Us
 import { motion } from "framer-motion";
 import AnimatedShaderBackground from "../ui/animated-shader-background";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 const bonuses = [
   {
@@ -582,14 +583,12 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
               </div>
             </div>
 
-            <Button 
+            <ShinyButton 
               type="submit"
               disabled={isLoading}
-              className={`w-full text-white h-14 rounded-2xl text-xs font-mono font-bold tracking-widest cursor-pointer shadow-xl border transition-all duration-300 mt-6 flex items-center justify-center gap-2 ${
-                isProgrammer 
-                  ? "bg-gradient-to-r from-orange-700 to-[#F97316] hover:from-orange-600 hover:to-[#fb923c] border-orange-500/50 shadow-[0_8px_32px_rgba(249,115,22,0.35)]" 
-                  : "bg-gradient-to-r from-blue-700 to-[#3B82F6] hover:from-blue-600 hover:to-[#60a5fa] border-blue-500/50 shadow-[0_8px_32px_rgba(59,130,246,0.35)]"
-              }`}
+              theme={isProgrammer ? "orange" : "blue"}
+              variant="solid"
+              className="w-full h-14 font-mono text-xs tracking-widest font-bold"
             >
               {isLoading ? (
                 <>
@@ -602,7 +601,7 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </>
               )}
-            </Button>
+            </ShinyButton>
           </form>
  
           {/* Trust Footnote */}

@@ -13,6 +13,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 interface WhatsAppWidgetProps {
   settings: SiteSettings;
@@ -161,10 +162,12 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
               </span>
             </div>
 
-            <Button
+            <ShinyButton
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-medium h-12 rounded-full transition-all shadow-lg hover:shadow-emerald-500/20 mt-2 flex items-center justify-center gap-2 cursor-pointer"
+              theme="green"
+              variant="solid"
+              className="w-full h-12 text-sm font-semibold mt-2"
             >
               {isSubmitting ? (
                 <>
@@ -176,7 +179,7 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
                   Falar no WhatsApp
                 </>
               )}
-            </Button>
+            </ShinyButton>
           </form>
         </div>
       </DialogContent>

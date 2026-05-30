@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Play, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { cn } from "@/lib/utils";
 
 const stats = [
@@ -360,20 +361,17 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
 
         {/* CTA */}
         <div className={`mt-10 flex justify-center transition-all duration-1000 delay-500 ${isVisible ? "opacity-100" : "opacity-0"}`}>
-          <Button
+          <ShinyButton
             asChild
-            size="lg"
-            className={`px-10 h-14 text-base rounded-full group cursor-pointer animate-cta-pulse font-mono ${
-              isProgrammer 
-                ? "bg-orange-500 hover:bg-orange-600 text-white shadow-[0_0_32px_rgba(249,115,22,0.3)] hover:shadow-[0_0_32px_rgba(249,115,22,0.5)]" 
-                : "bg-white hover:bg-white/90 text-black shadow-lg"
-            }`}
+            theme={isProgrammer ? "orange" : "blue"}
+            variant="solid"
+            className="w-full sm:w-auto h-14 font-bold"
           >
             <a href="#inscricao">
               {isProgrammer ? "Quero aprender esse método" : "Quero aprender esse método"}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </a>
-          </Button>
+          </ShinyButton>
         </div>
 
       </div>

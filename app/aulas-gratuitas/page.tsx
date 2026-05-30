@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { 
   Play, VolumeX, Volume2, Info, Lock, CheckCircle2, Clock, 
   Mail, Phone, User as UserIcon, HelpCircle, ChevronRight, ArrowRight
@@ -290,13 +291,15 @@ export default function FreeClassesPortal() {
                   </div>
                 </div>
 
-                <Button 
+                <ShinyButton 
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#0073e6] hover:bg-[#0073e6]/90 text-white h-12 rounded-xl text-xs font-mono font-bold tracking-widest cursor-pointer shadow-[0_8px_32px_rgba(0,115,230,0.35)] border border-blue-500/50 transition-all duration-300"
+                  theme="blue"
+                  variant="solid"
+                  className="w-full h-12 text-xs font-mono font-bold tracking-widest"
                 >
                   {isLoading ? "VERIFICANDO CADASTRO..." : "ACESSAR AULAS GRATUITAS"}
-                </Button>
+                </ShinyButton>
               </form>
             </CardContent>
           </Card>
@@ -405,23 +408,27 @@ export default function FreeClassesPortal() {
           </p>
 
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            <Button
+            <ShinyButton
               onClick={() => handleLessonSelect(activeLesson)}
-              className="bg-white hover:bg-white/90 text-black h-12 px-8 rounded-lg font-bold text-sm tracking-tight cursor-pointer shadow-lg transition-transform hover:scale-105 active:scale-95 flex items-center gap-2"
+              theme="default"
+              variant="solid"
+              className="h-12 px-8 font-bold text-sm tracking-tight"
             >
-              <Play className="w-5 h-5 fill-current" />
+              <Play className="w-5 h-5 fill-current mr-2" />
               Assistir {activeLesson.tag}
-            </Button>
+            </ShinyButton>
             
-            <Button
+            <ShinyButton
               onClick={() => {
                 toast.success("Suas aulas estão 100% liberadas no carrossel abaixo! Bons estudos.");
               }}
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white h-12 px-6 rounded-lg font-bold text-sm tracking-tight cursor-pointer transition-colors flex items-center gap-2"
+              theme="default"
+              variant="glass"
+              className="h-12 px-6 font-bold text-sm tracking-tight"
             >
-              <Info className="w-5 h-5" />
+              <Info className="w-5 h-5 mr-2" />
               Mais informações
-            </Button>
+            </ShinyButton>
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Sparkles, KeyRound, Mail, ArrowRight } from "lucide-react";
@@ -130,10 +130,12 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <Button
+              <ShinyButton
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-white hover:bg-white/90 text-black h-12 text-sm rounded-xl font-medium tracking-tight mt-6 cursor-pointer flex items-center justify-center transition-all duration-300 disabled:opacity-50"
+                theme="blue"
+                variant="solid"
+                className="w-full h-12 text-sm font-semibold mt-6"
               >
                 {isSubmitting ? (
                   "Verificando..."
@@ -143,7 +145,7 @@ export default function LoginPage() {
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                   </>
                 )}
-              </Button>
+              </ShinyButton>
             </form>
           </CardContent>
         </Card>

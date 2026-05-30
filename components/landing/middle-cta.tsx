@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { ArrowRight, Sparkles, ShieldCheck, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -97,21 +98,17 @@ export function MiddleCtaSection({ isProgrammer = false }: { isProgrammer?: bool
 
           {/* Right / Button CTA */}
           <div className="shrink-0 w-full lg:w-auto flex flex-col items-center gap-3">
-            <Button
+            <ShinyButton
               asChild
-              size="lg"
-              className={cn(
-                "w-full sm:w-auto h-14 px-8 text-base rounded-full font-semibold transition-all duration-300 group cursor-pointer flex items-center justify-center",
-                isProgrammer
-                  ? "bg-orange-500 hover:bg-orange-400 text-white shadow-[0_4px_25px_0_rgba(249,115,22,0.35)]"
-                  : "bg-blue-600 hover:bg-blue-500 text-white shadow-[0_4px_25px_0_rgba(59,130,246,0.35)]"
-              )}
+              theme={isProgrammer ? "orange" : "blue"}
+              variant="solid"
+              className="w-full sm:w-auto h-14 font-bold"
             >
               <a href="#inscricao">
                 Garantir Minha Vaga Grátis
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
               </a>
-            </Button>
+            </ShinyButton>
             <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest text-center">
               * Vagas limitadas para o grupo VIP de bônus
             </span>

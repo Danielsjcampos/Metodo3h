@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -93,15 +94,16 @@ export function Navigation({
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Button
+            <ShinyButton
               asChild
-              size="sm"
-              className={`rounded-full transition-all duration-500 cursor-pointer ${isScrolled ? "bg-foreground hover:bg-foreground/90 text-background px-4 h-8 text-xs" : "bg-white hover:bg-white/90 text-black px-6"}`}
+              theme={isProgrammer ? "orange" : "blue"}
+              variant="solid"
+              className="px-5 h-9 text-xs font-bold"
             >
               <a href="/#inscricao">
                 Garantir vaga
               </a>
-            </Button>
+            </ShinyButton>
           </div>
 
           {/* Mobile Menu Button */}
@@ -157,14 +159,16 @@ export function Navigation({
           }`}
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <Button 
+            <ShinyButton 
               asChild
-              className="w-full bg-foreground text-background rounded-full h-14 text-base cursor-pointer"
+              theme={isProgrammer ? "orange" : "blue"}
+              variant="solid"
+              className="w-full h-14 text-base"
             >
               <a href="/#inscricao" onClick={() => setIsMobileMenuOpen(false)}>
                 Garantir minha vaga
               </a>
-            </Button>
+            </ShinyButton>
           </div>
         </div>
       </div>

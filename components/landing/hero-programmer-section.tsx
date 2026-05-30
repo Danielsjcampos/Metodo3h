@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { ShinyButton } from "@/components/ui/shiny-button";
 import { ArrowRight, Play, Volume2, VolumeX, X } from "lucide-react";
 import { Component as MatrixCodeRain } from "@/components/ui/matrix-code-rain";
 import { cn } from "@/lib/utils";
@@ -124,38 +125,24 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const playerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        setIsFloating(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (window.innerWidth >= 1024) {
-          setIsFloating(!entry.isIntersecting);
+        if (!entry.isIntersecting) {
+          setIsFloating(true);
         } else {
           setIsFloating(false);
+          setIsClosed(false);
         }
       },
       { threshold: 0.1 }
     );
 
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
+    observer.observe(sentinel);
 
-    // Run initial check
-    handleResize();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -227,7 +214,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const videoId = getYouTubeId(settings?.vslVideoUrl || "dQw4w9WgXcQ");
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
+    <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-[140px] sm:pt-[180px] lg:pt-36 pb-12 lg:pb-16">
       {/* Background video */}
       <div className="absolute inset-0 z-0 opacity-55">
         <video
@@ -279,9 +266,9 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
       </div>
       
       {/* Main Content (Centered vertically via flex-grow) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-16 pt-8">
-        {/* Left Side: Headlines & Promise */}
-        <div className="flex-1 lg:max-w-[50%]">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-y-6 gap-x-12 lg:gap-x-16 items-center pt-8">
+        {/* 1. Intro Group (Eyebrow, Headline, Subheadline) */}
+        <div className="lg:col-start-1 lg:row-start-1 flex flex-col justify-end self-end w-full">
           {/* Eyebrow */}
           <div 
             className={`mb-6 transition-all duration-700 ${
@@ -312,48 +299,38 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           </div>
 
           {/* Subheadline */}
-          <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-2xl mb-2 lg:mb-8 leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             O <span className="text-[#F97316] font-semibold">Método 3h</span> é o método definitivo para você criar <span className="text-white font-semibold">qualquer estrutura digital em minutos</span> usando Inteligência Artificial. Conquiste autonomia total para o seu negócio ou fature alto prestando esse serviço premium — <span className="text-white font-semibold">mesmo sem saber uma única linha de código.</span>
           </p>
-
-          {/* CTA */}
-          <div className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}>
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 h-14 text-base rounded-full group cursor-pointer w-full sm:w-auto flex items-center justify-center shadow-[0_8px_32px_0_rgba(249,115,22,0.3)] transition-all duration-300 font-bold"
-            >
-              <a href="#inscricao">
-                Garantir minha vaga por R${settings?.launchPrice || "197"}
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-            <span className="text-sm text-white/50">
-              R${settings?.regularPrice || "247"} após o lançamento
-            </span>
-          </div>
         </div>
 
-        {/* Right Side: VSL Player */}
-        <div 
-          ref={sentinelRef}
-          className={`w-full max-w-2xl lg:max-w-[50%] aspect-video relative transition-all duration-1000 delay-400 ${
-            isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
-        >
+        {/* 2. VSL Player + Progress Bar wrapper */}
+        <div className={cn(
+          "w-full lg:col-start-2 lg:row-start-1 lg:row-span-2 self-center transition-all duration-1000",
+          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        )}>
           <div 
-            ref={playerRef}
-            className={cn(
-              "relative transition-all duration-500 overflow-hidden bg-black",
-              isFloating && !isClosed
-                ? "fixed bottom-6 right-6 z-50 w-[260px] sm:w-[320px] md:w-[420px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 aspect-video animate-in fade-in slide-in-from-bottom-8 duration-500"
-                : "w-full h-full border border-white/10 rounded-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] aspect-video"
-            )}
+            ref={sentinelRef}
+            className="w-full aspect-video relative"
           >
+            <div 
+              ref={playerRef}
+              className={cn(
+                "overflow-hidden bg-black",
+                isFloating && !isClosed
+                  ? "fixed z-[60] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-[#F97316]/30 aspect-video"
+                  : "absolute inset-0 border border-white/10 rounded-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]"
+              )}
+              style={isFloating && !isClosed ? {
+                bottom: '16px',
+                right: '16px',
+                top: 'auto',
+                left: 'auto',
+                width: 'min(45vw, 320px)',
+              } : undefined}
+            >
             {isFloating && !isClosed && (
               <button
                 onClick={(e) => {
@@ -434,15 +411,22 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
                     className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
                     onClick={handleUnmute}
                   >
-                    <div className="w-[280px] sm:w-[320px] bg-[#f97316] border border-orange-400/30 text-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(249,115,22,0.4)] text-center space-y-4 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle">
-                      <h4 className="text-lg font-bold tracking-tight leading-snug">Dê o play para ativar o som</h4>
-                      <div className="relative w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20">
+                    <div className={cn(
+                      "bg-[#f97316] border border-orange-400/30 text-white rounded-3xl text-center shadow-[0_20px_50px_rgba(249,115,22,0.4)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle",
+                      isFloating 
+                        ? "w-[180px] p-3 space-y-2 rounded-xl shadow-md" 
+                        : "w-[280px] sm:w-[320px] p-6 space-y-4 rounded-3xl"
+                    )}>
+                      <h4 className={cn("font-bold tracking-tight leading-snug", isFloating ? "text-xs" : "text-base sm:text-lg")}>
+                        {isFloating ? "Ativar Som" : "Dê o play para ativar o som"}
+                      </h4>
+                      <div className={cn("relative mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20", isFloating ? "w-8 h-8" : "w-16 h-16")}>
                         <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 animate-pulse text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className={cn("animate-pulse text-white", isFloating ? "w-4 h-4" : "w-8 h-8")}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l-2.25-2.25M19.5 12l-2.25 2.25m-10.5-6L4.5 9H1.5v6h3l2.25 2.25V8.25z" />
                         </svg>
                       </div>
-                      <p className="text-xs uppercase tracking-widest font-mono font-bold text-orange-200">O vídeo já começou</p>
+                      {!isFloating && <p className="text-xs uppercase tracking-widest font-mono font-bold text-orange-200">O vídeo já começou</p>}
                     </div>
                   </div>
                 )}
@@ -474,6 +458,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
               </>
             )}
           </div>
+          </div>
 
           {/* Premium Progress Bar Dashboard Panel */}
           {isStarted && (
@@ -500,6 +485,29 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
               </p>
             </div>
           )}
+        </div>
+
+        {/* 3. CTA Group */}
+        <div className="lg:col-start-1 lg:row-start-2 flex flex-col justify-start self-start w-full">
+          {/* CTA */}
+          <div className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
+            <ShinyButton
+              asChild
+              theme="orange"
+              variant="solid"
+              className="w-full sm:w-auto flex items-center justify-center h-14 font-bold"
+            >
+              <a href="#inscricao">
+                Garantir minha vaga por R${settings?.launchPrice || "197"}
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </a>
+            </ShinyButton>
+            <span className="text-sm text-white/50">
+              R${settings?.regularPrice || "247"} após o lançamento
+            </span>
+          </div>
         </div>
       </div>
       
