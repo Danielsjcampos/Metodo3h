@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Check, CheckCircle, ShieldCheck, Star, Loader2, Mail, Phone, User as UserIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedShaderBackground from "../ui/animated-shader-background";
+import { Button } from "@/components/ui/button";
 
 const bonuses = [
   {
