@@ -46,7 +46,7 @@ export function Navigation({
           isScrolled ? "max-h-0 opacity-0 transform -translate-y-full" : "max-h-[120px] opacity-100 transform translate-y-0"
         )}
       >
-        <TopBanner isWaitlist={isWaitlist} />
+        <TopBanner isWaitlist={isWaitlist} isProgrammer={isProgrammer} />
       </div>
 
       <nav 

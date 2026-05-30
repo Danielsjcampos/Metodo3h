@@ -5,9 +5,10 @@ import { cn } from "@/lib/utils";
 
 interface TopBannerProps {
   isWaitlist?: boolean;
+  isProgrammer?: boolean;
 }
 
-export function TopBanner({ isWaitlist = false }: TopBannerProps) {
+export function TopBanner({ isWaitlist = false, isProgrammer = false }: TopBannerProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: "03",
     hours: "16",
@@ -60,9 +61,19 @@ export function TopBanner({ isWaitlist = false }: TopBannerProps) {
   };
 
   return (
-    <div className="w-full bg-[#0073e6] text-white py-2 px-4 relative z-[60] flex flex-col md:flex-row items-center justify-between gap-3 text-center shadow-[0_4px_20px_rgba(0,115,230,0.25)] border-b border-[#0060c0]/50 select-none overflow-hidden">
+    <div className={cn(
+      "w-full py-2 px-4 relative z-[60] flex flex-col md:flex-row items-center justify-between gap-3 text-center select-none overflow-hidden border-b",
+      isProgrammer 
+        ? "bg-[#f97316] text-white shadow-[0_4px_20px_rgba(249,115,22,0.25)] border-[#ea580c]/50" 
+        : "bg-[#0073e6] text-white shadow-[0_4px_20px_rgba(0,115,230,0.25)] border-[#0060c0]/50"
+    )}>
       {/* Visual neon light overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-white/5 to-blue-600/10 pointer-events-none" />
+      <div className={cn(
+        "absolute inset-0 pointer-events-none",
+        isProgrammer 
+          ? "bg-gradient-to-r from-orange-600/10 via-white/5 to-orange-600/10" 
+          : "bg-gradient-to-r from-blue-600/10 via-white/5 to-blue-600/10"
+      )} />
 
       {/* Main Title Content */}
       <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-semibold z-10">

@@ -124,8 +124,23 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
+      {/* Background video */}
+      <div className="absolute inset-0 z-0 opacity-45">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center"
+          style={{ filter: "hue-rotate(320deg) saturate(1.8) brightness(0.6)" }}
+        >
+          <source src="/ai%20bacgkround.mp4" type="video/mp4" />
+        </video>
+      </div>
+
       {/* Background Matrix Rain (Falling Amber Characters) */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      <div className="absolute inset-0 z-[1] opacity-30 pointer-events-none">
         <MatrixCodeRain color="#F97316" />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 pointer-events-none" />
