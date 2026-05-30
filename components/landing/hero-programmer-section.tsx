@@ -307,7 +307,8 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
         {/* 2. VSL Player + Progress Bar wrapper */}
         <div className={cn(
           "w-full lg:col-start-2 lg:row-start-1 lg:row-span-2 self-center transition-all duration-1000",
-          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          isVisible ? "opacity-100" : "opacity-0",
+          !isFloating && (isVisible ? "scale-100" : "scale-95")
         )}>
           <div 
             ref={sentinelRef}
