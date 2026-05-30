@@ -112,8 +112,8 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
   const [wordIndex, setWordIndex] = useState(0);
 
   // VSL player states
-  const [isStarted, setIsStarted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isStarted, setIsStarted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
