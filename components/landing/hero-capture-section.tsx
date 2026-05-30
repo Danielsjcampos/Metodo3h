@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Clock, VolumeX, Volume2 } from "lucide-react";
+import { ArrowRight, Play, Clock, VolumeX, Volume2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const words = [
@@ -117,6 +117,30 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const [isFloating, setIsFloating] = useState(false);
+  const [isClosed, setIsClosed] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFloating(!entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     setIsVisible(true);
@@ -310,11 +334,34 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
         </div>
 
         {/* Right Side: VSL Player */}
-        <div className={`w-full max-w-2xl lg:max-w-[50%] transition-all duration-1000 delay-400 ${
-          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}>
-          <div className="relative aspect-video border border-white/10 rounded-3xl overflow-hidden bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
-            
+        <div 
+          ref={sentinelRef}
+          className={`w-full max-w-2xl lg:max-w-[50%] aspect-video relative transition-all duration-1000 delay-400 ${
+            isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
+        >
+          <div 
+            ref={playerRef}
+            className={cn(
+              "relative transition-all duration-500 overflow-hidden bg-black",
+              isFloating && !isClosed
+                ? "fixed bottom-6 right-6 z-50 w-[260px] sm:w-[320px] md:w-[420px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 aspect-video animate-in fade-in slide-in-from-bottom-8 duration-500"
+                : "w-full h-full border border-white/10 rounded-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] aspect-video"
+            )}
+          >
+            {isFloating && !isClosed && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsClosed(true);
+                }}
+                className="absolute top-3 right-3 z-50 bg-black/70 hover:bg-black/90 text-white rounded-full p-1.5 border border-white/15 hover:border-white/25 active:scale-90 transition-all pointer-events-auto shadow-lg"
+                title="Fechar mini player"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+
             {/* Thumbnail / placeholder */}
             {!isStarted && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0d0d0d] z-30">
