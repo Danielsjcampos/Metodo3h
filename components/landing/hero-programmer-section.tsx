@@ -125,24 +125,22 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const playerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
+    const handleScroll = () => {
+      const sentinel = sentinelRef.current;
+      if (!sentinel) return;
+      const rect = sentinel.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        setIsFloating(true);
+      } else {
+        setIsFloating(false);
+        setIsClosed(false);
+      }
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          setIsFloating(true);
-        } else {
-          setIsFloating(false);
-          setIsClosed(false);
-        }
-      },
-      { threshold: 0.1 }
-    );
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
 
-    observer.observe(sentinel);
-
-    return () => observer.disconnect();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
