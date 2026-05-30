@@ -81,7 +81,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         ? "bg-gradient-to-r from-blue-700 to-[#3B82F6] text-white shadow-[0_8px_24px_0_rgba(59,130,246,0.35)] hover:shadow-[0_12px_32px_0_rgba(59,130,246,0.55)] border border-blue-500/20"
         : theme === "green"
         ? "bg-gradient-to-r from-emerald-600 to-[#10B981] text-white shadow-[0_8px_24px_0_rgba(16,185,129,0.35)] hover:shadow-[0_12px_32px_0_rgba(16,185,129,0.55)] border border-emerald-500/20"
-        : "bg-white text-black hover:bg-white/95"
+        : "bg-gradient-to-r from-zinc-800 to-zinc-900 text-white shadow-[0_8px_24px_rgba(0,0,0,0.3)] hover:from-zinc-700 hover:to-zinc-800 border border-zinc-700/30"
       : // Glass theme
         theme === "orange"
         ? "bg-orange-500/10 text-orange-400 border border-orange-500/30 hover:bg-orange-500/20 hover:shadow-[0_0_20px_rgba(249,115,22,0.2)]"
@@ -102,7 +102,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         {...(props as any)}
         style={style}
         className={cn(
-          "relative rounded-full px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center",
+          "relative rounded-[10px] px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center",
           themeClasses,
           className
         )}
@@ -145,7 +145,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
       {...(props as any)}
       style={style}
       className={cn(
-        "relative rounded-full px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center disabled:opacity-50",
+        "relative rounded-[10px] px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center disabled:opacity-50",
         themeClasses,
         className
       )}
