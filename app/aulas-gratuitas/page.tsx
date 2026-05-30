@@ -381,7 +381,7 @@ export default function FreeClassesPortal() {
             </div>
           ) : (
             <video
-              src="https://assets.mixkit.co/videos/preview/mixkit-working-on-a-computer-in-a-dark-room-43093-large.mp4"
+              src="/ai%20bacgkround.mp4"
               autoPlay
               muted
               loop
