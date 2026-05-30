@@ -107,21 +107,17 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
           className
         )}
       >
-        <span
-          className="relative z-20 flex items-center justify-center gap-2"
-          style={{
-            maskImage:
-              variant === "glass"
-                ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
-                : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
-            WebkitMaskImage:
-              variant === "glass"
-                ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
-                : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
-          }}
-        >
+        <span className="relative z-20 flex items-center justify-center gap-2">
           {children}
         </span>
+
+        {/* Premium background reflection sweep */}
+        <span
+          style={{
+            backgroundImage: "linear-gradient(-75deg, rgba(255, 255, 255, 0) calc(var(--x) + 20%), rgba(255, 255, 255, 0.18) calc(var(--x) + 25%), rgba(255, 255, 255, 0) calc(var(--x) + 30%))",
+          }}
+          className="absolute inset-0 z-10 block rounded-[inherit] pointer-events-none"
+        ></span>
 
         <span
           style={{
@@ -150,21 +146,17 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         className
       )}
     >
-      <span
-        className="relative z-20 flex items-center justify-center gap-2"
-        style={{
-          maskImage:
-            variant === "glass"
-              ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
-              : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
-          WebkitMaskImage:
-            variant === "glass"
-              ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
-              : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
-        }}
-      >
+      <span className="relative z-20 flex items-center justify-center gap-2">
         {children}
       </span>
+
+      {/* Premium background reflection sweep */}
+      <span
+        style={{
+          backgroundImage: "linear-gradient(-75deg, rgba(255, 255, 255, 0) calc(var(--x) + 20%), rgba(255, 255, 255, 0.18) calc(var(--x) + 25%), rgba(255, 255, 255, 0) calc(var(--x) + 30%))",
+        }}
+        className="absolute inset-0 z-10 block rounded-[inherit] pointer-events-none"
+      ></span>
 
       <span
         style={{
