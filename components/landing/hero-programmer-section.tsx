@@ -188,7 +188,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   return (
     <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
       {/* Background video */}
-      <div className="absolute inset-0 z-0 opacity-45">
+      <div className="absolute inset-0 z-0 opacity-55">
         <video
           autoPlay
           muted
@@ -196,10 +196,12 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
           playsInline
           aria-hidden="true"
           className="w-full h-full object-cover object-center"
-          style={{ filter: "hue-rotate(320deg) saturate(1.8) brightness(0.6)" }}
+          style={{ filter: "grayscale(100%) brightness(0.6) contrast(1.2)" }}
         >
           <source src="/ai%20bacgkround.mp4" type="video/mp4" />
         </video>
+        {/* Rich Orange Brand Tint Overlay */}
+        <div className="absolute inset-0 bg-[#F97316] mix-blend-color opacity-85 pointer-events-none" />
       </div>
 
       {/* Background Matrix Rain (Falling Amber Characters) */}
