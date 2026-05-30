@@ -419,28 +419,29 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
                   onClick={togglePlay}
                 />
 
-                {/* Premium un-mute overlay */}
+                {/* Premium un-mute overlay matching request exactly */}
                 {isMuted && (
                   <div 
-                    className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
+                    className="absolute inset-0 z-30 flex items-center justify-center bg-black/50 backdrop-blur-[2px] cursor-pointer"
                     onClick={handleUnmute}
                   >
                     <div className={cn(
-                      "bg-[#f97316] border border-orange-400/30 text-white rounded-3xl text-center shadow-[0_20px_50px_rgba(249,115,22,0.4)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle",
+                      "bg-[#f97316] text-white text-center transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] animate-bounce-gentle",
                       isFloating 
-                        ? "w-[180px] p-3 space-y-2 rounded-xl shadow-md" 
-                        : "w-[280px] sm:w-[320px] p-6 space-y-4 rounded-3xl"
+                        ? "w-[180px] p-3 space-y-2 rounded-xl border-2 border-white shadow-md" 
+                        : "w-[90%] max-w-[360px] p-6 sm:p-8 space-y-6 rounded-3xl border-[3px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
                     )}>
-                      <h4 className={cn("font-bold tracking-tight leading-snug", isFloating ? "text-xs" : "text-base sm:text-lg")}>
-                        {isFloating ? "Ativar Som" : "Dê o play para ativar o som"}
+                      <h4 className={cn("font-bold tracking-tight leading-snug", isFloating ? "text-[11px]" : "text-lg sm:text-2xl")}>
+                        Dê o play para ativar o som
                       </h4>
-                      <div className={cn("relative mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20", isFloating ? "w-8 h-8" : "w-16 h-16")}>
-                        <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className={cn("animate-pulse text-white", isFloating ? "w-4 h-4" : "w-8 h-8")}>
+                      <div className={cn("mx-auto flex items-center justify-center text-white", isFloating ? "w-6 h-6" : "w-20 h-20")}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-full h-full">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l-2.25-2.25M19.5 12l-2.25 2.25m-10.5-6L4.5 9H1.5v6h3l2.25 2.25V8.25z" />
                         </svg>
                       </div>
-                      {!isFloating && <p className="text-xs uppercase tracking-widest font-mono font-bold text-orange-200">O vídeo já começou</p>}
+                      <p className={cn("font-bold tracking-tight text-white/95 leading-snug", isFloating ? "text-[10px]" : "text-base sm:text-xl")}>
+                        O vídeo já começou
+                      </p>
                     </div>
                   </div>
                 )}
