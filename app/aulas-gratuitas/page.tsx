@@ -61,8 +61,7 @@ const FREE_LESSONS: FreeLesson[] = [
 export default function FreeClassesPortal() {
   const [isApproved, setIsApproved] = useState(false);
   const [leadName, setLeadName] = useState("");
-  const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // Portal VOD playback state
@@ -139,35 +138,33 @@ export default function FreeClassesPortal() {
 
   const handleGateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!leadName || !email || !whatsapp) {
-      toast.error("Por favor, preencha todos os campos obrigatórios.");
+    if (!identifier) {
+      toast.error("Por favor, preencha o e-mail ou WhatsApp.");
       return;
     }
 
     setIsLoading(true);
     try {
-      const res = await fetch("/api/leads", {
+      const res = await fetch("/api/auth/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: leadName, email, whatsapp }),
+        body: JSON.stringify({ identifier }),
       });
 
-      if (res.ok) {
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        const name = data.lead?.name || "Aluno";
         localStorage.setItem("waitlist_approved", "true");
-        localStorage.setItem("waitlist_name", leadName);
+        localStorage.setItem("waitlist_name", name);
+        setLeadName(name);
         setIsApproved(true);
-        toast.success(`Seja bem-vindo, ${leadName}! Acesso liberado.`);
+        toast.success(`Seja bem-vindo, ${name}! Acesso liberado.`);
       } else {
-        localStorage.setItem("waitlist_approved", "true");
-        localStorage.setItem("waitlist_name", leadName);
-        setIsApproved(true);
-        toast.success(`Acesso liberado. Bons estudos!`);
+        toast.error(data.error || "Cadastro não encontrado. Por favor, registre-se na página principal.");
       }
     } catch (err) {
-      localStorage.setItem("waitlist_approved", "true");
-      localStorage.setItem("waitlist_name", leadName);
-      setIsApproved(true);
-      toast.success(`Acesso liberado!`);
+      toast.error("Erro interno ao validar seu acesso.");
     } finally {
       setIsLoading(false);
     }
@@ -273,50 +270,20 @@ export default function FreeClassesPortal() {
                   Área de Espera Liberada
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Para acessar os 3 módulos gratuitos do Método 3h (Daniel Marques, Vinícius e Gabriel), informe seus dados abaixo. É 100% gratuito.
+                  Para acessar os 3 módulos gratuitos do Método 3h (Daniel Marques, Vinícius e Gabriel), informe seu e-mail ou WhatsApp cadastrado.
                 </p>
               </div>
 
               <form onSubmit={handleGateSubmit} className="space-y-4">
                 <div className="space-y-1.5 relative">
-                  <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">Nome</span>
+                  <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">E-mail ou WhatsApp</span>
                   <div className="relative">
                     <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
                     <input 
                       type="text"
-                      placeholder="Seu nome completo"
-                      value={leadName}
-                      onChange={(e) => setLeadName(e.target.value)}
-                      className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 relative">
-                  <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">E-mail</span>
-                  <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
-                    <input 
-                      type="email"
-                      placeholder="seuemail@exemplo.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 relative">
-                  <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-widest block">WhatsApp (Com DDD)</span>
-                  <div className="relative">
-                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
-                    <input 
-                      type="tel"
-                      placeholder="(DD) 99999-9999"
-                      value={whatsapp}
-                      onChange={(e) => setWhatsapp(e.target.value)}
+                      placeholder="seuemail@exemplo.com ou DDD + Número"
+                      value={identifier}
+                      onChange={(e) => setIdentifier(e.target.value)}
                       className="w-full h-11 bg-white/[0.02] border border-white/10 focus:border-[#3B82F6] rounded-xl pl-11 pr-4 text-white text-sm outline-none transition-all duration-300 placeholder:text-muted-foreground/45"
                       required
                     />
@@ -328,7 +295,7 @@ export default function FreeClassesPortal() {
                   disabled={isLoading}
                   className="w-full bg-[#0073e6] hover:bg-[#0073e6]/90 text-white h-12 rounded-xl text-xs font-mono font-bold tracking-widest cursor-pointer shadow-[0_8px_32px_rgba(0,115,230,0.35)] border border-blue-500/50 transition-all duration-300"
                 >
-                  {isLoading ? "CONFIGURANDO CREDENCIAIS..." : "LIBERAR AULAS GRATUITAS"}
+                  {isLoading ? "VERIFICANDO CADASTRO..." : "ACESSAR AULAS GRATUITAS"}
                 </Button>
               </form>
             </CardContent>

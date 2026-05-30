@@ -64,9 +64,6 @@ export default async function ProgramadorPage() {
       {/* 1. ATENÇÃO: Seu site no ar hoje (Edição Programador com Matrix Code Rain) */}
       <HeroProgrammerSection settings={settings} />
 
-      {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
-      <VslSection settings={settings} isProgrammer={true} />
-
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection isProgrammer={true} />
 

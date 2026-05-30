@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play, Volume2 } from "lucide-react";
 import { Component as MatrixCodeRain } from "@/components/ui/matrix-code-rain";
 
 const words = [
@@ -111,6 +111,12 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
 
+  const [isStarted, setIsStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
   useEffect(() => {
     setIsVisible(true);
   }, []);
@@ -121,6 +127,63 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
     }, 2500);
     return () => clearInterval(interval);
   }, []);
+
+  // Real-time progressive simulation of the VSL video progress bar (averages ~8 min / 480 seconds total)
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (isStarted && isPlaying) {
+      interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return Math.min(prev + 0.208, 100);
+        });
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isStarted, isPlaying]);
+
+  const togglePlay = () => {
+    if (!isStarted) return;
+    if (isPlaying) {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"pauseVideo","args":""}',
+        "*"
+      );
+      setIsPlaying(false);
+    } else {
+      iframeRef.current?.contentWindow?.postMessage(
+        '{"event":"command","func":"playVideo","args":""}',
+        "*"
+      );
+      setIsPlaying(true);
+    }
+  };
+
+  const handleUnmute = () => {
+    setIsMuted(false);
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"unMute","args":""}',
+      "*"
+    );
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      "*"
+    );
+    setIsPlaying(true);
+  };
+
+  const getYouTubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
+  const videoId = getYouTubeId(settings?.vslVideoUrl || "dQw4w9WgXcQ");
 
   return (
     <section className="relative min-h-screen flex flex-col justify-between items-stretch overflow-hidden bg-black pt-28 pb-12 lg:pt-36 lg:pb-16">
@@ -173,15 +236,16 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
       </div>
       
       {/* Main Content (Centered vertically via flex-grow) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col justify-center">
-        <div className="lg:max-w-[65%]">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex-1 flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-16 pt-8">
+        {/* Left Side: Headlines & Promise */}
+        <div className="flex-1 lg:max-w-[50%]">
           {/* Eyebrow */}
           <div 
             className={`mb-6 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <span className="inline-flex items-center gap-3 text-sm font-mono text-white/60">
+            <span className="inline-flex items-center gap-3 text-sm font-mono text-[#F97316] uppercase tracking-widest">
               <span className="w-8 h-px bg-[#F97316]/30" />
               Lançamento · Maio 2025 · 50 vagas
             </span>
@@ -230,6 +294,147 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
               R${settings?.regularPrice || "247"} após o lançamento
             </span>
           </div>
+        </div>
+
+        {/* Right Side: VSL Player */}
+        <div className={`w-full max-w-2xl lg:max-w-[50%] transition-all duration-1000 delay-400 ${
+          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}>
+          <div className="relative aspect-video border border-white/10 rounded-3xl overflow-hidden bg-black shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+            
+            {/* Thumbnail / placeholder */}
+            {!isStarted && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0d0d0d] z-30">
+                {/* Grid lines background */}
+                <div className="absolute inset-0 opacity-[0.04]">
+                  {[...Array(8)].map((_, i) => (
+                    <div key={`h${i}`} className="absolute h-px bg-white" style={{ top: `${12.5 * (i + 1)}%`, left: 0, right: 0 }} />
+                  ))}
+                  {[...Array(12)].map((_, i) => (
+                    <div key={`v${i}`} className="absolute w-px bg-white" style={{ left: `${8.33 * (i + 1)}%`, top: 0, bottom: 0 }} />
+                  ))}
+                </div>
+
+                {/* Thumbnail text */}
+                <div className="relative text-center px-8 select-none">
+                  <p className="text-[10px] font-mono text-[#F97316] tracking-widest uppercase mb-4">Daniel Marques · O Dino</p>
+                  <h3 className="text-3xl font-display text-white leading-tight mb-2">
+                    Criar Sites com IA
+                  </h3>
+                  <p className="text-lg text-white/40 font-mono">Do Zero ao Ar no Mesmo Dia</p>
+                </div>
+
+                {/* Play button */}
+                <button
+                  onClick={() => {
+                    setIsStarted(true);
+                    setIsPlaying(true);
+                  }}
+                  className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+                  aria-label="Reproduzir vídeo"
+                >
+                  <div className="relative">
+                    {/* Pulse rings */}
+                    <div className="absolute -inset-6 rounded-full border border-[#F97316]/20 animate-ping opacity-60" />
+                    <div className="absolute -inset-12 rounded-full border border-[#F97316]/10 animate-ping opacity-30" style={{ animationDelay: "0.4s" }} />
+
+                    {/* Button */}
+                    <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 bg-white text-black shadow-[0_0_40px_rgba(249,115,22,0.4)]">
+                      <Play className="w-8 h-8 lg:w-10 lg:h-10 fill-current ml-1 text-black" />
+                    </div>
+                  </div>
+                </button>
+
+                {/* Duration badge */}
+                <div className="absolute bottom-6 right-6 flex items-center gap-2 bg-black/80 px-3 py-1.5 backdrop-blur-sm rounded-full border border-white/10">
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-[#F97316]" />
+                  <span className="text-xs font-mono text-white/70">
+                    Prévia gratuita · ~8 min
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {isStarted && (
+              <>
+                {/* Transparent click-lock overlay that sits ABOVE the YouTube player */}
+                <div 
+                  className="absolute inset-0 z-20 cursor-pointer" 
+                  onClick={togglePlay}
+                />
+
+                {/* Premium un-mute overlay */}
+                {isMuted && (
+                  <div 
+                    className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
+                    onClick={handleUnmute}
+                  >
+                    <div className="w-[280px] sm:w-[320px] bg-[#f97316] border border-orange-400/30 text-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(249,115,22,0.4)] text-center space-y-4 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle">
+                      <h4 className="text-lg font-bold tracking-tight leading-snug">Dê o play para ativar o som</h4>
+                      <div className="relative w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20">
+                        <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 animate-pulse text-white">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l-2.25-2.25M19.5 12l-2.25 2.25m-10.5-6L4.5 9H1.5v6h3l2.25 2.25V8.25z" />
+                        </svg>
+                      </div>
+                      <p className="text-xs uppercase tracking-widest font-mono font-bold text-orange-200">O vídeo já começou</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Semi-transparent blur overlay when paused */}
+                {!isPlaying && !isMuted && (
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center transition-all duration-300">
+                    <button
+                      onClick={togglePlay}
+                      className="absolute inset-0 w-full h-full flex items-center justify-center group"
+                    >
+                      <div className="relative">
+                        <div className="absolute -inset-6 rounded-full border border-[#F97316]/20 animate-ping opacity-60" />
+                        <div className="relative w-20 h-20 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 bg-white text-black shadow-[0_0_40px_rgba(249,115,22,0.4)]">
+                          <Play className="w-8 h-8 fill-current ml-1" />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                )}
+
+                <iframe
+                  ref={iframeRef}
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                  className="w-full h-full pointer-events-none scale-[1.01]"
+                  allow="autoplay; encrypted-media"
+                  title="VSL — Método 3h"
+                />
+              </>
+            )}
+          </div>
+
+          {/* Premium Progress Bar Dashboard Panel */}
+          {isStarted && (
+            <div className="mt-4 bg-white/[0.02] border border-white/5 p-4 rounded-2xl space-y-2 max-w-2xl mx-auto shadow-lg backdrop-blur-sm">
+              <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+                  Transmissão em Andamento
+                </span>
+                <span className="text-white font-medium">{Math.floor(progress)}% Concluído</span>
+              </div>
+              <div className="h-3 bg-white/5 border border-white/10 rounded-full overflow-hidden relative">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#F97316] to-[#FB923C] rounded-full transition-all duration-500 ease-out shadow-[0_0_12px_rgba(249,115,22,0.3)]"
+                  style={{ width: `${progress}%` }}
+                />
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-shine pointer-events-none"
+                  style={{ animationDuration: "3s" }}
+                />
+              </div>
+              <p className="text-[10px] text-center text-muted-foreground font-mono">
+                A barra de reprodução avança de acordo com os principais pontos práticos apresentados.
+              </p>
+            </div>
+          )}
         </div>
       </div>
       

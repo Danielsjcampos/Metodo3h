@@ -207,7 +207,7 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
           className="w-full h-full object-cover object-center opacity-70"
           style={{ filter: "hue-rotate(200deg) saturate(1.4) brightness(0.85)" }}
         >
-          <source src="/ai%20bacgkround.mp4" type="video/mp4" />
+          <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-hero-0BnFGdr81Ifnj3WbBZoNt1KE4D5DMT.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/70" />
