@@ -258,9 +258,8 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <span className="block">Destrave o segredo para criar</span>
-              <span className="block text-white/50">
-                e faturar com{" "}
+              <span className="block">Destrave o segredo para criar e faturar com</span>
+              <span className="block text-white/50 mt-1">
                 <span className="relative inline-block text-white min-w-[3ch]">
                   <BlurWord word={words[wordIndex]} trigger={wordIndex} />
                 </span>
