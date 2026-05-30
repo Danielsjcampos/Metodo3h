@@ -92,7 +92,22 @@ export interface DatabaseSchema {
 let isDbInitialized = false;
 
 async function ensureDbInitialized() {
-  if (!isDbInitialized) {
+  if (isDbInitialized) return;
+
+  const databaseUrl = process.env.DATABASE_URL;
+  if (!databaseUrl) {
+    isDbInitialized = true;
+    return;
+  }
+
+  try {
+    const sql = neon(databaseUrl);
+    // Quick check to see if tables are already created and seeded
+    await sql.query("SELECT 1 FROM site_settings LIMIT 1");
+    isDbInitialized = true;
+    console.log("Database tables already initialized. Skipping full setup.");
+  } catch (error) {
+    console.log("Database site_settings table not found. Running full schema creation and seeding...");
     await initDatabase();
     isDbInitialized = true;
   }

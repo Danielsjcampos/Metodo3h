@@ -113,11 +113,19 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
 
-  const [isStarted, setIsStarted] = useState(true);
+  const [isStarted, setIsStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    // Delay loading the heavy YouTube iframe until after the initial render/hydration for maximum page speed
+    const timer = setTimeout(() => {
+      setIsStarted(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const [isFloating, setIsFloating] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
@@ -129,7 +137,8 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
       const sentinel = sentinelRef.current;
       if (!sentinel) return;
       const rect = sentinel.getBoundingClientRect();
-      if (rect.bottom < 0) {
+      // Trigger floating window as soon as the top of the video container starts leaving the viewport
+      if (rect.top < 80) {
         setIsFloating(true);
       } else {
         setIsFloating(false);
@@ -319,7 +328,7 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
               className={cn(
                 "overflow-hidden bg-black",
                 isFloating && !isClosed
-                  ? "fixed z-[60] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-[#F97316]/30 aspect-video"
+                  ? "fixed z-[9999] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-[#F97316]/30 aspect-video"
                   : "absolute inset-0 border border-white/10 rounded-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]"
               )}
               style={isFloating && !isClosed ? {
