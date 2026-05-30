@@ -362,15 +362,13 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
         {/* CTA */}
         <div className={`mt-10 flex justify-center transition-all duration-1000 delay-500 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <ShinyButton
-            asChild
             theme={isProgrammer ? "orange" : "blue"}
             variant="solid"
+            href="#inscricao"
             className="w-full sm:w-auto h-14 font-bold"
           >
-            <a href="#inscricao">
-              {isProgrammer ? "Quero aprender esse método" : "Quero aprender esse método"}
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </a>
+            {isProgrammer ? "Quero aprender esse método" : "Quero aprender esse método"}
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </ShinyButton>
         </div>
 

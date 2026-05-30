@@ -116,16 +116,16 @@ export default async function ObrigadoPage({
           {/* Pulse Action Button */}
           <div className="space-y-4">
             <ShinyButton
-              asChild
               theme="green"
               variant="solid"
+              href={targetUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full h-14 font-bold"
             >
-              <a href={targetUrl} target="_blank" rel="noopener noreferrer">
-                <MessageSquare className="w-5 h-5 mr-2" />
-                Entrar no Grupo VIP Grátis
-                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
+              <MessageSquare className="w-5 h-5 mr-2" />
+              Entrar no Grupo VIP Grátis
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </ShinyButton>
             <p className="text-[10px] text-white/40">Você será redirecionado para o WhatsApp com segurança.</p>
           </div>

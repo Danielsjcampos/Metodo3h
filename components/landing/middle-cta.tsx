@@ -99,15 +99,13 @@ export function MiddleCtaSection({ isProgrammer = false }: { isProgrammer?: bool
           {/* Right / Button CTA */}
           <div className="shrink-0 w-full lg:w-auto flex flex-col items-center gap-3">
             <ShinyButton
-              asChild
               theme={isProgrammer ? "orange" : "blue"}
               variant="solid"
+              href="#inscricao"
               className="w-full sm:w-auto h-14 font-bold"
             >
-              <a href="#inscricao">
-                Garantir Minha Vaga Grátis
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
+              Garantir Minha Vaga Grátis
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </ShinyButton>
             <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest text-center">
               * Vagas limitadas para o grupo VIP de bônus

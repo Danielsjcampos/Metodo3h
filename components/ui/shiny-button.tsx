@@ -2,8 +2,6 @@
 
 import React from "react";
 import { motion, type AnimationProps } from "framer-motion";
-import { Slot } from "@radix-ui/react-slot";
-
 import { cn } from "@/lib/utils";
 
 const animationProps: AnimationProps = {
@@ -27,24 +25,29 @@ const animationProps: AnimationProps = {
   },
 };
 
-interface ShinyButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ShinyButtonProps {
   children: React.ReactNode;
   className?: string;
   theme?: "orange" | "blue" | "green" | "default";
   variant?: "solid" | "glass";
-  asChild?: boolean;
+  href?: string;
+  target?: string;
+  rel?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
-
-// Convert Slot to a motion component so framer-motion animations work perfectly on custom children
-const MotionSlot = motion(Slot);
 
 export const ShinyButton: React.FC<ShinyButtonProps> = ({
   children,
   className,
   theme = "default",
   variant = "solid",
-  asChild = false,
+  href,
+  target,
+  rel,
+  type = "button",
+  disabled,
   ...props
 }) => {
   // Define exact theme-based colors
@@ -88,15 +91,61 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]"
         : "bg-white/10 text-white border border-white/20 hover:bg-white/20";
 
-  const Comp = asChild ? MotionSlot : motion.button;
+  // Render a link if href is provided, otherwise render a button
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        target={target}
+        rel={rel}
+        {...(animationProps as any)}
+        {...(props as any)}
+        style={style}
+        className={cn(
+          "relative rounded-full px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center",
+          themeClasses,
+          className
+        )}
+      >
+        <span
+          className="relative z-20 flex items-center justify-center gap-2"
+          style={{
+            maskImage:
+              variant === "glass"
+                ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
+                : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
+            WebkitMaskImage:
+              variant === "glass"
+                ? "linear-gradient(-75deg, var(--primary-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--primary-color) calc(var(--x) + 100%))"
+                : "linear-gradient(-75deg, var(--shimmer-color) calc(var(--x) + 20%), transparent calc(var(--x) + 30%), var(--shimmer-color) calc(var(--x) + 100%))",
+          }}
+        >
+          {children}
+        </span>
+
+        <span
+          style={{
+            mask: "linear-gradient(rgb(0,0,0), rgb(0,0,0)) content-box, linear-gradient(rgb(0,0,0), rgb(0,0,0))",
+            maskComposite: "exclude",
+            WebkitMask: "linear-gradient(rgb(0,0,0), rgb(0,0,0)) content-box, linear-gradient(rgb(0,0,0), rgb(0,0,0))",
+            WebkitMaskComposite: "xor",
+            backgroundImage: "linear-gradient(-75deg, var(--border-shimmer-10) calc(var(--x) + 20%), var(--border-shimmer-50) calc(var(--x) + 25%), var(--border-shimmer-10) calc(var(--x) + 100%))",
+          }}
+          className="absolute inset-0 z-10 block rounded-[inherit] p-px"
+        ></span>
+      </motion.a>
+    );
+  }
 
   return (
-    <Comp
+    <motion.button
+      type={type}
+      disabled={disabled}
       {...(animationProps as any)}
       {...(props as any)}
       style={style}
       className={cn(
-        "relative rounded-full px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center",
+        "relative rounded-full px-8 py-4 font-bold text-base tracking-wide uppercase transition-all duration-300 ease-in-out hover:scale-[1.02] flex items-center justify-center gap-2 group cursor-pointer overflow-hidden text-center disabled:opacity-50",
         themeClasses,
         className
       )}
@@ -127,7 +176,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
         }}
         className="absolute inset-0 z-10 block rounded-[inherit] p-px"
       ></span>
-    </Comp>
+    </motion.button>
   );
 };
 

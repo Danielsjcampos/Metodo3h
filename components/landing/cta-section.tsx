@@ -288,22 +288,18 @@ export function CtaSection({
                     </div>
 
                     <ShinyButton
-                      asChild
                       theme={isProgrammer ? "orange" : "default"}
                       variant="solid"
+                      href={settings?.whatsappNumber 
+                        ? `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
+                        : `https://wa.me/5512999999999?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-full h-14 font-bold"
                     >
-                      <a 
-                        href={settings?.whatsappNumber 
-                          ? `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
-                          : `https://wa.me/5512999999999?text=${encodeURIComponent("Olá! Vim da página de matrícula e quero garantir minha vaga no Método 3h por R$197 à vista!")}`
-                        } 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        Quero Comprar Agora
-                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                      </a>
+                      Quero Comprar Agora
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </ShinyButton>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 text-gray-500 text-[10px] font-semibold uppercase tracking-wider">

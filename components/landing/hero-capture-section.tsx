@@ -511,15 +511,13 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
           {/* High-Impact CTA to go to bottom registration form */}
           <div className={`transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             <ShinyButton
-              asChild
               theme="blue"
               variant="solid"
+              href="#inscricao"
               className="w-full sm:w-auto flex items-center justify-center h-14 font-bold"
             >
-              <a href="#inscricao">
-                Reservar Minha Vaga & Acessar Aulas
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
+              Reservar Minha Vaga & Acessar Aulas
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </ShinyButton>
           </div>
         </div>

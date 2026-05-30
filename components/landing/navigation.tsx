@@ -95,14 +95,12 @@ export function Navigation({
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <ShinyButton
-              asChild
               theme={isProgrammer ? "orange" : "blue"}
               variant="solid"
+              href="/#inscricao"
               className="px-5 h-9 text-xs font-bold"
             >
-              <a href="/#inscricao">
-                Garantir vaga
-              </a>
+              Garantir vaga
             </ShinyButton>
           </div>
 
@@ -160,14 +158,13 @@ export function Navigation({
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
             <ShinyButton 
-              asChild
               theme={isProgrammer ? "orange" : "blue"}
               variant="solid"
+              href="/#inscricao"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="w-full h-14 text-base"
             >
-              <a href="/#inscricao" onClick={() => setIsMobileMenuOpen(false)}>
-                Garantir minha vaga
-              </a>
+              Garantir minha vaga
             </ShinyButton>
           </div>
         </div>

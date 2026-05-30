@@ -494,15 +494,13 @@ export function HeroProgrammerSection({ settings }: { settings?: any }) {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             <ShinyButton
-              asChild
               theme="orange"
               variant="solid"
+              href="#inscricao"
               className="w-full sm:w-auto flex items-center justify-center h-14 font-bold"
             >
-              <a href="#inscricao">
-                Garantir minha vaga por R${settings?.launchPrice || "197"}
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </a>
+              Garantir minha vaga por R${settings?.launchPrice || "197"}
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </ShinyButton>
             <span className="text-sm text-white/50">
               R${settings?.regularPrice || "247"} após o lançamento

@@ -180,15 +180,13 @@ export function FinalCtaSection({ isProgrammer = false }: { isProgrammer?: boole
 
                 <div className="space-y-3">
                   <ShinyButton
-                    asChild
                     theme={isProgrammer ? "orange" : "blue"}
                     variant="solid"
+                    href="#inscricao"
                     className="w-full h-14 font-bold"
                   >
-                    <a href="#inscricao">
-                      Quero me inscrever agora
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    Quero me inscrever agora
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                   </ShinyButton>
 
                   <p className="text-[9px] text-muted-foreground/60 leading-normal">
