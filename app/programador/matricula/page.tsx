@@ -1,5 +1,5 @@
 import { Navigation } from "@/components/landing/navigation";
-import { HeroProgrammerSection } from "@/components/landing/hero-programmer-section";
+import { HeroSection } from "@/components/landing/hero-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
 import { MetricsSection } from "@/components/landing/metrics-section";
@@ -20,8 +20,8 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
-  const title = settings.seoTitle ? `${settings.seoTitle} (Dev)` : "Método 3h (Edição Programador) - Crie Sites com IA";
-  const description = settings.seoDescription || "Aprenda a criar sites profissionais com IA em apenas 3 horas. Edição premium com foco em programadores e entusiastas de tecnologia com Matrix Code Rain.";
+  const title = settings.seoTitle ? `${settings.seoTitle} (Matrícula Dev)` : "Método 3h (Edição Programador) - Matrícula Aberta";
+  const description = settings.seoDescription || "Matrícula aberta para a edição premium focada em programadores. Crie sites profissionais com IA em apenas 3 horas.";
   const previewImage = settings.seoImage || "/images/preview.png";
 
   return {
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: title,
       description: description,
       type: "website",
-      url: "https://metodo3horas.com.br/programador",
+      url: "https://metodo3horas.com.br/programador/matricula",
       siteName: "Método 3h",
       images: [
         {
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ProgramadorPage() {
+export default async function ProgramadorMatriculaPage() {
   const settings = await getSettings();
 
   return (
@@ -59,43 +59,43 @@ export default async function ProgramadorPage() {
         backgroundSize: "32px 32px",
       }}
     >
-      <Navigation settings={settings} isProgrammer={true} isWaitlist={true} />
+      <Navigation settings={settings} isProgrammer={true} isWaitlist={false} />
 
-      {/* 1. ATENÇÃO: Seu site no ar hoje (Edição Programador com Matrix Code Rain) */}
-      <HeroProgrammerSection settings={settings} />
+      {/* Hero: Seu site no ar hoje (Dev style) */}
+      <HeroSection settings={settings} isProgrammer={true} />
 
-      {/* 2. DEMONSTRAÇÃO / PROVA: Método em funcionamento real */}
+      {/* VSL: Veja o método ao vivo (Dev style) */}
       <VslSection settings={settings} isProgrammer={true} />
 
-      {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
+      {/* O Problema: Você está pagando caro demais (Dev style) */}
       <FeaturesSection isProgrammer={true} />
 
-      {/* 4. A JORNADA: Detalhamento dos 8 módulos práticos do curso */}
+      {/* O que você vai aprender: 8 módulos carrossel (Dev style) */}
       <InfrastructureSection isProgrammer={true} />
 
-      {/* 5. ALINHAMENTO & EGO FEEDING: Mostra que ele pertence ao ecossistema (Freelancer, Negócio Local, etc.) */}
+      {/* Para quem é este curso (Dev style) */}
       <SecuritySection isProgrammer={true} />
 
-      {/* 6. SOLUÇÃO / A VIRADA: O que você realmente vai aprender a fazer com o Método 3h */}
+      {/* A Virada: O que você realmente vai aprender a fazer (Dev style) */}
       <HowItWorksSection isProgrammer={true} />
 
-      {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
+      {/* Stack do curso: Ferramentas profissionais (Dev style) */}
       <IntegrationsSection isProgrammer={true} />
 
-      {/* 8. LIDERANÇA / CREDIBILIDADE: Quem é o mentor (Daniel) e sua filosofia */}
+      {/* Quem vai te ensinar: Daniel Marques (Dev style) */}
       <DevelopersSection isProgrammer={true} />
+
+      {/* Quote: O que eu ensino aqui (Dev style) */}
       <MetricsSection isProgrammer={true} />
 
-      {/* 9. PROVA SOCIAL: Depoimentos e validação real do método */}
+      {/* Depoimentos reais (Dev style) */}
       <TestimonialsSection settings={settings} isProgrammer={true} />
 
-      {/* 10. A OFERTA IRRECUSÁVEL: O valor empilhado com os bônus detalhados por R$0,00 */}
+      {/* Bônus que valem mais que o curso (Dev style) */}
       <PricingSection settings={settings} isProgrammer={true} />
 
-      {/* 11. ANTIMÍSSIL DE OBJEÇÕES: FAQ colocado cirurgicamente ao lado do preço final */}
+      {/* FAQ: Suas perguntas (Dev style) */}
       <FaqSection settings={settings} isProgrammer={true} />
-
-
 
       {/* Footer */}
       <FooterSection settings={settings} isProgrammer={true} />

@@ -473,6 +473,30 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               O valor original riscado (âncora de preço) pós-lançamento.
             </span>
           </div>
+
+          <div className="space-y-2 md:col-span-2 border-t border-white/5 pt-4 flex items-center justify-between">
+            <div>
+              <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+                Exibir Preço do Curso na Landing Page
+              </label>
+              <span className="text-[10px] text-muted-foreground block">
+                Se desativado, o site ocultará o preço real e exibirá a oferta como 100% Gratuita, focando na captação de leads.
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggleChange("showCoursePrice")}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none shrink-0 ${
+                settings.showCoursePrice ? "bg-[#3B82F6]" : "bg-white/10"
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  settings.showCoursePrice ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -561,6 +585,31 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             O botão flutuante de WhatsApp está desativado na landing page. Ative no switch acima para configurar.
           </p>
         )}
+      </div>
+
+      {/* 7. Grupo de WhatsApp (Aula Gratuita) */}
+      <div className="bg-white/[0.02] border border-white/[0.08] rounded-2xl p-6 space-y-4">
+        <div className="flex items-center gap-3 pb-3 border-b border-white/5">
+          <MessageSquare className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-lg font-medium text-white">Grupo de WhatsApp (Aula Gratuita)</h2>
+        </div>
+        
+        <div className="space-y-2">
+          <label className="text-xs font-mono uppercase tracking-wider text-muted-foreground block">
+            Link do Grupo de WhatsApp
+          </label>
+          <input
+            type="url"
+            name="whatsappGroupUrl"
+            value={settings.whatsappGroupUrl || ""}
+            onChange={handleInputChange}
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:border-[#3B82F6]/50 focus:outline-none transition-all"
+            placeholder="Ex: https://chat.whatsapp.com/seu-grupo-vip"
+          />
+          <span className="text-[10px] text-muted-foreground block">
+            Cole o link do grupo do WhatsApp. Após se cadastrar na landing page, o lead será automaticamente redirecionado para este grupo.
+          </span>
+        </div>
       </div>
 
       {/* Form Action */}

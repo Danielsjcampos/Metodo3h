@@ -467,27 +467,55 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
             }
           </p>
  
-          <div className={`text-gray-400 font-bold uppercase text-xs md:text-sm tracking-[0.15em] mb-2 line-through decoration-2 ${
-            isProgrammer ? "decoration-orange-500/70" : "decoration-blue-500/70"
-          }`}>
-            De R$ {settings?.regularPrice || "247"},00 por
-          </div>
- 
-          <div className="mb-2 flex flex-col items-center justify-center">
-            <span className="text-4xl md:text-6xl font-black text-white tracking-tighter drop-shadow-lg">
-              R$ {settings?.launchPrice || "197"},00 à vista
-            </span>
-            <span className={`text-base md:text-lg font-bold mt-2 ${
-              isProgrammer ? "text-orange-400 font-mono" : "text-cyan-400"
-            }`}>
-              ou em até 10x de R$ 22,50 no cartão
-            </span>
-          </div>
-          <div className={`font-bold text-xs md:text-sm mb-10 ${
-            isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
-          }`}>
-            no Cartão ou Pix (sem mensalidades)
-          </div>
+          {settings?.showCoursePrice ? (
+            <>
+              <div className={`text-gray-400 font-bold uppercase text-xs md:text-sm tracking-[0.15em] mb-2 line-through decoration-2 ${
+                isProgrammer ? "decoration-orange-500/70" : "decoration-blue-500/70"
+              }`}>
+                De R$ {settings?.regularPrice || "247"},00 por
+              </div>
+     
+              <div className="mb-2 flex flex-col items-center justify-center">
+                <span className="text-4xl md:text-6xl font-black text-white tracking-tighter drop-shadow-lg">
+                  R$ {settings?.launchPrice || "197"},00 à vista
+                </span>
+                <span className={`text-base md:text-lg font-bold mt-2 ${
+                  isProgrammer ? "text-orange-400 font-mono" : "text-cyan-400"
+                }`}>
+                  ou em até 10x de R$ 22,50 no cartão
+                </span>
+              </div>
+              <div className={`font-bold text-xs md:text-sm mb-10 ${
+                isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
+              }`}>
+                no Cartão ou Pix (sem mensalidades)
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={`text-gray-400 font-bold uppercase text-xs md:text-sm tracking-[0.15em] mb-2 line-through decoration-2 ${
+                isProgrammer ? "decoration-orange-500/70" : "decoration-blue-500/70"
+              }`}>
+                De R$ 1.300,00 (Em Bônus e Aula) por
+              </div>
+     
+              <div className="mb-2 flex flex-col items-center justify-center">
+                <span className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500 tracking-tighter drop-shadow-lg uppercase">
+                  100% GRATUITO
+                </span>
+                <span className={`text-base md:text-lg font-bold mt-2 ${
+                  isProgrammer ? "text-orange-400 font-mono" : "text-emerald-400"
+                }`}>
+                  Apenas Hoje · Vagas Limitadas
+                </span>
+              </div>
+              <div className={`font-bold text-xs md:text-sm mb-10 ${
+                isProgrammer ? "text-orange-400/70 font-mono" : "text-[#3B82F6]/75"
+              }`}>
+                Acesso Livre & Imediato no Grupo VIP do WhatsApp
+              </div>
+            </>
+          )}
  
           {/* Real Timer */}
           <div className="flex items-center justify-center gap-3 sm:gap-4 mb-8">
@@ -517,7 +545,9 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
           </div>
  
           <p className="text-gray-400 text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed">
-            Ao finalizar o contador acima as vagas da oferta atual podem se encerrar. Oportunidade com 1 Ano de acesso e bônus inclusos.
+            {settings?.showCoursePrice 
+              ? "Ao finalizar o contador acima as vagas da oferta atual podem se encerrar. Oportunidade com 1 Ano de acesso e bônus inclusos."
+              : "Ao finalizar o contador acima as vagas gratuitas podem se encerrar. Garanta sua inscrição gratuita antes que acabe."}
           </p>
  
           {/* Features Grid */}
@@ -563,9 +593,15 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
             }`}
           >
             <div className="absolute inset-0 w-full h-full bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-            <span className="relative z-10">Quero Garantir Minha Vaga Agora</span>
+            <span className="relative z-10">
+              {settings?.showCoursePrice ? "Quero Garantir Minha Vaga Agora" : "Quero Participar da Aula Gratuita"}
+            </span>
           </motion.a>
-          <p className="text-gray-600 text-xs mb-8">Acesso imediato após a confirmação do cadastro</p>
+          <p className="text-gray-600 text-xs mb-8">
+            {settings?.showCoursePrice 
+              ? "Acesso imediato após a confirmação do cadastro" 
+              : "Acesso imediato e 100% gratuito pelo WhatsApp"}
+          </p>
  
           {/* Trust Footnote */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-10 pt-8 border-t border-white/5">

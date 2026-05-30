@@ -15,6 +15,7 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
   const [isVisible, setIsVisible] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -53,7 +54,26 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
     return () => clearInterval(interval);
   }, [isPlaying]);
 
+  const handleUnmute = () => {
+    setIsMuted(false);
+    // Unmute and play using postMessage
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"unMute","args":""}', 
+      '*'
+    );
+    iframeRef.current?.contentWindow?.postMessage(
+      '{"event":"command","func":"playVideo","args":""}', 
+      '*'
+    );
+    setIsPlaying(true);
+  };
+
   const togglePlay = () => {
+    if (isMuted) {
+      handleUnmute();
+      return;
+    }
+
     if (isPlaying) {
       // Pause command to YouTube iframe via postMessage
       iframeRef.current?.contentWindow?.postMessage(
@@ -228,8 +248,27 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
                     onClick={togglePlay}
                   />
 
-                  {/* Semi-transparent blur overlay when paused */}
-                  {!isPlaying && (
+                  {/* Sleek Dê o play para ativar o som Overlay (Pedro Sobral style) */}
+                  {isMuted && (
+                    <div 
+                      className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
+                      onClick={handleUnmute}
+                    >
+                      <div className="w-[300px] md:w-[320px] bg-[#0073e6] border border-blue-400/30 text-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,115,230,0.4)] text-center space-y-4 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 animate-bounce-gentle">
+                        <h4 className="text-lg font-bold tracking-tight leading-snug">Dê o play para ativar o som</h4>
+                        <div className="relative w-16 h-16 mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20">
+                          <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 animate-pulse text-white">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6L4.5 9H1.5v6h3l2.25 2.25V8.25z" />
+                          </svg>
+                        </div>
+                        <p className="text-xs uppercase tracking-widest font-mono font-bold text-blue-200">O vídeo já começou</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Semi-transparent blur overlay when paused (only shows when NOT muted) */}
+                  {!isPlaying && !isMuted && (
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center transition-all duration-300">
                       <button
                         onClick={togglePlay}
@@ -256,25 +295,46 @@ export function VslSection({ settings, isProgrammer = false }: { settings?: any;
 
                   <iframe
                     ref={iframeRef}
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
                     className="w-full h-full pointer-events-none scale-[1.01]"
                     allow="autoplay; encrypted-media"
                     title="VSL — Método 3h"
                   />
-
-                  {/* Fake Progress Bar */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 z-25 overflow-hidden">
-                    <div 
-                      className={cn(
-                        "h-full shadow-[0_0_8px_currentColor] transition-all duration-300 ease-out",
-                        isProgrammer ? "bg-orange-500 text-orange-500" : "bg-[#3B82F6] text-[#3B82F6]"
-                      )}
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
                 </>
               )}
             </div>
+
+            {/* Premium Progress Bar Dashboard Panel below the Video Container */}
+            {isStarted && (
+              <div className="mt-4 bg-white/[0.02] border border-white/5 p-4 rounded-2xl space-y-2 max-w-4xl mx-auto shadow-lg backdrop-blur-sm">
+                <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    Transmissão em Andamento
+                  </span>
+                  <span className="text-white font-medium">{Math.floor(progress)}% Concluído</span>
+                </div>
+                <div className="h-3 bg-white/5 border border-white/10 rounded-full overflow-hidden relative">
+                  <div 
+                    className={cn(
+                      "h-full bg-gradient-to-r rounded-full transition-all duration-500 ease-out shadow-[0_0_12px_rgba(59,130,246,0.3)]",
+                      isProgrammer 
+                        ? "from-orange-600 to-amber-500" 
+                        : "from-[#3B82F6] to-[#60A5FA]"
+                    )}
+                    style={{ width: `${progress}%` }}
+                  />
+                  {/* Glowing swipe reflect */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-shine pointer-events-none"
+                    style={{ animationDuration: "3s" }}
+                  />
+                </div>
+                <p className="text-[10px] text-center text-muted-foreground font-mono">
+                  A barra de reprodução avança de acordo com os principais pontos práticos apresentados.
+                </p>
+              </div>
+            )}
           </div>
         )}
 

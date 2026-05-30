@@ -75,8 +75,10 @@ export interface SiteSettings {
   whatsappEnabled: boolean;
   whatsappNumber: string;
   whatsappMessage: string;
+  whatsappGroupUrl: string;
   launchPrice: string;
   regularPrice: string;
+  showCoursePrice: boolean;
 }
 
 export interface DatabaseSchema {
@@ -418,8 +420,10 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3h.",
+      whatsappGroupUrl: "",
       launchPrice: "197",
       regularPrice: "247",
+      showCoursePrice: false,
     };
   }
 
@@ -448,8 +452,10 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: settingsMap["whatsapp_enabled"] === "true",
       whatsappNumber: settingsMap["whatsapp_number"] || "5512999999999",
       whatsappMessage: settingsMap["whatsapp_message"] || "Olá! Gostaria de saber mais sobre o Método 3h.",
+      whatsappGroupUrl: settingsMap["whatsapp_group_url"] || "",
       launchPrice: settingsMap["launch_price"] || "197",
       regularPrice: settingsMap["regular_price"] || "247",
+      showCoursePrice: settingsMap["show_course_price"] === "true",
     };
   } catch (error) {
     console.error("Error getting settings from Neon:", error);
@@ -469,8 +475,10 @@ export async function getSettings(): Promise<SiteSettings> {
       whatsappEnabled: false,
       whatsappNumber: "5512999999999",
       whatsappMessage: "Olá! Gostaria de saber mais sobre o Método 3h.",
+      whatsappGroupUrl: "",
       launchPrice: "197",
       regularPrice: "247",
+      showCoursePrice: false,
     };
   }
 }
@@ -502,8 +510,10 @@ export async function saveSettings(settings: SiteSettings): Promise<void> {
       ["whatsapp_enabled", settings.whatsappEnabled ? "true" : "false"],
       ["whatsapp_number", settings.whatsappNumber],
       ["whatsapp_message", settings.whatsappMessage],
+      ["whatsapp_group_url", settings.whatsappGroupUrl],
       ["launch_price", settings.launchPrice],
       ["regular_price", settings.regularPrice],
+      ["show_course_price", settings.showCoursePrice ? "true" : "false"],
     ];
 
     for (const [key, value] of settingsList) {

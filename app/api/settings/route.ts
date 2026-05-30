@@ -51,8 +51,10 @@ export async function POST(req: NextRequest) {
       whatsappEnabled,
       whatsappNumber,
       whatsappMessage,
+      whatsappGroupUrl,
       launchPrice,
       regularPrice,
+      showCoursePrice,
     } = body;
 
     // Validate essential parameters
@@ -79,8 +81,10 @@ export async function POST(req: NextRequest) {
       whatsappEnabled: !!whatsappEnabled,
       whatsappNumber: whatsappNumber || "",
       whatsappMessage: whatsappMessage || "",
+      whatsappGroupUrl: whatsappGroupUrl || "",
       launchPrice: launchPrice || "97",
       regularPrice: regularPrice || "247",
+      showCoursePrice: !!showCoursePrice,
     };
 
     await saveSettings(settingsToSave);

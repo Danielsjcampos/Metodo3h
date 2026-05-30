@@ -4,6 +4,7 @@ import { getSettings } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, MessageSquare, AlertTriangle, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import { RedirectCountdown } from "@/components/landing/redirect-countdown";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
@@ -34,6 +35,9 @@ export default async function ObrigadoPage({
   const whatsappUrl = `https://wa.me/${settings.whatsappNumber || "5512999999999"}?text=${encodeURIComponent(
     settings.whatsappMessage || "Olá! Gostaria de receber o link da aula gratuita gravada e os materiais do Método 3h."
   )}`;
+
+  // Redirect to WhatsApp Group if configured, otherwise fallback to support chat
+  const targetUrl = settings.whatsappGroupUrl ? settings.whatsappGroupUrl : whatsappUrl;
 
   return (
     <main
@@ -105,6 +109,9 @@ export default async function ObrigadoPage({
             </span>
           </div>
 
+          {/* Automatic countdown redirect component */}
+          <RedirectCountdown url={targetUrl} />
+
           {/* Pulse Action Button */}
           <div className="space-y-4">
             <Button
@@ -112,7 +119,7 @@ export default async function ObrigadoPage({
               size="lg"
               className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-14 rounded-2xl group cursor-pointer flex items-center justify-center font-bold text-base transition-all duration-300 shadow-[0_8px_32px_0_rgba(16,185,129,0.35)] animate-cta-pulse border border-emerald-500/50"
             >
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a href={targetUrl} target="_blank" rel="noopener noreferrer">
                 <MessageSquare className="w-5 h-5 mr-2" />
                 Entrar no Grupo VIP Grátis
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />

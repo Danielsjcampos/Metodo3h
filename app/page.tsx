@@ -61,7 +61,7 @@ export default async function Home() {
         backgroundSize: "28px 28px",
       }}
     >
-      <Navigation settings={settings} />
+      <Navigation settings={settings} isWaitlist={true} />
 
       {/* 1. Pre-Launch Waitlist Hero (Title rotation + Email/Name/WhatsApp Capture Form) */}
       <div id="inscricao">

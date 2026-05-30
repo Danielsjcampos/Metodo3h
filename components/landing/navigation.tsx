@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+import { TopBanner } from "./top-banner";
 
 const navLinks = [
   { name: "O Problema",     href: "/#problema"     },
@@ -12,7 +15,15 @@ const navLinks = [
   { name: "Quem Ensina",    href: "/#instrutor"    },
 ];
 
-export function Navigation({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
+export function Navigation({ 
+  settings, 
+  isProgrammer = false,
+  isWaitlist = false 
+}: { 
+  settings?: any; 
+  isProgrammer?: boolean; 
+  isWaitlist?: boolean;
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -26,19 +37,25 @@ export function Navigation({ settings, isProgrammer = false }: { settings?: any;
 
   return (
     <header
-      className={`fixed z-50 transition-all duration-500 ${
-        isScrolled 
-          ? "top-4 left-4 right-4" 
-          : "top-0 left-0 right-0"
-      }`}
+      className={`fixed z-50 transition-all duration-500 top-0 left-0 right-0`}
     >
+      {/* Top Countdown Banner (shrinks out smoothly on scroll) */}
+      <div 
+        className={cn(
+          "transition-all duration-500 ease-in-out overflow-hidden w-full",
+          isScrolled ? "max-h-0 opacity-0 transform -translate-y-full" : "max-h-[120px] opacity-100 transform translate-y-0"
+        )}
+      >
+        <TopBanner isWaitlist={isWaitlist} />
+      </div>
+
       <nav 
         className={`mx-auto transition-all duration-500 ${
           isScrolled 
-            ? "bg-black/90 md:bg-black/80 backdrop-blur-xl border border-white/10 rounded-full max-w-[1000px] px-2 shadow-2xl" 
+            ? "mt-4 bg-black/90 md:bg-black/80 backdrop-blur-xl border border-white/10 rounded-full max-w-[1000px] px-2 shadow-2xl" 
             : isMobileMenuOpen
-              ? "bg-black/95 md:bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl max-w-[1200px]"
-              : "bg-transparent max-w-[1400px]"
+              ? "mt-0 bg-black/95 md:bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl max-w-[1200px]"
+              : "mt-4 bg-black/80 backdrop-blur-md border border-white/5 rounded-full max-w-[1200px] px-2 shadow-lg"
         }`}
       >
         <div 
