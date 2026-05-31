@@ -168,9 +168,9 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
               <div className="relative">
                 <div className="w-10 h-10 rounded-full border border-white/15 bg-white/5 flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/images/metodo3h logo.png" 
-                    alt="Especialista" 
-                    className="w-full h-full object-cover scale-[1.3]" 
+                    src="/images/dino/dino3.jpg" 
+                    alt="Daniel Marques" 
+                    className="w-full h-full object-cover object-center" 
                     onError={(e) => {
                       // Fallback if image doesn't exist
                       (e.target as HTMLElement).style.display = 'none';
@@ -213,8 +213,16 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
 
             {/* Specialist welcome balloon */}
             <div className="flex items-start gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0">
-                <MessageSquare className={cn("w-3.5 h-3.5 text-white/60")} />
+              <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 bg-white/10">
+                <img 
+                  src="/images/dino/dino3.jpg" 
+                  alt="Daniel Marques" 
+                  className="w-full h-full object-cover object-center" 
+                  onError={(e) => {
+                    // Fallback to icon
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
+                />
               </div>
               
               <div className="space-y-2 flex-1 max-w-[85%]">
