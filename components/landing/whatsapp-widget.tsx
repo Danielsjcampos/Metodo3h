@@ -30,7 +30,7 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
   // WhatsApp active verification check
   if (!settings.whatsappEnabled) return null;
 
-  // Auto-open chatbot after 3 seconds of initial load
+  // Auto-open chatbot after 7 seconds of initial load
   useEffect(() => {
     const hasClosed = sessionStorage.getItem("chatbot_closed");
     if (!hasClosed) {
@@ -38,7 +38,7 @@ export function WhatsAppWidget({ settings, isProgrammer = false }: WhatsAppWidge
         setIsOpen(true);
         setHasNotification(false);
         simulateTyping();
-      }, 3000);
+      }, 7000);
       return () => clearTimeout(openTimer);
     } else {
       setHasNotification(false);

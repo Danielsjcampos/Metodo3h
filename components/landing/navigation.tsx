@@ -51,13 +51,12 @@ export function Navigation({
       </div>
 
       <nav 
-        className={`mx-auto transition-all duration-500 ${
+        className={cn(
+          "hidden md:block mx-auto transition-all duration-500",
           isScrolled 
             ? "mt-4 bg-black/90 md:bg-black/80 backdrop-blur-xl border border-white/10 rounded-full max-w-[1000px] px-2 shadow-2xl" 
-            : isMobileMenuOpen
-              ? "mt-0 bg-black/95 md:bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl max-w-[1200px]"
-              : "mt-4 bg-black/80 backdrop-blur-md border border-white/5 rounded-full max-w-[1200px] px-2 shadow-lg"
-        }`}
+            : "mt-4 bg-black/80 backdrop-blur-md border border-white/5 rounded-full max-w-[1200px] px-2 shadow-lg"
+        )}
       >
         <div 
           className={`flex items-center justify-between transition-all duration-500 px-6 lg:px-8 ${
