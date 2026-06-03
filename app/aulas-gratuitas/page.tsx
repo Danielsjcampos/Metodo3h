@@ -529,7 +529,7 @@ export default function FreeClassesPortal() {
               <ShinyButton
                 theme="blue"
                 variant="solid"
-                href="/#inscricao"
+                href="/"
                 className="w-full sm:w-auto h-14 font-mono text-xs tracking-widest font-bold px-8"
               >
                 ACESSE A PRÉ-RESERVA DO ARSENAL COMPLETO
