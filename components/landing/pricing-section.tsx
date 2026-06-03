@@ -59,7 +59,15 @@ const devGabrielLessons = [
   "5. Deploy Contínuo (CI/CD) de CRM de Alta Performance",
 ];
 
-export function PricingSection({ settings, isProgrammer = false }: { settings?: any; isProgrammer?: boolean }) {
+export function PricingSection({ 
+  settings, 
+  isProgrammer = false, 
+  isWaitlist = false 
+}: { 
+  settings?: any; 
+  isProgrammer?: boolean; 
+  isWaitlist?: boolean; 
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -231,194 +239,196 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
         </div>
 
         {/* Highlighted Bonus Modules (Paschoalin-style) */}
-        <div className="space-y-12 mb-20 max-w-5xl mx-auto w-full">
-          {/* Header for Highlight Modules */}
-          <div className="text-center mb-8">
-            <span className={`font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs block mb-3 ${
-              isProgrammer ? "text-orange-500" : "text-[#3B82F6]"
-            }`}>
-              {isProgrammer ? "Módulos Bônus Exclusivos de Engenharia & Prospecção" : "Módulos Bônus Exclusivos de Destaque"}
-            </span>
-            <h3 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-              Aprenda Diretamente com Quem <span className={isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}>Faz Acontecer</span>
-            </h3>
+        {!isWaitlist && (
+          <div className="space-y-12 mb-20 max-w-5xl mx-auto w-full">
+            {/* Header for Highlight Modules */}
+            <div className="text-center mb-8">
+              <span className={`font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs block mb-3 ${
+                isProgrammer ? "text-orange-500" : "text-[#3B82F6]"
+              }`}>
+                {isProgrammer ? "Módulos Bônus Exclusivos de Engenharia & Prospecção" : "Módulos Bônus Exclusivos de Destaque"}
+              </span>
+              <h3 className="text-2xl md:text-4xl font-black text-white tracking-tight">
+                Aprenda Diretamente com Quem <span className={isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}>Faz Acontecer</span>
+              </h3>
+            </div>
+
+            {/* Module 1: Vinicius Saldanha */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7 }}
+              className={`backdrop-blur-xl border rounded-[2.5rem] overflow-hidden relative ${
+                isProgrammer 
+                  ? "bg-[#0e0e0e]/85 border-[#F97316]/20 shadow-[0_0_80px_rgba(249,115,22,0.1)]" 
+                  : "bg-[#0e0e0e]/85 border-[#3B82F6]/20 shadow-[0_0_80px_rgba(59,130,246,0.1)]"
+              }`}
+            >
+              {/* Top Line Gradient */}
+              <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${
+                isProgrammer ? "from-orange-600 via-[#F97316] to-amber-500" : "from-blue-600 via-[#3B82F6] to-cyan-500"
+              }`} />
+              
+              <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+                {/* Photo Column */}
+                <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
+                  <img
+                    src="/images/Saldanha.jpeg"
+                    alt="Vinicius Saldanha"
+                    className="w-full h-full object-cover object-center lg:object-top transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
+                  
+                  {/* Badge */}
+                  <div className={`absolute bottom-4 left-4 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg ${
+                    isProgrammer ? "bg-orange-600/90" : "bg-yellow-600/90"
+                  }`}>
+                    <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Participação Especial
+                  </div>
+                </div>
+
+                {/* Content Column */}
+                <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
+                  <div className="mb-6">
+                    <span className={`font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1 ${
+                      isProgrammer ? "text-orange-500" : "text-yellow-500"
+                    }`}>
+                      Especialista em Marketing Local & IA
+                    </span>
+                    <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
+                      Vinicius Saldanha
+                    </h4>
+                    <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
+                      Google Meu Negócio: Domine o Maps e Atraia Clientes Sem Gastar Com Anúncios
+                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Aprenda a fórmula testada de SEO local para colocar qualquer empresa no topo das buscas do Google Maps. Uma ficha bem otimizada gera chamadas diárias e atrai clientes reais logo nas primeiras semanas de forma orgânica.
+                    </p>
+                  </div>
+
+                  <div className="border-t border-white/5 pt-6">
+                    <p className={`text-xs font-black uppercase tracking-widest mb-4 ${
+                      isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
+                    }`}>Aulas Exclusivas Inclusas:</p>
+                    <div className="space-y-2.5">
+                      {saldanhaLessons.map((lesson, idx) => (
+                        <div key={idx} className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
+                            isProgrammer ? "bg-orange-500/20 border border-orange-500/40" : "bg-[#3B82F6]/20 border border-[#3B82F6]/40"
+                          }`}>
+                            <Check size={10} className={isProgrammer ? "text-orange-400" : "text-[#3B82F6]"} strokeWidth={3} />
+                          </div>
+                          <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`p-4 rounded-xl mt-6 border ${
+                    isProgrammer ? "bg-orange-500/10 border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
+                  }`}>
+                    <p className="text-sm font-bold leading-relaxed">
+                      Vinicius te ensina a colocar qualquer empresa no topo do Google Maps, <strong className="text-white">gerando prospecção passiva de clientes altamente qualificados</strong> de forma orgânica.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Module 2: Gabriel */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className={`backdrop-blur-xl border rounded-[2.5rem] overflow-hidden relative ${
+                isProgrammer 
+                  ? "bg-[#0e0e0e]/85 border-[#F97316]/20 shadow-[0_0_80px_rgba(249,115,22,0.1)]" 
+                  : "bg-[#0e0e0e]/85 border-[#3B82F6]/20 shadow-[0_0_80px_rgba(59,130,246,0.1)]"
+              }`}
+            >
+              {/* Top Line Gradient */}
+              <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${
+                isProgrammer ? "from-orange-600 via-[#F97316] to-amber-500" : "from-blue-600 via-[#3B82F6] to-cyan-500"
+              }`} />
+              
+              <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+                {/* Photo Column */}
+                <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
+                  <img
+                    src="/images/gabriel.jpeg"
+                    alt="Gabriel"
+                    className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
+                  
+                  {/* Badge */}
+                  <div className={`absolute bottom-4 left-4 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg ${
+                    isProgrammer ? "bg-orange-600/90" : "bg-[#3B82F6]/90"
+                  }`}>
+                    <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Módulo Bônus Especial
+                  </div>
+                </div>
+
+                {/* Content Column */}
+                <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
+                  <div className="mb-6">
+                    <span className={`font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1 ${
+                      isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
+                    }`}>
+                      {isProgrammer ? "Engenheiro de IA & Arquiteto de Sistemas" : "Especialista em Sistemas & IA"}
+                    </span>
+                    <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
+                      Gabriel
+                    </h4>
+                    <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
+                      {isProgrammer ? "Arquitetura de Sistemas: Prompt-to-Database & CRM" : "Crie um CRM / Sistema de Gestão com IA em Menos de 1 Hora"}
+                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {isProgrammer 
+                        ? "Descubra como projetar, estruturar e publicar sistemas internos complexos usando IA. Gabriel revela a arquitetura do Prompt-to-Database, a criação automática de APIs, dashboards administrativos integrados e webhooks avançados com Supabase e Vercel sem precisar de codificação tradicional backend."
+                        : "Aprenda a estruturar o backend e a interface frontend de um sistema de CRM/gestão completo do zero com inteligência artificial. Crie ferramentas corporativas de alto valor de mercado sem precisar de código manual e automatize empresas locais."
+                      }
+                    </p>
+                  </div>
+
+                  <div className="border-t border-white/5 pt-6">
+                    <p className={`text-xs font-black uppercase tracking-widest mb-4 ${
+                      isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
+                    }`}>Aulas Exclusivas Inclusas:</p>
+                    <div className="space-y-2.5">
+                      {(isProgrammer ? devGabrielLessons : gabrielLessons).map((lesson, idx) => (
+                        <div key={idx} className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
+                            isProgrammer ? "bg-orange-500/20 border border-orange-500/40" : "bg-[#3B82F6]/20 border border-[#3B82F6]/40"
+                          }`}>
+                            <Check size={10} className={isProgrammer ? "text-orange-400" : "text-[#3B82F6]"} strokeWidth={3} />
+                          </div>
+                          <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`p-4 rounded-xl mt-6 border ${
+                    isProgrammer ? "bg-orange-500/10 border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
+                  }`}>
+                    <p className="text-sm font-bold leading-relaxed">
+                      {isProgrammer 
+                        ? "Gabriel te ensina a arquitetar e implantar um sistema de gestão completo in less than an hour, agregando altíssimo valor comercial e escalabilidade aos seus projetos."
+                        : "Gabriel te ensina a construir um sistema de gestão completo (CRM) com IA do zero, automatizando processos corporativos e gerando alto valor de vendas em menos de uma hora."
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
+        )}
 
-          {/* Module 1: Vinicius Saldanha */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7 }}
-            className={`backdrop-blur-xl border rounded-[2.5rem] overflow-hidden relative ${
-              isProgrammer 
-                ? "bg-[#0e0e0e]/85 border-[#F97316]/20 shadow-[0_0_80px_rgba(249,115,22,0.1)]" 
-                : "bg-[#0e0e0e]/85 border-[#3B82F6]/20 shadow-[0_0_80px_rgba(59,130,246,0.1)]"
-            }`}
-          >
-            {/* Top Line Gradient */}
-            <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${
-              isProgrammer ? "from-orange-600 via-[#F97316] to-amber-500" : "from-blue-600 via-[#3B82F6] to-cyan-500"
-            }`} />
-            
-            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
-              {/* Photo Column */}
-              <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
-                <img
-                  src="/images/Saldanha.jpeg"
-                  alt="Vinicius Saldanha"
-                  className="w-full h-full object-cover object-center lg:object-top transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
-                
-                {/* Badge */}
-                <div className={`absolute bottom-4 left-4 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg ${
-                  isProgrammer ? "bg-orange-600/90" : "bg-yellow-600/90"
-                }`}>
-                  <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Participação Especial
-                </div>
-              </div>
-
-              {/* Content Column */}
-              <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
-                <div className="mb-6">
-                  <span className={`font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1 ${
-                    isProgrammer ? "text-orange-500" : "text-yellow-500"
-                  }`}>
-                    Especialista em Marketing Local & IA
-                  </span>
-                  <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
-                    Vinicius Saldanha
-                  </h4>
-                  <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
-                    Google Meu Negócio: Domine o Maps e Atraia Clientes Sem Gastar Com Anúncios
-                  </p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Aprenda a fórmula testada de SEO local para colocar qualquer empresa no topo das buscas do Google Maps. Uma ficha bem otimizada gera chamadas diárias e atrai clientes reais logo nas primeiras semanas de forma orgânica.
-                  </p>
-                </div>
-
-                <div className="border-t border-white/5 pt-6">
-                  <p className={`text-xs font-black uppercase tracking-widest mb-4 ${
-                    isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
-                  }`}>Aulas Exclusivas Inclusas:</p>
-                  <div className="space-y-2.5">
-                    {saldanhaLessons.map((lesson, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-                          isProgrammer ? "bg-orange-500/20 border border-orange-500/40" : "bg-[#3B82F6]/20 border border-[#3B82F6]/40"
-                        }`}>
-                          <Check size={10} className={isProgrammer ? "text-orange-400" : "text-[#3B82F6]"} strokeWidth={3} />
-                        </div>
-                        <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={`p-4 rounded-xl mt-6 border ${
-                  isProgrammer ? "bg-orange-500/10 border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
-                }`}>
-                  <p className="text-sm font-bold leading-relaxed">
-                    Vinicius te ensina a colocar qualquer empresa no topo do Google Maps, <strong className="text-white">gerando prospecção passiva de clientes altamente qualificados</strong> de forma orgânica.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Module 2: Gabriel */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className={`backdrop-blur-xl border rounded-[2.5rem] overflow-hidden relative ${
-              isProgrammer 
-                ? "bg-[#0e0e0e]/85 border-[#F97316]/20 shadow-[0_0_80px_rgba(249,115,22,0.1)]" 
-                : "bg-[#0e0e0e]/85 border-[#3B82F6]/20 shadow-[0_0_80px_rgba(59,130,246,0.1)]"
-            }`}
-          >
-            {/* Top Line Gradient */}
-            <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${
-              isProgrammer ? "from-orange-600 via-[#F97316] to-amber-500" : "from-blue-600 via-[#3B82F6] to-cyan-500"
-            }`} />
-            
-            <div className="grid lg:grid-cols-12 gap-0 items-stretch">
-              {/* Photo Column */}
-              <div className="relative h-72 lg:h-auto lg:col-span-5 overflow-hidden">
-                <img
-                  src="/images/gabriel.jpeg"
-                  alt="Gabriel"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0e0e0e]/95 hidden lg:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/95 to-transparent lg:hidden" />
-                
-                {/* Badge */}
-                <div className={`absolute bottom-4 left-4 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg ${
-                  isProgrammer ? "bg-orange-600/90" : "bg-[#3B82F6]/90"
-                }`}>
-                  <Star size={10} className="fill-white text-white shrink-0 animate-spin-slow" /> Módulo Bônus Especial
-                </div>
-              </div>
- 
-              {/* Content Column */}
-              <div className="p-8 md:p-10 lg:col-span-7 relative z-10 flex flex-col justify-center text-left">
-                <div className="mb-6">
-                  <span className={`font-bold uppercase tracking-widest text-[10px] md:text-xs block mb-1 ${
-                    isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
-                  }`}>
-                    {isProgrammer ? "Engenheiro de IA & Arquiteto de Sistemas" : "Especialista em Sistemas & IA"}
-                  </span>
-                  <h4 className="text-3xl font-black text-white mb-2 tracking-tight">
-                    Gabriel
-                  </h4>
-                  <p className="text-gray-300 text-sm md:text-base font-medium mb-3 leading-snug">
-                    {isProgrammer ? "Arquitetura de Sistemas: Prompt-to-Database & CRM" : "Crie um CRM / Sistema de Gestão com IA em Menos de 1 Hora"}
-                  </p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {isProgrammer 
-                      ? "Descubra como projetar, estruturar e publicar sistemas internos complexos usando IA. Gabriel revela a arquitetura do Prompt-to-Database, a criação automática de APIs, dashboards administrativos integrados e webhooks avançados com Supabase e Vercel sem precisar de codificação tradicional backend."
-                      : "Aprenda a estruturar o backend e a interface frontend de um sistema de CRM/gestão completo do zero com inteligência artificial. Crie ferramentas corporativas de alto valor de mercado sem precisar de código manual e automatize empresas locais."
-                    }
-                  </p>
-                </div>
- 
-                <div className="border-t border-white/5 pt-6">
-                  <p className={`text-xs font-black uppercase tracking-widest mb-4 ${
-                    isProgrammer ? "text-orange-500 font-mono" : "text-[#3B82F6]"
-                  }`}>Aulas Exclusivas Inclusas:</p>
-                  <div className="space-y-2.5">
-                    {(isProgrammer ? devGabrielLessons : gabrielLessons).map((lesson, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-                          isProgrammer ? "bg-orange-500/20 border border-orange-500/40" : "bg-[#3B82F6]/20 border border-[#3B82F6]/40"
-                        }`}>
-                          <Check size={10} className={isProgrammer ? "text-orange-400" : "text-[#3B82F6]"} strokeWidth={3} />
-                        </div>
-                        <span className="text-gray-300 text-xs sm:text-sm font-medium">{lesson}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
- 
-                <div className={`p-4 rounded-xl mt-6 border ${
-                  isProgrammer ? "bg-orange-500/10 border-orange-500/20 text-orange-400" : "bg-[#3B82F6]/10 border border-[#3B82F6]/20 text-[#3B82F6]"
-                }`}>
-                  <p className="text-sm font-bold leading-relaxed">
-                    {isProgrammer 
-                      ? "Gabriel te ensina a arquitetar e implantar um sistema de gestão completo em menos de uma hora, agregando altíssimo valor comercial e escalabilidade aos seus projetos."
-                      : "Gabriel te ensina a construir um sistema de gestão completo (CRM) com IA do zero, automatizando processos corporativos e gerando alto valor de vendas em menos de uma hora."
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
- 
         {/* Certification & Launch Guarantee Highlight Card */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -511,11 +521,38 @@ export function PricingSection({ settings, isProgrammer = false }: { settings?: 
             Garanta Acesso Gratuito <span className={isProgrammer ? "text-orange-500" : "text-[#3B82F6]"}>+ Reserva de Desconto</span>
           </h2>
           
-          <p className="text-gray-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-400 text-sm mb-6 max-w-2xl mx-auto leading-relaxed">
             Ao se inscrever abaixo, você garante **acesso imediato e 100% gratuito** às 3 aulas/módulos práticos do Método 3h (Daniel, Vinícius e Gabriel). 
-            Além disso, você **trava o valor promocional de lançamento** do Arsenal Completo: de <span className="line-through text-red-500/80">R$ 997,00</span> por **apenas R$ 197,00** caso decida adquiri-lo futuramente.
-            <span className="block mt-3 font-semibold text-white">Sem compromisso ou obrigação de compra! É um benefício para garantir esse preço e ter acesso grátis imediato.</span>
+            Além disso, você **trava o valor promocional de lançamento** do Arsenal Completo caso decida adquiri-lo futuramente, sem nenhum compromisso ou obrigação de compra!
           </p>
+
+          {/* Visual Price Reservation Highlight Box */}
+          <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4 mb-8 max-w-md mx-auto relative z-20">
+            <div className="flex-1 bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center flex flex-col justify-center">
+              <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block mb-1">Preço Normal Oficial</span>
+              <span className="text-xl text-red-500/70 line-through font-bold">R$ 997,00</span>
+            </div>
+            <div className="hidden sm:flex items-center justify-center text-white/20 text-xl font-black">→</div>
+            <div className={cn(
+              "flex-1 border rounded-2xl p-4 text-center shadow-[0_0_30px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col justify-center",
+              isProgrammer 
+                ? "bg-orange-500/10 border-orange-500/30 shadow-orange-500/5" 
+                : "bg-blue-500/10 border-blue-500/30 shadow-blue-500/5"
+            )}>
+              <div className={cn(
+                "absolute top-0 right-0 text-[8px] font-mono font-black uppercase px-2 py-0.5 rounded-bl-lg",
+                isProgrammer ? "bg-orange-500 text-black" : "bg-blue-500 text-white"
+              )}>
+                80% OFF
+              </div>
+              <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block mb-1">Preço do Lançamento (Reservado)</span>
+              <span className={cn(
+                "text-2xl font-black block leading-none",
+                isProgrammer ? "text-orange-400" : "text-blue-400"
+              )}>R$ 197,00</span>
+              <span className="text-[9px] text-emerald-400 font-mono font-semibold block mt-1">✓ Desconto Garantido</span>
+            </div>
+          </div>
 
           <form onSubmit={handleFormSubmit} className="space-y-4 max-w-md mx-auto text-left mb-8 relative z-20">
             <div className="space-y-1.5 relative">

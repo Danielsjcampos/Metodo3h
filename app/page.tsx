@@ -1,14 +1,9 @@
 import { Navigation } from "@/components/landing/navigation";
 import { HeroCaptureSection } from "@/components/landing/hero-capture-section";
 import { FeaturesSection } from "@/components/landing/features-section";
-import { MiddleCtaSection } from "@/components/landing/middle-cta";
-
-import { MetricsSection } from "@/components/landing/metrics-section";
 import { DevelopersSection } from "@/components/landing/developers-section";
 import { IntegrationsSection } from "@/components/landing/integrations-section";
-import { SecuritySection } from "@/components/landing/security-section";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
-import { FinalCtaSection } from "@/components/landing/final-cta";
 import { PricingSection } from "@/components/landing/pricing-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { FooterSection } from "@/components/landing/footer-section";
@@ -68,31 +63,17 @@ export default async function Home() {
       {/* 3. DOR & AGITAÇÃO: Conexão empática expondo o problema do mercado tradicional */}
       <FeaturesSection />
 
-      {/* Middle CTA Button section for registration */}
-      <MiddleCtaSection />
-
-      {/* 5. ALINHAMENTO & EGO FEEDING: Mostra a quem pertence o ecossistema (Freelancer, Negócio Local, etc.) */}
-      <SecuritySection />
-
-
-
       {/* 7. O OUTLOOK PROFISSIONAL: A stack de ferramentas que ele dominará */}
       <IntegrationsSection />
 
       {/* 8. LIDERANÇA / CREDIBILIDADE: Quem vai te ensinar (Dino com foto e carrossel de logos) */}
       <DevelopersSection showPartners={true} />
 
-      {/* 9. Quote: O que eu ensino aqui */}
-      <MetricsSection />
-
       {/* 10. Depoimentos reais */}
       <TestimonialsSection settings={settings} />
 
       {/* 11. A OFERTA IRRECUSÁVEL: O valor empilhado com os bônus detalhados por R$0,00 e selo 2timeweb */}
-      <PricingSection settings={settings} />
-
-      {/* Final CTA Button section for registration */}
-      <FinalCtaSection />
+      <PricingSection settings={settings} isWaitlist={true} />
 
       {/* 12. FAQ: Suas perguntas (Quebra de objeções) */}
       <FaqSection settings={settings} isWaitlist={true} />

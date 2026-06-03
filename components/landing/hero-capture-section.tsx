@@ -339,9 +339,9 @@ export function HeroCaptureSection({ settings }: { settings?: any }) {
               )}
               style={isFloating && !isClosed ? {
                 bottom: '16px',
-                right: '16px',
+                left: '16px',
                 top: 'auto',
-                left: 'auto',
+                right: 'auto',
                 width: 'min(45vw, 320px)',
               } : undefined}
             >
