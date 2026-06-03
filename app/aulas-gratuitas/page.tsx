@@ -60,7 +60,7 @@ const FREE_LESSONS: FreeLesson[] = [
 ];
 
 export default function FreeClassesPortal() {
-  const [isApproved, setIsApproved] = useState(false);
+  const [isApproved, setIsApproved] = useState(true);
   const [leadName, setLeadName] = useState("");
   const [identifier, setIdentifier] = useState("");
   const [isLoading, setIsLoading] = useState(false);
