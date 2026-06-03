@@ -155,9 +155,9 @@ export function PricingSection({
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 w-full">
         {/* Header with High-Impact Value Stack Glow */}
-        <div className="mb-14 lg:mb-20 relative">
+        <div className="mb-14 lg:mb-20 relative flex flex-col items-center text-center justify-center">
           {/* Subtle Ambient Background Spotlight */}
-          <div className={`absolute -top-12 left-10 w-[300px] h-[300px] blur-[100px] rounded-full pointer-events-none -z-10 ${
+          <div className={`absolute -top-12 left-1/2 -translate-x-1/2 w-[300px] h-[300px] blur-[100px] rounded-full pointer-events-none -z-10 ${
             isProgrammer ? "bg-orange-500/10" : "bg-blue-500/10"
           }`} />
 
@@ -190,7 +190,7 @@ export function PricingSection({
           </h2>
           
           {/* Supporting Premium Subtext */}
-          <p className={`mt-6 text-gray-400 text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed transition-all duration-1000 delay-200 ${
+          <p className={`mt-6 text-gray-400 text-sm md:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}>
             Você não vai receber apenas um treinamento. Ao garantir sua vaga hoje, você leva um ecossistema completo com métodos validados de fechamento e posicionamento local para acelerar seu faturamento.
