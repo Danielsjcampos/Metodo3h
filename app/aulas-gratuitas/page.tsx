@@ -565,6 +565,60 @@ export default function FreeClassesPortal() {
           </div>
         </div>
 
+        {/* Pre-Reservation CTA Section */}
+        <div className="mt-16 bg-[#181818]/80 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center max-w-4xl mx-auto shadow-2xl">
+          {/* Subtle Ambient Background Spotlight */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] blur-[100px] rounded-full bg-blue-500/10 pointer-events-none -z-10" />
+
+          {/* Top Line Accent */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#3B82F6] to-transparent" />
+
+          <div className="max-w-2xl mx-auto space-y-6">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 text-[#3B82F6] font-bold">
+              ★ Oportunidade Exclusiva de Abertura
+            </span>
+
+            <h3 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              Desbloqueie o <span className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] bg-clip-text text-transparent">Arsenal Completo</span>
+            </h3>
+
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              Assista às aulas gratuitas e garanta sua vaga de pré-reserva para ter acesso a todos os templates prontos, roteiros de IA, grupo VIP de suporte e certificação oficial. Ao se cadastrar, você garante um desconto exclusivo de abertura: de <span className="line-through text-red-500/80">R$ 997,00</span> por **apenas R$ 197,00** na abertura oficial!
+            </p>
+
+            {/* Price Tag Comparison inside free portal */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-black/40 border border-white/5 rounded-2xl p-4 max-w-md mx-auto my-6">
+              <div className="text-center sm:text-left">
+                <span className="text-[9px] text-muted-foreground uppercase font-mono tracking-wider block">Preço de Lançamento</span>
+                <span className="text-lg text-gray-500 line-through font-bold">R$ 997,00</span>
+              </div>
+              <div className="hidden sm:block text-xl text-white/20">→</div>
+              <div className="text-center sm:text-left bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/30 rounded-xl px-4 py-2">
+                <span className="text-[9px] text-emerald-400 uppercase font-mono tracking-wider block font-bold">Preço de Pré-Reserva</span>
+                <span className="text-2xl font-black text-emerald-400">R$ 197,00</span>
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-col items-center gap-4">
+              <ShinyButton
+                theme="blue"
+                variant="solid"
+                href="/#inscricao"
+                className="w-full sm:w-auto h-14 font-mono text-xs tracking-widest font-bold px-8"
+              >
+                ACESSE A PRÉ-RESERVA DO ARSENAL COMPLETO
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </ShinyButton>
+              
+              <div className="flex flex-wrap items-center justify-center gap-6 text-[11px] text-muted-foreground font-mono">
+                <span className="flex items-center gap-1">✓ Trava de Preço Garantida</span>
+                <span className="flex items-center gap-1">✓ Sem Compromisso de Compra</span>
+                <span className="flex items-center gap-1">✓ Acesso Grátis Imediato</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </main>
