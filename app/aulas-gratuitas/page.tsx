@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { 
   Play, VolumeX, Volume2, Info, Lock, CheckCircle2, Clock, 
-  Mail, Phone, User as UserIcon, HelpCircle, ChevronRight, ArrowRight
+  Mail, Phone, User as UserIcon, HelpCircle, ChevronRight, ArrowRight, X
 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ const FREE_LESSONS: FreeLesson[] = [
     duration: "24:15",
     videoUrl: "dQw4w9WgXcQ", // Rickroll as premium placeholder
     instructor: "Daniel Marques",
-    thumbnail: "/images/pagina de vendas.png"
+    thumbnail: "/digitaliza seu negocio.png"
   },
   {
     id: "aula-2",
@@ -44,7 +44,7 @@ const FREE_LESSONS: FreeLesson[] = [
     duration: "18:40",
     videoUrl: "dQw4w9WgXcQ",
     instructor: "Vinícius",
-    thumbnail: "/images/Topo do Google SEO .png"
+    thumbnail: "/SEO e trafego organico.png"
   },
   {
     id: "aula-3",
@@ -55,7 +55,7 @@ const FREE_LESSONS: FreeLesson[] = [
     duration: "21:10",
     videoUrl: "dQw4w9WgXcQ",
     instructor: "Gabriel",
-    thumbnail: "/images/sistema de gestao .png"
+    thumbnail: "/crm r automacoes.png"
   }
 ];
 
@@ -68,11 +68,8 @@ export default function FreeClassesPortal() {
   // Portal VOD playback state
   const [activeLesson, setActiveLesson] = useState<FreeLesson>(FREE_LESSONS[0]);
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [showCinemaPlayer, setShowCinemaPlayer] = useState(false);
+  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const gateMatrixRef = useRef<HTMLCanvasElement>(null);
 
   // Check if approved on load
@@ -173,14 +170,7 @@ export default function FreeClassesPortal() {
 
   const handleLessonSelect = (lesson: FreeLesson) => {
     setActiveLesson(lesson);
-    setIsMuted(true);
-    setIsPlaying(true);
-    setShowCinemaPlayer(true);
-    
-    const playerEl = document.getElementById("main-vod-anchor");
-    if (playerEl) {
-      playerEl.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    setIsPlayerOpen(true);
   };
 
   const toggleLessonCompleted = (lessonId: string, e: React.MouseEvent) => {
@@ -196,37 +186,7 @@ export default function FreeClassesPortal() {
     });
   };
 
-  const handleUnmute = () => {
-    setIsMuted(false);
-    iframeRef.current?.contentWindow?.postMessage(
-      '{"event":"command","func":"unMute","args":""}', 
-      '*'
-    );
-    iframeRef.current?.contentWindow?.postMessage(
-      '{"event":"command","func":"playVideo","args":""}', 
-      '*'
-    );
-  };
 
-  const handlePlayerToggle = () => {
-    if (isMuted) {
-      handleUnmute();
-      return;
-    }
-    if (isPlaying) {
-      iframeRef.current?.contentWindow?.postMessage(
-        '{"event":"command","func":"pauseVideo","args":""}', 
-        '*'
-      );
-      setIsPlaying(false);
-    } else {
-      iframeRef.current?.contentWindow?.postMessage(
-        '{"event":"command","func":"playVideo","args":""}', 
-        '*'
-      );
-      setIsPlaying(true);
-    }
-  };
 
   // Overall Completion Progress
   const totalLessonsCount = FREE_LESSONS.length;
@@ -316,49 +276,15 @@ export default function FreeClassesPortal() {
     <main className="min-h-screen bg-[#141414] text-white flex flex-col justify-between overflow-x-hidden font-sans select-none">
       
       {/* Dynamic VOD Hero Section mimicking Netflix Header Banner */}
-      <div id="main-vod-anchor" className="relative w-full aspect-[21/9] min-h-[480px] lg:min-h-[600px] flex items-center justify-start overflow-hidden">
+      <div id="main-vod-anchor" className="relative w-full aspect-[21/9] min-h-[380px] lg:min-h-[480px] flex items-center justify-start overflow-hidden pt-12 md:pt-16">
         
-        {/* Loop coding/developer video background in the hero banner (AUTOPLAYED & MUTED) */}
+        {/* Active lesson thumbnail featured background */}
         <div className="absolute inset-0 z-0">
-          {showCinemaPlayer ? (
-            <div className="w-full h-full relative z-10 bg-black">
-              {/* Overlay play control for VOD */}
-              <div className="absolute inset-0 z-20 cursor-pointer" onClick={handlePlayerToggle} />
-
-              {isMuted && (
-                <div 
-                  className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
-                  onClick={handleUnmute}
-                >
-                  <div className="w-[300px] bg-[#0073e6] border border-blue-400/30 text-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,115,230,0.4)] text-center space-y-4 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300">
-                    <h4 className="text-base font-bold tracking-tight">Dê o play para ativar o som</h4>
-                    <div className="relative w-14 h-14 mx-auto bg-white/10 rounded-full flex items-center justify-center border border-white/20">
-                      <div className="absolute -inset-2 rounded-full border border-white/10 animate-ping opacity-75" />
-                      <VolumeX className="w-6 h-6 animate-pulse text-white" />
-                    </div>
-                    <p className="text-[10px] uppercase tracking-widest font-mono font-bold text-blue-200">O vídeo já começou</p>
-                  </div>
-                </div>
-              )}
-
-              <iframe
-                ref={iframeRef}
-                src={`https://www.youtube.com/embed/${activeLesson.videoUrl}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
-                className="w-full h-full pointer-events-none scale-[1.01]"
-                allow="autoplay; encrypted-media"
-                title="Cinema Player"
-              />
-            </div>
-          ) : (
-            <video
-              src="/ai%20bacgkround.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover opacity-35 scale-[1.01]"
-            />
-          )}
+          <img
+            src={activeLesson.thumbnail}
+            alt={activeLesson.title}
+            className="w-full h-full object-cover opacity-25 blur-[1px] scale-[1.01] transition-all duration-500"
+          />
 
           {/* Netflix signature dark vignette fade overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
@@ -431,20 +357,10 @@ export default function FreeClassesPortal() {
             </ShinyButton>
           </div>
         </div>
-
-        {/* Floating bottom-right volume status bar */}
-        {showCinemaPlayer && (
-          <button 
-            onClick={handlePlayerToggle}
-            className="absolute bottom-16 right-6 lg:right-12 z-30 p-3 bg-black/60 border border-white/10 hover:border-white/20 text-white rounded-full transition-all active:scale-90"
-          >
-            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-          </button>
-        )}
       </div>
 
       {/* 2. Netflix-style Slider rows block ("Em Alta") */}
-      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 space-y-12 py-10 relative z-20">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 space-y-6 py-2 relative z-20">
         
         {/* Progress dashboard hud block */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#181818] border border-white/5 p-6 rounded-2xl shadow-inner">
@@ -565,10 +481,20 @@ export default function FreeClassesPortal() {
           </div>
         </div>
 
-        {/* Pre-Reservation CTA Section */}
-        <div className="mt-16 bg-[#181818]/80 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center max-w-4xl mx-auto shadow-2xl">
-          {/* Subtle Ambient Background Spotlight */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] blur-[100px] rounded-full bg-blue-500/10 pointer-events-none -z-10" />
+        {/* Pre-Reservation CTA Section with premium background effects */}
+        <div className="mt-12 bg-gradient-to-b from-[#1c1c1c] to-[#121212] border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden text-center max-w-4xl mx-auto shadow-[0_25px_60px_-15px_rgba(0,115,230,0.25)] group">
+          {/* Animated Background Spotlights */}
+          <div className="absolute top-0 left-1/4 w-[350px] h-[250px] blur-[120px] rounded-full bg-[#3B82F6]/15 pointer-events-none -z-10 group-hover:bg-[#3B82F6]/20 transition-all duration-700" />
+          <div className="absolute bottom-0 right-1/4 w-[350px] h-[250px] blur-[120px] rounded-full bg-indigo-600/10 pointer-events-none -z-10 group-hover:bg-indigo-600/15 transition-all duration-700" />
+          
+          {/* Premium dot grid pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
+            style={{
+              backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+              backgroundSize: "20px 20px"
+            }}
+          />
 
           {/* Top Line Accent */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#3B82F6] to-transparent" />
@@ -620,6 +546,27 @@ export default function FreeClassesPortal() {
         </div>
 
       </div>
+
+      {/* Fullscreen Video Modal Player */}
+      {isPlayerOpen && (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-md transition-all duration-300">
+          <div className="relative w-full max-w-4xl mx-4 aspect-video bg-black rounded-2xl border border-white/10 overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setIsPlayerOpen(false)} 
+              className="absolute top-4 right-4 z-50 bg-black/70 hover:bg-black/90 text-white rounded-full p-2 border border-white/15 transition-all hover:scale-110 active:scale-95"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <iframe 
+              src={`https://www.youtube.com/embed/${activeLesson.videoUrl}?autoplay=1&rel=0&modestbranding=1`} 
+              className="w-full h-full" 
+              allow="autoplay; encrypted-media; fullscreen" 
+              allowFullScreen 
+              title={activeLesson.title}
+            />
+          </div>
+        </div>
+      )}
 
     </main>
   );
