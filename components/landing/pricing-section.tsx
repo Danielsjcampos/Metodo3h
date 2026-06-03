@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import AnimatedShaderBackground from "../ui/animated-shader-background";
 import { Button } from "@/components/ui/button";
 import { ShinyButton } from "@/components/ui/shiny-button";
+import { cn } from "@/lib/utils";
 
 const bonuses = [
   {
