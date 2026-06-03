@@ -276,7 +276,7 @@ export default function FreeClassesPortal() {
     <main className="min-h-screen bg-[#141414] text-white flex flex-col justify-between overflow-x-hidden font-sans select-none">
       
       {/* Dynamic VOD Hero Section mimicking Netflix Header Banner */}
-      <div id="main-vod-anchor" className="relative w-full aspect-[21/9] min-h-[380px] lg:min-h-[480px] flex items-center justify-start overflow-hidden pt-12 md:pt-16">
+      <div id="main-vod-anchor" className="relative w-full aspect-auto lg:aspect-[21/9] min-h-[520px] sm:min-h-[450px] lg:min-h-[480px] flex items-center justify-start overflow-hidden pt-28 sm:pt-24 lg:pt-16 pb-12 lg:pb-0">
         
         {/* Active lesson thumbnail featured background */}
         <div className="absolute inset-0 z-0">
@@ -302,9 +302,9 @@ export default function FreeClassesPortal() {
             />
           </a>
           
-          <div className="flex items-center gap-4 text-xs font-mono">
-            <span className="text-white/60">Aulas Gratuitas Ativas</span>
-            <div className="h-6 w-px bg-white/20" />
+          <div className="flex items-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono">
+            <span className="text-white/60 hidden sm:inline">Aulas Gratuitas Ativas</span>
+            <div className="h-4 w-px bg-white/20 hidden sm:block" />
             <span className="text-emerald-400 font-bold shrink-0">FILA DE ESPERA LIBERADA ✓</span>
           </div>
         </div>
@@ -315,7 +315,7 @@ export default function FreeClassesPortal() {
             <span className="text-xs font-bold text-red-500 uppercase tracking-widest block font-mono">
               ★ IMERSÃO EXCLUSIVA
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.05] text-white uppercase drop-shadow-md">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.05] text-white uppercase drop-shadow-md">
               PROFISSÃO <br className="hidden md:block" />
               <span className="bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">Criação com IA</span>
             </h1>
@@ -333,12 +333,12 @@ export default function FreeClassesPortal() {
             {activeLesson.description} Domine a criação de sites e automação comercial para alavancar seu negócio ou prestar serviços profissionais.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 mt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-2 w-full sm:w-auto">
             <ShinyButton
               onClick={() => handleLessonSelect(activeLesson)}
               theme="default"
               variant="solid"
-              className="h-12 px-8 font-bold text-sm tracking-tight"
+              className="w-full sm:w-auto h-12 px-8 font-bold text-sm tracking-tight"
             >
               <Play className="w-5 h-5 fill-current mr-2" />
               Assistir {activeLesson.tag}
@@ -350,7 +350,7 @@ export default function FreeClassesPortal() {
               }}
               theme="default"
               variant="glass"
-              className="h-12 px-6 font-bold text-sm tracking-tight"
+              className="w-full sm:w-auto h-12 px-6 font-bold text-sm tracking-tight"
             >
               <Info className="w-5 h-5 mr-2" />
               Mais informações
